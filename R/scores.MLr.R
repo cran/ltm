@@ -4,21 +4,13 @@ function (betas, X, method)
     logLik.z <- function(z, y, betas) {
         if (!is.matrix(z)) 
             z <- t(z)
-        probs <- plogis(betas %*% t(cbind(1, z)))
-        if (any(ind <- probs == 1)) 
-            probs[ind] <- 0.9999999
-        if (any(ind <- probs == 0)) 
-            probs[ind] <- 1e-07
-        exp(colSums(y * log(probs) + (1 - y) * log(1 - probs))) * 
+        pr <- probs(betas %*% t(cbind(1, z)))
+        exp(colSums(y * log(pr) + (1 - y) * log(1 - pr))) * 
             dnorm(z[, 1])
     }
     sc.z <- function(z, y, betas) {
-        probs <- plogis(c(betas %*% c(1, z)))
-        if (any(ind <- probs == 1)) 
-            probs[ind] <- 0.9999999
-        if (any(ind <- probs == 0)) 
-            probs[ind] <- 1e-07
-        fits <- y - probs
+        pr <- probs(c(betas %*% c(1, z)))
+        fits <- y - pr
         z[1] - sum(fits * betas[, 2])
     }
     score <- function(f, gr, ...) {

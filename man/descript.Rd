@@ -19,7 +19,7 @@ descript(X, n.print = 10, ..., print = TRUE)
 \details{
     Before an analysis with latent variable models, it is useful to inspect the data for evidence of
     positive correlations. In the case of binary data, this ad hoc check can be performed by constructing 
-    the \eqn{2 \times 2} contingency tables for all possible pairs of items and examine the chi-squared \eqn{p}-values.
+    the \eqn{2 \times 2}{2 by 2} contingency tables for all possible pairs of items and examine the chi-squared \eqn{p}-values.
 }
 \value{
 If \code{print=FALSE} a list is returned with the following components,
@@ -31,6 +31,7 @@ If \code{print=FALSE} a list is returned with the following components,
 ## Descriptives for Wirs data:
 descript(Wirs)
 descript(Wirs, 3)
+descript(Wirs, print=FALSE)
 
 }
 \keyword{ multivariate }

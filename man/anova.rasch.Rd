@@ -16,7 +16,7 @@ anova.rasch(object, ltm.obj = NULL, B = 49, ...)
   \item{\dots}{ additional arguments; currently none is used.}
 }
 \details{
-  If only \code{obj} is supplied \code{anova.rasch} performs a parametric 
+  If only \code{object} is supplied \code{anova.rasch} performs a parametric 
   Bootstrap test based on Pearson's chi-squared statistic. The Bootstrap 
   approximation to the reference distribution is preferable compared with 
   the ordinary chi-squared approximation since the latter is not valid especially
@@ -32,8 +32,11 @@ anova.rasch(object, ltm.obj = NULL, B = 49, ...)
     \item{Step 2:}{Using \eqn{\theta^*} simulate new data (with the same dimensions as the 
     observed ones), fit the Rasch model and based on this fit calculate the value of the statistic \eqn{T_i}.}
     \item{Step 3:}{Repeat steps 1-2 \code{B} times and estimate the \eqn{p}-value using 
-    \eqn{(\# T_i  > T_{obs}) / (B+1) }.}
-  }  
+    \eqn{\sum\limits_{i=1}^B I(T_i  > T_{obs}) / (B+1).}{\{\# T_i  > T_{obs}\}.}}
+  }
+  
+  If both \code{object} and \code{ltm.obj} are supplied, then a likelihood ratio test between the two fitted
+  models is performed.  
 }
 \value{
 An object of class \code{aov.rasch} with components,
@@ -53,11 +56,14 @@ An object of class \code{aov.rasch} with components,
     \item{df}{the degrees of freedom for the test (i.e., the difference in the number of parameters). Returned if \code{ltm.obj} is also supplied.}
     \item{p.value}{the \eqn{p}-value of the test.}
 }
+\section{Warning}{
+    When the manifest (response) variables matrix contains missing values the Pearson chi-squared is not computed.
+}
 \seealso{ \code{\link{rasch}}}
 \examples{
 
 ## GoF for the Rasch model for the Wirs data:
-## using 99 bootstrap samples
+## using 99+1 bootstrap samples
 m <- rasch(Wirs)
 anova(m, B=99)
 

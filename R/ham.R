@@ -4,13 +4,8 @@ function (obj, betas, X, GH)
     scores.fun <- function(betas, X) {
         p <- nrow(betas)
         q. <- ncol(betas)
-        pr <- plogis(GH$Z %*% t(betas))
-        if (any(ind <- pr == 1)) 
-            pr[ind] <- 0.9999999
-        if (any(ind <- pr == 0)) 
-            pr[ind] <- 1e-07
-        p.xz <- exp(X %*% t(log(pr)) + (1 - X) %*% t(log(1 - 
-            pr)))
+        pr <- probs(GH$Z %*% t(betas))
+        p.xz <- exp(X %*% t(log(pr)) + (1 - X) %*% t(log(1 - pr)))
         p.x <- c(p.xz %*% GH$GHw)
         p.zx <- p.xz/p.x
         Nt <- GH$GHw * colSums(p.zx)

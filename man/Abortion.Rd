@@ -21,18 +21,18 @@
   1986 British Social Attitudes Survey (McGrath and Waterton, 1986).
 }
 \references{
-  Bartholomew, D., Steel, F., Moustaki, I. and Galbraith, J. (2002). \emph{The Analysis and Interpretation of 
+  Bartholomew, D., Steel, F., Moustaki, I. and Galbraith, J. (2002) \emph{The Analysis and Interpretation of 
   Multivariate Data for Social Scientists}. London: Chapman and Hall.
   
-  Knott, M., Albanese, M. and Galbraith, J. (1990). Scoring attitudes
-  to abortion. \emph{The Statistician} \bold{40}: 217-223.
+  Knott, M., Albanese, M. and Galbraith, J. (1990) Scoring attitudes
+  to abortion. \emph{The Statistician}, \bold{40}, 217--223.
   
-  McGrath, K. and Waterton, J. (1986). \emph{British social attitudes, 1983-86 panel
+  McGrath, K. and Waterton, J. (1986) \emph{British social attitudes, 1983-86 panel
   survey}. London: SCPR.
 }
 \examples{
 
-## Descriptive statistics for Abortion
+## Descriptive statistics for Abortion data
 descript(Abortion)
 
 }

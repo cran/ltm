@@ -21,10 +21,13 @@ function (object, ltm.obj = NULL, B = 49, ...)
             call = object$call)
     }
     else {
+	if (any(is.na(object$X)) && is.null(object$na.action))
+	    stop("In case of missing values the Pearson chi-squared is not derived.\n")
         pearson.chi <- function(object) {
             pats <- object$patterns$dat
             Obs <- pats$Obs
             Exp <- pats$Exp
+	    if(any(ind <- Exp == 0)) Exp[ind] <- 0.001
             sum((Obs - Exp)^2/Exp) + n - sum(Exp)
         }
         rmvlogis <- function(betas, n, p) {
@@ -36,15 +39,16 @@ function (object, ltm.obj = NULL, B = 49, ...)
         }
         old <- options(warn = (-1))
         on.exit(options(old))
-        n <- nrow(object$X)
         betas <- object$coef
         Var.betas <- summary(object)$Var.betas
-        p <- nrow(betas)
+        n <- nrow(object$X)
+	p <- nrow(betas)
         Tobs <- pearson.chi(object)
         Ts <- numeric(B)
         for (i in 1:B) {
             betas. <- mvrnorm(1, unique(c(betas)), Var.betas)
-            X <- rmvlogis(betas, n, p)
+	    betas. <- matrix(c(betas.[1:p], rep(betas.[p+1], p)), p)
+            X <- rmvlogis(betas., n, p)
             Ts[i] <- pearson.chi(rasch(X, control = object$control))
         }
         p.val <- sum(c(Tobs, Ts) >= Tobs) / (B + 1)

@@ -14,17 +14,17 @@
   This LSAT example is a part of a data set given in Bock and Lieberman (1970).
 }
 \references{
-Bartholomew, D., Steel, F., Moustaki, I. and Galbraith, J. (2002).
+Bartholomew, D., Steel, F., Moustaki, I. and Galbraith, J. (2002)
 \emph{The Analysis and Interpretation of Multivariate Data for
 Social Scientists}. London: Chapman and Hall.
 
-Bock, R. and Lieberman, M. (1970). Fitting a response model for \eqn{n}
-dichotomously scored items. \emph{Psychometrika} \bold{35}: 179-197.
+Bock, R. and Lieberman, M. (1970) Fitting a response model for \eqn{n}
+dichotomously scored items. \emph{Psychometrika}, \bold{35}, 179--197.
 
 }
 \examples{
 
-## Descriptive statistics for Lsat
+## Descriptive statistics for Lsat data
 descript(Lsat)
 
 

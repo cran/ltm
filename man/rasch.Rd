@@ -11,14 +11,13 @@ rasch(dat, start.val, na.action = NULL, control = list())
   \item{dat}{a data.frame (that will be converted to a numeric matrix using 
         \code{data.matrix()}) or a numeric matrix of manifest variables. The binary responses
         must be in 0/1 format.}
-  \item{start.val}{ a matrix of starting values for the
-        algorithm (rows denote items and columns latent structure). If it is not supplied randomly
-        chosen starting values are used instead.}
+  \item{start.val}{ a numeric vector of \code{p+1} starting values for the algorithm. The first \code{p}
+        values correspond to the difficulty parameters while the last value corresponds to the discrimination 
+        parameter. If it is not supplied randomly chosen starting values are used instead.}
   \item{na.action}{ the \code{na.action} to be used on \code{dat}. In case of missing data, if 
-  \code{na.action=NULL} the model uses the available cases, i.e., it takes 
-        into account the observed part of sample units with missing values (valid under MAR mechanisms 
-        if the model is correctly specified). If you want to apply a complete case analysis then use 
-        \code{na.action=na.exclude}.}
+        \code{na.action=NULL} the model uses the available cases, i.e., it takes into account the observed 
+        part of sample units with missing values (valid under MAR mechanisms if the model is correctly specified). 
+        If you want to apply a complete case analysis then use \code{na.action=na.exclude}.}
   \item{control}{a list of control values,
     \describe{
         \item{iter.qN}{ the number of quasi-Newton iterations. Default 150.}
@@ -29,21 +28,17 @@ rasch(dat, start.val, na.action = NULL, control = list())
   }
 }
 \details{ 
-The Rasch model is special case of the unidimensional latent 
-trait model when all the discrimination parameters are equal. 
-This model was first discussed by Rasch (1960) and it is used 
-mainly in educational testing where the aim is to study the 
-abilities of a particular set of individuals.
+    The Rasch model is special case of the unidimensional latent trait model when all the discrimination 
+    parameters are equal. This model was first discussed by Rasch (1960) and it is used mainly in educational 
+    testing where the aim is to study the abilities of a particular set of individuals.
 
-The model is defined as follows \deqn{y_i = \theta_{i0} + \beta 
-z,}{ y_i = theta_i + beta z, } where \eqn{y_i} denotes the response 
-for the \emph{i}th item, \eqn{\theta_i} denotes the difficulty 
-parameter for the \emph{i}th item, \eqn{\beta} is the 
-discrimination parameter and \eqn{z} denotes the latent variable.
+    The model is defined as follows \deqn{\log\left(\frac{\pi_i}{1-\pi_i}\right) = \beta_{i0} + \beta z,}{ logit
+    (\pi_i) = beta_{i0} + beta z, } where \eqn{\pi_i} denotes the probability of responding correctly to the \emph{i}th 
+    item, \eqn{\beta_{i0}}{beta_{i0}} denotes the difficulty parameter for the \emph{i}th item, \eqn{\beta} is the discrimination 
+    parameter (the same for all the items) and \eqn{z} denotes the latent ability.
 
-The optimization algorithm works under the constraint that the 
-discrimination parameter is always positive.
-
+    The optimization algorithm works under the constraint that the 
+    discrimination parameter is always positive.
 }
 \value{ An object of class \code{rasch} with components,
     \item{coefficients}{the loadings' values at convergence.}
@@ -65,10 +60,10 @@ In case the Hessian matrix at convergence is not positive definite, try
 to re-fit the model. \code{rasch} will use new random starting values.
 }
 \references{
-Baker, F. and Kim, S-H. (2004). \emph{Item Response Theory}, 2nd ed. 
+Baker, F. and Kim, S-H. (2004) \emph{Item Response Theory}, 2nd ed. 
 New York: Marcel Dekker.
 
-Rasch, G. (1960). \emph{Probabilistic Models for Some 
+Rasch, G. (1960) \emph{Probabilistic Models for Some 
 Intelligence and  Attainment Tests}. Copenhagen: Paedagogiske 
 Institute.
 }
@@ -87,6 +82,9 @@ rasch(Wirs)
 
 ## The Rasch model for the Lsat data:
 rasch(Lsat)
+
+## The Rasch model for the Abortion data:
+rasch(Abortion)
 
 }
 \keyword{multivariate}

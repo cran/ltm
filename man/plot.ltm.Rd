@@ -2,7 +2,7 @@
 \alias{plot.ltm}
 \title{ Plot method for ltm objects }
 \description{
-  produces the Item Characteristic Curves or Surfaces for fitted \code{ltm} objects.
+  Produces the Item Characteristic Curves or Surfaces for fitted \code{ltm} objects.
 }
 \usage{
 plot.ltm(x, cx = NULL, cy = NULL, ...)
@@ -32,8 +32,9 @@ m <- ltm(Wirs~z1)
 plot(m)
 
 \dontrun{
-## Item Characteristic Surfaces for the two-factor model:
-m <- ltm(Wirs~z1+z2)
+## because of an error during R CMD CHECK; you can run it.
+## Item Characteristic Surfaces for the interaction model:
+m <- ltm(Wirs~z1*z2)
 plot(m)
 }
 }

@@ -5,23 +5,15 @@ function (betas, X, method)
         if (!is.matrix(z)) 
             z <- t(z)
         z <- Z.fun(z, inter, quad.z1, quad.z2)
-        probs <- plogis(betas %*% t(cbind(1, z)))
-        if (any(ind <- probs == 1)) 
-            probs[ind] <- 0.9999999
-        if (any(ind <- probs == 0)) 
-            probs[ind] <- 1e-07
-        exp(colSums(y * log(probs) + (1 - y) * log(1 - probs))) * 
+        pr <- probs(betas %*% t(cbind(1, z)))
+        exp(colSums(y * log(pr) + (1 - y) * log(1 - pr))) * 
             exp(rowSums(dnorm(z[, seq(1, factors), drop = FALSE], 
                 log = TRUE)))
     }
     sc.z <- function(z, y, betas) {
         z <- Z.fun(z, inter, quad.z1, quad.z2)
-        probs <- plogis(c(betas %*% c(1, z)))
-        if (any(ind <- probs == 1)) 
-            probs[ind] <- 0.9999999
-        if (any(ind <- probs == 0)) 
-            probs[ind] <- 1e-07
-        fits <- y - probs
+        pr <- probs(c(betas %*% c(1, z)))
+        fits <- y - pr
         if (factors == 1) {
             out <- if (quad.z1) 
                 z[1] - sum(fits * (betas[, 2] + 2 * z[1] * betas[, 

@@ -8,8 +8,10 @@
 anova.ltm(object, obj2, ...)
 }
 \arguments{
-  \item{object}{ an object inheriting from class  \code{ltm}.}
-  \item{obj2}{ an object inheriting from class \code{ltm}.}
+  \item{object}{ an object inheriting from class \code{ltm} representing the model
+                under the null hypothesis.}
+  \item{obj2}{ an object inheriting from class \code{ltm} representing the model
+                under the alternative hypothesis.}
   \item{\dots}{ additional arguments; currently none is used.}
 }
 \value{
@@ -26,17 +28,25 @@ An object of class \code{aov.ltm} with components,
     \item{df}{the degrees of freedom for the test (i.e., the difference in the number of parameters).}
     \item{p.value}{the \eqn{p}-value of the test.}
 }
-\Warning{ The code does not test if the models are nested! The user is responsible to supply nested models in
-order the LRT to be valid}
+\section{Warning}{
+    The code does not check if the models are nested! The user is responsible to supply nested models in
+    order the LRT to be valid.
+}
 \seealso{
     \code{\link{ltm}}
 }
 \examples{
 
-## LRT between the one- and two-factor models 
+## LRT between the one- and two-factor model 
 ## for the Wirs data:
 m1 <- ltm(Wirs~z1)
 m2 <- ltm(Wirs~z1+z2)
+anova(m1, m2)
+
+## LRT between the two-factor and the interaction 
+## model for the Mobility data:
+m1 <- ltm(Mobility~z1+z2)
+m2 <- ltm(Mobility~z1*z2)
 anova(m1, m2)
 
 }

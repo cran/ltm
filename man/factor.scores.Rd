@@ -34,15 +34,16 @@ factor.scores.rasch(object, method=c("EB", "MI"), B=5,
   
   Usually as factor scores we assign the modes of the above posterior distribution evaluated at the MLEs. These
   Empirical Bayes estimates (use \code{method="EB"}) and their associated variance are good measures of the 
-  posterior distribution while \eqn{n \rightarrow \infty}, where \eqn{n} is the sample size. This is based on the result
-  \deqn{p(z|x)=p(z|x; \hat{\theta})(1+O(1/n)).}{p(z|x)=p(z|x; \hat{\theta})(1+O(1/n)).} However, in the case of 
-  small \eqn{n} we ignore the variability of plugging in estimates and not the \emph{true} parameter values. A 
-  solution to this problem can be given using Multiple Imputation (MI, use \code{method="MI"}). In particular, 
-  MI is used the other way around, i.e.,
+  posterior distribution while \eqn{p \rightarrow \infty}{p -> infinity}, where \eqn{p} is the number of items. 
+  This is based on the result \deqn{p(z|x)=p(z|x; \hat{\theta})(1+O(1/p)),}{p(z|x)=p(z|x; \hat{\theta})(1+O(1/p)),}
+  where \eqn{\hat{\theta}} are the MLEs. However, 
+  in the case of small \eqn{p} we ignore the variability of plugging in estimates and not the \emph{true} 
+  parameter values. A solution to this problem can be given using Multiple Imputation (MI, use \code{method="MI"}). 
+  In particular, MI is used the other way around, i.e.,
    \describe{
     \item{Step 1:}{Simulate new parameter values, say \eqn{\theta^*}, from \eqn{N(\hat{\theta}, C(\hat{\theta}))},
-    where \eqn{\hat{\theta}} are the MLEs and \eqn{C(\hat{\theta})} their large sample covariance 
-    matrix (if \code{robust.se=TRUE} \eqn{C(\hat{\theta})} is based on the sandwich estimator).}
+    where \eqn{C(\hat{\theta})} is the large sample covariance matrix of \eqn{\hat{\theta}} (if \code{robust.se=TRUE} 
+    \eqn{C(\hat{\theta})} is based on the sandwich estimator).}
     \item{Step 2:}{Maximize \eqn{p(z|x; \theta^*)} \emph{wrt} \eqn{z} and also compute the associated 
     variance to this mode.}
     \item{Step 3:}{Repeat steps 1-2 \code{B} times and combine the estimates using the known formulas of MI.}
@@ -63,36 +64,37 @@ factor.scores.rasch(object, method=c("EB", "MI"), B=5,
   \item{B}{the number of multiple imputations used; relevant only if \code{method="MI"}.}
 }
 \references{
-Bartholomew, D. (1984). Scaling binary data using a factor model. \emph{Journal of the Royal 
-Statistical Society, Series B} \bold{46}: 120-123.
+Bartholomew, D. (1984) Scaling binary data using a factor model. \emph{Journal of the Royal 
+Statistical Society, Series B}, \bold{46}, 120--123.
 
-Bartholomew, D. and Knott, M. (1999). \emph{Latent Variable Models
+Bartholomew, D. and Knott, M. (1999) \emph{Latent Variable Models
 and Factor Analysis}, 2nd ed. London: Arnold.
 
-Bartholomew, D., Steel, F., Moustaki, I. and Galbraith, J. (2002).
+Bartholomew, D., Steel, F., Moustaki, I. and Galbraith, J. (2002)
 \emph{The Analysis and Interpretation of Multivariate Data for
 Social Scientists}. London: Chapman and Hall.
 
-Rizopoulos, D. and Moustaki, I. (2005). Nonlinear effects in the
-generalized latent variable model. \emph{submitted for
-publication}.
+Rizopoulos, D. and Moustaki, I. (2005) Generalized latent variable models
+with nonlinear terms. \emph{submitted for publication}.
 }
-\seealso{ \code{\link{ltm}}, \code{\link{rasch}} }\examples{
+\seealso{ \code{\link{ltm}}, \code{\link{rasch}} }
+\examples{
+
 ## Factor Scores for the Rasch model
 m <- rasch(Wirs)
-factor.scores(m)
-factor.scores(m, "MI")
+factor.scores(m) # Empirical Bayes
+factor.scores(m, "MI", B=20) # Multiple Imputation with 20 imputations
 
-## Component Scores for the one-factor model
-m <- ltm(Wirs~z1)
-factor.scores(m)
-
+## Factor Scores for the one-factor model
+m <- ltm(Abortion~z1)
+factor.scores(m) # Component
+factor.scores(m, "EB") # Empirical Bayes
+factor.scores(m, "MI") # Multiple Imputation
 
 ## Factor Scores for the interaction model
 m <- ltm(Wirs~z1*z2)
-factor.scores(m, "EB")
-factor.scores(m, "MI")
-
+factor.scores(m, "EB") # Empirical Bayes
+factor.scores(m, "MI") # Multiple Imputation
 
 }
 \keyword{ multivariate }

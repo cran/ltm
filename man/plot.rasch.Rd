@@ -2,7 +2,7 @@
 \alias{plot.rasch}
 \title{ Plot method for rasch objects }
 \description{
-  produces the Item Characteristic Curves or Surfaces for fitted \code{rasch} objects.
+  Produces the Item Characteristic Curves or Surfaces for fitted \code{rasch} objects.
 }
 \usage{
 plot.rasch(x, cx = NULL, cy = NULL, ...)

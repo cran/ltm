@@ -23,19 +23,23 @@ coef.ltm(object, standardized = FALSE, ...)
 }
 \value{The matrix of the estimated parameters for the fitted model.}
 \references{
-Bartholomew, D. and Knott, M. (1999). \emph{Latent Variable Models
+Bartholomew, D. and Knott, M. (1999) \emph{Latent Variable Models
 and Factor Analysis}, 2nd ed. London: Arnold.
 
-Bartholomew, D., Steel, F., Moustaki, I. and Galbraith, J. (2002).
+Bartholomew, D., Steel, F., Moustaki, I. and Galbraith, J. (2002)
 \emph{The Analysis and Interpretation of Multivariate Data for
 Social Scientists}. London: Chapman and Hall.
 }
 \seealso{ \code{\link{ltm}}}
 \examples{
 
-m1 <- ltm(Wirs~z1)
+m1 <- ltm(Lsat~z1)
 coef(m1)
 coef(m1, TRUE)
+
+m2 <- ltm(Wirs~z1+z2)
+coef(m2)
+coef(m2, TRUE)
 
 }
 \keyword{ multivariate }

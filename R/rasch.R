@@ -27,23 +27,15 @@ function (dat, start.val, na.action = NULL, control = list())
     Z <- cbind(1, GH$x)
     GHw <- GH$w * dnorm(Z[, 2])
     logLik.rasch <- function(betas) {
-        betas <- cbind(betas[1:p], rep(abs(betas[p + 1]), p))
-        pr <- plogis(Z %*% t(betas))
-        if (any(ind <- pr == 1)) 
-            pr[ind] <- 0.9999999
-        if (any(ind <- pr == 0)) 
-            pr[ind] <- 1e-07
+        betas <- cbind(betas[1:p], abs(betas[p + 1]))
+        pr <- probs(Z %*% t(betas))
         p.xz <- exp(X %*% t(log(pr)) + mX %*% t(log(1 - pr)))
         p.x <- rep(c(p.xz %*% GHw), obs)
         -sum(log(p.x))
     }
     score.rasch <- function(betas) {
-        betas <- cbind(betas[1:p], rep(abs(betas[p + 1]), p))
-        pr <- plogis(Z %*% t(betas))
-        if (any(ind <- pr == 1)) 
-            pr[ind] <- 0.9999999
-        if (any(ind <- pr == 0)) 
-            pr[ind] <- 1e-07
+        betas <- cbind(betas[1:p], abs(betas[p + 1]))
+        pr <- probs(Z %*% t(betas))
         p.xz <- exp(X %*% t(log(pr)) + mX %*% t(log(1 - pr)))
         p.x <- c(p.xz %*% GHw)
         p.zx <- p.xz/p.x
@@ -61,9 +53,9 @@ function (dat, start.val, na.action = NULL, control = list())
     res.qN <- optim(betas, fn = logLik.rasch, gr = score.rasch, 
         method = con$method, hessian = TRUE, control = list(maxit = con$iter.qN, 
             trace = as.numeric(con$verbose)))
-    if (any(eigen(res.qN$hes, TRUE, TRUE)$val < 1e-05)) 
+    if (any(eigen(res.qN$hes, TRUE, TRUE)$val < sqrt(.Machine$double.eps))) 
         warning("Hessian matrix at convergence is not positive definite, unstable solution. Re-fit the model.\n")
-    betas <- cbind(res.qN$par[1:p], rep(abs(res.qN$par[p + 1]), p))
+    betas <- cbind(res.qN$par[1:p], abs(res.qN$par[p + 1]))
     pats <- patterns(X., betas)
     max.sc <- max(abs(score.rasch(res.qN$par)))
     fit <- list(coefficients = betas, log.Lik = -res.qN$val, 
@@ -71,6 +63,7 @@ function (dat, start.val, na.action = NULL, control = list())
         patterns = pats, GH = list(Z = Z, GHw = GHw), max.sc = max.sc)
     fit$X <- oX
     fit$control <- con
+    fit$na.action <- na.action
     fit$call <- cl
     class(fit) <- "rasch"
     fit

@@ -31,14 +31,14 @@ An object of class \code{margins} with components,
     \item{rule}{the value of the \code{rule} argument.}
 }
 \references{
-Bartholomew, D. (1998). Scaling unobservable constructs in social science. 
-\emph{Applied Statistics} \bold{47}: 1-13.
+Bartholomew, D. (1998) Scaling unobservable constructs in social science. 
+\emph{Applied Statistics}, \bold{47}, 1--13.
 
 
-Bartholomew, D. and Knott, M. (1999). \emph{Latent Variable Models
+Bartholomew, D. and Knott, M. (1999) \emph{Latent Variable Models
 and Factor Analysis}, 2nd ed. London: Arnold.
 
-Bartholomew, D., Steel, F., Moustaki, I. and Galbraith, J. (2002).
+Bartholomew, D., Steel, F., Moustaki, I. and Galbraith, J. (2002)
 \emph{The Analysis and Interpretation of Multivariate Data for
 Social Scientists}. London: Chapman and Hall.
 }

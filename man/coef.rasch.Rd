@@ -19,5 +19,8 @@ coef.rasch(object, ...)
 m1 <- rasch(Lsat)
 coef(m1)
 
+m2 <- rasch(Abortion)
+coef(m2)
+
 }
 \keyword{ multivariate }

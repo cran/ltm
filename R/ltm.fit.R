@@ -29,7 +29,7 @@ function (X, betas, constraint, factors, inter, quad.z1, quad.z2,
         gr = score.ltm, method = control$method, hessian = TRUE, 
         control = list(maxit = control$iter.qN, trace = as.numeric(control$verbose)), 
         constraint = constraint)
-    if (any(eigen(res.qN$hes, TRUE, TRUE)$val < 1e-05)) 
+    if (any(eigen(res.qN$hes, TRUE, TRUE)$val < sqrt(.Machine$double.eps))) 
         warning("Hessian matrix at convergence is not positive definite, unstable solution. Re-fit the model.\n")
     if (!is.null(constraint)) {
         ind <- constraint[1] + constraint[2] * p

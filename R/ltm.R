@@ -18,27 +18,29 @@ function (formula, start.val, constraint = NULL, na.action = NULL,
     inter <- "z1:z2" %in% tm
     quad.z1 <- "I(z1^2)" %in% tm
     quad.z2 <- "I(z2^2)" %in% tm
-    betas <- if (missing(start.val)) 
-        start.values(X, factors, inter, quad.z1, quad.z2)
-    else start.val
-    if (!is.null(constraint)) {
-        if (length(constraint) != 3) {
+    q. <- sum(1+factors, inter, quad.z1, quad.z2)
+    betas <- if(!missing(start.val)){
+        if(all(is.numeric(start.val), is.matrix(start.val), nrow(start.val)==ncol(X), ncol(start.val)==q.)) start.val else{
+            warning("'start.val' must be a ", ncol(X), " by ", q., " numeric matrix; random starting values are used instead.\n")
+            start.values(X, factors, inter, quad.z1, quad.z2)
+        } 
+    } else start.values(X, factors, inter, quad.z1, quad.z2)
+    if(!is.null(constraint)) {
+        if(!is.numeric(constraint) || length(constraint) != 3) {
             constraint <- NULL
-            warning("constraint must be a vector of length 3, see ?ltm for more info. `constraint' is set to NULL\n")
+            warning("'constraint' must be a numeric vector of length 3, see '?ltm' for more info; 'constraint' is set to NULL\n")
         }
-        if (constraint[1] > ncol(X) || constraint[2] > 2) {
+        if(constraint[1] > ncol(X) || constraint[2] > 2) {
             constraint <- NULL
-            warning("not acceptable values for the constraint, see `?ltm' for more info. `constraint' is set to NULL\n")
+            warning("not acceptable values for the constraint, see '?ltm' for more info; 'constraint' is set to NULL\n")
         }
     }
-    con <- list(iter.em = 40, iter.qN = 150, GHk = 15, method = "BFGS", 
-        verbose = FALSE)
+    con <- list(iter.em = 40, iter.qN = 150, GHk = 15, method = "BFGS", verbose = FALSE)
     con[names(control)] <- control
     fit <- ltm.fit(X, betas, constraint, factors, inter, quad.z1, 
         quad.z2, con)
     fit$X <- X
-    fit$ltn.struct <- c("z1", "z2", "z1:z2", "z1^2", "z2^2")[c("z1" %in% 
-        av, "z2" %in% av, inter, quad.z1, quad.z2)]
+    fit$ltn.struct <- c("z1", "z2", "z1:z2", "z1^2", "z2^2")[c("z1" %in% av, "z2" %in% av, inter, quad.z1, quad.z2)]
     fit$control <- con
     fit$call <- cl
     class(fit) <- "ltm"

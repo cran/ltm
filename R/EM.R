@@ -5,11 +5,7 @@ function (betas, constraint, iter, verbose = FALSE)
     if (!is.null(constraint)) 
         betas[constraint[1], 1 + constraint[2]] <- constraint[3]
     for (it in 1:iter) {
-        pr <- plogis(Z %*% t(betas))
-        if (any(ind <- pr == 1)) 
-            pr[ind] <- 0.9999999
-        if (any(ind <- pr == 0)) 
-            pr[ind] <- 1e-07
+        pr <- probs(Z %*% t(betas))
         dvar <- pr * (1 - pr)
         p.xz <- exp(X %*% t(log(pr)) + mX %*% t(log(1 - pr)))
         p.x <- c(p.xz %*% GHw)

@@ -37,5 +37,9 @@ summary(m)
 m <- rasch(Lsat)
 summary(m)
 
+## The Rasch model for the Abortion data:
+m <- rasch(Abortion)
+summary(m, TRUE)
+
 }
 \keyword{multivariate}

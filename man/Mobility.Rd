@@ -23,15 +23,15 @@ whether they could engage in the following activities alone (1=yes, 0=no):
   Bangladesh Fertility Survey of 1989 (Huq and Cleland, 1990).
 }
 \references{
-  Bartholomew, D., Steel, F., Moustaki, I. and Galbraith, J. (2002). \emph{The Analysis and Interpretation of 
+  Bartholomew, D., Steel, F., Moustaki, I. and Galbraith, J. (2002) \emph{The Analysis and Interpretation of 
   Multivariate Data for Social Scientists}. London: Chapman and Hall.
   
-  Huq, N. and Cleland, J. (1990). \emph{Bangladesh Fertility Survey, 1989}. Dhaka: National
+  Huq, N. and Cleland, J. (1990) \emph{Bangladesh Fertility Survey, 1989}. Dhaka: National
   Institute of Population Research and Training (NIPORT).
 }
 \examples{
 
-## Descriptive statistics for Mobility
+## Descriptive statistics for Mobility data
 descript(Mobility)
 
 }

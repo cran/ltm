@@ -25,15 +25,15 @@
   The WIRS surveys can be found at \url{http://www.niesr.ac.uk/niesr/wers98/}.
 }
 \references{
-  Bartholomew, D. (1998). Scaling unobservable constructs in social science. 
-  \emph{Applied Statistics} \bold{47}: 1-13. 
+  Bartholomew, D. (1998) Scaling unobservable constructs in social science. 
+  \emph{Applied Statistics}, \bold{47}, 1--13. 
   
-  Bartholomew, D., Steel, F., Moustaki, I. and Galbraith, J. (2002). \emph{The Analysis and Interpretation of 
+  Bartholomew, D., Steel, F., Moustaki, I. and Galbraith, J. (2002) \emph{The Analysis and Interpretation of 
   Multivariate Data for Social Scientists}. London: Chapman and Hall.
 }
 \examples{
 
-## Descriptive statistics for Wirs
+## Descriptive statistics for Wirs data
 descript(Wirs)
 
 }

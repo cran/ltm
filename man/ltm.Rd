@@ -2,7 +2,7 @@
 \alias{ltm}
 \title{ Latent Trait Model - Latent Variable Model for Binary Data}
 \description{
-  Fit a latent trait model under the Item Response Theory approach.
+  Fit a latent trait model under the Item Response Theory (IRT) approach.
 }
 \usage{
 ltm(formula, start.val, constraint=NULL, na.action = NULL, 
@@ -15,7 +15,7 @@ ltm(formula, start.val, constraint=NULL, na.action = NULL,
         supplied. The binary responses must be in 0/1 format. In the right side of \code{formula} only 
         two latent variables are allowed with codenames \code{z1}, \code{z2}. Interaction and quadratic 
         terms can also be used (see Details section for more info).}
-  \item{start.val}{ a matrix of starting values for the
+  \item{start.val}{ a numeric matrix of starting values for the
         algorithm (rows denote items and columns latent structure, with first column the intercepts). 
         If it is not supplied randomly chosen starting values are used instead.}
   \item{constraint}{a numeric vector with 3 elements, denoting the item, the factor and
@@ -36,36 +36,36 @@ ltm(formula, start.val, constraint=NULL, na.action = NULL,
   }
 }
 \details{
-The latent trait model is the analogous of the factor 
-analysis model for binary observed data. The model assumes that 
-the dependencies between the observed response variables (known as items) 
-can be interpreted by a small number of latent variables. The model 
-formulation is under the IRT approach.
+    The latent trait model is the analogous of the factor analysis model for binary observed data. 
+    The model assumes that the dependencies between the observed response variables (known as items) 
+    can be interpreted by a small number of latent variables. The model formulation is under the IRT 
+    approach; in particular, \deqn{\log\left(\frac{\pi_{i}}{1-\pi_{i}}\right)=\beta_{i0} + \beta_{i1}z_1 + 
+    \beta_{i2}z_2,}{logit(pi_i)=beta_{i0} + beta_{i1}z_1 + beta_{i2}z_2,} where \eqn{\pi_i} is the the probability
+    of a positive response in the $i$th item, \eqn{\beta_{i0}} is the difficulty parameter, \eqn{\beta_{ij}} 
+    (\eqn{j=1,2}) are the discrimination parameters and \eqn{z_1, z_2} denote the two latent variables. 
 
-The usual form of the latent trait model assumes linear latent 
-variable effects (Bartholomew and Knott, 1999; Moustaki and Knott, 2000). \code{ltm} fits the 
-linear one- and two-factor models but also provides extensions described 
-by Rizopoulos and Moustaki (2005) to include nonlinear latent variable effects.
+    The usual form of the latent trait model assumes linear latent variable effects (Bartholomew and 
+    Knott, 1999; Moustaki and Knott, 2000). \code{ltm} fits the linear one- and two-factor models but 
+    also provides extensions described by Rizopoulos and Moustaki (2005) to include nonlinear latent 
+    variable effects. These are incorporated in the linear predictor of the model, i.e., \deqn{\log\left
+    (\frac{\pi_{i}}{1-\pi_{i}}\right)=\beta_{i0} + \beta_{i1}z_1 + \beta_{i2}z_2 + \beta_{nl}^tf(z_1, z_2),
+    }{logit(pi_i)=beta_{i0} + beta_{i1}z_1 + beta_{i2}z_2 + beta_{nl}^tf(z_1, z_2),} where \eqn{f(z_1, z_2)} is
+    a function of \eqn{z_1} and \eqn{z_2} (e.g., \eqn{f(z_1, z_2)=z_1z_2}, \eqn{f(z_1, z_2)=z_1^2}, etc.) and 
+    \eqn{\beta_{nl}} is a matrix of nonlinear terms parameters (look also at the Examples).
+    
+    The linear one- and two-factor model are unidentified under orthogonal rotations on the factors' 
+    space. To achieve identifiability you can fix the value of one loading using the \code{constraint} 
+    argument. 
 
-The linear one- and two-factor model are unidentified under orthogonal 
-rotations on the factors' space. To achieve identifiability you 
-can fix the value of one loading using the \code{constraint} 
-argument. 
-
-The fit is done by optimizing the marginal log-likelihood using 
-the conditional independence assumption, i.e., conditionally on 
-the latent structure the items are independent Bernoulli variates 
-under the logit link. The required integrals are approximated 
-using the Gauss-Hermite rule. The optimization procedure used is 
-a hybrid algorithm. The procedure initially uses a moderate 
-number of EM iterations (see \code{control} argument 
-\code{iter.em}) and then switches to quasi-Newton (see 
-\code{control} arguments \code{method} and \code{iter.qN}) 
-iterations until convergence. In case of large number of items, 
-the `Conjugate Gradient' optimization method might be preferable. 
-Due to the use of Gauss-Hermite integration combined with the relatively
-large data sets encountered in multivariate analysis the use of optimized
-BLAS (e.g., Goto's BLAS) is highly recommended. 
+    The fit is done by optimizing the marginal log-likelihood using the conditional independence assumption, 
+    i.e., conditionally on the latent structure the items are independent Bernoulli variates under the logit 
+    link. The required integrals are approximated using the Gauss-Hermite rule. The optimization procedure used 
+    is a hybrid algorithm. The procedure initially uses a moderate number of EM iterations (see \code{control} 
+    argument \code{iter.em}) and then switches to quasi-Newton (see \code{control} arguments \code{method} and 
+    \code{iter.qN}) iterations until convergence. In case of large number of items, the `Conjugate Gradient' 
+    optimization method might be preferable. Due to the use of Gauss-Hermite integration combined with the relatively 
+    large data sets encountered in multivariate analysis the use of optimized BLAS (e.g., Goto's BLAS) is highly 
+    recommended. 
 }
 \value{
 An object of class \code{ltm} with components,
@@ -95,22 +95,21 @@ reached re-fit the model a number of times (simulations showed
 that usually 10 times are adequate to ensure global convergence).
 }
 \references{
-Baker, F. and Kim, S-H. (2004). \emph{Item Response Theory}, 2nd ed. 
+Baker, F. and Kim, S-H. (2004) \emph{Item Response Theory}, 2nd ed. 
 New York: Marcel Dekker.
 
-Bartholomew, D. and Knott, M. (1999). \emph{Latent Variable Models
+Bartholomew, D. and Knott, M. (1999) \emph{Latent Variable Models
 and Factor Analysis}, 2nd ed. London: Arnold.
 
-Bartholomew, D., Steel, F., Moustaki, I. and Galbraith, J. (2002).
+Bartholomew, D., Steel, F., Moustaki, I. and Galbraith, J. (2002)
 \emph{The Analysis and Interpretation of Multivariate Data for
 Social Scientists}. London: Chapman and Hall.
 
-Moustaki, I. and Knott, M. (2000). Generalized latent trait
-models. \emph{Psychometrika} \bold{65}: 391-411.
+Moustaki, I. and Knott, M. (2000) Generalized latent trait
+models. \emph{Psychometrika}, \bold{65}, 391--411.
 
-Rizopoulos, D. and Moustaki, I. (2005). Nonlinear effects in the
-generalized latent variable model. \emph{submitted for
-publication}.
+Rizopoulos, D. and Moustaki, I. (2005) Generalized latent variable models
+with nonlinear terms. \emph{submitted for publication}.
 }
 \seealso{
   \code{\link{coef.ltm}},
@@ -139,7 +138,7 @@ ltm(Wirs~z1+z2, constraint=c(3,2,1))
 
 ## One-factor model with 20 quadrature points
 ## 20 EM iterations
-ltm(Lsat~z1, control=list(GHk=20, iter.em=20))
+ltm(Abortion~z1, control=list(GHk=20, iter.em=20))
 
 }
 \keyword{multivariate}
