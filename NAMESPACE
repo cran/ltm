@@ -1,0 +1,35 @@
+# functions
+export(anova.ltm, anova.rasch, coef.ltm, coef.rasch, descript, factor.scores, factor.scores.ltm, 
+		factor.scores.rasch, margins, ltm, plot.ltm, plot.rasch, rasch, summary.ltm, summary.rasch)
+
+importFrom(MASS, mvrnorm)
+
+S3method(anova, ltm)
+S3method(anova, rasch)
+S3method(coef, ltm)
+S3method(coef, rasch)
+S3method(factor.scores, ltm)
+S3method(factor.scores, rasch)
+S3method(print, aov.ltm)
+S3method(print, aov.rasch)
+S3method(print, ltm)
+S3method(print, margins)
+S3method(print, rasch)
+S3method(print, fscores)
+S3method(print, summ.ltm)
+S3method(print, summ.rasch)
+S3method(plot, ltm)
+S3method(plot, rasch)
+S3method(summary, ltm)
+S3method(summary, rasch)
+
+
+
+
+
+
+
+
+
+
+
