@@ -1,0 +1,12 @@
+Changes in version: ltm_0.2-1
+
+  o "rasch()" now contains an extra argument 'constraint' that permits incoprotation of fixed-value constraints. For more info check help("rasch", package="ltm").
+
+  o "anova.rasch()" now also performs LRTs betweem constrained and unconstrained Rasch models.
+  
+  o a vcov() method has been introduced for "rasch()" objects.
+
+  o Edited .Rd files to use \method{} for generics.
+
+  o corrected some typos in .Rd files.
+

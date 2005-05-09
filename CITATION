@@ -1,0 +1,14 @@
+citHeader("To cite package 'ltm' in publications use:")
+
+citEntry(entry="Manual",
+         title = "ltm: Latent Trait Models under IRT",
+         author = personList(as.person("D. Rizopoulos")),
+         year         = 2005,
+         note         = "R package version 0.2-0",
+         url          = "http://www.student.kuleuven.ac.be/~m0390867/dimitris.htm",
+         
+         textVersion = 
+         paste("Rizopoulos, D. (2005)", 
+               "'ltm: Latent Trait Models under IRT'.",
+               "R package version 0.2-0.")
+)

@@ -1,30 +1,20 @@
 "print.margins" <-
-function (x, digits = 2, ...) 
-{
+function(x, digits=2, ...){
     combs <- x$combs
     type <- x$type
-    cat("\nFit on the", if (type == "two-way") 
-        "Two-Way"
-    else "Three-Way", "Margins\n\n")
+    cat("\nFit on the", if (type == "two-way") "Two-Way" else "Three-Way", "Margins\n\n")
     for (i in 1:nrow(combs)) {
-        cat("Response: (", paste(combs[i, ], collapse = ","), 
-            ")\n", sep = "")
+        cat("Response: (", paste(combs[i, ], collapse = ","), ")\n", sep = "")
         mat <- x$margins[, , i]
-        mat <- mat[order(mat[, ncol(mat)], decreasing = TRUE), 
-            ]
+        mat <- mat[order(mat[, ncol(mat)], decreasing = TRUE), ]
         mat <- data.frame(round(mat[seq(1, x$nprint), ], digits))
-        mat$rule <- ifelse(mat[, ncol(mat)] > x$rule, "***", 
-            "")
-        names(mat) <- if (type == "two-way") 
-            c("Item i", "Item j", "Obs", "Exp", "(O-E)^2/E", 
-                " ")
-        else c("Item i", "Item j", "Item k", "Obs", "Exp", "(O-E)^2/E", 
-            " ")
+        mat$rule <- ifelse(mat[, ncol(mat)] > x$rule, "***", "")
+        names(mat) <- if (type == "two-way") c("Item i", "Item j", "Obs", "Exp", "(O-E)^2/E", " ")
+            else c("Item i", "Item j", "Item k", "Obs", "Exp", "(O-E)^2/E", " ")
         print(mat)
         cat("\n")
     }
-    cat("`***' denotes a chi-squared residual greater than", 
-        x$rule, "\n")
+    cat("`***' denotes a chi-squared residual greater than", x$rule, "\n")
     invisible(x)
 }
 

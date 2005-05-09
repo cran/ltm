@@ -2,10 +2,10 @@
 \alias{plot.rasch}
 \title{ Plot method for rasch objects }
 \description{
-  Produces the Item Characteristic Curves or Surfaces for fitted \code{rasch} objects.
+  Produces the Item Characteristic Curves for fitted \code{rasch} objects.
 }
 \usage{
-plot.rasch(x, cx = NULL, cy = NULL, ...)
+\method{plot}{rasch}(x, cx = NULL, cy = NULL, \dots)
 }
 \arguments{
   \item{x}{ an object inheriting from class  \code{rasch}. }
@@ -16,6 +16,9 @@ plot.rasch(x, cx = NULL, cy = NULL, ...)
 \details{
   Item characteristic curves (also known as item response functions) show how the probability
   of a positive response, in each item, increases with the values of the latent variable (ability).
+}
+\author{
+    Dimitris Rizopoulos \email{dimitris.rizopoulos@med.kuleuven.be}
 }
 \seealso{ \code{\link{rasch}}}
 \examples{
@@ -29,4 +32,5 @@ m <- rasch(Lsat)
 plot(m, cx=1.5, cy=0.4)
 
 }
+\keyword{methods}
 \keyword{ multivariate }

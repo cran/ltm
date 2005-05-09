@@ -5,7 +5,7 @@
   Summarizes the fit of an \code{ltm} object.
 }
 \usage{
-summary.ltm(object, robust.se = FALSE, ...)
+\method{summary}{ltm}(object, robust.se = FALSE, \dots)
 }
 \arguments{
   \item{object}{ an object inheriting from class  \code{ltm}. }
@@ -15,7 +15,7 @@ summary.ltm(object, robust.se = FALSE, ...)
 \value{
   An object of class \code{summ.ltm} with components,
   \item{coefficients}{the estimated coefficients' table.}
-  \item{Var.betas}{the covariance matrix for the estimated parameters.}
+  \item{Var.betas}{the approximate covariance matrix for the estimated parameters.}
   \item{logLik}{the log-likelihood of \code{object}.}
   \item{AIC}{the AIC for \code{object}.}
   \item{BIC}{the BIC for \code{object}.}
@@ -27,6 +27,9 @@ summary.ltm(object, robust.se = FALSE, ...)
   \item{control}{the values used in the \code{control} argument in the fit of \code{object}.}
   \item{nitems}{the number of items in the data set.}
 }
+\author{
+    Dimitris Rizopoulos \email{dimitris.rizopoulos@med.kuleuven.be}
+}
 \seealso{ \code{\link{ltm}} }
 \examples{
 
@@ -36,4 +39,5 @@ summary(m)
 summary(m, TRUE)
 
 }
+\keyword{methods}
 \keyword{multivariate}

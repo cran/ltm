@@ -1,7 +1,6 @@
 "factor.scores.ltm" <-
-function (object, method = c("Component", "EB", "MI"), B = 5, 
-    robust.se = FALSE, ...) 
-{
+function(object, method=c("Component", "EB", "MI"), B=5, robust.se=FALSE, ...){
+    if(!inherits(object, "ltm")) stop("Use only with 'ltm' objects.\n")
     betas <- object$coef
     X <- object$patterns$mat
     nx <- nrow(X)
@@ -18,16 +17,16 @@ function (object, method = c("Component", "EB", "MI"), B = 5,
         method <- "MI"
     }
     res <- object$patterns$dat
-    if (method == "Component") {
+    if(method == "Component") {
         res$z1 <- colSums(t(X) * betas[, 2])
-        if (factors == 2) 
-            res$z2 <- colSums(t(X) * betas[, 3])
+        if(factors == 2) res$z2 <- colSums(t(X) * betas[, 3])
     }
-    if (method == "EB" || method == "MI") {
+    if(method == "EB" || method == "MI") {
         environment(scores.ML) <- environment()
         res <- scores.ML(betas, X, method)
     }
-    out <- list(score.dat = res, method = method, B = B)
+    out <- list(score.dat=res, method=method, B=B)
+    out$call <- object$call
     class(out) <- "fscores"
     out
 }

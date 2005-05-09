@@ -5,7 +5,7 @@
   Performs a Likelihood Ratio Test between two nested \code{ltm} objects. 
 }
 \usage{
-anova.ltm(object, obj2, ...)
+\method{anova}{ltm}(object, obj2, \dots)
 }
 \arguments{
   \item{object}{ an object inheriting from class \code{ltm} representing the model
@@ -32,9 +32,10 @@ An object of class \code{aov.ltm} with components,
     The code does not check if the models are nested! The user is responsible to supply nested models in
     order the LRT to be valid.
 }
-\seealso{
-    \code{\link{ltm}}
+\author{
+    Dimitris Rizopoulos \email{dimitris.rizopoulos@med.kuleuven.be}
 }
+\seealso{ \code{\link{ltm}} }
 \examples{
 
 ## LRT between the one- and two-factor model 
@@ -50,4 +51,5 @@ m2 <- ltm(Mobility~z1*z2)
 anova(m1, m2)
 
 }
+\keyword{methods}
 \keyword{ multivariate }

@@ -3,7 +3,7 @@
 \title{ Descriptive Statistics for Response Matrices }
 \description{
   Computes the percentages of positive and negative responses for each item, as well 
-  the pairwise associations between items (see Details for more info).
+  the pairwise associations between items (see \bold{Details} for more info).
 }
 \usage{
 descript(X, n.print = 10, ..., print = TRUE)
@@ -25,6 +25,9 @@ descript(X, n.print = 10, ..., print = TRUE)
 If \code{print=FALSE} a list is returned with the following components,
     \item{perc}{a matrix containing the percentages of positive and negative responses for each item.}
     \item{pw.ass}{a matrix containing the \eqn{p}-values for the pairwise association between the items.}
+}
+\author{
+    Dimitris Rizopoulos \email{dimitris.rizopoulos@med.kuleuven.be}
 }
 \examples{
 

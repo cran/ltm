@@ -1,15 +1,16 @@
 "summary.rasch" <-
-function (object, robust.se = FALSE, ...) 
-{
+function (object, robust.se = FALSE, ...) {
+    if(!inherits(object, "rasch")) stop("Use only with 'rasch' objects.\n")
     coefs <- object$coef
     coefs <- c(coefs[, 1], coefs[1, 2])
-    Var.betas <- if (robust.se) {
-        H <- solve(object$hes)
+    Var.betas <- if(robust.se) {
+        H <- vcov(object)
         S <- ham(object, object$coef, object$X, object$GH)
         H %*% S %*% H
-    }
-    else solve(object$hes)
-    se <- sqrt(diag(Var.betas))
+    } else vcov(object)
+    se <- rep(NA, length(coefs))
+    ind <- if(!is.null(constraint <- object$constraint)) seq(along=se)[-constraint[, 1]] else seq(along=se)
+    se[ind] <- sqrt(diag(Var.betas))
     z.vals <- coefs/se
     coef.tab <- cbind(value = coefs, st.err = se, z.vals)
     out <- list(coefficients = coef.tab, Var.betas = Var.betas)

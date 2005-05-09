@@ -42,7 +42,9 @@ Bartholomew, D., Steel, F., Moustaki, I. and Galbraith, J. (2002)
 \emph{The Analysis and Interpretation of Multivariate Data for
 Social Scientists}. London: Chapman and Hall.
 }
-
+\author{
+    Dimitris Rizopoulos \email{dimitris.rizopoulos@med.kuleuven.be}
+}
 \seealso{ \code{\link{ltm}}, \code{\link{rasch}} }
 \examples{
 ## Two- and Three-way residuals for the Rasch model

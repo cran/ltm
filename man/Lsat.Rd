@@ -4,7 +4,7 @@
 \title{ The Law School Admission Test (LSAT), Section VI }
 \description{
   The LSAT is a classical example in educational testing for measuring
-  ability traits. This test was designed to measure a \emph(single)
+  ability traits. This test was designed to measure a \emph{single}
   latent ability scale.
 }
 \format{

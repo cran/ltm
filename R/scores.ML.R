@@ -1,14 +1,10 @@
 "scores.ML" <-
-function (betas, X, method) 
-{
+function (betas, X, method){
     logLik.z <- function(z, y, betas) {
-        if (!is.matrix(z)) 
-            z <- t(z)
+        if(!is.matrix(z)) z <- t(z)
         z <- Z.fun(z, inter, quad.z1, quad.z2)
         pr <- probs(betas %*% t(cbind(1, z)))
-        exp(colSums(y * log(pr) + (1 - y) * log(1 - pr))) * 
-            exp(rowSums(dnorm(z[, seq(1, factors), drop = FALSE], 
-                log = TRUE)))
+        exp(colSums(y * log(pr) + (1-y) * log(1-pr))) * exp(rowSums(dnorm(z[, seq(1, factors), drop=FALSE], log=TRUE)))
     }
     sc.z <- function(z, y, betas) {
         z <- Z.fun(z, inter, quad.z1, quad.z2)
@@ -61,18 +57,13 @@ function (betas, X, method)
         scores.ML <- matrix(0, nx, factors)
         hes.ML <- array(data = 0, dim = c(factors, factors, nx))
         for (i in 1:nx) {
-            out <- score(f = logLik.z, gr = sc.z, y = X[i, ], 
-                betas = betas)
+            out <- score(f = logLik.z, gr = sc.z, y = X[i, ], betas = betas)
             scores.ML[i, ] <- out$mu
             hes.ML[, , i] <- out$hes
         }
         se.ML <- t(apply(hes.ML, 3, function(x) sqrt(diag(x))))
-        res$z1 <- if (factors == 2) 
-            scores.ML[, 1]
-        else c(scores.ML)
-        res$se.z1 <- if (factors == 2) 
-            se.ML[, 1]
-        else c(se.ML)
+        res$z1 <- if (factors == 2) scores.ML[, 1] else c(scores.ML)
+        res$se.z1 <- if (factors == 2) se.ML[, 1] else c(se.ML)
         if (factors == 2) {
             res$z2 <- scores.ML[, 2]
             res$se.z2 <- se.ML[, 2]
@@ -80,24 +71,20 @@ function (betas, X, method)
     }
     if (method == "MI") {
         var.b <- summary(object, robust.se)$Var.betas
-        scores.B <- lapply(1:B, array, data = 0, dim = c(nx, 
-            factors))
-        hes.B <- lapply(1:B, array, data = 0, dim = c(factors, 
-            factors, nx))
+        scores.B <- lapply(1:B, array, data = 0, dim = c(nx, factors))
+        hes.B <- lapply(1:B, array, data = 0, dim = c(factors, factors, nx))
         for (b in 1:B) {
             betas. <- mvrnorm(1, c(betas), var.b)
             dim(betas.) <- c(p, q.)
             for (i in 1:nx) {
-                out <- score(f = logLik.z, gr = sc.z, y = X[i, 
-                  ], betas = betas.)
+                out <- score(f = logLik.z, gr = sc.z, y = X[i, ], betas = betas.)
                 scores.B[[b]][i, ] <- out$mu
                 hes.B[[b]][, , i] <- out$hes
             }
         }
         scores.av <- matMeans(scores.B)
         hes.av <- matArrays(hes.B)
-        SV <- lapply(1:B, array, data = 0, dim = c(factors, factors, 
-            nx))
+        SV <- lapply(1:B, array, data = 0, dim = c(factors, factors, nx))
         for (b in 1:B) {
             for (i in 1:nx) {
                 sc.dif <- scores.B[[b]][i, ] - scores.av[i, ]

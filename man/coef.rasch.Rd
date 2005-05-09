@@ -5,7 +5,7 @@
   Extracts the estimated parameters from an \code{rasch} object.
 }
 \usage{
-coef.rasch(object, ...)
+\method{coef}{rasch}(object, \dots)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -13,6 +13,9 @@ coef.rasch(object, ...)
   \item{\dots}{ additional arguments; currently none is used. }
 }
 \value{The matrix of the estimated parameters for the fitted model.}
+\author{
+    Dimitris Rizopoulos \email{dimitris.rizopoulos@med.kuleuven.be}
+}
 \seealso{ \code{\link{rasch}} }
 \examples{
 
@@ -23,4 +26,5 @@ m2 <- rasch(Abortion)
 coef(m2)
 
 }
+\keyword{methods}
 \keyword{ multivariate }

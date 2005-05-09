@@ -1,8 +1,6 @@
 "coef.rasch" <-
-function (object, ...) 
-{
-    cof <- object$coef
-    dimnames(cof) <- list(paste("Item", 1:nrow(cof)), c("Difficulty", "Discrimination"))
-    round(cof, 2)
+function(object, ...) {
+    if(!inherits(object, "rasch")) stop("Use only with 'rasch' objects.\n")
+    if(is.null(cof <- object$coef)) cat("\n No Coefficients.\n") else round(cof, 2)
 }
 

@@ -1,22 +1,21 @@
 "gauher" <-
-function (n) 
-{
+function(n){
     EPS <- 3e-14
     PIM4 <- 0.751125544464943
     MAXIT <- 10
     m <- trunc((n + 1)/2)
     x <- w <- rep(-1, n)
-    for (i in 1:m) {
-        if (i == 1) {
+    for(i in 1:m){
+        if(i == 1){
             z <- sqrt(2 * n + 1) - 1.85575 * (2 * n + 1)^(-0.16667)
         }
-        else if (i == 2) {
+        else if(i == 2){
             z <- z - 1.14 * n^0.426/z
         }
-        else if (i == 3) {
+        else if(i == 3) {
             z <- 1.86 * z - 0.86 * x[1]
         }
-        else if (i == 4) {
+        else if(i == 4) {
             z <- 1.91 * z - 0.91 * x[2]
         }
         else {

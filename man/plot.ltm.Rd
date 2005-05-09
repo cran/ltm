@@ -5,7 +5,7 @@
   Produces the Item Characteristic Curves or Surfaces for fitted \code{ltm} objects.
 }
 \usage{
-plot.ltm(x, cx = NULL, cy = NULL, ...)
+\method{plot}{ltm}(x, cx = NULL, cy = NULL, \dots)
 }
 \arguments{
   \item{x}{ an object inheriting from class  \code{ltm}. }
@@ -24,6 +24,9 @@ plot.ltm(x, cx = NULL, cy = NULL, ...)
   When two latent variables are used, \code{plot.ltm} uses \code{options(graphics.record = TRUE)}, i.e.,
   the plots are available for scrolling.
 }
+\author{
+    Dimitris Rizopoulos \email{dimitris.rizopoulos@med.kuleuven.be}
+}
 \seealso{ \code{\link{ltm}}}
 \examples{
 
@@ -38,4 +41,5 @@ m <- ltm(Wirs~z1*z2)
 plot(m)
 }
 }
+\keyword{methods}
 \keyword{ multivariate }

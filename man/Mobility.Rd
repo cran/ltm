@@ -7,7 +7,7 @@
 }
 \format{
 The dimension of interest is women's mobility of social freedom. Women were asked
-whether they could engage in the following activities alone (1=yes, 0=no):  
+whether they could engage in the following activities alone (1 = yes, 0 = no):  
   \describe{
     \item{Item 1}{Go to any part of the village/town/city.}
     \item{Item 2}{Go outside the village/town/city.}

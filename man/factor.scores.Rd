@@ -7,25 +7,23 @@
   Computation of factor scores for \code{ltm} and \code{rasch} models.
 }
 \usage{
-factor.scores(object, ...)
+factor.scores(object, \dots)
 
-# S3 method for class 'ltm':
-factor.scores.ltm(object, method=c("Component", "EB", "MI"), B=5, 
-                    robust.se=FALSE, ...)
+\method{factor.scores}{ltm}(object, method = c("Component", "EB", "MI"), B = 5, 
+                    robust.se = FALSE, \dots)
 
-# S3 method for class 'rasch':
-factor.scores.rasch(object, method=c("EB", "MI"), B=5, 
-                    robust.se=FALSE, ...)
+\method{factor.scores}{rasch}(object, method = c("EB", "MI"), B = 5, 
+                    robust.se = FALSE, \dots)
 }
 \arguments{
   \item{object}{ an object inheriting either from class \code{ltm} or class \code{rasch}.}
   \item{method}{a character supplying the scoring method. For \code{ltm} objects available methods are:
   Component scores, Empirical Bayes and Multiple Imputation.
   For \code{rasch} objects available methods are: Empirical Bayes and Multiple Imputation. 
-  See Details section for more info.}
+  See \bold{Details} section for more info.}
   \item{B}{the number of multiple imputations to be used if \code{method="MI"}.}
   \item{robust.se}{logical; if \code{TRUE} the sandwich estimator is used for the estimation of the covariance
-  matrix of the MLEs. See Details section for more info.}
+  matrix of the MLEs. See \bold{Details} section for more info.}
   \item{\dots}{ additional argument; currently none is used. }
 }
 \details{
@@ -76,6 +74,9 @@ Social Scientists}. London: Chapman and Hall.
 
 Rizopoulos, D. and Moustaki, I. (2005) Generalized latent variable models
 with nonlinear terms. \emph{submitted for publication}.
+}
+\author{
+    Dimitris Rizopoulos \email{dimitris.rizopoulos@med.kuleuven.be}
 }
 \seealso{ \code{\link{ltm}}, \code{\link{rasch}} }
 \examples{

@@ -1,16 +1,14 @@
 "summary.ltm" <-
-function (object, robust.se = FALSE, ...) 
-{
+function (object, robust.se = FALSE, ...) {
+    if(!inherits(object, "ltm")) stop("Use only with 'ltm' objects.\n")
     coefs <- object$coef
     Var.betas <- if (robust.se) {
         H <- solve(object$hes)
         S <- ham(object, coefs, object$X, object$GH)
         H %*% S %*% H
-    }
-    else solve(object$hes)
+    } else solve(object$hes)
     se <- sqrt(diag(Var.betas))
-    if (any(ind <- se < 1e-08)) 
-        se[ind] <- NA
+    if(any(ind <- se < 1e-08)) se[ind] <- NA
     coefs <- c(coefs)
     z.vals <- coefs/se
     coef.tab <- cbind(value = coefs, st.err = se, z.vals)

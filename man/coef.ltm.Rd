@@ -5,7 +5,7 @@
   Extracts the estimated parameters from an \code{ltm} object.
 }
 \usage{
-coef.ltm(object, standardized = FALSE, ...)
+\method{coef}{ltm}(object, standardized = FALSE, \dots)
 }
 \arguments{
   \item{object}{ an object inheriting from class \code{ltm}. }
@@ -30,6 +30,9 @@ Bartholomew, D., Steel, F., Moustaki, I. and Galbraith, J. (2002)
 \emph{The Analysis and Interpretation of Multivariate Data for
 Social Scientists}. London: Chapman and Hall.
 }
+\author{
+    Dimitris Rizopoulos \email{dimitris.rizopoulos@med.kuleuven.be}
+}
 \seealso{ \code{\link{ltm}}}
 \examples{
 
@@ -42,4 +45,5 @@ coef(m2)
 coef(m2, TRUE)
 
 }
+\keyword{methods}
 \keyword{ multivariate }

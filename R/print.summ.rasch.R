@@ -1,17 +1,15 @@
 "print.summ.rasch" <-
-function (x, digits = max(3, getOption("digits") - 3), ...) 
-{
+function (x, digits = max(3, getOption("digits") - 3), ...){
+    if(!inherits(x, "summ.rasch")) stop("Use only with 'summ.rasch' objects.\n")
     cat("\nCall:\n", deparse(x$call), "\n\n", sep = "")
     cat("Model Summary:\n")
-    model.sum <- data.frame(log.Lik = x$logLik, AIC = x$AIC, 
-        BIC = x$BIC, row.names = "")
+    model.sum <- data.frame(log.Lik = x$logLik, AIC = x$AIC, BIC = x$BIC, row.names = "")
     print(model.sum)
     cat("\nCoefficients:\n")
     coefs <- x$coef
     p <- x$nitems
-    coefs <- data.frame(value = round(coefs[, 1], digits), std.error = round(coefs[, 
-        2], digits), z.value = round(coefs[, 3], digits), row.names = c(paste("Difficulty", 
-        1:p, sep = "."), "Discrimination"))
+    coefs <- data.frame(value = round(coefs[, 1], digits), std.error = round(coefs[, 2], digits), 
+            z.value = round(coefs[, 3], digits), row.names = c(paste("beta", 1:p, sep = "."), "beta"))
     print(coefs, digits = digits)
     cat("\nIntegration:\n")
     cat("method: Gauss-Hermite\n")
