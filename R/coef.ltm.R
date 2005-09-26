@@ -1,28 +1,30 @@
 "coef.ltm" <-
-function (object, standardized=FALSE, ...){
-    if(!inherits(object, "ltm")) stop("Use only with 'ltm' objects.\n")
+function(object, standardized = FALSE, prob = FALSE, ...){
+    if(!inherits(object, "ltm"))
+        stop("Use only with 'ltm' objects.\n")
     cof <- object$coef
-    if(standardized){
-        strct <- ltn.strct(object$ltn.struct)
-        factors <- strct$factors
-        if(any(strct$inter, strct$quad.z1, strct$quad.z2)){
+    cof <- if(standardized){
+        factors <- object$ltst$factors
+        if(any(object$ltst$inter, object$ltst$quad.z1, object$ltst$quad.z2)){
             warning("standardized loadings are returned for the simple one- and two-factor models.\n")
-            dimnames(cof) <- list(paste("Item", 1:nrow(cof)), c("(Intercept)", object$ltn.struct))
-            return(round(cof, 2))
+            colnames(cof) <- object$ltst$nams
+            cof
         }
-        std.z <- cof[, -1] / sqrt(rowSums(cof[, -1, drop=FALSE] * cof[, -1, drop=FALSE]) + factors)
-        if (factors == 1){
+        std.z <- cof[, -1] / sqrt(rowSums(cof[, -1, drop = FALSE] * cof[, -1, drop = FALSE]) + factors)
+        if(factors == 1){
             cof <- cbind(cof, std.z)
-            dimnames(cof) <- list(paste("Item", 1:nrow(cof)), c("(Intercept)", "z1", "std.z1"))
-            return(round(cof, 2))
+            colnames(cof) <- c("(Intercept)", "z1", "std.z1")
+            cof
         }
         else{
             cof <- cbind(cof[, 1:2], std.z[, 1], cof[, 3], std.z[, 2])
-            dimnames(cof) <- list(paste("Item", 1:nrow(cof)), c("(Intercept)", "z1", "std.z1", "z2", "std.z2"))
-            return(round(cof, 2))
+            colnames(cof) <- c("(Intercept)", "z1", "std.z1", "z2", "std.z2")
+            cof
         }
-    }
-    dimnames(cof) <- list(paste("Item", 1:nrow(cof)), c("(Intercept)", object$ltn.struct))
-    round(cof, 2)
+    } else
+        cof
+    if(prob)
+        cof <- cbind(cof, "P(x=1|z=0)" = plogis(cof[, 1]))
+    round(cof, 3)
 }
 

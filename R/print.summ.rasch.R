@@ -1,16 +1,13 @@
 "print.summ.rasch" <-
 function (x, digits = max(3, getOption("digits") - 3), ...){
-    if(!inherits(x, "summ.rasch")) stop("Use only with 'summ.rasch' objects.\n")
-    cat("\nCall:\n", deparse(x$call), "\n\n", sep = "")
+    if(!inherits(x, "summ.rasch"))
+        stop("Use only with 'summ.rasch' objects.\n")
+    cat("\nCall:\n", paste(deparse(x$call), sep = "\n", collapse = "\n"), "\n\n", sep = "")
     cat("Model Summary:\n")
     model.sum <- data.frame(log.Lik = x$logLik, AIC = x$AIC, BIC = x$BIC, row.names = "")
     print(model.sum)
     cat("\nCoefficients:\n")
-    coefs <- x$coef
-    p <- x$nitems
-    coefs <- data.frame(value = round(coefs[, 1], digits), std.error = round(coefs[, 2], digits), 
-            z.value = round(coefs[, 3], digits), row.names = c(paste("beta", 1:p, sep = "."), "beta"))
-    print(coefs, digits = digits)
+    print(round(x$coef, digits = digits))
     cat("\nIntegration:\n")
     cat("method: Gauss-Hermite\n")
     cat("quadrature points:", x$control$GHk, "\n")
@@ -18,6 +15,7 @@ function (x, digits = max(3, getOption("digits") - 3), ...){
     cat("Convergence:", x$conv, "\n")
     cat("max(|grad|):", format.pval(x$max.sc, digits = 2, eps = 1e-06), "\n")
     cat("quasi-Newton:", x$control$method, "\n")
+    cat("\n\n")
     invisible(x)
 }
 

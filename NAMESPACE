@@ -1,38 +1,38 @@
-# functions
+# Exported functions
 export(anova.ltm, anova.rasch, coef.ltm, coef.rasch, descript, factor.scores, factor.scores.ltm, 
-		factor.scores.rasch, margins, ltm, plot.ltm, plot.rasch, rasch, summary.ltm, summary.rasch,
-		vcov.rasch)
+		factor.scores.rasch, fitted.ltm, fitted.rasch, margins, ltm, plot.ltm, plot.rasch, rasch, 
+		summary.ltm, summary.rasch, vcov.ltm, vcov.rasch)
 
+# Imported functions
 importFrom(MASS, mvrnorm)
+importFrom(gtools, combinations)
+importFrom(msm, deltamethod)
 
+# S3 methods
 S3method(anova, ltm)
 S3method(anova, rasch)
 S3method(coef, ltm)
 S3method(coef, rasch)
 S3method(factor.scores, ltm)
 S3method(factor.scores, rasch)
+S3method(fitted, ltm)
+S3method(fitted, rasch)
+S3method(IRT.parm, ltm)
+S3method(IRT.parm, rasch)
+S3method(logLik, ltm)
+S3method(logLik, rasch)
 S3method(print, aov.ltm)
 S3method(print, aov.rasch)
+S3method(print, descript)
+S3method(print, fscores)
 S3method(print, ltm)
 S3method(print, margins)
 S3method(print, rasch)
-S3method(print, fscores)
 S3method(print, summ.ltm)
 S3method(print, summ.rasch)
 S3method(plot, ltm)
 S3method(plot, rasch)
 S3method(summary, ltm)
 S3method(summary, rasch)
+S3method(vcov, ltm)
 S3method(vcov, rasch)
-
-
-
-
-
-
-
-
-
-
-
-

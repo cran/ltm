@@ -1,17 +1,26 @@
 "summary.ltm" <-
 function (object, robust.se = FALSE, ...) {
-    if(!inherits(object, "ltm")) stop("Use only with 'ltm' objects.\n")
-    coefs <- object$coef
-    Var.betas <- if (robust.se) {
-        H <- solve(object$hes)
-        S <- ham(object, coefs, object$X, object$GH)
-        H %*% S %*% H
-    } else solve(object$hes)
-    se <- sqrt(diag(Var.betas))
-    if(any(ind <- se < 1e-08)) se[ind] <- NA
-    coefs <- c(coefs)
-    z.vals <- coefs/se
-    coef.tab <- cbind(value = coefs, st.err = se, z.vals)
+    if(!inherits(object, "ltm"))
+        stop("Use only with 'ltm' objects.\n")
+    if(object$IRT.param)
+        irt <- IRT.parm(object, TRUE, robust = robust.se)
+    coefs <- if(object$IRT.param) irt$parms else object$coef
+    Var.betas <- vcov(object, robust = robust.se)
+    se <- if(!is.null(constraint <- object$constraint)){
+        p <- nrow(coefs)
+        res <- matrix(NA, p, ncol(coefs))
+        res[-((constraint[, 2] - 1) * p + constraint[, 1])] <- if(object$IRT.param) irt$se else sqrt(diag(Var.betas))
+        c(res)
+    } else{
+        if(object$IRT.param) irt$se else sqrt(diag(Var.betas))
+    }
+    z.vals <- c(coefs)/se
+    coef.tab <- cbind(value = c(coefs), std.err = se, z.vals = z.vals)
+    p <- nrow(coefs)
+    rownames(coef.tab) <- if(object$IRT & (object$ltst$factors == 1 & !object$ltst$quad.z1))
+            paste(rep(colnames(coefs), each = p), abbreviate(rownames(coefs), 3), sep = ".")
+        else
+            paste(rep(object$ltst$nams, each = p), abbreviate(rownames(coefs), 3), sep = ".")
     out <- list(coefficients = coef.tab, Var.betas = Var.betas)
     out$logLik <- object$log.Lik
     out$AIC <- -2 * object$log.Lik + 2 * length(coefs)
@@ -20,9 +29,8 @@ function (object, robust.se = FALSE, ...) {
     out$conv <- object$conv
     out$counts <- object$counts
     out$call <- object$call
-    out$ltn.struct <- object$ltn.struct
+    out$ltst <- object$ltst
     out$control <- object$control
-    out$nitems <- ncol(object$X)
     class(out) <- "summ.ltm"
     out
 }

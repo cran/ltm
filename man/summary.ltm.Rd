@@ -12,6 +12,14 @@
   \item{robust.se}{logical; if \code{TRUE} robust estimation of standard errors is used, based on the sandwich estimator.}
   \item{\dots}{ additional argument; currently none is used. }
 }
+
+\note{
+    For the parameters that have been constrained, the standard errors and \eqn{z}-values are printed as \code{NA}.
+
+    When the coefficients' estimates are reported under the usual IRT parameterization (i.e., \code{IRT.param = TRUE}
+    in the call of \code{ltm}), their standard errors are calculated using the Delta method.
+}
+
 \value{
   An object of class \code{summ.ltm} with components,
   \item{coefficients}{the estimated coefficients' table.}
@@ -27,17 +35,23 @@
   \item{control}{the values used in the \code{control} argument in the fit of \code{object}.}
   \item{nitems}{the number of items in the data set.}
 }
+
 \author{
     Dimitris Rizopoulos \email{dimitris.rizopoulos@med.kuleuven.be}
 }
-\seealso{ \code{\link{ltm}} }
+
+\seealso{
+    \code{\link{ltm}}
+}
+
 \examples{
 
-## One factor model using the WIRS data
-m <- ltm(Wirs~z1)
+## One factor model using the WIRS data;
+## results are reported under the IRT
+## parameterization
+m <- ltm(Wirs ~ z1, IRT = TRUE)
 summary(m)
 summary(m, TRUE)
 
 }
 \keyword{methods}
-\keyword{multivariate}

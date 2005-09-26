@@ -5,11 +5,15 @@
   Extracts the estimated parameters from an \code{ltm} object.
 }
 \usage{
-\method{coef}{ltm}(object, standardized = FALSE, \dots)
+\method{coef}{ltm}(object, standardized = FALSE, prob = FALSE, \dots)
 }
 \arguments{
   \item{object}{ an object inheriting from class \code{ltm}. }
-  \item{standardized}{ logical; if \code{TRUE} the standardized loadings are also returned. See  Details for more info.}
+  \item{standardized}{ logical; if \code{TRUE} the standardized loadings are also returned. See  \bold{Details} 
+        for more info.}
+  \item{prob}{ logical; if \code{TRUE} the probability of a positive response for the median individual
+        (i.e., \eqn{Pr(x_i = 1 | z = 0)}, with \eqn{i = 1, \ldots, p}{i = 1, ..., p} denoting the items) 
+        is also returned.}
   \item{\dots}{ additional arguments; currently none is used.}
 }
 \details{
@@ -36,14 +40,8 @@ Social Scientists}. London: Chapman and Hall.
 \seealso{ \code{\link{ltm}}}
 \examples{
 
-m1 <- ltm(Lsat~z1)
-coef(m1)
-coef(m1, TRUE)
-
-m2 <- ltm(Wirs~z1+z2)
-coef(m2)
-coef(m2, TRUE)
+m <- ltm(Lsat ~ z1)
+coef(m, TRUE, TRUE)
 
 }
 \keyword{methods}
-\keyword{ multivariate }

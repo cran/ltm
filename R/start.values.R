@@ -1,15 +1,19 @@
 "start.values" <-
-function (X, factors, inter, quad.z1, quad.z2){
+function(X, factors, formula){
     n <- dim(X)[1]
     p <- dim(X)[2]
-    Z <- rnorm(factors * n, sd = 1.5)
-    dim(Z) <- c(n, factors)
-    if(inter) Z <- cbind(Z, Z[, 1] * Z[, 2])
-    if(quad.z1) Z <- cbind(Z, Z[, 1] * Z[, 1])
-    if(quad.z2) Z <- cbind(Z, Z[, 2] * Z[, 2])
-    coefs <- matrix(0, p, ncol(Z) + 1)
-    for (i in seq(1, p)) coefs[i, ] <- glm(X[, i] ~ Z, family = binomial)$coef
+    Z <- as.data.frame(lapply(1:factors, rnorm, n = n, sd = 1.5))
+    names(Z) <- paste("z", 1:factors, sep = "")
+    cf <- paste(formula[3])
+    form <- paste("y ~ ", paste("z", 1:factors, collapse = " + ", sep = ""), " + ", cf)
+    form <- as.formula(form)
+    q. <- length(attr(terms(form), "term.labels"))
+    coefs <- matrix(0, p, q. + 1)
+    for (i in 1:p){
+        Z$y <- X[, i]
+        coefs[i, ] <- glm(form, family = binomial, data = Z)$coef
+    }
     dimnames(coefs) <- NULL
-    return(coefs)
+    coefs
 }
 

@@ -1,0 +1,41 @@
+Changes in version: ltm_0.3-0
+
+  o a new logical argument -- 'IRT.parm' (default to FALSE) -- has been introduced in both "ltm()" and "rasch()"
+    which if TRUE reports the coefficients under the usual IRT parameterization.
+
+  o "plot.ltm()" and "plot.rasch()" improved: (i) if the column names of the input data are not NULL then they are 
+    used to denote the items, (ii) printing of legend is now optional -- see argument 'legend', (iii) if 'legend = FALSE',
+    'text()' is used to add as labels to the existing plot either the column names of the input data or numbers denoting
+    the items, (iv) there is an argument 'items' controlling which items are plotted.
+
+  o 'constraint' argument in "ltm()" accepts now more general fixed value constraints. For more info check 
+    help("ltm", package = "ltm").
+
+  o a "fitted()" method has been introduced for both classes 'ltm' and 'rasch'.
+
+  o a "logLik()" method has been introduced for both classes 'ltm' and 'rasch'.
+
+  o a "vcov()" method has been introduced for both classes 'ltm' and 'rasch'.
+
+  o now robust standard errors estimation is done inside "vcov.rasch()" and "vcov.ltm()".
+
+  o "coef.ltm()" and "coef.rasch" have a new logical argument 'prob' which if TRUE, then the probabilities
+    of a positive response for the median individual are returned.
+
+  o "descript()" now has a print method -- 'print' argument no longer available.
+
+==============================
+
+Changes in version: ltm_0.2-1
+
+  o "rasch()" now contains an extra argument 'constraint' that permits incorporation of fixed-value constraints. 
+    For more info check help("rasch", package = "ltm").
+
+  o "anova.rasch()" now also performs LRTs between constrained and unconstrained Rasch models.
+  
+  o a "vcov()" method has been introduced for "rasch()" objects.
+
+  o Edited *.Rd files to use \method{} for generics.
+
+  o corrected some typos in .Rd files.
+

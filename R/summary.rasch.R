@@ -1,18 +1,18 @@
 "summary.rasch" <-
 function (object, robust.se = FALSE, ...) {
-    if(!inherits(object, "rasch")) stop("Use only with 'rasch' objects.\n")
-    coefs <- object$coef
-    coefs <- c(coefs[, 1], coefs[1, 2])
-    Var.betas <- if(robust.se) {
-        H <- vcov(object)
-        S <- ham(object, object$coef, object$X, object$GH)
-        H %*% S %*% H
-    } else vcov(object)
+    if(!inherits(object, "rasch"))
+        stop("Use only with 'rasch' objects.\n")
+    if(object$IRT.param)
+        irt <- IRT.parm(object, TRUE, robust = robust.se)
+    coefs <- if(object$IRT.param) irt$parms else c(object$coef[, 1], object$coef[1, 2])
+    Var.betas <- vcov(object, robust = robust.se)
     se <- rep(NA, length(coefs))
-    ind <- if(!is.null(constraint <- object$constraint)) seq(along=se)[-constraint[, 1]] else seq(along=se)
-    se[ind] <- sqrt(diag(Var.betas))
+    ind <- if(!is.null(constraint <- object$constraint)) seq(along = se)[-constraint[, 1]] else seq(along = se)
+    se[ind] <- if(object$IRT.param) irt$se else sqrt(diag(Var.betas))
     z.vals <- coefs/se
-    coef.tab <- cbind(value = coefs, st.err = se, z.vals)
+    coef.tab <- cbind(value = coefs, std.err = se, z.vals = z.vals)
+    p <- ncol(object$X)
+    rownames(coef.tab) <- if(object$IRT) names(coefs) else c(abbreviate(names(coefs[1:p]), 5), "z") 
     out <- list(coefficients = coef.tab, Var.betas = Var.betas)
     out$logLik <- object$log.Lik
     out$AIC <- -2 * object$log.Lik + 2 * length(coefs)
@@ -22,7 +22,7 @@ function (object, robust.se = FALSE, ...) {
     out$counts <- object$counts
     out$call <- object$call
     out$control <- object$control
-    out$nitems <- ncol(object$X)
+    out$IRT.param <- object$IRT.param
     class(out) <- "summ.rasch"
     out
 }

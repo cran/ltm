@@ -2,7 +2,7 @@
 \alias{anova.rasch}
 \title{ Anova method for rasch objects }
 \description{
-  Performs either a parametric Bootsrap goodness-of-fit test based on the
+  Performs either a parametric Bootstrap goodness-of-fit test based on the
   Pearson chi-squared or a Likelihood Ratio Test between two nested models.
 }
 \usage{
@@ -18,7 +18,7 @@
   If only \code{object} is supplied \code{anova.rasch} performs a parametric 
   Bootstrap test based on Pearson's chi-squared statistic. The Bootstrap 
   approximation to the reference distribution is preferable compared with 
-  the ordinary chi-squared approximation since the latter is not valid especially
+  the ordinary Chi-squared approximation since the latter is not valid especially
   for large number of items (=> many response patterns with expected frequencies
   smaller than 1).
   
@@ -31,7 +31,7 @@
     \item{Step 2:}{Using \eqn{\theta^*} simulate new data (with the same dimensions as the 
     observed ones), fit the Rasch model and based on this fit calculate the value of the statistic \eqn{T_i}.}
     \item{Step 3:}{Repeat steps 1-2 \code{B} times and estimate the \eqn{p}-value using 
-    \eqn{\sum\limits_{i=1}^B I(T_i  > T_{obs}) / (B+1).}{\{\# T_i  > T_{obs}\}.}}
+    \eqn{[1 + \sum\limits_{i=1}^B I(T_i  > T_{obs})] / (B + 1).}{[1 + \{\# T_i  > T_{obs}\}]/(B + 1).}}
   }
   
   If both \code{object} and \code{object2} are supplied, then a likelihood ratio test between the two fitted
@@ -73,9 +73,11 @@ m <- rasch(Wirs)
 anova(m, B = 99)
 }
 
+
 ## GoF for the Rasch model for the Lsat data:
 m <- rasch(Lsat)
 anova(m)
+
 
 ## An LRT between the constrained (discrimination 
 ## parameter equals 1) and the unconstrained Rasch
@@ -85,11 +87,12 @@ m1 <- rasch(Wirs)
 anova(m0, m1)
 
 
-## An LRT between the Rasch and the one-factor model
-## for the Wirs data: 
+## An LRT between the Rasch and a constrained 
+## two-parameter logistic model for the Wirs data: 
 m0 <- rasch(Wirs)
-m1 <- ltm(Wirs~z1)
+m1 <- ltm(Wirs ~ z1, constraint = cbind(c(1, 3, 5), 2, 1))
 anova(m0, m1)
+
 
 ## An LRT between constrained (discrimination 
 ## parameter equals 1) and the unconstrained Rasch
@@ -98,6 +101,10 @@ m0 <- rasch(Lsat, constraint = rbind(c(6, 1)))
 m1 <- rasch(Lsat)
 anova(m0, m1)
 
+
+## An LRT between the Rasch and the two-parameter 
+## logistic models for the Lsat data: 
+anova(rasch(Lsat), ltm(Lsat ~ z1))
+
 }
 \keyword{methods}
-\keyword{ multivariate }

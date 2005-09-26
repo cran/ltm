@@ -5,7 +5,8 @@
   Fit the Rasch model under the Item Response Theory approach.
 }
 \usage{
-rasch(data, constraint = NULL, start.val, na.action = NULL, control = list())
+rasch(data, constraint = NULL, IRT.param = FALSE, start.val, 
+            na.action = NULL, control = list())
 }
 \arguments{
   \item{data}{a data.frame (that will be converted to a numeric matrix using 
@@ -15,13 +16,15 @@ rasch(data, constraint = NULL, start.val, na.action = NULL, control = list())
         specifying fixed-value constraints. The first column represents the item (i.e., \eqn{1} denotes the first item,
         \eqn{2} the second, etc., and \eqn{p+1} the discrimination parameter) and the second column the 
         value at which the corresponding parameter should be fixed. See \bold{Examples} for more info.}
+  \item{IRT.param}{logical; if \code{TRUE} then the coefficients' estimates are reported under the 
+        usual IRT parameterization. See \bold{Details} for more info.}
   \item{start.val}{ a numeric vector of \eqn{p+1} starting values for the algorithm. The first \eqn{p}
         values correspond to the easiness parameters while the last value corresponds to the discrimination 
         parameter. If it is not supplied randomly chosen starting values are used instead.}
   \item{na.action}{ the \code{na.action} to be used on \code{dat}. In case of missing data, if 
-        \code{na.action=NULL} the model uses the available cases, i.e., it takes into account the observed 
+        \code{na.action = NULL} the model uses the available cases, i.e., it takes into account the observed 
         part of sample units with missing values (valid under MAR mechanisms if the model is correctly specified). 
-        If you want to apply a complete case analysis then use \code{na.action=na.exclude}.}
+        If you want to apply a complete case analysis then use \code{na.action = na.exclude}.}
   \item{control}{a list of control values,
     \describe{
         \item{iter.qN}{ the number of quasi-Newton iterations. Default 150.}
@@ -31,39 +34,63 @@ rasch(data, constraint = NULL, start.val, na.action = NULL, control = list())
     }
   }
 }
+
 \details{ 
     The Rasch model is special case of the unidimensional latent trait model when all the discrimination 
     parameters are equal. This model was first discussed by Rasch (1960) and it is used mainly in educational 
     testing where the aim is to study the abilities of a particular set of individuals.
 
     The model is defined as follows \deqn{\log\left(\frac{\pi_i}{1-\pi_i}\right) = \beta_{i} + \beta z,}{ logit
-    (\pi_i) = beta_{i} + beta z, } where \eqn{\pi_i} denotes the probability of responding correctly to the \eqn{i}th 
-    item, \eqn{\beta_{i}}{beta_{i}} is the easiness parameter for the \eqn{i}th item, \eqn{\beta} is the 
-    discrimination parameter (the same for all the items) and \eqn{z} denotes the latent ability.
+    (\pi_i) = beta_{i} + beta z, } where \eqn{\pi_i} denotes the conditional probability of responding correctly 
+    to the \eqn{i}th item given \eqn{z}, \eqn{\beta_{i}}{beta_{i}} is the easiness parameter for the \eqn{i}th 
+    item, \eqn{\beta} is the discrimination parameter (the same for all the items) and \eqn{z} denotes the latent 
+    ability.
+    
+    If \code{IRT.param = TRUE}, then the parameters estimates are reported under the usual IRT parameterization,
+    i.e., \deqn{\log\left(\frac{\pi_i}{1-\pi_i}\right) = \beta (z - \beta_i^*).}{ logit
+    (\pi_i) = beta (z - beta_i^*).}
 
     The fit of the model is based on approximate marginal Maximum Likelihood, using the Gauss-Hermite quadrature rule 
-    for the approximation of the required integrals. The optimization algorithm works under the constraint that 
-    the discrimination parameter is always positive.
+    for the approximation of the required integrals.
 }
+
+\note{
+    The optimization algorithm works under the constraint that the discrimination parameter 
+    \eqn{\beta}{beta} is always positive.
+    
+    When the coefficients' estimates are reported under the usual IRT parameterization (i.e., \code{IRT.param = TRUE}),
+    their standard errors are calculated using the Delta method.
+}
+
 \value{ An object of class \code{rasch} with components,
-    \item{coefficients}{the parameter values at convergence.}
+    \item{coefficients}{the parameter values at convergence. These are always the estimates of 
+        \eqn{\beta_i, \beta}{beta_i, beta} parameters, even if \code{IRT.param = TRUE}.}
     \item{log.Lik}{the log-likelihood value at convergence.}
     \item{convergence}{the convergence identifier returned by \code{optim}.}
     \item{hessian}{the approximate Hessian matrix at convergence returned by \code{optim}.}
-    \item{patterns}{a list with two components: (i) \code{mat} a numeric matrix 
-    that contains the observed response patterns. (ii) \code{dat} a data.frame that contains the observed and expected 
-    frequencies for each observed response pattern.}
-    \item{GH}{a list with two components used in the Gauss-Hermite rule: (i) \code{Z} a numeric matrix that contains 
-    the quadrature points. (ii) \code{GHw} a numeric vector that contains the corresponding  weights.} 
+    \item{counts}{the number of function and gradient evaluations required by the quasi-Newton algorithm.}
+    \item{patterns}{a list with two components: (i) \code{X}: a numeric matrix 
+        that contains the observed response patterns, and (ii) \code{obs}: a numeric vector that contains the observed 
+        frequencies for each observed response pattern.}
+    \item{GH}{a list with two components used in the Gauss-Hermite rule: (i) \code{Z}: a numeric matrix that contains 
+        the abscissas, and (ii) \code{GHw}: a numeric vector that contains the corresponding  weights.} 
     \item{max.sc}{the maximum absolute value of the score vector at convergence.}
-    \item{X}{the responses data matrix.}
+    \item{constraint}{the value of the \code{constraint} argument.}
+    \item{IRT.param}{the value of the \code{IRT.param} argument.}
+    \item{X}{a copy of the response data matrix.}
     \item{control}{the values used in the \code{control} argument.}
+    \item{na.action}{the value of the \code{na.action} argument.}
     \item{call}{the matched call.}
 }
+
 \section{Warning}{ 
-In case the Hessian matrix at convergence is not positive definite, try
-to re-fit the model. \code{rasch} will use new random starting values.
+    In case the Hessian matrix at convergence is not positive definite, try to re-fit the model; 
+    \code{rasch} will use new random starting values.
+
+    If \code{IRT.param = TRUE}, calculation of the standard errors for \eqn{\hat{\beta}_i^*}{\hat{beta}_i^*} 
+    requires that the discrimination parameter \eqn{\beta}{beta} is not fixed.
 }
+
 \references{
 Baker, F. and Kim, S-H. (2004) \emph{Item Response Theory}, 2nd ed. 
 New York: Marcel Dekker.
@@ -77,6 +104,7 @@ Institute.
 }
 \seealso{
   \code{\link{coef.rasch}},
+  \code{\link{fitted.rasch}},
   \code{\link{summary.rasch}},
   \code{\link{anova.rasch}},
   \code{\link{plot.rasch}},
@@ -84,10 +112,12 @@ Institute.
   \code{\link{margins}},
   \code{\link{factor.scores}}
 }
+
 \examples{
 
 ## The Rasch model for the Wirs data:
 rasch(Wirs)
+
 
 ## The Rasch model for the Wirs data, under the 
 ## constraint that: (i) the easiness parameter 
@@ -98,17 +128,22 @@ rasch(Wirs)
 rasch(Wirs, constraint = constr)
 
 
-## The Rasch model for the Lsat data:
-rasch(Lsat)
+## The Rasch model for the Lsat data;
+## report parameter estimates under the
+## usual IRT parameterization:
+rasch(Lsat, IRT = TRUE)
+
 
 ## The Rasch model for the Lsat data, under the 
 ## constraint that the discrimination parameter
 ## equals 1
-rasch(Lsat, constraint = rbind(c(6,1)))
+rasch(Lsat, constraint = rbind(c(6, 1)))
 
 
 ## The Rasch model for the Abortion data:
-rasch(Abortion)
+## report parameter estimates under the
+## usual IRT parameterization:
+rasch(Abortion, IRT = TRUE)
 
 }
 \keyword{multivariate}

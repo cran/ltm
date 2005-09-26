@@ -1,7 +1,8 @@
 "print.margins" <-
-function(x, digits=2, ...){
+function(x, digits = 2, ...){
     combs <- x$combs
     type <- x$type
+    cat("\nCall:\n", paste(deparse(x$call), sep = "\n", collapse = "\n"), "\n", sep = "")
     cat("\nFit on the", if (type == "two-way") "Two-Way" else "Three-Way", "Margins\n\n")
     for (i in 1:nrow(combs)) {
         cat("Response: (", paste(combs[i, ], collapse = ","), ")\n", sep = "")
@@ -15,6 +16,7 @@ function(x, digits=2, ...){
         cat("\n")
     }
     cat("`***' denotes a chi-squared residual greater than", x$rule, "\n")
+    cat("\n")
     invisible(x)
 }
 

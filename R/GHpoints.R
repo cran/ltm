@@ -1,13 +1,20 @@
 "GHpoints" <-
-function(k, factors, inter=FALSE, quad.z1=FALSE, quad.z2=FALSE){
+function(form, k){
+    av <- all.vars(form)
+    factors <- length(av[-1])
+    cf <- paste(form[3])
+    form. <- paste(" ~ ", paste("z", 1:factors, collapse = " + ", sep = ""), " + ", cf)
+    form. <- as.formula(form.)
     GH <- gauher(k)
-    grid.t <- as.matrix(expand.grid(lapply(1:factors, function(k, u) u$x, u = GH)))
+    grid.t <- expand.grid(lapply(1:factors, function(k, u) u$x, u = GH))
+    names(grid.t) <- paste("z", 1:factors, sep = "")
+    out <- model.matrix(form., grid.t)
+    colnams <- colnames(out)
+    dimnames(out) <- attr(out, "assign") <- NULL
     grid.w <- as.matrix(expand.grid(lapply(1:factors, function(k, u) u$w, u = GH)))
-    dimnames(grid.t) <- dimnames(grid.w) <- NULL
-    grid.w <- apply(grid.w, 1, prod) * exp(rowSums(grid.t^2))
-    if(inter) grid.t <- cbind(grid.t, grid.t[, 1] * grid.t[, 2])
-    if(quad.z1) grid.t <- cbind(grid.t, grid.t[, 1] * grid.t[, 1])
-    if(quad.z2) grid.t <- cbind(grid.t, grid.t[, 2] * grid.t[, 2])
-    list(x=grid.t, w=grid.w)
+    grid.w <- apply(grid.w, 1, prod) * exp(rowSums(grid.t * grid.t))
+    grid.w <- grid.w * exp(rowSums(dnorm(out[, seq(2, factors + 1), drop = FALSE], log = TRUE)))
+    names(grid.w) <- NULL
+    list(x = out, w = grid.w, colnams = colnams)
 }
 

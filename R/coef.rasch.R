@@ -1,6 +1,10 @@
 "coef.rasch" <-
-function(object, ...) {
-    if(!inherits(object, "rasch")) stop("Use only with 'rasch' objects.\n")
-    if(is.null(cof <- object$coef)) cat("\n No Coefficients.\n") else round(cof, 2)
+function(object, prob = FALSE, ...) {
+    if(!inherits(object, "rasch"))
+        stop("Use only with 'rasch' objects.\n")
+    cof <- object$coef
+    if(prob)
+        cof <- cbind(cof, "P(x=1|z=0)" = plogis(cof[, 1]))
+    round(cof, 3)
 }
 

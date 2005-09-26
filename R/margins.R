@@ -1,6 +1,7 @@
 "margins" <-
-function(object, type=c("two-way", "three-way"), nprint=3, rule=3.5) {
-    if (!inherits(object, "ltm") && !inherits(object, "rasch")) stop("\nobj must be either an `ltm' or an `rasch' object.")
+function(object, type = c("two-way", "three-way"), nprint = 3, rule = 3.5) {
+    if (!inherits(object, "ltm") && !inherits(object, "rasch"))
+        stop("'object' must inherit from either class 'ltm' or 'rasch'.")
     type <- match.arg(type)
     n <- nrow(object$X)
     betas <- object$coef
@@ -8,10 +9,10 @@ function(object, type=c("two-way", "three-way"), nprint=3, rule=3.5) {
     q. <- ncol(betas)
     pr <- plogis(object$GH$Z %*% t(betas))
     GHw <- object$GH$GHw
-    X <- object$patterns$mat
-    Obs <- object$patterns$dat$Obs
+    X <- object$patterns$X
+    Obs <- object$patterns$obs
     if(type == "two-way"){
-        index <- subsets(p, 2)
+        index <- combinations(p, 2)
         nindex <- nrow(index)
         combs <- as.matrix(expand.grid(lapply(1:2, function(x) 0:1)))
         dimnames(combs) <- NULL
@@ -22,7 +23,7 @@ function(object, type=c("two-way", "three-way"), nprint=3, rule=3.5) {
             p1 <- pr[, item1]; mp1 <- 1 - p1
             p2 <- pr[, item2]; mp2 <- 1 - p2
             for(j in 1:ncombs) {
-                ind <- X[, item1]==combs[j, 1] & X[, item2]==combs[j, 2]
+                ind <- X[, item1] == combs[j, 1] & X[, item2] == combs[j, 2]
                 pp <- p1^combs[j, 1] * mp1^(1 - combs[j, 1]) * p2^combs[j, 2] * mp2^(1 - combs[j, 2])
                 obs <- sum(Obs[ind])
                 exp. <- n * sum(GHw * pp)
@@ -30,8 +31,8 @@ function(object, type=c("two-way", "three-way"), nprint=3, rule=3.5) {
             }
         }
     }
-    if(type=="three-way"){
-        index <- subsets(p, 3)
+    if(type == "three-way"){
+        index <- combinations(p, 3)
         nindex <- nrow(index)
         combs <- as.matrix(expand.grid(lapply(1:3, function(x) 0:1)))
         dimnames(combs) <- NULL
@@ -43,7 +44,7 @@ function(object, type=c("two-way", "three-way"), nprint=3, rule=3.5) {
             p2 <- pr[, item2]; mp2 <- 1 - p2
             p3 <- pr[, item3]; mp3 <- 1 - p3
             for (j in 1:ncombs) {
-                ind <- X[, item1]==combs[j, 1] & X[, item2]==combs[j, 2] & X[, item3] == combs[j, 3]
+                ind <- X[, item1] == combs[j, 1] & X[, item2] == combs[j, 2] & X[, item3] == combs[j, 3]
                 pp <- p1^combs[j, 1] * mp1^(1 - combs[j, 1]) * p2^combs[j, 2] * mp2^(1 - combs[j, 2]) * p3^combs[j, 3] * mp3^(1 - combs[j, 3])
                 obs <- sum(Obs[ind])
                 exp. <- n * sum(GHw * pp)
@@ -52,10 +53,10 @@ function(object, type=c("two-way", "three-way"), nprint=3, rule=3.5) {
         }
     }
     if(nprint > nindex) {
-        warning("not acceptable value for `nprint' argument, it is set to its default value.\n")
+        warning("not acceptable value for 'nprint' argument, it is set to its default value.\n")
         nprint <- 3
     }
-    out <- list(margins = margins, type = type, nprint = nprint, combs = combs, rule = rule)
+    out <- list(margins = margins, type = type, nprint = nprint, combs = combs, rule = rule, call = object$call)
     class(out) <- "margins"
     out
 }

@@ -5,8 +5,8 @@
   Fit a latent trait model under the Item Response Theory (IRT) approach.
 }
 \usage{
-ltm(formula, start.val, constraint=NULL, na.action = NULL, 
-        control = list())
+ltm(formula, constraint = NULL, IRT.param = FALSE, start.val, 
+        na.action = NULL, control = list())
 }
 \arguments{
   \item{formula}{ a two-sided formula providing the responses data matrix and describing the latent 
@@ -14,17 +14,24 @@ ltm(formula, start.val, constraint=NULL, na.action = NULL,
         a numeric matrix using \code{data.matrix()}) or a numeric matrix of manifest variables must be 
         supplied. The binary responses must be in 0/1 format. In the right side of \code{formula} only 
         two latent variables are allowed with codenames \code{z1}, \code{z2}. Interaction and quadratic 
-        terms can also be used (see \bold{Details} and \bold{Examples} sections for more info).}
+        terms can also be used (see \bold{Details} and \bold{Examples} for more info).}
+  \item{constraint}{a three-column numeric matrix with at most \eqn{pq - 1} rows (where \eqn{p} is the number 
+        of items and \eqn{q} the number of latent components plus the intercept), specifying fixed-value 
+        constraints. The first column represents the item (i.e., \eqn{1} denotes the first item, \eqn{2} the 
+        second, etc.), the second column the represents the component of the latent structure (i.e., \eqn{1} 
+        denotes the intercept \eqn{\beta_{i0}}{beta_{i0}}, \eqn{2} the loadings of the first factor \eqn{\beta_
+        {i1}}{beta_{i1}}, etc.) and the third column denotes the value at which the corresponding parameter 
+        should be fixed. See \bold{Details} and \bold{Examples} for more info.}
+  \item{IRT.param}{logical; if \code{TRUE} then the coefficients' estimates for the two-parameter logistic 
+        model are reported under the usual IRT parameterization. See \bold{Details} for more info.}
   \item{start.val}{ a numeric matrix of starting values for the
         algorithm (rows denote items and columns latent structure, with first column the intercepts). 
         If it is not supplied randomly chosen starting values are used instead.}
-  \item{constraint}{a numeric vector with 3 elements, denoting the item, the factor and
-        the value of the constraint. Look at the Details section for more info.}
   \item{na.action}{ the \code{na.action} to be used on the data frame in the left-side of \code{formula}.
-        In case of missing data, if \code{na.action=NULL} the model uses the available cases, i.e., it takes 
+        In case of missing data, if \code{na.action = NULL} the model uses the available cases, i.e., it takes 
         into account the observed part of sample units with missing values (valid under MAR mechanisms if the
         model is correctly specified). If you want to apply a complete case analysis then use 
-        \code{na.action=na.exclude}.}
+        \code{na.action = na.exclude}.}
   \item{control}{ a list of control values,
     \describe{
         \item{iter.em}{ the number of EM iterations. Default 40.}
@@ -40,9 +47,10 @@ ltm(formula, start.val, constraint=NULL, na.action = NULL,
     The model assumes that the dependencies between the observed response variables (known as items) 
     can be interpreted by a small number of latent variables. The model formulation is under the IRT 
     approach; in particular, \deqn{\log\left(\frac{\pi_{i}}{1-\pi_{i}}\right)=\beta_{i0} + \beta_{i1}z_1 + 
-    \beta_{i2}z_2,}{logit(pi_i)=beta_{i0} + beta_{i1}z_1 + beta_{i2}z_2,} where \eqn{\pi_i} is the the probability
-    of a positive response in the \eqn{i}th item, \eqn{\beta_{i0}} is the difficulty parameter, \eqn{\beta_{ij}} 
-    (\eqn{j=1,2}) are the discrimination parameters and \eqn{z_1, z_2} denote the two latent variables. 
+    \beta_{i2}z_2,}{logit(pi_i)=beta_{i0} + beta_{i1}z_1 + beta_{i2}z_2,} where \eqn{\pi_i} is the the 
+    probability of a positive response in the \eqn{i}th item, \eqn{\beta_{i0}} is the easiness parameter, 
+    \eqn{\beta_{ij}} (\eqn{j=1,2}) are the discrimination parameters and \eqn{z_1, z_2} denote the two 
+    latent variables.
 
     The usual form of the latent trait model assumes linear latent variable effects (Bartholomew and 
     Knott, 1999; Moustaki and Knott, 2000). \code{ltm} fits the linear one- and two-factor models but 
@@ -50,10 +58,15 @@ ltm(formula, start.val, constraint=NULL, na.action = NULL,
     variable effects. These are incorporated in the linear predictor of the model, i.e., \deqn{\log\left
     (\frac{\pi_{i}}{1-\pi_{i}}\right)=\beta_{i0} + \beta_{i1}z_1 + \beta_{i2}z_2 + \beta_{nl}^tf(z_1, z_2),
     }{logit(pi_i)=beta_{i0} + beta_{i1}z_1 + beta_{i2}z_2 + beta_{nl}^tf(z_1, z_2),} where \eqn{f(z_1, z_2)} is
-    a function of \eqn{z_1} and \eqn{z_2} (e.g., \eqn{f(z_1, z_2)=z_1z_2}, \eqn{f(z_1, z_2)=z_1^2}, etc.) and 
-    \eqn{\beta_{nl}} is a matrix of nonlinear terms parameters (look also at the Examples).
+    a function of \eqn{z_1} and \eqn{z_2} (e.g., \eqn{f(z_1, z_2) = z_1z_2}, \eqn{f(z_1, z_2) = z_1^2}, etc.) and 
+    \eqn{\beta_{nl}} is a matrix of nonlinear terms parameters (look also at the \bold{Examples}).
     
-    The linear one- and two-factor model are unidentified under orthogonal rotations on the factors' 
+    If \code{IRT.param = TRUE}, then the parameters estimates for the two-parameter logistic
+    model (i.e., the model with one factor) are reported under the usual IRT parameterization, i.e., 
+    \deqn{\log\left(\frac{\pi_i}{1-\pi_i}\right) = \beta_{i1} (z - \beta_{i0}^*).}{logit(\pi_i) = 
+    beta_{i1}(z - beta_{i0}^*).} 
+    
+    The linear two-factor model is unidentified under orthogonal rotations on the factors' 
     space. To achieve identifiability you can fix the value of one loading using the \code{constraint} 
     argument. 
 
@@ -65,25 +78,40 @@ ltm(formula, start.val, constraint=NULL, na.action = NULL,
     arguments \code{method} and \code{iter.qN}) iterations until convergence. In case of large number of items, 
     the `Conjugate Gradient' optimization method might be preferable. Due to the use of Gauss-Hermite integration 
     combined with the relatively large data sets encountered in multivariate analysis the use of optimized BLAS 
-    (e.g., Goto's BLAS) is highly recommended. 
+    (e.g., Goto's BLAS) is recommended.
 }
+
+\note{
+    In the case of the one-factor model, the optimization algorithm works under the constraint that 
+    the discrimination parameter of the first item \eqn{\beta_{11}}{beta_{11}} is always positive. If you wish 
+    to change its sign, then in the fitted model, say \code{m}, use \code{m$coef[, 2] <- -m$coef[, 2]}.
+
+    When the coefficients' estimates are reported under the usual IRT parameterization (i.e., \code{IRT.param = TRUE}),
+    their standard errors are calculated using the Delta method.
+}
+
 \value{
 An object of class \code{ltm} with components,
-    \item{coefficients}{the parameter values at convergence.}
+    \item{coefficients}{the parameter values at convergence. These are always the estimates of 
+        \eqn{\beta_{il}, l = 0, 1, \ldots}{beta_{il}, l = 0, 1, ...} parameters, even if \code{IRT.param = TRUE}.}
     \item{log.Lik}{the log-likelihood value at convergence.}
     \item{convergence}{the convergence identifier returned by \code{optim}.}
     \item{hessian}{the approximate Hessian matrix at convergence returned by \code{optim}.}
-    \item{patterns}{a list with two components: (i) \code{mat} a numeric matrix 
-    that contains the observed response patterns. (ii) \code{dat} a data.frame that contains the observed and expected 
-    frequencies for each observed response pattern.}
-    \item{GH}{a list with two components used in the Gauss-Hermite rule: (i) \code{Z} a numeric matrix that contains 
-    the quadrature points. (ii) \code{GHw} a numeric vector that contains the corresponding  weights.} 
+    \item{counts}{the number of function and gradient evaluations required by the quasi-Newton algorithm.}
+    \item{patterns}{a list with two components: (i) \code{X}: a numeric matrix 
+        that contains the observed response patterns, and (ii) \code{obs}: a numeric vector that contains the observed 
+        frequencies for each observed response pattern.}
+    \item{GH}{a list with two components used in the Gauss-Hermite rule: (i) \code{Z}: a numeric matrix that contains 
+        the abscissas, and (ii) \code{GHw}: a numeric vector that contains the corresponding  weights.} 
     \item{max.sc}{the maximum absolute value of the score vector at convergence.}
-    \item{X}{the responses data matrix.}
-    \item{ltn.struct}{a character vector describing the latent structure.}
+    \item{ltst}{a list describing the latent structure.}
+    \item{X}{a copy of the response data matrix.}
     \item{control}{the values used in the \code{control} argument.}
+    \item{IRT.param}{the value of the \code{IRT.param} argument.}
+    \item{constraint}{\code{if(!is.null(constraint))}, then it contains the value of the \code{constraint} argument.}
     \item{call}{the matched call.}
 }
+
 \section{Warning}{ 
 In case the Hessian matrix at convergence is not positive definite, try
 to re-fit the model. \code{ltm} will use new random starting values.
@@ -93,7 +121,14 @@ complex likelihood surfaces which might possess a number of local
 maxima. To ensure that the maximum likelihood value has been
 reached re-fit the model a number of times (simulations showed
 that usually 10 times are adequate to ensure global convergence).
+
+Conversion of the parameter estimates to the usual IRT parameterization
+works only for the two-parameter logistic model. Moreover, calculation of
+the standard error of \eqn{\hat{\beta}_{i0}^*}{beta_{i0}} in this case requires 
+that the corresponding discrimination parameter \eqn{\beta_{i1}}{beta_{i1}} has 
+not been fixed.
 }
+
 \references{
 Baker, F. and Kim, S-H. (2004) \emph{Item Response Theory}, 2nd ed. 
 New York: Marcel Dekker.
@@ -111,37 +146,43 @@ models. \emph{Psychometrika}, \bold{65}, 391--411.
 Rizopoulos, D. and Moustaki, I. (2005) Generalized latent variable models
 with nonlinear terms. \emph{submitted for publication}.
 }
+
 \author{
     Dimitris Rizopoulos \email{dimitris.rizopoulos@med.kuleuven.be}
 }
+
 \seealso{
   \code{\link{coef.ltm}},
+  \code{\link{fitted.ltm}},
   \code{\link{summary.ltm}},
   \code{\link{anova.ltm}},
   \code{\link{plot.ltm}},
   \code{\link{margins}},
   \code{\link{factor.scores}}
 }
+
 \examples{
 ## The two-parameter logistic model for the WIRS data
-ltm(Wirs~z1)
+## with the constraint that (i) the easiness parameter 
+## for the 1st item equals 1 and (ii) the discrimination
+## parameter for the 6th item equals -0.5
+
+ltm(Wirs ~ z1, constr = rbind(c(1, 1, 1), c(6, 2, -0.5)))
+
 
 ## One-factor and a quadratic term
 ## using the Mobility data
-ltm(Mobility~z1+I(z1^2))
-
+ltm(Mobility ~ z1 + I(z1^2))
 
 ## Two-factor model with an interaction term
 ## using the WIRS data
-ltm(Wirs~z1*z2)
+ltm(Wirs ~ z1 * z2)
 
-## A two-factor model with the constraint that the loading
-## for the 3rd item and the 2nd factor equals 1
-ltm(Wirs~z1+z2, constraint = c(3,2,1))
 
 ## The two-parameter logistic model for the Abortion data 
-## with 20 quadrature points and 20 EM iterations
-ltm(Abortion~z1, control = list(GHk=20, iter.em=20))
+## with 20 quadrature points and 20 EM iterations;
+## report results under the usual IRT parameterization
+ltm(Abortion ~ z1, IRT = TRUE, control = list(GHk = 20, iter.em = 20))
 
 }
 \keyword{multivariate}
