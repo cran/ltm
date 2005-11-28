@@ -23,8 +23,13 @@ function(object, standardized = FALSE, prob = FALSE, ...){
         }
     } else
         cof
+    if(object$IRT.param){
+        cofIRT <- IRT.parm(object)$parms
+        cof[, "(Intercept)"] <- cofIRT[, 1]
+        cof[, "z1"] <- cofIRT[, 2]
+        colnames(cof)[1:2] <- c("Dffclt", "Dscrmn")
+    }
     if(prob)
         cof <- cbind(cof, "P(x=1|z=0)" = plogis(cof[, 1]))
     round(cof, 3)
 }
-

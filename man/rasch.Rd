@@ -86,9 +86,6 @@ rasch(data, constraint = NULL, IRT.param = FALSE, start.val,
 \section{Warning}{ 
     In case the Hessian matrix at convergence is not positive definite, try to re-fit the model; 
     \code{rasch} will use new random starting values.
-
-    If \code{IRT.param = TRUE}, calculation of the standard errors for \eqn{\hat{\beta}_i^*}{\hat{beta}_i^*} 
-    requires that the discrimination parameter \eqn{\beta}{beta} is not fixed.
 }
 
 \references{

@@ -7,7 +7,7 @@ function (x, digits = 3, ...){
     dat <- data.frame(AIC = round(c(x$aic0, x$aic1), 2), BIC = round(c(x$bic0, x$bic1), 2), 
                 log.Lik = round(c(x$L0, x$L1), 2), LRT = c(" ", round(x$LRT, 2)), df = c("", x$df), 
                 p.value = c("", p.val), row.names = c(x$nam0, x$nam1))
-    cat("\n Anova Table\n")
+    cat("\n Likelihood Ratio Table\n")
     print(dat)
     cat("\n")
     invisible(x)

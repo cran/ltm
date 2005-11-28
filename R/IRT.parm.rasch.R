@@ -11,8 +11,9 @@ function(object, standard.errors = FALSE, robust = FALSE, ...){
         p <- nrow(thetas)
         constraint <- object$constraint
         if(!is.null(constraint) && any(constraint[, 1] == p + 1)){
-            warning("standard errors, under the IRT parameterization, cannot be computed if the discrimination \n\tparameter is fixed.")
-            return(list(parms = parms, se = rep(NA, p + 1 - nrow(constraint))))
+            Var <- vcov(object, robust = robust)
+            ses <- sqrt(diag(Var)) / constraint[which(constraint[, 1] == p + 1), 2]
+            return(list(parms = parms, se = ses))
         }
         ind <- if(!is.null(constraint)) (1:p)[-sort(constraint[, 1])] else 1:p
         n.ind <- length(ind)
@@ -21,7 +22,7 @@ function(object, standard.errors = FALSE, robust = FALSE, ...){
         for(i in seq(along = ind))
             ses[i] <- deltamethod(~ -x1 / x2, c(thetas[ind[i], 1], thetas[1, 2]), Var[c(i, n.ind + 1), c(i, n.ind + 1)])
         c(ses, sqrt(Var[n.ind + 1, n.ind + 1]))
-    } else NULL
+    } else
+        NULL
     out
 }
-

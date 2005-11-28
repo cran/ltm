@@ -1,14 +1,14 @@
 "EM" <-
-function(betas, constraint, iter, verbose=FALSE){
-    lgLik <- numeric(iter)
+function(betas, constraint, iter, verbose = FALSE) {
     for(it in 1:iter) {
         pr <- probs(Z %*% t(betas))
-        dvar <- pr * (1 - pr)
-        p.xz <- exp(X %*% t(log(pr)) + mX %*% t(log(1 - pr)))
+        qr <- 1 - pr
+        dvar <- pr * qr
+        p.xz <- exp(X %*% t(log(pr)) + mX %*% t(log(qr)))
         p.x <- c(p.xz %*% GHw)
-        lgLik[it] <- sum(log(rep(p.x, obs)))
+        lgLik <- sum(log(rep(p.x, obs)))
         if(verbose)
-            cat("EM iteration:", it, "  -logLik:", -lgLik[it], "\n")
+            cat("EM iteration:", it, "  -logLik:", -lgLik, "\n")
         p.zx <- p.xz / p.x
         Nt <- GHw * colSums(p.zx * obs)
         nb <- matrix(0, p, q.)
@@ -24,4 +24,3 @@ function(betas, constraint, iter, verbose=FALSE){
     }
     betas
 }
-

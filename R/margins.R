@@ -1,7 +1,7 @@
 "margins" <-
 function(object, type = c("two-way", "three-way"), nprint = 3, rule = 3.5) {
     if (!inherits(object, "ltm") && !inherits(object, "rasch"))
-        stop("'object' must inherit from either class 'ltm' or 'rasch'.")
+        stop("'object' must inherit from either class 'ltm' or class 'rasch'.")
     type <- match.arg(type)
     n <- nrow(object$X)
     betas <- object$coef

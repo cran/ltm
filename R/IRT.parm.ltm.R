@@ -11,18 +11,23 @@ function(object, standard.errors = FALSE, robust = FALSE, ...){
     out$se <- if(standard.errors){
         p <- nrow(thetas)
         constraint <- object$constraint
-        if(!is.null(constraint) && any(constraint[, 2] == 2))
-            warning("standard errors, under the IRT parameterization, cannot be computed for some of the difficulty \n\tparameters because the corresponding discrimination parameters are fixed.")
-        ind <- (constraint[, 2] - 1) * p + constraint[, 1]
         Var <- if(!is.null(constraint)){
+            ind <- (constraint[, 2] - 1) * p + constraint[, 1]
             V <- matrix(NA, 2 * p, 2 * p)
-            V[seq(1, 2 * p)[-ind], seq(1, 2 * p)[-ind]] <- vcov(object, robust = robust)
+            seq.ind <- seq(1, 2 * p)[-ind]
+            V[seq.ind, seq.ind] <- vcov(object, robust = robust)
             V
         } else
             vcov(object, robust = robust)
         ses <- rep(NA, p)
-        for(i in seq(along = ses))
-            ses[i] <- deltamethod(~ -x1 / x2, c(thetas[i, 1], thetas[i, 2]), Var[c(i, p + i), c(i, p + i)])
+        for(i in seq(along = ses)){
+            Vi <- Var[c(i, p + i), c(i, p + i)]
+            ses[i] <- if(is.na(Vi[2, 2])) {
+                    Vi[1, 1] / thetas[i, 2]
+                } else {
+                    deltamethod(~ -x1 / x2, c(thetas[i, 1], thetas[i, 2]), Vi)
+                }
+        }
         ses <- c(ses, sqrt(diag(Var[seq(p + 1, 2 * p), seq(p + 1, 2 * p)])))
         if(!is.null(constraint))
             ses[-ind]
@@ -32,4 +37,3 @@ function(object, standard.errors = FALSE, robust = FALSE, ...){
         NULL
     out
 }
-

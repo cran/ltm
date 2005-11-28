@@ -7,9 +7,9 @@ function(betas, constraint){
     p.zx <- p.xz / p.x
     Nt <- GHw * colSums(p.zx * obs)
     scores <- matrix(0, p, q.)
-    for (i in 1:p){
+    for (i in 1:p) {
         ind. <- !na.ind[, i]
-        rit <- if(all(ind.)) GHw*colSums(p.zx * X[, i] * obs) else GHw * colSums(p.zx[ind., ] * X[ind., i] * obs[ind.])
+        rit <- if(all(ind.)) GHw * colSums(p.zx * X[, i] * obs) else GHw * colSums(p.zx[ind., ] * X[ind., i] * obs[ind.])
         scores[i, ] <- -c(crossprod(rit - pr[, i] * Nt, Z))
     }
     if(!is.null(constraint))

@@ -2,9 +2,15 @@
 function(object, prob = FALSE, ...) {
     if(!inherits(object, "rasch"))
         stop("Use only with 'rasch' objects.\n")
-    cof <- object$coef
+    cof <- if(object$IRT.param){
+            coefs <- IRT.parm(object)$parms
+            p <- length(coefs)
+            matrix(c(coefs[1:(p - 1)], rep(coefs[p], p - 1)), ncol = 2,
+                    dimnames = list(colnames(object$X), c("Dffclt", "Dscrmn")))
+        } else {
+            object$coef
+        }
     if(prob)
         cof <- cbind(cof, "P(x=1|z=0)" = plogis(cof[, 1]))
     round(cof, 3)
 }
-

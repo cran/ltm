@@ -1,6 +1,17 @@
+Changes in version: ltm_0.3-1
+
+  o "coef.rasch()" and "coef.ltm()" now obey to the 'IRT.param' argument.
+
+  o standard errors are now reported also for the case where the dicriminitation parameters are fixed.
+
+  o a demo for "rasch()" has been added.
+
+
+==============================
+
 Changes in version: ltm_0.3-0
 
-  o a new logical argument -- 'IRT.parm' (default to FALSE) -- has been introduced in both "ltm()" and "rasch()"
+  o a new logical argument -- 'IRT.param' (default to FALSE) -- has been introduced in both "ltm()" and "rasch()"
     which if TRUE reports the coefficients under the usual IRT parameterization.
 
   o "plot.ltm()" and "plot.rasch()" improved: (i) if the column names of the input data are not NULL then they are 
@@ -23,6 +34,7 @@ Changes in version: ltm_0.3-0
     of a positive response for the median individual are returned.
 
   o "descript()" now has a print method -- 'print' argument no longer available.
+
 
 ==============================
 

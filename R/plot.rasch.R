@@ -2,7 +2,7 @@
 function(x, items = NULL, legend = FALSE, cx = -3.4, cy = 0.9, ...){
     if(!inherits(x, "rasch"))
         stop("Use only with 'rasch' objects.\n")
-    betas <- coef(x)
+    betas <- x$coef
     p <- nrow(betas)
     itms <- if(!is.null(items)){
                 if(!is.numeric(items) || length(items) > p)
@@ -12,10 +12,10 @@ function(x, items = NULL, legend = FALSE, cx = -3.4, cy = 0.9, ...){
                 items
             } else
                 1:p
-    z1 <- seq(-3.4, 3.4, length = 100)
+    z1 <- seq(-4, 4, length = 150)
     Z <- cbind(1, z1)
     pr <- plogis(Z %*% t(betas))
-    plot(c(-3.4, 3.4), c(0, 1), type = "n", xlab = "Ability", ylab = "Probability", 
+    plot(c(-4, 4), c(0, 1), type = "n", xlab = "Ability", ylab = "Probability", 
             main = "Item Characteristic Curves", ...)
     if(legend)
         legend(x = cx, y = cy, legend = rownames(x$coef)[itms], col = (1:p)[itms], lty = 1, bty = "n", ...) 
@@ -31,4 +31,3 @@ function(x, items = NULL, legend = FALSE, cx = -3.4, cy = 0.9, ...){
     }
     invisible()
 }
-

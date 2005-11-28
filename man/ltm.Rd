@@ -123,10 +123,7 @@ reached re-fit the model a number of times (simulations showed
 that usually 10 times are adequate to ensure global convergence).
 
 Conversion of the parameter estimates to the usual IRT parameterization
-works only for the two-parameter logistic model. Moreover, calculation of
-the standard error of \eqn{\hat{\beta}_{i0}^*}{beta_{i0}} in this case requires 
-that the corresponding discrimination parameter \eqn{\beta_{i1}}{beta_{i1}} has 
-not been fixed.
+works only for the two-parameter logistic model.
 }
 
 \references{
