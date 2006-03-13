@@ -1,3 +1,35 @@
+Changes in version: ltm_0.4-0
+
+  o "grm()" function is introduced for fitting Graded Response models under IRT.
+
+  o "plot()" function has a new argument, 'type', that indicates whether Item Characteristic Curves or
+    Item Information Curves should be plotted. If 'items = 0', the Test Information Curve is plotted. 
+    Some extra arguments have been also introduced, like 'lty' and 'col'.
+
+  o Both "grm()" and "rasch()" report parameter estimates under the IRT parameterization, by default. "ltm()" does the
+    same for the two parameter logistic model.
+
+  o "margins()" is now a generic function with methods for 'grm', 'ltm' and 'rasch' objects.
+
+  o "factor.scores()" has a new argument 'resp.patterns' that provides specific response patterns for which
+    factor scores should be computed. "factor.scores.ltm()" has now as default method 'EB' instead of 'Component'.
+
+  o "grm()" does not use random starting values unless 'start.val = "random"'; look at the help file for more info.
+    
+  o "descript()" can now also handle data sets with polytomous responses.
+
+  o the function "mult.choice()" has been introduced that can convert multiple choice responses to 0-1 data; this
+    can be used in "ltm()" and "rasch()".
+
+  o the function "information()" has been introduced that computes the area under the test information curve.
+
+  o the demo for "rasch()" has been updated.
+
+  o corrected some typos in .Rd files.
+
+
+==============================
+
 Changes in version: ltm_0.3-1
 
   o "coef.rasch()" and "coef.ltm()" now obey to the 'IRT.param' argument.

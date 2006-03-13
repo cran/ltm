@@ -1,6 +1,6 @@
 "print.summ.ltm" <-
-function (x, digits = max(3, getOption("digits") - 3), ...){
-    if(!inherits(x, "summ.ltm"))
+function (x, digits = max(3, getOption("digits") - 3), ...) {
+    if (!inherits(x, "summ.ltm"))
         stop("Use only with 'summ.ltm' objects.\n")
     cat("\nCall:\n", paste(deparse(x$call), sep = "\n", collapse = "\n"), "\n\n", sep="")
     cat("Model Summary:\n")

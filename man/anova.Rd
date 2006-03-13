@@ -1,22 +1,30 @@
-\name{anova.rasch}
+\name{anova}
+\alias{anova.grm}
+\alias{anova.ltm}
 \alias{anova.rasch}
-\title{ Anova method for rasch objects }
+\title{ Anova method for fitted IRT models}
 \description{
-  Performs either a parametric Bootstrap goodness-of-fit test based on the
-  Pearson chi-squared or a Likelihood Ratio Test between two nested models.
+  Performs a Likelihood Ratio Test between two nested IRT models or performs a parametric 
+  Bootstrap test for Rasch models. 
 }
 \usage{
+\method{anova}{grm}(object, object2, \dots)
+
+\method{anova}{ltm}(object, object2, \dots)
+
 \method{anova}{rasch}(object, object2 = NULL, B = 49, \dots)
 }
 \arguments{
-  \item{object}{ an object inheriting from class \code{rasch}. }
-  \item{object2}{ an object inheriting from either class \code{rasch} or class \code{ltm}. }
+  \item{object}{ an object inheriting from either class \code{grm}, class \code{ltm} or class \code{rasch},
+                representing the model under the null hypothesis.}
+  \item{object2}{ an object inheriting from either class \code{grm}, class \code{ltm} or class \code{rasch},
+                representing the model under the alternative hypothesis.}  
   \item{B}{ the number of Bootstrap samples. See \bold{Details} section for more info.}
   \item{\dots}{ additional arguments; currently none is used.}
 }
 \details{
-  If only \code{object} is supplied \code{anova.rasch} performs a parametric 
-  Bootstrap test based on Pearson's chi-squared statistic. The Bootstrap 
+  If only \code{object} is supplied and \code{object} inherits from class \code{rasch}, then \code{anova.rasch()} 
+  performs a parametric Bootstrap test based on Pearson's chi-squared statistic. The Bootstrap 
   approximation to the reference distribution is preferable compared with 
   the ordinary Chi-squared approximation since the latter is not valid especially
   for large number of items (=> many response patterns with expected frequencies
@@ -38,7 +46,7 @@
   models is performed.  
 }
 \value{
-An object of class \code{aov.rasch} with components,
+An object of either class \code{aov.grm}, class \code{aov.ltm} or class \code{aov.rasch} with components,
     \item{Tobs}{the value of the Pearson's chi-squared statistic for the observed data. Returned if only \code{object} is supplied.}
     \item{B}{the \code{B} argument specifying the number of Bootstrap samples used. Returned if only \code{object} is supplied.}
     \item{call}{the matched call of \code{object}. Returned if only \code{object} is supplied.}
@@ -54,38 +62,39 @@ An object of class \code{aov.rasch} with components,
     \item{df}{the degrees of freedom for the test (i.e., the difference in the number of parameters). Returned if \code{object2} is also supplied.}
     \item{p.value}{the \eqn{p}-value of the test.}
 }
+
 \section{Warning}{
     The code does not check if the models are nested! The user is responsible to supply nested models in
     order the LRT to be valid.
-
-    When the manifest (response) variables matrix contains missing values the Pearson chi-squared is not computed.
 }
+
 \author{
     Dimitris Rizopoulos \email{dimitris.rizopoulos@med.kuleuven.be}
 }
-\seealso{ \code{\link{rasch}}}
+
+\seealso{
+    \code{\link{grm}},
+    \code{\link{ltm}},
+    \code{\link{rasch}}
+}
+
 \examples{
 
-\dontrun{
-## GoF for the Rasch model for the Wirs data:
-## using 99+1 bootstrap samples
-m <- rasch(Wirs)
-anova(m, B = 99)
-}
+## LRT between the constrained and unconstrained GRMs 
+## for the Science data:
+m0 <- grm(Science[c(1,3,4,7)], constrained = TRUE)
+m1 <- grm(Science[c(1,3,4,7)])
+anova(m0, m1)
+
+
+## LRT between the one- and two-factor models 
+## for the Wirs data:
+anova(ltm(Wirs ~ z1), ltm(Wirs ~ z1 + z2))
 
 
 ## GoF for the Rasch model for the Lsat data:
 m <- rasch(Lsat)
 anova(m)
-
-
-## An LRT between the constrained (discrimination 
-## parameter equals 1) and the unconstrained Rasch
-## model for the Wirs data: 
-m0 <- rasch(Wirs, constraint = rbind(c(7, 1)))
-m1 <- rasch(Wirs)
-anova(m0, m1)
-
 
 ## An LRT between the Rasch and a constrained 
 ## two-parameter logistic model for the Wirs data: 
@@ -94,7 +103,7 @@ m1 <- ltm(Wirs ~ z1, constraint = cbind(c(1, 3, 5), 2, 1))
 anova(m0, m1)
 
 
-## An LRT between constrained (discrimination 
+## An LRT between the constrained (discrimination 
 ## parameter equals 1) and the unconstrained Rasch
 ## model for the Lsat data: 
 m0 <- rasch(Lsat, constraint = rbind(c(6, 1)))
@@ -103,7 +112,7 @@ anova(m0, m1)
 
 
 ## An LRT between the Rasch and the two-parameter 
-## logistic models for the Lsat data: 
+## logistic model for the Lsat data: 
 anova(rasch(Lsat), ltm(Lsat ~ z1))
 
 }

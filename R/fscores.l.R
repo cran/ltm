@@ -1,26 +1,26 @@
 "fscores.l" <-
-function (betas, X, method){
-    logf.z <- function(z, y, betas) {
+function (betas, X, method) {
+    logf.z <- function (z, y, betas) {
         Z <- c(1, z)
-        names(Z) <- if(length(z) == 1) c("(Intercept)", "z1") else c("(Intercept)", "z1", "z2")
-        if(inter)
+        names(Z) <- if (length(z) == 1) c("(Intercept)", "z1") else c("(Intercept)", "z1", "z2")
+        if (inter)
             Z <- c(Z, "z1:z2" = z[1] * z[2])
-        if(quad.z1)
+        if (quad.z1)
             Z <- c(Z, "I(z1^2)" = z[1] * z[1])
-        if(quad.z2)
+        if (quad.z2)
             Z <- c(Z, "I(z2^2)" = z[2] * z[2])            
         Z <- Z[match(colnames(betas), names(Z))]
         pr <- probs(c(betas %*% Z))
         -(sum(y * log(pr) + (1 - y) * log(1-pr)) + sum(dnorm(z, log = TRUE)))
     }
-    logg.z <- function(z, y, betas) {
+    logg.z <- function (z, y, betas) {
         Z <- c(1, z)
-        names(Z) <- if(length(z) == 1) c("(Intercept)", "z1") else c("(Intercept)", "z1", "z2")
-        if(inter)
+        names(Z) <- if (length(z) == 1) c("(Intercept)", "z1") else c("(Intercept)", "z1", "z2")
+        if (inter)
             Z <- c(Z, "z1:z2" = z[1] * z[2])
-        if(quad.z1)
+        if (quad.z1)
             Z <- c(Z, "I(z1^2)" = z[1] * z[1])
-        if(quad.z2)
+        if (quad.z2)
             Z <- c(Z, "I(z2^2)" = z[2] * z[2])            
         Z <- Z[match(colnames(betas), names(Z))]
         pr <- probs(c(betas %*% Z))
@@ -50,7 +50,7 @@ function (betas, X, method){
         }
         out
     }
-    fscore <- function(logf.z, logg.z, y, betas) {
+    fscore <- function (logf.z, logg.z, y, betas) {
         if (factors == 1) {
             opt <- optim(0, fn = logf.z, gr = logg.z, method = "BFGS", hessian = TRUE, y = y, betas = betas)
             hc <- c(1/opt$hes)
@@ -79,7 +79,7 @@ function (betas, X, method){
     }
     if (method == "MI") {
         constraint <- object$constraint
-        if(!is.null(constraint))
+        if (!is.null(constraint))
             betas <- betas[-((constraint[, 2] - 1) * p + constraint[, 1])]
         var.b <- vcov(object, robust.se)
         scores.B <- lapply(1:B, array, data = 0, dim = c(nx, factors))

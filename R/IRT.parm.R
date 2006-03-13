@@ -1,4 +1,5 @@
 "IRT.parm" <-
-function(object, ...)
+function (object, ...) {
     UseMethod("IRT.parm")
+}
 

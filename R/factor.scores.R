@@ -1,4 +1,5 @@
 "factor.scores" <-
-function(object, ...)
+function (object, ...) {
     UseMethod("factor.scores")
+}
 

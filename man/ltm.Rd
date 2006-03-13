@@ -5,14 +5,14 @@
   Fit a latent trait model under the Item Response Theory (IRT) approach.
 }
 \usage{
-ltm(formula, constraint = NULL, IRT.param = FALSE, start.val, 
-        na.action = NULL, control = list())
+ltm(formula, constraint = NULL, IRT.param, start.val, 
+    na.action = NULL, control = list())
 }
 \arguments{
   \item{formula}{ a two-sided formula providing the responses data matrix and describing the latent 
         structure. In the left side of \code{formula} either a data.frame (that will be converted to 
         a numeric matrix using \code{data.matrix()}) or a numeric matrix of manifest variables must be 
-        supplied. The binary responses must be in 0/1 format. In the right side of \code{formula} only 
+        supplied. In the right side of \code{formula} only 
         two latent variables are allowed with codenames \code{z1}, \code{z2}. Interaction and quadratic 
         terms can also be used (see \bold{Details} and \bold{Examples} for more info).}
   \item{constraint}{a three-column numeric matrix with at most \eqn{pq - 1} rows (where \eqn{p} is the number 
@@ -37,11 +37,12 @@ ltm(formula, constraint = NULL, IRT.param = FALSE, start.val,
         \item{iter.em}{ the number of EM iterations. Default 40.}
         \item{iter.qN}{ the number of quasi-Newton iterations. Default 150.}
         \item{GHk}{ the number of Gauss-Hermite quadrature points. Default 15.}
-        \item{method}{ the optimization method to be used in \code{optim}. Default "BFGS".}
+        \item{method}{ the optimization method to be used in \code{optim()}. Default "BFGS".}
         \item{verbose}{ logical; if \code{TRUE} info about the optimization procedure are printed.}
     }
   }
 }
+
 \details{
     The latent trait model is the analogous of the factor analysis model for binary observed data. 
     The model assumes that the dependencies between the observed response variables (known as items) 
@@ -53,7 +54,7 @@ ltm(formula, constraint = NULL, IRT.param = FALSE, start.val,
     latent variables.
 
     The usual form of the latent trait model assumes linear latent variable effects (Bartholomew and 
-    Knott, 1999; Moustaki and Knott, 2000). \code{ltm} fits the linear one- and two-factor models but 
+    Knott, 1999; Moustaki and Knott, 2000). \code{ltm()} fits the linear one- and two-factor models but 
     also provides extensions described by Rizopoulos and Moustaki (2005) to include nonlinear latent 
     variable effects. These are incorporated in the linear predictor of the model, i.e., \deqn{\log\left
     (\frac{\pi_{i}}{1-\pi_{i}}\right)=\beta_{i0} + \beta_{i1}z_1 + \beta_{i2}z_2 + \beta_{nl}^tf(z_1, z_2),
@@ -78,7 +79,7 @@ ltm(formula, constraint = NULL, IRT.param = FALSE, start.val,
     arguments \code{method} and \code{iter.qN}) iterations until convergence. In case of large number of items, 
     the `Conjugate Gradient' optimization method might be preferable. Due to the use of Gauss-Hermite integration 
     combined with the relatively large data sets encountered in multivariate analysis the use of optimized BLAS 
-    (e.g., Goto's BLAS) is recommended.
+    (e.g., ATLAS) is recommended.
 }
 
 \note{
@@ -92,12 +93,12 @@ ltm(formula, constraint = NULL, IRT.param = FALSE, start.val,
 
 \value{
 An object of class \code{ltm} with components,
-    \item{coefficients}{the parameter values at convergence. These are always the estimates of 
+    \item{coefficients}{a matrix with the parameter values at convergence. These are always the estimates of 
         \eqn{\beta_{il}, l = 0, 1, \ldots}{beta_{il}, l = 0, 1, ...} parameters, even if \code{IRT.param = TRUE}.}
     \item{log.Lik}{the log-likelihood value at convergence.}
-    \item{convergence}{the convergence identifier returned by \code{optim}.}
-    \item{hessian}{the approximate Hessian matrix at convergence returned by \code{optim}.}
-    \item{counts}{the number of function and gradient evaluations required by the quasi-Newton algorithm.}
+    \item{convergence}{the convergence identifier returned by \code{optim()}.}
+    \item{hessian}{the approximate Hessian matrix at convergence returned by \code{optim()}.}
+    \item{counts}{the number of function and gradient evaluations used by the quasi-Newton algorithm.}
     \item{patterns}{a list with two components: (i) \code{X}: a numeric matrix 
         that contains the observed response patterns, and (ii) \code{obs}: a numeric vector that contains the observed 
         frequencies for each observed response pattern.}
@@ -114,7 +115,7 @@ An object of class \code{ltm} with components,
 
 \section{Warning}{ 
 In case the Hessian matrix at convergence is not positive definite, try
-to re-fit the model. \code{ltm} will use new random starting values.
+to re-fit the model; \code{ltm()} will use new random starting values.
 
 The inclusion of nonlinear latent variable effects produces more
 complex likelihood surfaces which might possess a number of local
@@ -154,6 +155,7 @@ with nonlinear terms. \emph{submitted for publication}.
   \code{\link{summary.ltm}},
   \code{\link{anova.ltm}},
   \code{\link{plot.ltm}},
+  \code{\link{vcov.ltm}},
   \code{\link{margins}},
   \code{\link{factor.scores}}
 }
@@ -179,7 +181,7 @@ ltm(Wirs ~ z1 * z2)
 ## The two-parameter logistic model for the Abortion data 
 ## with 20 quadrature points and 20 EM iterations;
 ## report results under the usual IRT parameterization
-ltm(Abortion ~ z1, IRT = TRUE, control = list(GHk = 20, iter.em = 20))
+ltm(Abortion ~ z1, control = list(GHk = 20, iter.em = 20))
 
 }
 \keyword{multivariate}

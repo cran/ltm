@@ -12,7 +12,7 @@ descript(Lsat)
 ## under the usual IRT parameterization; in order to fix the
 ## discrimination parameter the 'constraint' argument is used
 
-m1 <- rasch(Lsat, IRT = TRUE, constr = cbind(length(Lsat) + 1, 1))
+m1 <- rasch(Lsat, constr = cbind(length(Lsat) + 1, 1))
 
 summary(m1)
 
@@ -24,7 +24,7 @@ summary(m1)
 anova(m1, B = 100) # B specifies the number of Bootstrap samples
 
 
-## Alternatively, we could check also the fit on the margins
+## Alternatively, we could also check the fit on the margins
 
 margins(m1)
 
@@ -33,17 +33,28 @@ margins(m1, "three-way")
 
 ## The Item Characterstic Curves are produced by the plot() function
 
-par(mfrow = c(2, 2))
 plot(m1, lwd = 3, cex = 1.2)
 # or
 plot(m1, legend = TRUE, lwd = 3, cx = 1, cy = 0.7) # 'cx' and 'cy' define the coordinates of the legend
 
 
+## The Item Information Curves are produced using type = "IIC"
+## increase cex.lab and cex.main using par()
+
+op <- par(cex.lab = 1.2, cex.main = 1.6)
+plot(m1, type = "IIC", legend = TRUE, cx = "topright", lwd = 2.3, cex = 1.3)
+par(op)
+
+
+## The Test Information Function is produced using type = "IIC" and items = 0
+
+plot(m1, type = "IIC", items = 0, lwd = 2.3)
+
 
 
 ## We repeat the analysis without constaining discrimination parameter
 
-m2 <- rasch(Lsat, IRT = TRUE)
+m2 <- rasch(Lsat)
 
 summary(m2)
 
@@ -68,14 +79,27 @@ anova(m1, m2)
 
 
 ## The Item Characterstic Curves for the unconstrained model
+## plot only items 1, 3 and 5
 
-plot(m2, lwd = 3, cex = 1.2)
+plot(m2, items = c(1, 3, 5), lwd = 3, cex = 1.2)
 # or
-plot(m2, legend = TRUE, lwd = 3, cx = 1, cy = 0.7)
+plot(m2, items = c(1, 3, 5), legend = TRUE, lwd = 3, cx = 1, cy = 0.7)
 
 
-## Finally, the ability estimates can be obtained using the factor.scores()
-## function
+## The Item Information Curves are produced using type = "IIC"
+## increase cex.lab and cex.main using par(); plot only items 1, 3 and 5
+
+op <- par(cex.lab = 1.2, cex.main = 1.6)
+plot(m2, type = "IIC", items = c(1, 3, 5), legend = TRUE, cx = "topright", lwd = 2.3, cex = 1.3)
+par(op)
+
+
+## The Test Information Function is produced using type = "IIC" and items = 0
+
+plot(m2, type = "IIC", items = 0, lwd = 2.3)
+
+
+## Finally, the ability estimates can be obtained using the factor.scores() function
 
 factor.scores(m2)
 # or

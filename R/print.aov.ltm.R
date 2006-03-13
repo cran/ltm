@@ -1,6 +1,6 @@
 "print.aov.ltm" <-
-function (x, digits = 3, ...){
-    if(!inherits(x, "aov.ltm"))
+function (x, digits = 3, ...) {
+    if (!inherits(x, "aov.ltm"))
         stop("Use only with 'aov.ltm' objects.\n")
     p.val <- round(x$p.value, 3)
     p.val <- if (p.val < 0.001) "<0.001" else p.val

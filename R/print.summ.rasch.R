@@ -1,6 +1,6 @@
 "print.summ.rasch" <-
 function (x, digits = max(3, getOption("digits") - 3), ...){
-    if(!inherits(x, "summ.rasch"))
+    if (!inherits(x, "summ.rasch"))
         stop("Use only with 'summ.rasch' objects.\n")
     cat("\nCall:\n", paste(deparse(x$call), sep = "\n", collapse = "\n"), "\n\n", sep = "")
     cat("Model Summary:\n")

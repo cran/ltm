@@ -1,8 +1,8 @@
 "coef.rasch" <-
-function(object, prob = FALSE, ...) {
-    if(!inherits(object, "rasch"))
+function (object, prob = FALSE, ...) {
+    if (!inherits(object, "rasch"))
         stop("Use only with 'rasch' objects.\n")
-    cof <- if(object$IRT.param){
+    cof <- if (object$IRT.param){
             coefs <- IRT.parm(object)$parms
             p <- length(coefs)
             matrix(c(coefs[1:(p - 1)], rep(coefs[p], p - 1)), ncol = 2,
@@ -10,7 +10,8 @@ function(object, prob = FALSE, ...) {
         } else {
             object$coef
         }
-    if(prob)
+    if (prob)
         cof <- cbind(cof, "P(x=1|z=0)" = plogis(cof[, 1]))
     round(cof, 3)
 }
+

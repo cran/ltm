@@ -1,29 +1,35 @@
 \name{factor.scores}
 \alias{factor.scores}
+\alias{factor.scores.grm}
 \alias{factor.scores.ltm}
 \alias{factor.scores.rasch}
 
 \title{ Factor Scores }
 
 \description{
-  Computation of factor scores for \code{ltm} and \code{rasch} models.
+  Computation of factor scores for \code{grm}, \code{ltm} and \code{rasch} models.
 }
 
 \usage{
 factor.scores(object, \dots)
 
-\method{factor.scores}{ltm}(object, method = c("Component", "EB", "MI"), B = 5, 
-                    robust.se = FALSE, \dots)
+\method{factor.scores}{grm}(object, resp.patterns = NULL, method = c("EB", "MI"), 
+                    B = 5, \dots)
 
-\method{factor.scores}{rasch}(object, method = c("EB", "MI"), B = 5, 
-                    robust.se = FALSE, \dots)
+\method{factor.scores}{ltm}(object, resp.patterns = NULL, method = c("EB", "MI", 
+                    "Component"), B = 5, robust.se = FALSE, \dots)
+
+\method{factor.scores}{rasch}(object, resp.patterns = NULL, method = c("EB", "MI"), 
+                    B = 5, robust.se = FALSE, \dots)
 }
 
 \arguments{
-  \item{object}{ an object inheriting either from class \code{ltm} or class \code{rasch}.}
+  \item{object}{ an object inheriting either from class \code{grm}, class \code{ltm} or class \code{rasch}.}
+  \item{resp.patterns}{a matrix or a data.frame of response patterns with columns denoting the items; if \code{NULL} 
+        the factor scores are computed for the observed response patterns.}
   \item{method}{a character supplying the scoring method. For \code{ltm} objects available methods are:
   Component scores, Empirical Bayes and Multiple Imputation.
-  For \code{rasch} objects available methods are: Empirical Bayes and Multiple Imputation. 
+  For \code{grm} and \code{rasch} objects available methods are: Empirical Bayes and Multiple Imputation. 
   See \bold{Details} section for more info.}
   \item{B}{the number of multiple imputations to be used if \code{method = "MI"}.}
   \item{robust.se}{logical; if \code{TRUE} the sandwich estimator is used for the estimation of the covariance
@@ -54,11 +60,11 @@ factor.scores(object, \dots)
   
   This scheme explicitly acknowledges the ignorance of the true parameter values by drawing from their large sample
   posterior distribution while taking into account the sampling error. The modes of the posterior distribution 
-  \eqn{p(z|x; \theta)}{p(z|x; theta)} are found numerically using the BFGS algorithm in \code{\link{optim}}. 
+  \eqn{p(z|x; \theta)}{p(z|x; theta)} are numerically approximated using the BFGS algorithm in \code{optim()}. 
   
   The Component scores (use \code{method = "Component"}) proposed by Bartholomew (1984) is an alternative method
   to scale the sample units in the latent dimensions identified by the model that avoids the calculation of the 
-  posterior mode. However, this method is not valid in the general case where we use nonlinear latent terms.
+  posterior mode. However, this method is not valid in the general case where nonlinear latent terms are assumed.
 }
 
 \value{
@@ -90,6 +96,7 @@ with nonlinear terms. \emph{submitted for publication}.
 }
 
 \seealso{
+    \code{\link{grm}},
     \code{\link{ltm}},
     \code{\link{rasch}}
 }
@@ -97,16 +104,17 @@ with nonlinear terms. \emph{submitted for publication}.
 \examples{
 
 ## Factor Scores for the Rasch model
-m <- rasch(Wirs)
+m <- rasch(Lsat)
 factor.scores(m) # Empirical Bayes
-factor.scores(m, "MI", B = 20) # Multiple Imputation with 20 imputations
 
 
 ## Factor Scores for the two-parameter logistic model
 m <- ltm(Abortion ~ z1)
-factor.scores(m) # Component
-factor.scores(m, "EB") # Empirical Bayes
-factor.scores(m, "MI") # Multiple Imputation
+factor.scores(m, method = "MI", B = 20) # Multiple Imputation
+
+## Factor Scores for the graded response model
+m <- grm(Science[c(1,3,4,7)])
+factor.scores(m, resp.patterns = rbind(1:4))
 
 }
 \keyword{ multivariate }

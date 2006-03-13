@@ -1,5 +1,7 @@
-"print.margins" <-
-function(x, digits = 2, ...){
+"print.margins.ltm" <-
+function (x, digits = 2, ...) {
+    if (!inherits(x, "margins.ltm"))
+        stop("Use only with 'margins.ltm' objects.\n")    
     combs <- x$combs
     type <- x$type
     cat("\nCall:\n", paste(deparse(x$call), sep = "\n", collapse = "\n"), "\n", sep = "")
@@ -15,7 +17,7 @@ function(x, digits = 2, ...){
         print(mat)
         cat("\n")
     }
-    cat("`***' denotes a chi-squared residual greater than", x$rule, "\n")
+    cat("'***' denotes a chi-squared residual greater than", x$rule, "\n")
     cat("\n")
     invisible(x)
 }

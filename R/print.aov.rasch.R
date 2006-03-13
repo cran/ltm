@@ -1,6 +1,6 @@
 "print.aov.rasch" <-
-function(x, digits = 3, ...){
-    if(!inherits(x, "aov.rasch"))
+function (x, digits = 3, ...) {
+    if (!inherits(x, "aov.rasch"))
         stop("Use only with 'aov.rasch' objects.\n")
     if (!is.null(x$LRT)) {
         p.val <- round(x$p.value, 3)
@@ -13,7 +13,7 @@ function(x, digits = 3, ...){
     }
     else {
         p.val <- round(x$p.value, 3)
-        p.val <- if(p.val < 0.001) "<0.001" else p.val
+        p.val <- if (p.val < 0.001) "<0.001" else p.val
         cat("\nGoodness-of-Fit using Pearson chi-squared\n")
         cat("\nCall:\n", deparse(x$call), "\n\n", sep = "")
         cat("Tobs:", round(x$Tobs, 2), "\n")

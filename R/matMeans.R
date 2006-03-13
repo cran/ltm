@@ -1,4 +1,5 @@
 "matMeans" <-
-function(lis)
+function (lis) {
     matSums(lis) / length(lis)
+}
 

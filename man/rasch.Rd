@@ -5,13 +5,12 @@
   Fit the Rasch model under the Item Response Theory approach.
 }
 \usage{
-rasch(data, constraint = NULL, IRT.param = FALSE, start.val, 
-            na.action = NULL, control = list())
+rasch(data, constraint = NULL, IRT.param = TRUE, start.val, 
+    na.action = NULL, control = list())
 }
 \arguments{
   \item{data}{a data.frame (that will be converted to a numeric matrix using 
-        \code{data.matrix()}) or a numeric matrix of manifest variables. The binary responses
-        must be in 0/1 format.}
+        \code{data.matrix()}) or a numeric matrix of manifest variables.}
   \item{constraint}{a two-column numeric matrix with at most \eqn{p} rows (where \eqn{p} is the number of items), 
         specifying fixed-value constraints. The first column represents the item (i.e., \eqn{1} denotes the first item,
         \eqn{2} the second, etc., and \eqn{p+1} the discrimination parameter) and the second column the 
@@ -21,7 +20,7 @@ rasch(data, constraint = NULL, IRT.param = FALSE, start.val,
   \item{start.val}{ a numeric vector of \eqn{p+1} starting values for the algorithm. The first \eqn{p}
         values correspond to the easiness parameters while the last value corresponds to the discrimination 
         parameter. If it is not supplied randomly chosen starting values are used instead.}
-  \item{na.action}{ the \code{na.action} to be used on \code{dat}. In case of missing data, if 
+  \item{na.action}{ the \code{na.action} to be used on \code{data}. In case of missing data, if 
         \code{na.action = NULL} the model uses the available cases, i.e., it takes into account the observed 
         part of sample units with missing values (valid under MAR mechanisms if the model is correctly specified). 
         If you want to apply a complete case analysis then use \code{na.action = na.exclude}.}
@@ -29,7 +28,7 @@ rasch(data, constraint = NULL, IRT.param = FALSE, start.val,
     \describe{
         \item{iter.qN}{ the number of quasi-Newton iterations. Default 150.}
         \item{GHk}{ the number of Gauss-Hermite quadrature points. Default 21.}
-        \item{method}{ the optimization method to be used in \code{optim}. Default "BFGS".}
+        \item{method}{ the optimization method to be used in \code{optim()}. Default "BFGS".}
         \item{verbose}{ logical; if \code{TRUE} info about the optimization procedure are printed.}
     }
   }
@@ -37,7 +36,7 @@ rasch(data, constraint = NULL, IRT.param = FALSE, start.val,
 
 \details{ 
     The Rasch model is special case of the unidimensional latent trait model when all the discrimination 
-    parameters are equal. This model was first discussed by Rasch (1960) and it is used mainly in educational 
+    parameters are equal. This model was first discussed by Rasch (1960) and it is mainly used in educational 
     testing where the aim is to study the abilities of a particular set of individuals.
 
     The model is defined as follows \deqn{\log\left(\frac{\pi_i}{1-\pi_i}\right) = \beta_{i} + \beta z,}{ logit
@@ -49,12 +48,16 @@ rasch(data, constraint = NULL, IRT.param = FALSE, start.val,
     If \code{IRT.param = TRUE}, then the parameters estimates are reported under the usual IRT parameterization,
     i.e., \deqn{\log\left(\frac{\pi_i}{1-\pi_i}\right) = \beta (z - \beta_i^*).}{ logit
     (\pi_i) = beta (z - beta_i^*).}
-
+    
     The fit of the model is based on approximate marginal Maximum Likelihood, using the Gauss-Hermite quadrature rule 
     for the approximation of the required integrals.
 }
 
 \note{
+    Although the common formulation of the Rasch model assumes that the discrimination parameter is fixed to 1,
+    \code{rasch()} estimates it. If you wish to fit the constrained version of the model, use the \code{constraint} 
+    argument accordingly. See \bold{Examples} for more info.
+
     The optimization algorithm works under the constraint that the discrimination parameter 
     \eqn{\beta}{beta} is always positive.
     
@@ -63,12 +66,12 @@ rasch(data, constraint = NULL, IRT.param = FALSE, start.val,
 }
 
 \value{ An object of class \code{rasch} with components,
-    \item{coefficients}{the parameter values at convergence. These are always the estimates of 
+    \item{coefficients}{a matrix with the parameter values at convergence. These are always the estimates of 
         \eqn{\beta_i, \beta}{beta_i, beta} parameters, even if \code{IRT.param = TRUE}.}
     \item{log.Lik}{the log-likelihood value at convergence.}
-    \item{convergence}{the convergence identifier returned by \code{optim}.}
-    \item{hessian}{the approximate Hessian matrix at convergence returned by \code{optim}.}
-    \item{counts}{the number of function and gradient evaluations required by the quasi-Newton algorithm.}
+    \item{convergence}{the convergence identifier returned by \code{optim()}.}
+    \item{hessian}{the approximate Hessian matrix at convergence returned by \code{optim()}.}
+    \item{counts}{the number of function and gradient evaluations used by the quasi-Newton algorithm.}
     \item{patterns}{a list with two components: (i) \code{X}: a numeric matrix 
         that contains the observed response patterns, and (ii) \code{obs}: a numeric vector that contains the observed 
         frequencies for each observed response pattern.}
@@ -85,7 +88,7 @@ rasch(data, constraint = NULL, IRT.param = FALSE, start.val,
 
 \section{Warning}{ 
     In case the Hessian matrix at convergence is not positive definite, try to re-fit the model; 
-    \code{rasch} will use new random starting values.
+    \code{rasch()} will use new random starting values.
 }
 
 \references{
@@ -126,21 +129,13 @@ rasch(Wirs, constraint = constr)
 
 
 ## The Rasch model for the Lsat data;
-## report parameter estimates under the
-## usual IRT parameterization:
-rasch(Lsat, IRT = TRUE)
+rasch(Lsat)
 
 
 ## The Rasch model for the Lsat data, under the 
 ## constraint that the discrimination parameter
 ## equals 1
 rasch(Lsat, constraint = rbind(c(6, 1)))
-
-
-## The Rasch model for the Abortion data:
-## report parameter estimates under the
-## usual IRT parameterization:
-rasch(Abortion, IRT = TRUE)
 
 }
 \keyword{multivariate}

@@ -1,15 +1,15 @@
 "fscores.r" <-
 function (betas, X, method) {
-    logf.z <- function(z, y, betas) {
+    logf.z <- function (z, y, betas) {
         pr <- probs(c(betas %*% c(1, z)))
         -(sum(y * log(pr) + (1 - y) * log(1 - pr)) + dnorm(z, log = TRUE))
     }
-    logg.z <- function(z, y, betas) {
+    logg.z <- function (z, y, betas) {
         pr <- probs(c(betas %*% c(1, z)))
         fits <- y - pr
         z - sum(fits * betas[, 2])
-    }
-    fscore <- function(logf.z, logg.z, y, betas) {
+    }    
+    fscore <- function (logf.z, logg.z, y, betas) {
         opt <- optim(0, fn = logf.z, gr = logg.z, method = "BFGS", hessian = TRUE, y = y, betas = betas)
         hc <- c(1/opt$hes)
         list(mu = opt$par, hes = hc)
@@ -27,7 +27,7 @@ function (betas, X, method) {
     if (method == "MI") {
         constraint <- object$constraint
         betas <- c(betas[, 1], betas[1, 2])
-        if(!is.null(constraint))
+        if (!is.null(constraint))
             betas <- betas[-constraint[, 1]]
         Var.betas <- vcov(object, robust.se)
         scores.B <- hes.B <- array(0, dim = c(nx, B))
