@@ -27,7 +27,7 @@
 }
 
 \value{
-a numeric matrix including the response patterns of interest with the their expected frequencies.
+a numeric matrix including the response patterns of interest with their expected frequencies.
 }
 
 \author{

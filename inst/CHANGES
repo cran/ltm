@@ -1,3 +1,15 @@
+Changes in version: ltm_0.4-1
+
+  o "information()" now has the arguments 'items' that specifies for which items the information should be computed in
+    the provided interval. By default, the test information is computed.
+
+  o a bug was fixed in "print.grm()".
+
+  o a bug was fixed in "plot.grm()".
+
+
+==============================
+
 Changes in version: ltm_0.4-0
 
   o "grm()" function is introduced for fitting Graded Response models under IRT.

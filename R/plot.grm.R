@@ -134,12 +134,12 @@ function (x, type = c("ICC", "IIC"), items = NULL, category = NULL, legend = FAL
             stop(paste("'category' must be a number between 1 and ", max(ncatg), ".\n", sep = ""))
         if (any(ind <- category > ncatg)){
             if (sum(ind) > 1)
-                warning("Items ", items[ind], " are excluded since they have only ", nactg[ind], " categories, respectively")
+                warning("Items ", items[ind], " are excluded since they have only ", ncatg[ind], " categories, respectively")
             else
-                warning("Item ", items[ind], " is excluded since they have only ", nactg[ind], " categories")
+                warning("Item ", items[ind], " is excluded since they have only ", ncatg[ind], " categories")
             items <- items[!ind]
         }
-        p <- sapply(cpr, function (x, category) x[, category], category = category)
+        p <- sapply(cpr[!ind], function (x, category) x[, category], category = category)
         one.fig <- prod(par("mfcol")) == 1
         main. <- if (one.fig) paste("- Category:", category) else paste("\nCategory:", category)
         plot(c(-3.8, 3.8), c(0, 1), type = "n", xlab = "Ability", ylab = "Probability", 

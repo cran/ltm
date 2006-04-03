@@ -35,7 +35,7 @@ rasch(data, constraint = NULL, IRT.param = TRUE, start.val,
 }
 
 \details{ 
-    The Rasch model is special case of the unidimensional latent trait model when all the discrimination 
+    The Rasch model is a special case of the unidimensional latent trait model when all the discrimination 
     parameters are equal. This model was first discussed by Rasch (1960) and it is mainly used in educational 
     testing where the aim is to study the abilities of a particular set of individuals.
 

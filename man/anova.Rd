@@ -23,7 +23,7 @@
   \item{\dots}{ additional arguments; currently none is used.}
 }
 \details{
-  If only \code{object} is supplied and \code{object} inherits from class \code{rasch}, then \code{anova.rasch()} 
+  If \code{object} is only supplied and \code{object} inherits from class \code{rasch}, then \code{anova.rasch()} 
   performs a parametric Bootstrap test based on Pearson's chi-squared statistic. The Bootstrap 
   approximation to the reference distribution is preferable compared with 
   the ordinary Chi-squared approximation since the latter is not valid especially
@@ -47,8 +47,8 @@
 }
 \value{
 An object of either class \code{aov.grm}, class \code{aov.ltm} or class \code{aov.rasch} with components,
-    \item{Tobs}{the value of the Pearson's chi-squared statistic for the observed data. Returned if only \code{object} is supplied.}
-    \item{B}{the \code{B} argument specifying the number of Bootstrap samples used. Returned if only \code{object} is supplied.}
+    \item{Tobs}{the value of the Pearson's chi-squared statistic for the observed data. Returned if \code{object} is only supplied.}
+    \item{B}{the \code{B} argument specifying the number of Bootstrap samples used. Returned if \code{object} is only supplied.}
     \item{call}{the matched call of \code{object}. Returned if only \code{object} is supplied.}
     \item{nam0}{the name of \code{object}. Returned if \code{object2} is also supplied.}
     \item{L0}{the log-likelihood under the null hypothesis (\code{object}). Returned if \code{object2} is also supplied.}

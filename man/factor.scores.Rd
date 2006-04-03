@@ -46,7 +46,7 @@ factor.scores(object, \dots)
   posterior distribution while \eqn{p \rightarrow \infty}{p -> infinity}, where \eqn{p} is the number of items. 
   This is based on the result \deqn{p(z|x)=p(z|x; \hat{\theta})(1+O(1/p)),}{p(z|x)=p(z|x; \hat{\theta})(1+O(1/p)),}
   where \eqn{\hat{\theta}} are the MLEs. However, in cases where \eqn{p} and/or \eqn{n} (the sample size) is small 
-  we ignore the variability of plugging-in estimates and not the \emph{true} parameter values. A solution to this 
+  we ignore the variability of plugging-in estimates but not the \emph{true} parameter values. A solution to this 
   problem can be given using Multiple Imputation (MI; use \code{method = "MI"}). In particular, MI is used the 
   other way around, i.e.,
    \describe{
@@ -87,7 +87,7 @@ Bartholomew, D., Steel, F., Moustaki, I. and Galbraith, J. (2002)
 \emph{The Analysis and Interpretation of Multivariate Data for
 Social Scientists}. London: Chapman and Hall.
 
-Rizopoulos, D. and Moustaki, I. (2005) Generalized latent variable models
+Rizopoulos, D. and Moustaki, I. (2006) Generalized latent variable models
 with nonlinear terms. \emph{submitted for publication}.
 }
 

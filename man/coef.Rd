@@ -25,7 +25,7 @@
   \item{\dots}{ additional arguments; currently none is used. }
 }
 
-\value{A list a or matrix of the estimated parameters for the fitted model.}
+\value{A list or a matrix of the estimated parameters for the fitted model.}
 
 \author{
     Dimitris Rizopoulos \email{dimitris.rizopoulos@med.kuleuven.be}

@@ -10,18 +10,20 @@
 }
 
 \usage{
-information(object, range, ...)
+information(object, range, items = NULL, ...)
 }
 
 \arguments{
-  \item{object}{ an object inheriting for either class \code{grm}, class \code{ltm} or class \code{rasch}. }
+  \item{object}{an object inheriting from either class \code{grm}, class \code{ltm} or class \code{rasch}.}
   \item{range}{a numeric interval for which the test information should be computed.}
-  \item{\dots}{ extra arguments passed to \code{integrate()} }
+  \item{items}{the items for which the information should be computed; the default \code{NULL} corresponds
+                to all the items, which is equivalent to the test information.}
+  \item{\dots}{extra arguments passed to \code{integrate()}.}
 }
 
 \details{
-    The amount of information is computed as the area under the Test Information Curve in the specified interval,
-    using \code{integrate()}.
+    The amount of information is computed as the area under the Item or Test Information Curve in the specified 
+    interval, using \code{integrate()}.
 }
 
 \value{
@@ -47,7 +49,7 @@ A list with components,
 
 m <- rasch(Lsat)
 information(m, c(-2, 0))
-information(m, c(0, 2))
+information(m, c(0, 2), items = 3)
 
 }
 

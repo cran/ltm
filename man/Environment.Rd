@@ -4,7 +4,7 @@
 \title{Attitude to the Environment}
 \description{
  This data set comes from the Environment section of the 1990 British Social Attitudes Survey (Brook et al., 1991). 
- A sample of 291 responded to the question below:
+ A sample of 291 responded to the questions below:
 }
 \format{
 All of the below items were measured on a three-group scale with response categories "very concerned", 

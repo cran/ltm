@@ -37,9 +37,9 @@ margins(object, \dots)
 
 \details{
     Rather than looking at the whole set of response patterns, we can look at the two- and three-way margins. 
-    In the case of the former, we construct the \eqn{2 \times 2}{2 by 2} contingency tables obtained by taking 
+    For the former, we construct the \eqn{2 \times 2}{2 by 2} contingency tables obtained by taking 
     the variables two at a time. Comparing the observed and expected two-way margins is analogous to comparing 
-    the observed and expected correlations when judging the fit of a factor analysis model. In the case of Bernoulli and
+    the observed and expected correlations when judging the fit of a factor analysis model. For Bernoulli and
     Ordinal variates, the comparison is made using the so called Chi-squared residuals. As a rule of thumb residuals 
     greater than 3.5 are indicative of poor fit. For a more strict rule of thumb use the \code{rule} argument. 
     The analogous procedure is followed for the three-way margins.

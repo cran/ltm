@@ -2,7 +2,7 @@
 \alias{grm}
 \title{ Graded Response Model - Polytomous IRT}
 \description{
-  Fit the Graded Response model for ordinal polytomous data, under the Item Response Theory approach.
+  Fits the Graded Response model for ordinal polytomous data, under the Item Response Theory approach.
 }
 \usage{
 grm(data, constrained = FALSE, IRT.param = TRUE, Hessian = FALSE, 

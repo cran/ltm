@@ -8,7 +8,7 @@
     to some of the questions and this data set contains only the complete cases.
 }
 \format{
-  The 379 individuals answered to the following questions after being asked if
+  379 individuals answered to the following questions after being asked if
   the law should allow abortion under the circumstances presented under each item,
   \describe{
     \item{Item 1}{The woman decides on her own that she does not.}

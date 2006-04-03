@@ -8,6 +8,7 @@ function (x, digits = max(3, getOption("digits") - 4), ...) {
     mat[lower.tri(mat)] <- low.part
     mat[upper.tri(mat)] <- upp.part
     diag(mat) <- "****"
+    cat("\n")
     print(noquote(mat))
     cat("\n\n")
     invisible(x)

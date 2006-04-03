@@ -18,16 +18,16 @@ ltm(formula, constraint = NULL, IRT.param, start.val,
   \item{constraint}{a three-column numeric matrix with at most \eqn{pq - 1} rows (where \eqn{p} is the number 
         of items and \eqn{q} the number of latent components plus the intercept), specifying fixed-value 
         constraints. The first column represents the item (i.e., \eqn{1} denotes the first item, \eqn{2} the 
-        second, etc.), the second column the represents the component of the latent structure (i.e., \eqn{1} 
+        second, etc.), the second column represents the component of the latent structure (i.e., \eqn{1} 
         denotes the intercept \eqn{\beta_{i0}}{beta_{i0}}, \eqn{2} the loadings of the first factor \eqn{\beta_
         {i1}}{beta_{i1}}, etc.) and the third column denotes the value at which the corresponding parameter 
         should be fixed. See \bold{Details} and \bold{Examples} for more info.}
   \item{IRT.param}{logical; if \code{TRUE} then the coefficients' estimates for the two-parameter logistic 
         model are reported under the usual IRT parameterization. See \bold{Details} for more info.}
   \item{start.val}{ a numeric matrix of starting values for the
-        algorithm (rows denote items and columns latent structure, with first column the intercepts). 
+        algorithm (rows denote items and columns latent structure, with the first column denoting the intercepts). 
         If it is not supplied randomly chosen starting values are used instead.}
-  \item{na.action}{ the \code{na.action} to be used on the data frame in the left-side of \code{formula}.
+  \item{na.action}{ the \code{na.action} to be used on the data frame in the left side of \code{formula}.
         In case of missing data, if \code{na.action = NULL} the model uses the available cases, i.e., it takes 
         into account the observed part of sample units with missing values (valid under MAR mechanisms if the
         model is correctly specified). If you want to apply a complete case analysis then use 
@@ -55,7 +55,7 @@ ltm(formula, constraint = NULL, IRT.param, start.val,
 
     The usual form of the latent trait model assumes linear latent variable effects (Bartholomew and 
     Knott, 1999; Moustaki and Knott, 2000). \code{ltm()} fits the linear one- and two-factor models but 
-    also provides extensions described by Rizopoulos and Moustaki (2005) to include nonlinear latent 
+    also provides extensions described by Rizopoulos and Moustaki (2006) to include nonlinear latent 
     variable effects. These are incorporated in the linear predictor of the model, i.e., \deqn{\log\left
     (\frac{\pi_{i}}{1-\pi_{i}}\right)=\beta_{i0} + \beta_{i1}z_1 + \beta_{i2}z_2 + \beta_{nl}^tf(z_1, z_2),
     }{logit(pi_i)=beta_{i0} + beta_{i1}z_1 + beta_{i2}z_2 + beta_{nl}^tf(z_1, z_2),} where \eqn{f(z_1, z_2)} is
@@ -77,8 +77,8 @@ ltm(formula, constraint = NULL, IRT.param, start.val,
     optimization procedure used is a hybrid algorithm. The procedure initially uses a moderate number of EM 
     iterations (see \code{control} argument \code{iter.em}) and then switches to quasi-Newton (see \code{control} 
     arguments \code{method} and \code{iter.qN}) iterations until convergence. In case of large number of items, 
-    the `Conjugate Gradient' optimization method might be preferable. Due to the use of Gauss-Hermite integration 
-    combined with the relatively large data sets encountered in multivariate analysis the use of optimized BLAS 
+    the `Conjugate Gradient' optimization method might be preferable. Due to the use of Gauss-Hermite integration, 
+    when relatively large data sets are encountered in multivariate analysis the use of optimized BLAS 
     (e.g., ATLAS) is recommended.
 }
 
@@ -141,7 +141,7 @@ Social Scientists}. London: Chapman and Hall.
 Moustaki, I. and Knott, M. (2000) Generalized latent trait
 models. \emph{Psychometrika}, \bold{65}, 391--411.
 
-Rizopoulos, D. and Moustaki, I. (2005) Generalized latent variable models
+Rizopoulos, D. and Moustaki, I. (2006) Generalized latent variable models
 with nonlinear terms. \emph{submitted for publication}.
 }
 
