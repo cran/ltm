@@ -1,8 +1,8 @@
 "rasch" <-
 function (data, constraint = NULL, IRT.param = TRUE, start.val = NULL, na.action = NULL, control = list()) {
     cl <- match.call()
-    if (!is.data.frame(data) && !is.matrix(data))
-        stop("'data' must be either a numeric matrix or a data.frame.\n")
+    if ((!is.data.frame(data) & !is.matrix(data)) || ncol(data) == 1)
+        stop("'data' must be either a numeric matrix or a data.frame, with at least two columns.\n")
     X <- data.matrix(data)
     if (!all(its <- apply(X, 2, function (x) { x <- x[!is.na(x)]; length(unique(x)) } ) == 2))
         stop("'data' contain more that 2 distinct values for item(s): ", paste(which(!its), collapse = ", "))
@@ -16,7 +16,7 @@ function (data, constraint = NULL, IRT.param = TRUE, start.val = NULL, na.action
     p <- ncol(X)
     con <- list(iter.qN = 150, GHk = 21, method = "BFGS", verbose = FALSE)
     con[names(control)] <- control
-    betas <- if (!missing(start.val) && length(start.val) == p + 1) start.val else rnorm(p + 1)
+    betas <- start.val.rasch(start.val, oX)
     if (!is.null(constraint)) {
         if (!is.matrix(constraint) || (nrow(constraint) > p + 1 | ncol(constraint) != 2))
             stop("'constraint' should be a 2-column matrix with at most ", p + 1, " rows (read help file).\n")

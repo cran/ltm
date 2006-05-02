@@ -2,7 +2,7 @@
 \alias{rcor.test}
 
 \title{
-    Pairwise Associations between Items
+    Pairwise Associations between Items using a Correlation Coefficient
 }
 
 \description{
@@ -21,7 +21,7 @@ rcor.test(mat, \dots)
 \value{
 An object of class \code{rcor.test} with components,
     \item{cor.mat}{the correlation matrix.}
-    \item{p.values}{a numeric three column matrix containing the \eqn{p}-values for all the combinations of items.}
+    \item{p.values}{a three column numeric matrix containing the \eqn{p}-values for all the combinations of items.}
 
 The print method for class \code{rcor.test} returns a square matrix in which the upper diagonal part contains
 the estimates of the correlation coefficients, and the lower diagonal part contains the corresponding \eqn{p}-values.

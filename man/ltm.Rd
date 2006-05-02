@@ -44,7 +44,7 @@ ltm(formula, constraint = NULL, IRT.param, start.val,
 }
 
 \details{
-    The latent trait model is the analogous of the factor analysis model for binary observed data. 
+    The latent trait model is the analogue of the factor analysis model for binary observed data. 
     The model assumes that the dependencies between the observed response variables (known as items) 
     can be interpreted by a small number of latent variables. The model formulation is under the IRT 
     approach; in particular, \deqn{\log\left(\frac{\pi_{i}}{1-\pi_{i}}\right)=\beta_{i0} + \beta_{i1}z_1 + 

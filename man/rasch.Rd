@@ -5,7 +5,7 @@
   Fit the Rasch model under the Item Response Theory approach.
 }
 \usage{
-rasch(data, constraint = NULL, IRT.param = TRUE, start.val, 
+rasch(data, constraint = NULL, IRT.param = TRUE, start.val = NULL, 
     na.action = NULL, control = list())
 }
 \arguments{
@@ -17,9 +17,10 @@ rasch(data, constraint = NULL, IRT.param = TRUE, start.val,
         value at which the corresponding parameter should be fixed. See \bold{Examples} for more info.}
   \item{IRT.param}{logical; if \code{TRUE} then the coefficients' estimates are reported under the 
         usual IRT parameterization. See \bold{Details} for more info.}
-  \item{start.val}{ a numeric vector of \eqn{p+1} starting values for the algorithm. The first \eqn{p}
-        values correspond to the easiness parameters while the last value corresponds to the discrimination 
-        parameter. If it is not supplied randomly chosen starting values are used instead.}
+  \item{start.val}{ the character string "random" or a numeric vector of \eqn{p+1} starting values for the algorithm, 
+        where the first \eqn{p} values correspond to the easiness parameters while the last value corresponds to the 
+        discrimination parameter. If "random", random starting values are used. If \code{NULL} starting values
+        are automatically computed. }
   \item{na.action}{ the \code{na.action} to be used on \code{data}. In case of missing data, if 
         \code{na.action = NULL} the model uses the available cases, i.e., it takes into account the observed 
         part of sample units with missing values (valid under MAR mechanisms if the model is correctly specified). 

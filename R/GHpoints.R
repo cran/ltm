@@ -1,7 +1,7 @@
 "GHpoints" <-
 function (form, k) {
     av <- all.vars(form)
-    factors <- length(av[-1])
+    factors <- sum(av %in% c("z1", "z2"))
     cf <- paste(form[3])
     form. <- paste(" ~ ", paste("z", 1:factors, collapse = " + ", sep = ""), " + ", cf)
     form. <- as.formula(form.)

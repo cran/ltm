@@ -10,7 +10,8 @@ function (object, resp.patterns = NULL, ...) {
         resp.patterns <- data.matrix(resp.patterns)
         p <- ncol(object$X)
         if (ncol(resp.patterns) != p)
-            stop("the number of items in ", deparse(substitute(object)), " and the columns of 'resp.patterns' do not much.\n")
+            stop("the number of items in ", deparse(substitute(object)), 
+                    " and the columns of 'resp.patterns' do not much.\n")
         check.items <- vector("logical", p)
         for (i in 1:p)
             check.items[i] <- all(unique(resp.patterns[, i]) %in% unique(object$patterns$X[, i]))

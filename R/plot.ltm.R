@@ -1,28 +1,35 @@
 "plot.ltm" <-
-function (x, type = c("ICC", "IIC"), items = NULL, legend = FALSE, cx = "topleft", cy = NULL, ncol = 1, 
-                    col = palette(), lty = 1, ...) {
+function (x, type = c("ICC", "IIC", "loadings"), items = NULL, zrange = c(-3.8, 3.8), annot, 
+                      labels = NULL, legend = FALSE, cx = "topleft", cy = NULL, ncol = 1, bty = "n", 
+                      col = palette(), lty = 1, pch, xlab, ylab, zlab, main, sub = NULL, cex = par("cex"), 
+                      cex.lab = par("cex.lab"), cex.main = par("cex.main"), cex.sub = par("cex.sub"), 
+                      cex.axis = par("cex.axis"), ...) {
     if (!inherits(x, "ltm"))
         stop("Use only with 'ltm' objects.\n")
     type <- match.arg(type)
     if (type == "IIC" && any(x$ltst$factors == 2, x$ltst$inter, x$ltst$quad.z1, x$ltst$quad.z2))
         stop("Item Information Curves are currently plotted only for the one-factor model.\n")
+    if (type %in% c("loadings", "persp", "contour") && x$ltst$factors == 1)
+        stop("'loadings', 'persp' and 'contour' are used only for two-factor models.\n")
     betas <- x$coefficients
     p <- nrow(betas)
     itms <- if (!is.null(items)) {
-                if (!is.numeric(items) || length(items) > p)
-                    stop("'items' must be a numeric vector of length at most ", p)
-                if (type == "ICC" && any(items < 1 | items > p))
-                    stop("'items' must contain numbers between 1 and ", p, " denoting the items.\n")
-                if (type == "IIC" && any(items < 0 | items > p))
-                    stop("'items' must contain numbers between 0 and ", p)
-                items
-            } else
-                1:p
+        if (!is.numeric(items) || length(items) > p)
+            stop("'items' must be a numeric vector of length at most ", p)
+        if (type == "ICC" && any(items < 1 | items > p))
+            stop("'items' must contain numbers between 1 and ", p, " denoting the items.\n")
+        if (type == "IIC" && any(items < 0 | items > p))
+            stop("'items' must contain numbers between 0 and ", p)
+            items
+    } else
+        1:p
     np <- 100
     if (x$ltst$factors == 1){
-        z1 <- seq(-3.8, 3.8, length = np)
+        z1 <- seq(zrange[1], zrange[2], length = np)
         Z <- if (x$ltst$quad.z1) cbind(1, z1, z1 * z1) else cbind(1, z1)
-        pr <- if (type == "ICC") plogis(Z %*% t(betas)) else {
+        pr <- if (type == "ICC") {
+            plogis(Z %*% t(betas))
+        } else {
             pr <- plogis(Z %*% t(betas))
             pqr <- pr * (1 - pr)
             t(t(pqr) * betas[, 2]^2)
@@ -31,69 +38,124 @@ function (x, type = c("ICC", "IIC"), items = NULL, legend = FALSE, cx = "topleft
         plot.info <- !plot.items
         col <- if (plot.items) rep(col, length.out = length(itms)) else col[1]
         lty <- if (plot.items) rep(lty, length.out = length(itms)) else lty[1]
-        main <- if (type == "ICC") "Item Characteristic Curves" else { 
-            if (plot.items) "Item Information Curves" else "Test Information Function"
+        if(!missing(pch)) {
+            pch <- if (plot.items) rep(pch, length.out = length(itms)) else pch[1]
+            pch.ind <- round(seq(15, 85, length = 4))
         }
-        ylab <- if (type == "ICC") "Probability" else "Information"
+        if (missing(main)) {
+            main <- if (type == "ICC") "Item Characteristic Curves" else { 
+                if (plot.items) "Item Information Curves" else "Test Information Function"
+            }
+        }
+        if (missing(xlab)) {
+            xlab <- "Ability"
+        }
+        if (missing(ylab)) {
+            ylab <- if (type == "ICC") "Probability" else "Information"
+        }
         r <- if (type == "ICC") c(0, 1) else { if (plot.info) range(rowSums(pr)) else range(pr[, itms]) }
-        plot(c(-3.8, 3.8), r, type = "n", xlab = "Ability", ylab = ylab, 
-                main = main, ...)
-        if (legend) {
-            legnd <- if (plot.info) "Information" else rownames(betas)[itms]
-            legend(cx, cy, legend = legnd, col = col, lty = lty, bty = "n", ncol = ncol, ...) 
+        plot(zrange, r, type = "n", xlab = xlab, ylab = ylab, main = main, sub = sub, cex = cex, 
+             cex.lab = cex.lab, cex.main = cex.main, cex.axis = cex.axis, cex.sub = cex.sub, ...)
+        if (missing(annot)) {
+            annot <- !legend
         }
-        else {
+        if (legend) {
+            legnd <- if (is.null(labels)) {
+                if (plot.info) "Information" else rownames(betas)[itms]
+            } else {
+                if (length(labels) < length(itms))
+                    warning("the length of 'labels' is smaller than the length of 'items'.\n")
+                labels
+            }
+            legend(cx, cy, legend = legnd, col = col, lty = lty, bty = bty, ncol = ncol, cex = cex, pch = pch, ...) 
+        }
+        if (annot) {
             pos <- round(seq(10, 90, length = length(itms)))
-            nams <- if(rownames(x$coef)[1] == "Item 1") 1:p else rownames(x$coef)
+            nams <- if (is.null(labels)) { 
+                nms <- if (rownames(betas)[1] == "Item 1") 1:p else rownames(betas)
+                nms[itms]
+            } else {
+                if (length(labels) < length(itms))
+                    warning("the length of 'labels' is smaller than the length of 'items'.\n")
+                labels
+            }
         }
         if (plot.items) {
             for (it in seq(along = itms)) {
                 lines(z1, pr[, itms[it]], lty = lty[it], col = col[it], ...)
-                if (!legend)
-                    text(z1[pos[it]], pr[pos[it], itms[it]], labels = nams[itms[it]], adj = c(0, 0), col = col[it], ...)            
+                if (!missing(pch))
+                    points(z1[pch.ind], pr[pch.ind, itms[it]], pch = pch[it], col = col[it], cex = cex, ...)
+                if (annot)
+                    text(z1[pos[it]], pr[pos[it], itms[it]], labels = nams[it], adj = c(0, 2), col = col[it], 
+                         cex = cex, ...)
             }
         }
         if (plot.info)
             lines(z1, rowSums(pr), lty = lty, col = col, ...)
+        return.value <- if (plot.items) cbind(z = z1, pr[, itms]) else cbind(z = z1, info = rowSums(pr))
     }
     if (x$ltst$factors == 2) {
         nams <- rownames(x$coef)
-        if (!any(unlist(x$ltst[2:4]))) {
+        if (type == "loadings") {
+            if (any(unlist(x$ltst[2:4])))
+                stop("the plot of standardized loadings is produced only for the linear two-factor model.\n")
             cof <- coef(x, TRUE)
             z1 <- cof[itms, 3]
             z2 <- cof[itms, 5]
-            plot(z1, z2, type = "n", xlab = "Factor 1", ylab = "Factor 2", main = "Standardized Loadings", 
-                    xlim = c(min(z1, -0.1), max(z1, 0.1)), ylim = c(min(z2, -0.1), max(z2, 0.1)))
+            if (missing(xlab))
+                xlab <- "Factor 1"
+            if (missing(ylab))
+                ylab <- "Factor 2"
+            if (missing(main))
+                main <- "Standardized Loadings"
+            plot(z1, z2, type = "n", xlab = xlab, ylab = ylab, main = main, sub = sub,
+                    xlim = c(min(z1, -0.1), max(z1, 0.1)), ylim = c(min(z2, -0.1), max(z2, 0.1)),
+                    cex = cex, cex.lab = cex.lab, cex.main = cex.main, cex.axis = cex.axis, cex.sub = cex.sub, ...)
             abline(h = 0, v = 0, lty = 2)
-            text(z1, z2, labels = nams[itms])
+            text(z1, z2, labels = if (is.null(labels)) nams[itms] else labels, cex = cex, ...)
+        } else {
+            z1 <- seq(zrange[1], zrange[2], length = np)
+            z2 <- seq(zrange[1], zrange[2], length = np)
+            f <- function (z, betas, strct) {
+                Z <- cbind(1, z[1], z[2])
+                colnames(Z) <- c("(Intercept)", "z1", "z2")
+                if (strct$inter)
+                    Z <- cbind(Z, "z1:z2" = z[1] * z[2])
+                if (strct$quad.z1)
+                    Z <- cbind(Z, "I(z1^2)" = z[1] * z[1])
+                if (strct$quad.z2)
+                    Z <- cbind(Z, "I(z2^2)" = z[2] * z[2])
+                Z <- Z[, match(names(betas), colnames(Z)), drop = FALSE]
+                pr <- plogis(Z %*% betas)
+            }
+            if (missing(xlab))
+                xlab <- "Factor 1"
+            if (missing(ylab))
+                ylab <- "Factor 2"
+            if (missing(zlab))
+                zlab <- "Probability"
+            if (missing(main))
+                main <- "Item Characteristic Surfaces"
+            grid. <- as.matrix(expand.grid(z1, z2))
+            dimnames(grid.) <- NULL
+            old.par <- par(ask = TRUE)
+            on.exit(par(old.par))
+            z <- vector("list", length(itms))
+            for (it in seq(along = itms)) {
+                item <- itms[it]
+                z[[it]] <- apply(grid., 1, f, betas = betas[item, ], strct = x$ltst)
+                dim(z[[it]]) <- c(np, np)
+                persp(z1, z2, z[[it]], cex = cex, xlab = list(xlab, cex = cex.lab), ylab = list(ylab, cex = cex.lab), 
+                        zlab = list(zlab, cex = cex.lab), main = list(main, cex = cex.main), 
+                        sub = list(if (is.null(labels)) nams[item] else labels[it], cex = cex.sub), ...)
+            }
         }
-        z1 <- seq(-3.8, 3.8, length = np)
-        z2 <- seq(-3.8, 3.8, length = np)
-        f <- function (z, betas, strct) {
-            Z <- cbind(1, z[1], z[2])
-            colnames(Z) <- c("(Intercept)", "z1", "z2")
-            if (strct$inter)
-                Z <- cbind(Z, "z1:z2" = z[1] * z[2])
-            if (strct$quad.z1)
-                Z <- cbind(Z, "I(z1^2)" = z[1] * z[1])
-            if (strct$quad.z2)
-                Z <- cbind(Z, "I(z2^2)" = z[2] * z[2])
-            Z <- Z[, match(names(betas), colnames(Z)), drop = FALSE]
-            pr <- plogis(Z %*% betas)
-        }
-        grid. <- as.matrix(expand.grid(z1, z2))
-        dimnames(grid.) <- NULL
-        old.par <- par(ask = TRUE)
-        on.exit(par(old.par))
-        for (it in itms) {
-            z <- apply(grid., 1, f, betas = betas[it, ], strct = x$ltst)
-            dim(z) <- c(np, np)
-            persp(z1, z2, z, ticktype = "detailed", theta = 30, phi = 30, expand = 0.5, d = 2, cex = 0.7, 
-                    xlab = "Factor 1", ylab = "Factor 2", 
-                    zlab = "Probability", main = list("Item Characteristic Surfaces", cex = 1.5), 
-                    sub = list(nams[it], cex = 1.4), ...)
+        return.value <- if (type == "loadings") {
+            cbind("Factor 1" = z1, "Factor 2" = z2)
+        }  else {
+            list(z1, z2, z)
         }
     }
-    invisible()
+    invisible(return.value)
 }
 

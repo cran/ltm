@@ -6,7 +6,7 @@
 }
 
 \description{
-it converts multiple choice items to a matrix of binary responses.
+It converts multiple choice items to a matrix of binary responses.
 }
 
 \usage{

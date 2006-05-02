@@ -1,21 +1,25 @@
 "ltm" <-
 function (formula, constraint = NULL, IRT.param, start.val = NULL, na.action = NULL, control = list()) {
     cl <- match.call()
+    tm <- terms(formula)
     av <- all.vars(formula)
-    X <- get(av[1], env = parent.frame())
+    X <- eval(attr(tm, "variables"), list(z1 = 0, z2 = 0), parent.frame())[[1]]
+    if ((!is.data.frame(X) & !is.matrix(X)) || ncol(X) == 1)
+        stop("\nthe left-hand side of 'formula' must be either a numeric matrix or a data.frame, with at least two columns.\n")    
     X <- data.matrix(X)
     if (!all(its <- apply(X, 2, function (x) { x <- x[!is.na(x)]; length(unique(x)) } ) == 2))
         stop("'data' contain more that 2 distinct values for item(s): ", paste(which(!its), collapse = ", "))
     X <- apply(X, 2, function (x) if (all(unique(x) %in% c(1, 0, NA))) x else x - 1)    
     if (!is.null(na.action))
         X <- na.action(X)
-    factors <- length(av <- av[-1])
+    factors <- sum(av %in% c("z1", "z2"))
     if (factors > 2)
         stop("\nMaximum number of factors to include is 2.")
-    if ((factors == 1 & av != "z1") || (factors == 2 & any(!av[-1] %in% c("z1", "z2"))))  
+    if ((factors == 1 & !"z1" %in% av) || (factors == 2 & !c("z1", "z2") %in% av))  
         stop("\nyou have to use 'z1' for the first factor and 'z2' for the second one.")
-    tm <- attr(terms(formula), "term.labels")
-    ltst <- list(factors = factors, inter = "z1:z2" %in% tm, quad.z1 = "I(z1^2)" %in% tm, quad.z2 = "I(z2^2)" %in% tm)
+    tm.lab <- attr(tm, "term.labels")
+    ltst <- list(factors = factors, inter = "z1:z2" %in% tm.lab, quad.z1 = "I(z1^2)" %in% tm.lab, 
+                 quad.z2 = "I(z2^2)" %in% tm.lab)
     IRT.param <- if (missing(IRT.param)) {
         factors == 1 & !ltst$quad.z1
     } else {
@@ -34,7 +38,7 @@ function (formula, constraint = NULL, IRT.param, start.val = NULL, na.action = N
             start.val else  {
                 warning("'start.val' must be a ", ncol(X), " by ", q., 
                                 " numeric matrix; random starting values are used instead.\n")
-               start.val.ltm(X, factors, formula)
+                start.val.ltm(X, factors, formula)
             } 
     } else
         start.val.ltm(X, factors, formula)

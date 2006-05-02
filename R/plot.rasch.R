@@ -1,6 +1,8 @@
 "plot.rasch" <-
-function (x, type = c("ICC", "IIC"), items = NULL, legend = FALSE, cx = "topleft", cy = NULL, ncol = 1, 
-                        col = palette(), lty = 1, ...) {
+function (x, type = c("ICC", "IIC"), items = NULL, zrange = c(-3.8, 3.8), annot, labels = NULL, 
+                        legend = FALSE, cx = "topleft", cy = NULL, ncol = 1, bty = "n", col = palette(), lty = 1, 
+                        pch, xlab, ylab, main, sub = NULL, cex = par("cex"), cex.lab = par("cex.lab"), 
+                        cex.main = par("cex.main"), cex.sub = par("cex.sub"), cex.axis = par("cex.axis"), ...) {
     if (!inherits(x, "rasch"))
         stop("Use only with 'rasch' objects.\n")
     type <- match.arg(type)
@@ -16,35 +18,71 @@ function (x, type = c("ICC", "IIC"), items = NULL, legend = FALSE, cx = "topleft
         items
     } else
         1:p
-    z1 <- seq(-3.8, 3.8, length = 100)
+    z1 <- seq(zrange[1], zrange[2], length = 100)
     Z <- cbind(1, z1)
-    pr <- if (type == "ICC") plogis(Z %*% t(betas)) else betas[1, 2]^2 * plogis(Z %*% t(betas)) * (1 - plogis(Z %*% t(betas)))
+    pr <- if (type == "ICC") {
+        plogis(Z %*% t(betas))
+    } else {
+        pi <- plogis(Z %*% t(betas))
+        betas[1, 2]^2 * pi * (1 - pi)
+    }
     plot.items <- type == "ICC" || (type == "IIC" & (is.null(items) || all(items > 0)))
     plot.info <- !plot.items
     col <- if (plot.items) rep(col, length.out = length(itms)) else col[1]
     lty <- if (plot.items) rep(lty, length.out = length(itms)) else lty[1]
-    main <- if (type == "ICC") "Item Characteristic Curves" else { 
-        if (plot.items) "Item Information Curves" else "Test Information Function"
+    if(!missing(pch)) {
+        pch <- if (plot.items) rep(pch, length.out = length(itms)) else pch[1]
+        pch.ind <- round(seq(15, 85, length = 4))
     }
-    ylab <- if (type == "ICC") "Probability" else "Information"
+    if (missing(main)) {
+        main <- if (type == "ICC") "Item Characteristic Curves" else { 
+            if (plot.items) "Item Information Curves" else "Test Information Function"
+        }
+    }
+    if (missing(xlab)) {
+        xlab <- "Ability"
+    }
+    if (missing(ylab)) {
+        ylab <- if (type == "ICC") "Probability" else "Information"
+    }
     r <- if (type == "ICC") c(0, 1) else { if (plot.info) range(rowSums(pr)) else range(pr[, itms]) }
-    plot(c(-3.8, 3.8), r, type = "n", xlab = "Ability", ylab = ylab, main = main, ...)
+    plot(zrange, r, type = "n", xlab = xlab, ylab = ylab, main = main, sub = sub, cex = cex, cex.lab = cex.lab, 
+            cex.main = cex.main, cex.axis = cex.axis, cex.sub = cex.sub, ...)
+    if (missing(annot)) {
+        annot <- !legend
+    }
     if (legend) {
-        legnd <- if (plot.info) "Information" else rownames(betas)[itms]
-        legend(cx, cy, legend = legnd, col = col, lty = lty, bty = "n", ncol = ncol, ...) 
-    } else {
+        legnd <- if (is.null(labels)) {
+            if (plot.info) "Information" else rownames(betas)[itms]
+        } else {
+            if (length(labels) < length(itms))
+                warning("the length of 'labels' is smaller than the length of 'items'.\n")
+            labels
+        }
+        legend(cx, cy, legend = legnd, col = col, lty = lty, bty = bty, ncol = ncol, cex = cex, pch = pch, ...) 
+    }
+    if (annot) {
         pos <- round(seq(10, 90, length = length(itms)))
-        nams <- if (rownames(betas)[1] == "Item 1") 1:p else rownames(betas)
+        nams <- if (is.null(labels)) { 
+            nms <- if (rownames(betas)[1] == "Item 1") 1:p else rownames(betas)
+            nms[itms]
+        } else {
+            if (length(labels) < length(itms))
+                warning("the length of 'labels' is smaller than the length of 'items'.\n")
+            labels
+        }
     }
     if (plot.items) {
         for (it in seq(along = itms)) {
             lines(z1, pr[, itms[it]], lty = lty[it], col = col[it], ...)
-            if (!legend)
-                text(z1[pos[it]], pr[pos[it], itms[it]], labels = nams[itms[it]], adj = c(0, 0), col = col[it], ...)
+            if (!missing(pch))
+                points(z1[pch.ind], pr[pch.ind, itms[it]], pch = pch[it], col = col[it], cex = cex, ...)
+            if (annot)
+                text(z1[pos[it]], pr[pos[it], itms[it]], labels = nams[it], adj = c(0, 2), col = col[it], cex = cex, ...)
         }
     }
     if (plot.info)
         lines(z1, rowSums(pr), lty = lty, col = col, ...)
-    invisible()
+    invisible(if (plot.items) cbind(z = z1, pr[, itms]) else cbind(z = z1, info = rowSums(pr)))
 }
 

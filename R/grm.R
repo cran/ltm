@@ -2,8 +2,8 @@
 function (data, constrained = FALSE, IRT.param = TRUE, Hessian = FALSE, start.val = NULL, na.action = na.omit, 
                  control = list()) {
     cl <- match.call()
-    if (!is.data.frame(data) && !is.matrix(data))
-        stop("'data' must be either a numeric matrix or a data.frame.\n")
+    if ((!is.data.frame(data) & !is.matrix(data)) || ncol(data) == 1)
+        stop("'data' must be either a numeric matrix or a data.frame, with at least two columns.\n")
     X <- data.matrix(data)    
     X <- na.action(X)
     colnamsX <- colnames(X)

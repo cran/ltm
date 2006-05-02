@@ -33,7 +33,7 @@ function (object, object2 = NULL, B = 49, ...) {
                 p.value = p.value, call = object$call)
     } else {
         if (any(is.na(object$X)) && is.null(object$na.action))
-            stop("In presense of missing values the parametric Bootstrap test is not currently implemented.\n")
+            stop("In the presense of missing values the parametric Bootstrap test is not currently implemented.\n")
         pearson.chi <- function (object) {
             Obs <- object$patterns$obs
             fits <- fitted(object)
@@ -66,7 +66,8 @@ function (object, object2 = NULL, B = 49, ...) {
             betas. <- mvrnorm(1, betas, Var.betas)
             betas. <- betas.rasch(betas., constraint, p)
             X <- rmvlogis(betas.)
-            Ts[i] <- pearson.chi(rasch(X, constraint = constraint, control = object$control))
+            Ts[i] <- pearson.chi(rasch(X, constraint = constraint, start.val = c(betas.[, 1], betas.[1, 2]), 
+                                    control = object$control))
         }
         p.val <- (1 + sum(Ts >= Tobs)) / (B + 1)
         out <- list(Tobs = Tobs, p.value = p.val, B = B, call = object$call)

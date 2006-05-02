@@ -9,7 +9,7 @@ function (object, robust.se = FALSE, ...) {
     se <- rep(NA, length(coefs))
     ind <- if (!is.null(constraint <- object$constraint)) seq(along = se)[-constraint[, 1]] else seq(along = se)
     se[ind] <- if (object$IRT.param) irt$se else sqrt(diag(Var.betas))
-    z.vals <- coefs/se
+    z.vals <- coefs / se
     coef.tab <- cbind(value = coefs, std.err = se, z.vals = z.vals)
     p <- ncol(object$X)
     rownames(coef.tab) <- if (object$IRT) names(coefs) else c(abbreviate(names(coefs[1:p]), 5), "z") 

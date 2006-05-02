@@ -2,11 +2,11 @@
 \alias{information}
 
 \title{
-    Area under the Test Information Function
+    Area under the Test or Item Information Curves
 }
 
 \description{
-  Computes the amount of test information for a fitted IRT model, in a specified range.
+  Computes the amount of test or item information for a fitted IRT model, in a specified range.
 }
 
 \usage{
@@ -18,7 +18,7 @@ information(object, range, items = NULL, ...)
   \item{range}{a numeric interval for which the test information should be computed.}
   \item{items}{the items for which the information should be computed; the default \code{NULL} corresponds
                 to all the items, which is equivalent to the test information.}
-  \item{\dots}{extra arguments passed to \code{integrate()}.}
+  \item{\dots}{extra arguments passed to \code{\link{integrate}}.}
 }
 
 \details{
@@ -49,7 +49,7 @@ A list with components,
 
 m <- rasch(Lsat)
 information(m, c(-2, 0))
-information(m, c(0, 2), items = 3)
+information(m, c(0, 2), items = c(3, 5))
 
 }
 

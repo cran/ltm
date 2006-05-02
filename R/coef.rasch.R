@@ -1,5 +1,5 @@
 "coef.rasch" <-
-function (object, prob = FALSE, ...) {
+function (object, prob = FALSE, order = FALSE, ...) {
     if (!inherits(object, "rasch"))
         stop("Use only with 'rasch' objects.\n")
     cof <- if (object$IRT.param){
@@ -12,6 +12,8 @@ function (object, prob = FALSE, ...) {
         }
     if (prob)
         cof <- cbind(cof, "P(x=1|z=0)" = plogis(cof[, 1]))
+    if (order)
+        cof <- cof[order(cof[, 1]), ]
     round(cof, 3)
 }
 

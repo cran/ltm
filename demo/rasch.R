@@ -21,7 +21,7 @@ summary(m1)
 ## is used; This computes a Bootstrap p-value for the Pearson's 
 ## Chi-squared statistic
 
-anova(m1, B = 100) # B specifies the number of Bootstrap samples
+anova(m1, B = 199) # B specifies the number of Bootstrap samples
 
 
 ## Alternatively, we could also check the fit on the margins
@@ -39,11 +39,9 @@ plot(m1, legend = TRUE, lwd = 3, cx = 1, cy = 0.7) # 'cx' and 'cy' define the co
 
 
 ## The Item Information Curves are produced using type = "IIC"
-## increase cex.lab and cex.main using par()
+## increase cex.lab and cex.main
 
-op <- par(cex.lab = 1.2, cex.main = 1.6)
-plot(m1, type = "IIC", legend = TRUE, cx = "topright", lwd = 2.3, cex = 1.3)
-par(op)
+plot(m1, type = "IIC", legend = TRUE, cx = "topright", lwd = 2.3, cex = 1.3, cex.lab = 1.2, cex.main = 1.6)
 
 
 ## The Test Information Function is produced using type = "IIC" and items = 0
@@ -61,7 +59,7 @@ summary(m2)
 
 ## The Goodness-of-Fit is checked again
 
-anova(m2, B = 100) # B specifies the number of Bootstrap samples
+anova(m2, B = 199) # B specifies the number of Bootstrap samples
 
 
 ## The fit on the margins
@@ -86,12 +84,10 @@ plot(m2, items = c(1, 3, 5), lwd = 3, cex = 1.2)
 plot(m2, items = c(1, 3, 5), legend = TRUE, lwd = 3, cx = 1, cy = 0.7)
 
 
-## The Item Information Curves are produced using type = "IIC"
-## increase cex.lab and cex.main using par(); plot only items 1, 3 and 5
+## The Item Information Curves are produced using type = "IIC";
+## plot only items 1, 3 and 5
 
-op <- par(cex.lab = 1.2, cex.main = 1.6)
 plot(m2, type = "IIC", items = c(1, 3, 5), legend = TRUE, cx = "topright", lwd = 2.3, cex = 1.3)
-par(op)
 
 
 ## The Test Information Function is produced using type = "IIC" and items = 0
