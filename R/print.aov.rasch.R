@@ -17,7 +17,7 @@ function (x, digits = 3, ...) {
         cat("\nGoodness-of-Fit using Pearson chi-squared\n")
         cat("\nCall:\n", deparse(x$call), "\n\n", sep = "")
         cat("Tobs:", round(x$Tobs, 2), "\n")
-        cat("# Bootstrap samples:", x$B + 1, "\n")
+        cat("# data-sets:", x$B + 1, "\n")
         cat("p-value:", p.val, "\n")
     }
     cat("\n")

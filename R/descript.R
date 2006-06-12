@@ -21,6 +21,8 @@ function (data, n.print = 10, B = 1000) {
         apply(X, 2, function (x) { nas <- sum(is.na(x)); c(Freq = nas, Percs =nas / n) })
     } else
         NULL
+    data <- na.exclude(data)    
+    attr(data, "na.action") <- NULL    
     ind <- combinations(p, 2)
     nind <- nrow(ind)
     pvals <- numeric(nind)
@@ -36,7 +38,10 @@ function (data, n.print = 10, B = 1000) {
     names(pw.ass) <- c("Item i", "Item j", "p.value")
     pw.ass <- pw.ass[order(pvals, decreasing = TRUE), ]
     row.names(pw.ass) <- 1:nind
-    itms <- rbind(Freq = table(rowSums(X)))
+    levs <- apply(data, 2, function (x) length(unique(x)))
+    levs <- pmax(2, levs)
+    levs <- if (all(levs == 2)) 0:sum(levs - 1) else p:sum(levs) 
+    itms <- rbind(Freq = table( factor(rowSums(X), levels = levs) ))
     out <- list(sample = c(p, n), perc = perc, items = itms, pw.ass = pw.ass, n.print = n.print, name = nam, 
                 missin = missin)
     class(out) <- "descript"

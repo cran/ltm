@@ -7,11 +7,11 @@ function (data, constraint = NULL, IRT.param = TRUE, start.val = NULL, na.action
     if (!all(its <- apply(X, 2, function (x) { x <- x[!is.na(x)]; length(unique(x)) } ) == 2))
         stop("'data' contain more that 2 distinct values for item(s): ", paste(which(!its), collapse = ", "))
     X <- apply(X, 2, function (x) if (all(unique(x) %in% c(1, 0, NA))) x else x - 1)
+    if (!is.null(na.action))
+        X <- na.action(X)    
     oX <- X
     colnamsX <- colnames(X)
     dimnames(X) <- NULL
-    if (!is.null(na.action))
-        X <- na.action(X)
     n <- nrow(X)
     p <- ncol(X)
     con <- list(iter.qN = 150, GHk = 21, method = "BFGS", verbose = FALSE)
@@ -70,7 +70,6 @@ function (data, constraint = NULL, IRT.param = TRUE, start.val = NULL, na.action
             c(scores[, 1], sum(scores[, 2]))
     }
     environment(logLik.rasch) <- environment(score.rasch) <- environment()
-    gc()
     res.qN <- optim(betas[!is.na(betas)], fn = logLik.rasch, gr = score.rasch, method = con$method, hessian = TRUE, 
                 control = list(maxit = con$iter.qN, trace = as.numeric(con$verbose)), constraint = constraint)
     ev <- eigen(res.qN$hes, TRUE, TRUE)$values
@@ -82,12 +81,7 @@ function (data, constraint = NULL, IRT.param = TRUE, start.val = NULL, na.action
     max.sc <- max(abs(score.rasch(res.qN$par, constraint)))
     fit <- list(coefficients = betas, log.Lik = -res.qN$val, convergence = res.qN$conv, hessian = res.qN$hes, 
                 counts = res.qN$counts, patterns = list(X = X, obs = obs), GH = list(Z = Z, GHw = GHw), max.sc = max.sc, 
-                constraint = constraint)
-    fit$IRT.param <- IRT.param
-    fit$X <- oX
-    fit$control <- con
-    fit$na.action <- na.action
-    fit$call <- cl
+                constraint = constraint, IRT.param = IRT.param, X = oX, control = con, na.action = na.action, call = cl)
     class(fit) <- "rasch"
     fit
 }

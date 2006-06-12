@@ -8,11 +8,11 @@ function (form, k) {
     GH <- gauher(k)
     grid.t <- expand.grid(lapply(1:factors, function (k, u) u$x, u = GH))
     names(grid.t) <- paste("z", 1:factors, sep = "")
-    out <- model.matrix(form., grid.t)
+    out <- model.matrix(form., sqrt(2) * grid.t)
     colnams <- colnames(out)
     dimnames(out) <- attr(out, "assign") <- NULL
     grid.w <- as.matrix(expand.grid(lapply(1:factors, function (k, u) u$w, u = GH)))
-    grid.w <- apply(grid.w, 1, prod) * exp(rowSums(grid.t * grid.t))
+    grid.w <- (2^(factors/2)) * apply(grid.w, 1, prod) * exp(rowSums(grid.t * grid.t))
     grid.w <- grid.w * exp(rowSums(dnorm(out[, seq(2, factors + 1), drop = FALSE], log = TRUE)))
     names(grid.w) <- NULL
     list(x = out, w = grid.w, colnams = colnams)

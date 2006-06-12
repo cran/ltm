@@ -1,3 +1,15 @@
+Changes in version: ltm_0.5-1
+
+  o the Gauss-Hermite rule has been upgraded; functions "grm()", "ltm()" and "rasch()" may produce slightly different 
+    parameter estimates from the previous versions.
+
+  o some issues regarding missing values and singular designs have been resolved in "start.val.rasch()".
+
+  o a bug was fixed in "coef.grm()".
+
+
+==============================
+
 Changes in version: ltm_0.5-0
 
   o the "plot()" method for 'grm', 'ltm' and 'rasch' objects is now more flexible containing a number of extra arguments.
@@ -40,8 +52,6 @@ Changes in version: ltm_0.4-0
 
   o "factor.scores()" has a new argument 'resp.patterns' that provides specific response patterns for which
     factor scores should be computed. "factor.scores.ltm()" has now as default method 'EB' instead of 'Component'.
-
-  o "grm()" does not use random starting values unless 'start.val = "random"'; look at the help file for more info.
     
   o "descript()" can now also handle data sets with polytomous responses.
 
