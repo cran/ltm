@@ -2,10 +2,13 @@
 \alias{vcov.grm}
 \alias{vcov.ltm}
 \alias{vcov.rasch}
+\alias{vcov.tpm}
+
 \title{ vcov method for fitted IRT models }
+
 \description{
  Extracts the asymptotic variance-covariance matrix of the MLEs from either \code{grm},
- \code{ltm} or \code{rasch} objects.
+ \code{ltm}, \code{rasch} or \code{tpm} objects.
 }
 
 \usage{
@@ -16,10 +19,11 @@
 
 \method{vcov}{rasch}(object, robust = FALSE, \dots)
 
+\method{vcov}{tpm}(object, \dots)
 }
 
 \arguments{
-  \item{object}{ an object inheriting from either class \code{grm}, class \code{ltm} or class \code{rasch}. }
+  \item{object}{ an object inheriting from either class \code{grm}, class \code{ltm}, class \code{rasch} or class \code{tpm}. }
   \item{robust}{ logical; if \code{TRUE} the sandwich estimator is used. }
   \item{\dots}{ additional arguments; currently none is used. }
 }
@@ -35,7 +39,8 @@
 \seealso{
     \code{\link{grm}},
     \code{\link{ltm}},
-    \code{\link{rasch}}
+    \code{\link{rasch}},
+    \code{\link{tpm}}
 }
 
 \examples{

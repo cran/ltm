@@ -34,12 +34,12 @@ function (formula, constraint = NULL, IRT.param, start.val = NULL, na.action = N
     p <- ncol(X)
     q. <- 1 + factors + sum(unlist(ltst[-1]))
     betas <- if (!missing(start.val)) {
-        if(all(is.numeric(start.val), is.matrix(start.val), nrow(start.val) == p, ncol(start.val) == q.))
-            start.val else  {
-                warning("'start.val' must be a ", ncol(X), " by ", q., 
-                                " numeric matrix; random starting values are used instead.\n")
-                start.val.ltm(X, factors, formula)
-            } 
+        if(all(is.numeric(start.val), is.matrix(start.val), nrow(start.val) == p, ncol(start.val) == q.)) {
+            start.val
+        } else {
+            warning("'start.val' must be a ", ncol(X), " by ", q., " numeric matrix; random starting values are used instead.\n")
+            start.val.ltm(X, factors, formula)
+        } 
     } else
         start.val.ltm(X, factors, formula)
     if (!is.null(constraint)) {
@@ -54,7 +54,8 @@ function (formula, constraint = NULL, IRT.param, start.val = NULL, na.action = N
         constraint[, 1:2] <- round(constraint[, 1:2])
         betas[constraint[, 1:2]] <- constraint[, 3]
     }
-    con <- list(iter.em = 40, iter.qN = 150, GHk = 15, method = "BFGS", verbose = getOption("verbose"))
+    con <- list(iter.em = 40, iter.qN = 150, GHk = if (factors == 1) 21 else 15, method = "BFGS", 
+                verbose = getOption("verbose"))
     con[names(control)] <- control
     fit <- ltm.fit(X, betas, constraint, formula, con)
     ltst$nams <- colnames(fit$coefficients)

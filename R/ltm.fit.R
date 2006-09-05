@@ -28,19 +28,21 @@ function (X, betas, constraint, formula, control) {
     res.EM <- EM(betas, constraint, control$iter.em, control$verbose)
     if (!is.null(constraint))
         res.EM[constraint[, 1:2, drop = FALSE]] <- NA
-    gc()
     res.qN <- optim(c(res.EM[!is.na(res.EM)]), fn = loglikltm, gr = scoreltm, method = control$method, hessian = TRUE, 
                 control = list(maxit = control$iter.qN, trace = as.numeric(control$verbose)), constraint = constraint)
-    ev <- eigen(res.qN$hes, TRUE, TRUE)$values
-    if (!all(ev >= -1e-06 * abs(ev[1]))) 
-        warning("Hessian matrix at convergence is not positive definite, unstable solution; re-fit the model.\n")
+    if (all(!is.na(res.qN$hessian) & is.finite(res.qN$hessian))) {
+        ev <- eigen(res.qN$hessian, TRUE, TRUE)$values
+        if (!all(ev >= -1e-06 * abs(ev[1]))) 
+            warning("Hessian matrix at convergence is not positive definite; unstable solution.\n")
+    } else 
+        warning("Hessian matrix at convergence contains infinite or missing values; unstable solution.\n")
     betas <- betas.ltm(res.qN$par, constraint, p, q.)
     colnames(betas) <- GH$colnams
     rownames(betas) <- if (!is.null(colnamsX)) colnamsX else paste("Item", 1:p)
     if (q. == 2 && sign(betas[1, 2]) == -1)
         betas[, 2] <- -betas[, 2]
     max.sc <- max(abs(scoreltm(res.qN$par, constraint)))
-    list(coefficients = betas, log.Lik = -res.qN$val, convergence = res.qN$conv, hessian = res.qN$hes, 
+    list(coefficients = betas, log.Lik = -res.qN$value, convergence = res.qN$conv, hessian = res.qN$hessian, 
             counts = res.qN$counts, patterns = list(X = X, obs = obs), GH = list(Z = Z, GHw = GHw), max.sc = max.sc)
 }
 

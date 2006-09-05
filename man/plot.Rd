@@ -2,37 +2,49 @@
 \alias{plot.grm}
 \alias{plot.ltm}
 \alias{plot.rasch}
+\alias{plot.tpm}
+
 \title{ Plot method for fitted IRT models}
+
 \description{
   Produces the Item Characteristic or Item Information Curves for fitted IRT models.
 }
+
 \usage{
 \method{plot}{grm}(x, type = c("ICC", "IIC"), items = NULL, category = NULL, 
-     zrange = c(-3.8, 3.8), annot, labels = NULL, legend = FALSE, 
-     cx = "top", cy = NULL, ncol = 1, bty = "n", col = palette(), 
-     lty = 1, pch, xlab, ylab, main, sub = NULL, cex = par("cex"), 
-     cex.lab = par("cex.lab"), cex.main = par("cex.main"), 
-     cex.sub = par("cex.sub"), cex.axis = par("cex.axis"), \dots)
+     z = seq(-3.8, 3.8, length = 100), annot, labels = NULL, 
+     legend = FALSE, cx = "top", cy = NULL, ncol = 1, bty = "n", 
+     col = palette(), lty = 1, pch, xlab, ylab, main, sub = NULL, 
+     cex = par("cex"), cex.lab = par("cex.lab"), 
+     cex.main = par("cex.main"), cex.sub = par("cex.sub"), 
+     cex.axis = par("cex.axis"), \dots)
 
 \method{plot}{ltm}(x, type = c("ICC", "IIC", "loadings"), items = NULL, 
-     zrange = c(-3.8, 3.8), annot, labels = NULL, legend = FALSE, 
-     cx = "topleft", cy = NULL, ncol = 1, bty = "n", 
-     col = palette(), lty = 1, pch, xlab, ylab, zlab, main, 
-     sub = NULL, cex = par("cex"), cex.lab = par("cex.lab"), 
+     z = seq(-3.8, 3.8, length = 100), annot, labels = NULL, 
+     legend = FALSE, cx = "topleft", cy = NULL, ncol = 1, 
+     bty = "n", col = palette(), lty = 1, pch, xlab, ylab, zlab, 
+     main, sub = NULL, cex = par("cex"), cex.lab = par("cex.lab"), 
      cex.main = par("cex.main"), cex.sub = par("cex.sub"), 
      cex.axis = par("cex.axis"), \dots)
 
 \method{plot}{rasch}(x, type = c("ICC", "IIC"), items = NULL, 
-     zrange = c(-3.8, 3.8), annot, labels = NULL, legend = FALSE, 
-     cx = "topleft", cy = NULL, ncol = 1, bty = "n", 
-     col = palette(), lty = 1, pch, xlab, ylab, main, 
+     z = seq(-3.8, 3.8, length = 100), annot, labels = NULL, 
+     legend = FALSE, cx = "topleft", cy = NULL, ncol = 1, 
+     bty = "n", col = palette(), lty = 1, pch, xlab, ylab, main, 
      sub = NULL, cex = par("cex"), cex.lab = par("cex.lab"), 
      cex.main = par("cex.main"), cex.sub = par("cex.sub"), 
      cex.axis = par("cex.axis"), \dots)
 
+\method{plot}{tpm}(x, type = c("ICC", "IIC"), items = NULL, 
+     z = seq(-3.8, 3.8, length = 100), annot, labels = NULL, 
+     legend = FALSE, cx = "topleft", cy = NULL, ncol = 1, bty = "n", 
+     col = palette(), lty = 1, pch, xlab, ylab, main, 
+     sub = NULL, cex = par("cex"), cex.lab = par("cex.lab"), 
+     cex.main = par("cex.main"), cex.sub = par("cex.sub"), 
+     cex.axis = par("cex.axis"), \dots)
 }
 \arguments{
-  \item{x}{ an object inheriting from either class \code{grm}, class \code{ltm} or class \code{rasch}. }
+  \item{x}{ an object inheriting from either class \code{grm}, class \code{ltm}, class \code{rasch} or class \code{tpm}. }
   \item{type}{ the type of plot; "ICC" refers to Item Response Category Characteristic Curves whereas "IIC" to 
                 Item Information Curves. For \code{ltm} objects the option "loadings" is also available that produces
                 the scatter plot of the standardized loadings. }
@@ -40,7 +52,7 @@
                 \code{type = "IIC"} the Test Information Curve is plotted. }
   \item{category}{ a scalar indicating the response category for which the curves should be plotted; if \code{NULL}
                 all categories are considered. This argument is only relevant for \code{grm} objects. }
-  \item{zrange}{ the range for the latent variable(s) values. }
+  \item{z}{ a numeric vector denoting the values for the latent variable(s) values to be used in the plots. }
   \item{annot}{logical; if \code{TRUE} the plotted lines are annotated. }
   \item{labels}{character vector; the labels to use in either the annotation or legend. If \code{NULL} 
                     adequate labels are produced.}
@@ -74,13 +86,6 @@ Reise, S. and Waller, N. (2002) Item response theory for dichotomous assessment 
 editors, \emph{Measuring and Analyzing Behavior in Organizations}. San Francisco: Jossey-Bass.
 }
 
-\section{Warning}{
-    Since the \code{\dots} argument is passed to both \code{plot()} and \code{legend()} an error will occur
-    if you pass an argument that is not shared by the two functions. In such cases you could specify the 
-    required option(s) using \code{\link{par}} or the desired plot could be produced using the return value
-    of the \code{plot()} method. 
-}
-
 \author{
     Dimitris Rizopoulos \email{dimitris.rizopoulos@med.kuleuven.be}
 }
@@ -89,7 +94,8 @@ editors, \emph{Measuring and Analyzing Behavior in Organizations}. San Francisco
     \code{\link{information}},
     \code{\link{grm}},
     \code{\link{ltm}},
-    \code{\link{rasch}}
+    \code{\link{rasch}},
+    \code{\link{tpm}}
 }
 
 \examples{
@@ -173,5 +179,33 @@ text(x = 2, y = 0.5, labels = paste("Total Information in (-2, 0):",
     "\n\nInformation in (-2, 0) based on\n Items 2 and 4:", round(info.35, 3), 
     paste("(", round(100 * info.35 / info.Tot, 2), "\%)", sep = "")), 
     cex = 1.2)
+
+###################################################
+
+
+# Examples for plot.tpm()
+
+## Compare the Item Characteristic Curves for the Lsat data,
+## under the constraint Rasch model, the unconstraint Rasch model,
+## and the three parameter model assuming equal discrimination
+## across items
+par(mfrow = c(2, 2))
+pl1 <- plot(rasch(Lsat, constr = cbind(length(Lsat) + 1, 1)))
+text(2, 0.35, "Rasch model\nDiscrimination = 1")
+pl2 <- plot(rasch(Lsat))
+text(2, 0.35, "Rasch model")
+pl3 <- plot(tpm(Lsat, type = "rasch", max.guessing = 1))
+text(2, 0.35, "Rasch model\nwith Guessing parameter")
+
+## Compare the Item Characteristic Curves for Item 4
+## (you have to run the above first)
+plot(range(pl1[, "z"]), c(0, 1), type = "n", xlab = "Ability", 
+     ylab = "Probability", main = "Item Characteristic Curves - Item 4")
+lines(pl1[, "z"], pl1[, "Item 4"], lwd = 2)
+lines(pl2[, "z"], pl2[, "Item 4"], lwd = 2, col = "red")
+lines(pl3[, "z"], pl3[, "Item 4"], lwd = 2, col = "blue")
+legend("right", c("Rasch model Discrimination = 1", "Rasch model", 
+       "Rasch model with\nGuessing parameter"), lwd = 2, col = c("black", 
+       "red", "blue"), bty = "n")
 }
 \keyword{methods}

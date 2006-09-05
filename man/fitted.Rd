@@ -2,6 +2,7 @@
 \alias{fitted.grm}
 \alias{fitted.ltm}
 \alias{fitted.rasch}
+\alias{fitted.tpm}
 
 \title{ Fitted Values }
 
@@ -17,10 +18,11 @@
 
 \method{fitted}{rasch}(object, resp.patterns = NULL, \dots)
 
+\method{fitted}{tpm}(object, resp.patterns = NULL, \dots)
 }
 
 \arguments{
-  \item{object}{ an object inheriting from either class \code{grm}, class \code{ltm} or class \code{rasch}. }
+  \item{object}{ an object inheriting from either class \code{grm}, class \code{ltm}, class \code{rasch}, or class \code{tpm}. }
   \item{resp.patterns}{a matrix or a data.frame of response patterns with columns denoting the items; if \code{NULL} 
         the expected frequencies are computed for the observed response patterns. }
   \item{\dots}{ additional arguments; currently none is used. }
@@ -37,7 +39,8 @@ a numeric matrix including the response patterns of interest with their expected
 \seealso{
     \code{\link{grm}},
     \code{\link{ltm}},
-    \code{\link{rasch}}
+    \code{\link{rasch}},
+    \code{\link{tpm}}
 }
 
 \examples{

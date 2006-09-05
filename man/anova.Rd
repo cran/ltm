@@ -2,20 +2,26 @@
 \alias{anova.grm}
 \alias{anova.ltm}
 \alias{anova.rasch}
+\alias{anova.tpm}
+
 \title{ Anova method for fitted IRT models}
+
 \description{
   Performs a Likelihood Ratio Test between two nested IRT models or performs a parametric 
   Bootstrap test for Rasch models. 
 }
+
 \usage{
 \method{anova}{grm}(object, object2, \dots)
 
 \method{anova}{ltm}(object, object2, \dots)
 
 \method{anova}{rasch}(object, object2 = NULL, B = 49, \dots)
+
+\method{anova}{tpm}(object, object2, \dots)
 }
 \arguments{
-  \item{object}{ an object inheriting from either class \code{grm}, class \code{ltm} or class \code{rasch},
+  \item{object}{ an object inheriting from either class \code{grm}, class \code{ltm}, class \code{rasch} or class \code{tpm},
                 representing the model under the null hypothesis.}
   \item{object2}{ an object inheriting from either class \code{grm}, class \code{ltm} or class \code{rasch},
                 representing the model under the alternative hypothesis.}  
@@ -66,6 +72,10 @@ An object of either class \code{aov.grm}, class \code{aov.ltm} or class \code{ao
 \section{Warning}{
     The code does not check if the models are nested! The user is responsible to supply nested models in
     order the LRT to be valid.
+    
+    In \code{anova.ltm} and \code{anova.rasch} and when \code{object2} represents a three parameter model, note that the
+    null hypothesis in on the boundary of the parameter space for the guessing parameters. Thus, the Chi-squared reference 
+    distribution used by these function might not be totally appropriate.
 }
 
 \author{
@@ -75,7 +85,8 @@ An object of either class \code{aov.grm}, class \code{aov.ltm} or class \code{ao
 \seealso{
     \code{\link{grm}},
     \code{\link{ltm}},
-    \code{\link{rasch}}
+    \code{\link{rasch}},
+    \code{\link{tpm}}
 }
 
 \examples{

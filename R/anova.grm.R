@@ -17,7 +17,7 @@ function (object, object2, ...) {
     nb1 <- attr(L1, "df")
     df. <- nb1 - nb0
     if (df. < 0)
-        stop(deparse(substitute(object)), " is not nested in ", deparse(substitute(object2)))
+        stop("'object' is not nested in 'object2'.\n")
     LRT <- - 2 * (L0 - L1)
     attributes(LRT) <- NULL
     if (LRT < 0)

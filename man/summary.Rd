@@ -2,10 +2,14 @@
 \alias{summary.grm}
 \alias{summary.ltm}
 \alias{summary.rasch}
+\alias{summary.tpm}
+
 \title{ Summary method for fitted IRT models }
+
 \description{
-  Summarizes the fit of either \code{grm}, \code{ltm} or \code{rasch} objects.
+  Summarizes the fit of either \code{grm}, \code{ltm}, \code{rasch} or \code{tpm} objects.
 }
+
 \usage{
 \method{summary}{grm}(object, \dots)
 
@@ -13,8 +17,9 @@
 
 \method{summary}{rasch}(object, robust.se = FALSE, \dots)
 }
+
 \arguments{
-  \item{object}{ an object inheriting from either class \code{grm}, class \code{ltm} or class \code{rasch}. }
+  \item{object}{ an object inheriting from either class \code{grm}, class \code{ltm}, class \code{rasch} or class \code{tpm}. }
   \item{robust.se}{logical; if \code{TRUE} robust estimation of standard errors is used, based on the sandwich estimator.}
   \item{\dots}{ additional argument; currently none is used. }
 }
@@ -52,7 +57,8 @@
 \seealso{
     \code{\link{grm}},
     \code{\link{ltm}},
-    \code{\link{rasch}}
+    \code{\link{rasch}},
+    \code{\link{tpm}}
 }
 
 \examples{

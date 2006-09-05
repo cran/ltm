@@ -3,11 +3,12 @@
 \alias{factor.scores.grm}
 \alias{factor.scores.ltm}
 \alias{factor.scores.rasch}
+\alias{factor.scores.tpm}
 
 \title{ Factor Scores }
 
 \description{
-  Computation of factor scores for \code{grm}, \code{ltm} and \code{rasch} models.
+  Computation of factor scores for \code{grm}, \code{ltm}, \code{rasch} and \code{tpm} models.
 }
 
 \usage{
@@ -21,6 +22,9 @@ factor.scores(object, \dots)
 
 \method{factor.scores}{rasch}(object, resp.patterns = NULL, method = c("EB", "MI"), 
                     B = 5, robust.se = FALSE, \dots)
+
+\method{factor.scores}{tpm}(object, resp.patterns = NULL, method = c("EB", "MI"), 
+                    B = 5, \dots)
 }
 
 \arguments{
@@ -98,7 +102,8 @@ with nonlinear terms. \emph{submitted for publication}.
 \seealso{
     \code{\link{grm}},
     \code{\link{ltm}},
-    \code{\link{rasch}}
+    \code{\link{rasch}},
+    \code{\link{tpm}}
 }
 
 \examples{

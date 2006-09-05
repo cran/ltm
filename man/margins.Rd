@@ -3,13 +3,14 @@
 \alias{margins.grm}
 \alias{margins.ltm}
 \alias{margins.rasch}
+\alias{margins.tpm}
 
 \title{
     Fit of the model on the margins
 }
 
 \description{
-  Checks the fit on the two- and three-way margins for \code{grm}, \code{ltm} and \code{rasch} objects.
+  Checks the fit on the two- and three-way margins for \code{grm}, \code{ltm}, \code{rasch} and \code{tpm} objects.
 }
 
 \usage{
@@ -24,6 +25,8 @@ margins(object, \dots)
 \method{margins}{rasch}(object, type = c("two-way", "three-way"), rule = 3.5, 
         nprint = 3, \dots)
 
+\method{margins}{tpm}(object, type = c("two-way", "three-way"), rule = 3.5, 
+        nprint = 3, \dots)
 }
 
 \arguments{
@@ -46,11 +49,11 @@ margins(object, \dots)
 }
 
 \note{
-    \code{margins.rasch()} is in fact a copy of \code{margins.ltm()}.
+    \code{margins.rasch()} \code{margins.tpm()} and are in fact a copy of \code{margins.ltm()}.
 }
 
 \value{
-An object of either class \code{margins.ltm} if \code{object} inherits from class \code{ltm} or class \code{rasch}, 
+An object of either class \code{margins.ltm} if \code{object} inherits from class \code{ltm}, class \code{rasch} or class \code{tpm}, 
             or an object of class \code{margins.grm} if \code{object} inherits from class \code{grm}, with components,
     \item{margins}{for \code{margins.ltm} is an array containing the values of chi-squared residuals; 
                     for \code{margins.grm} is a list of length either the number of all possible pairs or all possible 
@@ -86,7 +89,8 @@ Social Scientists}. London: Chapman and Hall.
 \seealso{
     \code{\link{grm}},
     \code{\link{ltm}},
-    \code{\link{rasch}}
+    \code{\link{rasch}},
+    \code{\link{tpm}}
 }
 
 \examples{

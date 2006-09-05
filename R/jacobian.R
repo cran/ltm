@@ -7,8 +7,10 @@ function (thetas, constrained, ind1, ind2, p) {
         etheta <- exp(theta)
         mat <- matrix(0, nth, nth)
         mat[, 1] <- rep(1, nth)
-        for (i in 2:nth)
-            mat[i:nth, i] <- etheta[i]
+        if (nth > 1) {
+            for (i in 2:nth)
+                mat[i:nth, i] <- etheta[i]
+        }
         lis.mat[[j]] <- mat
     }
     lis.mat

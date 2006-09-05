@@ -4,21 +4,29 @@ function (data, n.print = 10, B = 1000) {
         stop("'data' must be either a data.frame or a matrix")
     nam <- deparse(substitute(data))
     perc <- if (is.matrix(data)) {
-                apply(data, 2, function (x) as.vector(table(x)) / sum(!is.na(x)))
-            } else {
-                out <- lapply(data, function (x) { tab <- table(x); nams <- names(tab)
-                                out <-  tab / sum(!is.na(x)); names(out) <- nams; out })
-                nams <- lapply(out, names)
-                nams1 <- nams[[1]]
-                if (all(sapply(nams, function (x) isTRUE(all.equal(x, nams1)))))
-                    out <- matrix(unlist(out), length(nams[[1]]), dimnames = list(nams1, names(out)))
-                out
-            }
+        apply(data, 2, function (x) as.vector(table(x)) / sum(!is.na(x)))
+    } else {
+        out <- lapply(data, function (x) {
+            tab <- table(x)
+            nams <- names(tab)
+            out <-  tab / sum(!is.na(x))
+            names(out) <- nams
+            out
+        })
+        nams <- lapply(out, names)
+        nams1 <- nams[[1]]
+        if (all(sapply(nams, function (x) isTRUE(all.equal(x, nams1)))))
+            out <- matrix(unlist(out), length(nams[[1]]), dimnames = list(nams1, names(out)))
+        out
+    }
     X <- data.matrix(data)
     n <- nrow(X)
     p <- ncol(X)
     missin <- if (any(is.na(X))) {
-        apply(X, 2, function (x) { nas <- sum(is.na(x)); c(Freq = nas, Percs =nas / n) })
+        apply(X, 2, function (x) {
+            nas <- sum(is.na(x))
+            c(Freq = nas, Percs = 100 * nas / n)
+        })
     } else
         NULL
     data <- na.exclude(data)    
@@ -38,12 +46,17 @@ function (data, n.print = 10, B = 1000) {
     names(pw.ass) <- c("Item i", "Item j", "p.value")
     pw.ass <- pw.ass[order(pvals, decreasing = TRUE), ]
     row.names(pw.ass) <- 1:nind
-    levs <- apply(data, 2, function (x) length(unique(x)))
-    levs <- pmax(2, levs)
-    levs <- if (all(levs == 2)) 0:sum(levs - 1) else p:sum(levs) 
-    itms <- rbind(Freq = table( factor(rowSums(X), levels = levs) ))
+    levs. <- apply(data, 2, function (x) length(unique(x)))
+    levs <- pmax(2, levs.)
+    levs <- if (all(levs == 2)) 0:sum(levs - 1) else p:sum(levs)
+    totSc <- rowSums(X)
+    itms <- rbind(Freq = table( factor(totSc, levels = levs) ))
     out <- list(sample = c(p, n), perc = perc, items = itms, pw.ass = pw.ass, n.print = n.print, name = nam, 
                 missin = missin)
+    if (all(levs. == 2)) {
+        out$bisCorr <- apply(X, 2, biserial.cor, x = totSc, use = "pairwise.complete.obs")
+        out$perc <- rbind(out$perc, "logit" = qlogis(out$perc[2, ]))
+    }
     class(out) <- "descript"
     out
 }

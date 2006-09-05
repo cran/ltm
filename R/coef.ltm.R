@@ -29,7 +29,7 @@ function (object, standardized = FALSE, prob = FALSE, order = FALSE, ...) {
         colnames(cof)[1:2] <- c("Dffclt", "Dscrmn")
     }
     if (prob)
-        cof <- cbind(cof, "P(x=1|z=0)" = plogis(cof[, 1]))
+        cof <- cbind(cof, "P(x=1|z=0)" = plogis(object$coef[, 1]))
     if (order)
         cof <- cof[order(cof[, 1]), ]
     round(cof, 3)

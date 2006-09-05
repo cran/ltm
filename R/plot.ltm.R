@@ -1,5 +1,5 @@
 "plot.ltm" <-
-function (x, type = c("ICC", "IIC", "loadings"), items = NULL, zrange = c(-3.8, 3.8), annot, 
+function (x, type = c("ICC", "IIC", "loadings"), items = NULL, z = seq(-3.8, 3.8, length = 100), annot, 
                       labels = NULL, legend = FALSE, cx = "topleft", cy = NULL, ncol = 1, bty = "n", 
                       col = palette(), lty = 1, pch, xlab, ylab, zlab, main, sub = NULL, cex = par("cex"), 
                       cex.lab = par("cex.lab"), cex.main = par("cex.main"), cex.sub = par("cex.sub"), 
@@ -23,10 +23,8 @@ function (x, type = c("ICC", "IIC", "loadings"), items = NULL, zrange = c(-3.8, 
             items
     } else
         1:p
-    np <- 100
     if (x$ltst$factors == 1){
-        z1 <- seq(zrange[1], zrange[2], length = np)
-        Z <- if (x$ltst$quad.z1) cbind(1, z1, z1 * z1) else cbind(1, z1)
+        Z <- if (x$ltst$quad.z1) cbind(1, z, z * z) else cbind(1, z)
         pr <- if (type == "ICC") {
             plogis(Z %*% t(betas))
         } else {
@@ -54,7 +52,7 @@ function (x, type = c("ICC", "IIC", "loadings"), items = NULL, zrange = c(-3.8, 
             ylab <- if (type == "ICC") "Probability" else "Information"
         }
         r <- if (type == "ICC") c(0, 1) else { if (plot.info) range(rowSums(pr)) else range(pr[, itms]) }
-        plot(zrange, r, type = "n", xlab = xlab, ylab = ylab, main = main, sub = sub, cex = cex, 
+        plot(range(z), r, type = "n", xlab = xlab, ylab = ylab, main = main, sub = sub, cex = cex, 
              cex.lab = cex.lab, cex.main = cex.main, cex.axis = cex.axis, cex.sub = cex.sub, ...)
         if (missing(annot)) {
             annot <- !legend
@@ -82,17 +80,17 @@ function (x, type = c("ICC", "IIC", "loadings"), items = NULL, zrange = c(-3.8, 
         }
         if (plot.items) {
             for (it in seq(along = itms)) {
-                lines(z1, pr[, itms[it]], lty = lty[it], col = col[it], ...)
+                lines(z, pr[, itms[it]], lty = lty[it], col = col[it], ...)
                 if (!missing(pch))
-                    points(z1[pch.ind], pr[pch.ind, itms[it]], pch = pch[it], col = col[it], cex = cex, ...)
+                    points(z[pch.ind], pr[pch.ind, itms[it]], pch = pch[it], col = col[it], cex = cex, ...)
                 if (annot)
-                    text(z1[pos[it]], pr[pos[it], itms[it]], labels = nams[it], adj = c(0, 2), col = col[it], 
+                    text(z[pos[it]], pr[pos[it], itms[it]], labels = nams[it], adj = c(0, 2), col = col[it], 
                          cex = cex, ...)
             }
         }
         if (plot.info)
-            lines(z1, rowSums(pr), lty = lty, col = col, ...)
-        return.value <- if (plot.items) cbind(z = z1, pr[, itms]) else cbind(z = z1, info = rowSums(pr))
+            lines(z, rowSums(pr), lty = lty, col = col, ...)
+        return.value <- if (plot.items) cbind(z = z, pr[, itms]) else cbind(z = z, info = rowSums(pr))
     }
     if (x$ltst$factors == 2) {
         nams <- rownames(x$coef)
@@ -114,8 +112,7 @@ function (x, type = c("ICC", "IIC", "loadings"), items = NULL, zrange = c(-3.8, 
             abline(h = 0, v = 0, lty = 2)
             text(z1, z2, labels = if (is.null(labels)) nams[itms] else labels, cex = cex, ...)
         } else {
-            z1 <- seq(zrange[1], zrange[2], length = np)
-            z2 <- seq(zrange[1], zrange[2], length = np)
+            z1 <- z2 <- z
             f <- function (z, betas, strct) {
                 Z <- cbind(1, z[1], z[2])
                 colnames(Z) <- c("(Intercept)", "z1", "z2")
@@ -144,7 +141,7 @@ function (x, type = c("ICC", "IIC", "loadings"), items = NULL, zrange = c(-3.8, 
             for (it in seq(along = itms)) {
                 item <- itms[it]
                 z[[it]] <- apply(grid., 1, f, betas = betas[item, ], strct = x$ltst)
-                dim(z[[it]]) <- c(np, np)
+                dim(z[[it]]) <- c(length(z1), length(z1))
                 persp(z1, z2, z[[it]], cex = cex, xlab = list(xlab, cex = cex.lab), ylab = list(ylab, cex = cex.lab), 
                         zlab = list(zlab, cex = cex.lab), main = list(main, cex = cex.main), 
                         sub = list(if (is.null(labels)) nams[item] else labels[it], cex = cex.sub), ...)

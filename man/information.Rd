@@ -14,11 +14,11 @@ information(object, range, items = NULL, ...)
 }
 
 \arguments{
-  \item{object}{an object inheriting from either class \code{grm}, class \code{ltm} or class \code{rasch}.}
+  \item{object}{an object inheriting from either class \code{grm}, class \code{ltm}, class \code{rasch} or class \code{tpm}.}
   \item{range}{a numeric interval for which the test information should be computed.}
   \item{items}{the items for which the information should be computed; the default \code{NULL} corresponds
                 to all the items, which is equivalent to the test information.}
-  \item{\dots}{extra arguments passed to \code{\link{integrate}}.}
+  \item{\dots}{extra arguments passed to \code{integrate()}.}
 }
 
 \details{

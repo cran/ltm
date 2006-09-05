@@ -58,6 +58,8 @@ grm(data, constrained = FALSE, IRT.param = TRUE, Hessian = FALSE,
     When the coefficients' estimates are reported under the usual IRT parameterization (i.e., \code{IRT.param = TRUE}),
     their standard errors are calculated using the Delta method.
     
+    \code{grm()} can also handle binary items, which should be coded as `1, 2' instead of `0, 1'.
+    
     Some parts of the code used for the calculation of the log-likelihood and the score vector have been based 
     on \code{polr()} from package MASS.
 }

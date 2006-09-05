@@ -11,7 +11,7 @@ function (object, prob = FALSE, order = FALSE, ...) {
             object$coef
         }
     if (prob)
-        cof <- cbind(cof, "P(x=1|z=0)" = plogis(cof[, 1]))
+        cof <- cbind(cof, "P(x=1|z=0)" = plogis(object$coef[, 1]))
     if (order)
         cof <- cof[order(cof[, 1]), ]
     round(cof, 3)

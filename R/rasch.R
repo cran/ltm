@@ -14,7 +14,7 @@ function (data, constraint = NULL, IRT.param = TRUE, start.val = NULL, na.action
     dimnames(X) <- NULL
     n <- nrow(X)
     p <- ncol(X)
-    con <- list(iter.qN = 150, GHk = 21, method = "BFGS", verbose = FALSE)
+    con <- list(iter.qN = 150, GHk = 21, method = "BFGS", verbose = getOption("verbose"))
     con[names(control)] <- control
     betas <- start.val.rasch(start.val, oX)
     if (!is.null(constraint)) {
@@ -72,14 +72,17 @@ function (data, constraint = NULL, IRT.param = TRUE, start.val = NULL, na.action
     environment(logLik.rasch) <- environment(score.rasch) <- environment()
     res.qN <- optim(betas[!is.na(betas)], fn = logLik.rasch, gr = score.rasch, method = con$method, hessian = TRUE, 
                 control = list(maxit = con$iter.qN, trace = as.numeric(con$verbose)), constraint = constraint)
-    ev <- eigen(res.qN$hes, TRUE, TRUE)$values
-    if (!all(ev >= -1e-06 * abs(ev[1]))) 
-        warning("Hessian matrix at convergence is not positive definite, unstable solution; re-fit the model.\n")
+    if (all(!is.na(res.qN$hessian) & is.finite(res.qN$hessian))) {
+        ev <- eigen(res.qN$hessian, TRUE, TRUE)$values
+        if (!all(ev >= -1e-06 * abs(ev[1]))) 
+            warning("Hessian matrix at convergence is not positive definite; unstable solution.\n")
+    } else 
+        warning("Hessian matrix at convergence contains infinite or missing values; unstable solution.\n")
     betas <- betas.rasch(res.qN$par, constraint, p)
     rownames(betas) <- if (!is.null(colnamsX)) colnamsX else paste("Item", 1:p)
     colnames(betas) <- c("beta.i", "beta")
     max.sc <- max(abs(score.rasch(res.qN$par, constraint)))
-    fit <- list(coefficients = betas, log.Lik = -res.qN$val, convergence = res.qN$conv, hessian = res.qN$hes, 
+    fit <- list(coefficients = betas, log.Lik = -res.qN$value, convergence = res.qN$conv, hessian = res.qN$hessian, 
                 counts = res.qN$counts, patterns = list(X = X, obs = obs), GH = list(Z = Z, GHw = GHw), max.sc = max.sc, 
                 constraint = constraint, IRT.param = IRT.param, X = oX, control = con, na.action = na.action, call = cl)
     class(fit) <- "rasch"

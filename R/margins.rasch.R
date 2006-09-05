@@ -1,13 +1,18 @@
 "margins.rasch" <-
 function (object, type = c("two-way", "three-way"), rule = 3.5, nprint = 3, ...) {
-    if (!inherits(object, "ltm") && !inherits(object, "rasch"))
-        stop("Use only with 'ltm' or 'rasch' objects.\n")
+    if (!class(object) %in% c("ltm", "rasch", "tpm"))
+        stop("Use only with 'ltm', 'rasch' or 'tpm' objects.\n")
     type <- match.arg(type)
     n <- nrow(object$X)
-    betas <- object$coef
-    p <- nrow(betas)
-    q. <- ncol(betas)
-    pr <- plogis(object$GH$Z %*% t(betas))
+    p <- ncol(object$X)
+    pr <- if (inherits(object, "tpm")) {
+        Z <- object$GH$Z
+        cs <- plogis(object$coef[, 1]) * object$max.guessing
+        cs <- matrix(cs, nrow(Z), p, TRUE)
+        pr <- cs + (1 - cs) * probs(Z %*% t(object$coef[, 2:3]))    
+    } else {
+        plogis(object$GH$Z %*% t(object$coef))
+    }
     GHw <- object$GH$GHw
     X <- object$patterns$X
     Obs <- object$patterns$obs

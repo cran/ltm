@@ -2,9 +2,10 @@
 \alias{coef.grm}
 \alias{coef.ltm}
 \alias{coef.rasch}
+\alias{coef.tpm}
 \title{ Extract Estimated Loadings }
 \description{
-  Extracts the estimated parameters from either \code{grm}, \code{ltm} or \code{rasch} objects.
+  Extracts the estimated parameters from either \code{grm}, \code{ltm}, \code{rasch} or \code{tpm} objects.
 }
 \usage{
 
@@ -13,10 +14,12 @@
 \method{coef}{ltm}(object, standardized = FALSE, prob = FALSE, order = FALSE, \dots)
 
 \method{coef}{rasch}(object, prob = FALSE, order = FALSE, \dots)
+
+\method{coef}{tpm}(object, prob = FALSE, order = FALSE, \dots)
 }
 
 \arguments{
-  \item{object}{ an object inheriting from either class \code{grm}, class \code{ltm} or class \code{rasch}. }
+  \item{object}{ an object inheriting from either class \code{grm}, class \code{ltm}, class \code{rasch} or class \code{tpm}. }
   \item{standardized}{ logical; if \code{TRUE} the standardized loadings are also returned. See  \bold{Details} 
         for more info.}
   \item{prob}{ logical; if \code{TRUE} the probability of a positive response for the median individual
@@ -54,7 +57,8 @@ Social Scientists}. London: Chapman and Hall.
 \seealso{
     \code{\link{grm}},
     \code{\link{ltm}},
-    \code{\link{rasch}}
+    \code{\link{rasch}},
+    \code{\link{tpm}}
 }
 
 \examples{

@@ -1,7 +1,7 @@
 "information" <-
 function (object, range, items = NULL, ...) {
-    if (!class(object) %in% c("grm", "ltm", "rasch"))
-        stop("'object' must inherit from either class 'grm', class 'ltm' or class 'rasch'.\n")
+    if (!class(object) %in% c("grm", "ltm", "rasch", "tpm"))
+        stop("'object' must inherit from either class 'grm', class 'ltm', class 'rasch' or class 'tpm'.\n")
     p <- ncol(object$X)
     items <- if (!is.null(items)) {
         if (!is.numeric(items) && length(items) > p)
@@ -14,17 +14,27 @@ function (object, range, items = NULL, ...) {
     f <- function (z) {
         switch(class(object),
             "grm" = rowSums(infoprobs(object$coefficients, z)[, items, drop = FALSE]),
-            "ltm" = { betas <- object$coefficients; Z <- cbind(1, z);
-                mat <- t(t(plogis(Z %*% t(betas)) * (1 - plogis(Z %*% t(betas)))) * betas[, 2]^2);
+            "ltm" = { betas <- object$coefficients; Z <- cbind(1, z)
+                mat <- t(t(plogis(Z %*% t(betas)) * (1 - plogis(Z %*% t(betas)))) * betas[, 2]^2)
                 rowSums(mat[, items, drop = FALSE])
                 },
-            "rasch" = { betas <- object$coefficients; Z <- cbind(1, z);
-                mat <- betas[1, 2]^2 * plogis(Z %*% t(betas)) * (1 - plogis(Z %*% t(betas)));
+            "rasch" = { betas <- object$coefficients; Z <- cbind(1, z)
+                mat <- betas[1, 2]^2 * plogis(Z %*% t(betas)) * (1 - plogis(Z %*% t(betas)))
+                rowSums(mat[, items, drop = FALSE])
+                },
+            "tpm" = { thetas <- object$coefficients; Z <- cbind(1, z)
+                betas <- thetas[, 2:3]
+                cs <- plogis(thetas[, 1]) * object$max.guessing
+                pi. <- plogis(Z %*% t(betas))
+                cs <- matrix(cs, nrow(Z), p, TRUE)
+                pi <- cs + (1 - cs) * pi.
+                pqr <- pi * (1 - pi) * (pi. / pi)^2
+                mat <- t(t(pqr) * betas[, 2]^2)
                 rowSums(mat[, items, drop = FALSE])
                 })
     }
     I0 <- integrate(f, -10, 10, ...)$value
     I1 <- integrate(f, lower = range[1], upper = range[2], ...)$value
-    list("Info in range" = I1, "Total Info" = I0, "Proportion in range" = I1/I0)
+    list("Info in range" = I1, "Total Info" = I0, "Proportion in range" = I1 / I0)
 }
 

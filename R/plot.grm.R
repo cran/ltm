@@ -1,6 +1,6 @@
 "plot.grm" <-
-function (x, type = c("ICC", "IIC"), items = NULL, category = NULL, zrange = c(-3.8, 3.8), annot, 
-                      labels = NULL, legend = FALSE, cx = "top", cy = NULL, ncol = 1, bty = "n", col = palette(), 
+function (x, type = c("ICC", "IIC"), items = NULL, category = NULL, z = seq(-3.8, 3.8, length = 100), 
+                      annot, labels = NULL, legend = FALSE, cx = "top", cy = NULL, ncol = 1, bty = "n", col = palette(), 
                       lty = 1, pch, xlab, ylab, main, sub = NULL, cex = par("cex"), cex.lab = par("cex.lab"), 
                       cex.main = par("cex.main"), cex.sub = par("cex.sub"), cex.axis = par("cex.axis"), ...) {
     if (!inherits(x, "grm"))
@@ -35,7 +35,6 @@ function (x, type = c("ICC", "IIC"), items = NULL, category = NULL, zrange = c(-
         category
     } else
         "all"
-    z <- seq(zrange[1], zrange[2], length = 100)
     cpr <- if (type == "ICC") iprobs(betas, z) else infoprobs(betas, z)
     plot.items <- type == "ICC" || (type == "IIC" & (is.null(items) || all(items > 0)))
     plot.info <- !plot.items
@@ -66,7 +65,7 @@ function (x, type = c("ICC", "IIC"), items = NULL, category = NULL, zrange = c(-
                     main. <- if (one.fig) paste("- Item:", names(cpr)[ii]) else paste("\nItem:", names(cpr)[ii])
                     main <- paste(Main, main.)
                 }
-                plot(zrange, c(0, 1), type = "n", xlab = xlab, ylab = ylab, main = main, sub = sub, cex = cex, 
+                plot(range(z), c(0, 1), type = "n", xlab = xlab, ylab = ylab, main = main, sub = sub, cex = cex, 
                      cex.lab = cex.lab, cex.main = cex.main, cex.axis = cex.axis, cex.sub = cex.sub, ...)
                 p <- cpr[[ii]]
                 pos <- round(seq(10, 90, length = ncol(p)))
@@ -104,7 +103,7 @@ function (x, type = c("ICC", "IIC"), items = NULL, category = NULL, zrange = c(-
                 main. <- if (one.fig) paste("- Category:", ctg) else paste("\nCategory:", ctg)
                 main <- paste(Main, main.)
             }
-            plot(zrange, c(0, 1), type = "n", xlab = xlab, ylab = ylab, main = main, sub = sub, cex = cex, 
+            plot(range(z), c(0, 1), type = "n", xlab = xlab, ylab = ylab, main = main, sub = sub, cex = cex, 
                  cex.lab = cex.lab, cex.main = cex.main, cex.axis = cex.axis, cex.sub = cex.sub, ...)
             pos <- round(seq(10, 90, length = ncol(p)))
             col <- rep(col, length.out = length(itms))
@@ -137,8 +136,8 @@ function (x, type = c("ICC", "IIC"), items = NULL, category = NULL, zrange = c(-
         if (mis.ind) {
             main <- Main
         }
-        plot(zrange, r, type = "n", xlab = xlab, ylab = ylab, main = main, sub = sub, cex = cex, 
-                cex.lab = cex.lab, cex.main = cex.main, cex.axis = cex.axis, cex.sub = cex.sub, ...)
+        plot(range(z), r, type = "n", xlab = xlab, ylab = ylab, main = main, sub = sub, cex = cex, 
+             cex.lab = cex.lab, cex.main = cex.main, cex.axis = cex.axis, cex.sub = cex.sub, ...)
         if (plot.items) {
             col <- rep(col, length.out = length(itms))
             lty <- rep(lty, length.out = length(itms))

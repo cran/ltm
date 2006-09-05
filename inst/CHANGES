@@ -1,3 +1,23 @@
+Changes in version: ltm_0.6-0
+
+  o "tpm()" function is introduced for fitting Birnbaum's Three Parameter model.
+
+  o "grm()" modified to handle dichotmous items as well.
+
+  o "rmvlogis()" function can be used to simulate binary variates under dichotomous IRT models.
+
+  o "descript()" returns more output.
+
+  o the "plot()" method for classes 'grm', 'ltm', 'rasch', and 'tpm' contains the new argument 'z' that
+    specifies the latent variable values used in the plots.
+
+  o a bug was fixed in "coef.rasch()" and "coef.ltm()".
+
+  o a demo for "ltm()" has been added.
+
+
+==============================
+
 Changes in version: ltm_0.5-1
 
   o the Gauss-Hermite rule has been upgraded; functions "grm()", "ltm()" and "rasch()" may produce slightly different 

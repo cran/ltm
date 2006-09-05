@@ -88,8 +88,8 @@ rasch(data, constraint = NULL, IRT.param = TRUE, start.val = NULL,
 }
 
 \section{Warning}{ 
-    In case the Hessian matrix at convergence is not positive definite, try to re-fit the model; 
-    \code{rasch()} will use new random starting values.
+    In case the Hessian matrix at convergence is not positive definite, try to re-fit the model using 
+    \code{rasch(..., start.val = "random")}.
 }
 
 \references{
@@ -100,9 +100,11 @@ Rasch, G. (1960) \emph{Probabilistic Models for Some
 Intelligence and  Attainment Tests}. Copenhagen: Paedagogiske 
 Institute.
 }
+
 \author{
     Dimitris Rizopoulos \email{dimitris.rizopoulos@med.kuleuven.be}
 }
+
 \seealso{
   \code{\link{coef.rasch}},
   \code{\link{fitted.rasch}},

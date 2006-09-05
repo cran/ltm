@@ -1,12 +1,14 @@
-"plot.rasch" <-
-function (x, type = c("ICC", "IIC"), items = NULL, z = seq(-3.8, 3.8, length = 100), annot, 
-                        labels = NULL, legend = FALSE, cx = "topleft", cy = NULL, ncol = 1, bty = "n", col = palette(), 
-                        lty = 1, pch, xlab, ylab, main, sub = NULL, cex = par("cex"), cex.lab = par("cex.lab"), 
-                        cex.main = par("cex.main"), cex.sub = par("cex.sub"), cex.axis = par("cex.axis"), ...) {
-    if (!inherits(x, "rasch"))
-        stop("Use only with 'rasch' objects.\n")
+"plot.tpm" <-
+function (x, type = c("ICC", "IIC"), items = NULL, z = seq(-3.8, 3.8, length = 100), annot, labels = NULL, 
+                      legend = FALSE, cx = "topleft", cy = NULL, ncol = 1, bty = "n", col = palette(), lty = 1, 
+                      pch, xlab, ylab, main, sub = NULL, cex = par("cex"), cex.lab = par("cex.lab"), 
+                      cex.main = par("cex.main"), cex.sub = par("cex.sub"), cex.axis = par("cex.axis"), ...) {
+    if (!inherits(x, "tpm"))
+        stop("Use only with 'tpm' objects.\n")
     type <- match.arg(type)
-    betas <- x$coefficients
+    thetas <- x$coefficients
+    cs <- plogis(thetas[, 1]) * x$max.guessing
+    betas <- thetas[, 2:3]
     p <- nrow(betas)
     itms <- if (!is.null(items)) {
         if (!is.numeric(items) || length(items) > p)
@@ -20,10 +22,14 @@ function (x, type = c("ICC", "IIC"), items = NULL, z = seq(-3.8, 3.8, length = 1
         1:p
     Z <- cbind(1, z)
     pr <- if (type == "ICC") {
-        plogis(Z %*% t(betas))
+        cs <- matrix(cs, length(z), p, TRUE)
+        cs + (1 - cs) * probs(Z %*% t(betas))
     } else {
-        pi <- plogis(Z %*% t(betas))
-        betas[1, 2]^2 * pi * (1 - pi)
+        pi. <- plogis(Z %*% t(betas))
+        cs <- matrix(cs, 100, p, TRUE)
+        pi <- cs + (1 - cs) * pi.
+        pqr <- pi * (1 - pi) * (pi. / pi)^2
+        t(t(pqr) * betas[, 2]^2)
     }
     plot.items <- type == "ICC" || (type == "IIC" & (is.null(items) || all(items > 0)))
     plot.info <- !plot.items
