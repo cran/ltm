@@ -1,5 +1,5 @@
-\name{Wirs}
-\alias{Wirs}
+\name{WIRS}
+\alias{WIRS}
 \docType{data}
 \title{Workplace Industrial Relation Survey Data}
 \description{
@@ -34,7 +34,7 @@
 \examples{
 
 ## Descriptive statistics for Wirs data
-descript(Wirs)
+descript(WIRS)
 
 }
 \keyword{datasets}

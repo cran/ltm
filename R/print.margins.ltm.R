@@ -12,12 +12,16 @@ function (x, digits = 2, ...) {
         mat <- mat[order(mat[, ncol(mat)], decreasing = TRUE), ]
         mat <- data.frame(round(mat[seq(1, x$nprint), ], digits))
         mat$rule <- ifelse(mat[, ncol(mat)] > x$rule, "***", "")
-        names(mat) <- if (type == "two-way") c("Item i", "Item j", "Obs", "Exp", "(O-E)^2/E", " ")
-            else c("Item i", "Item j", "Item k", "Obs", "Exp", "(O-E)^2/E", " ")
+        names(mat) <- if (type == "two-way") {
+            c("Item i", "Item j", "Obs", "Exp", "(O-E)^2/E", " ")
+        } else {
+            c("Item i", "Item j", "Item k", "Obs", "Exp", "(O-E)^2/E", " ")
+        }
         print(mat)
         cat("\n")
     }
-    cat("'***' denotes a chi-squared residual greater than", x$rule, "\n")
+    if (any(apply(x$margins, 2, c)[, ncol(x$margins[, , 1])] > x$rule))
+        cat("'***' denotes a chi-squared residual greater than", x$rule, "\n")
     cat("\n")
     invisible(x)
 }

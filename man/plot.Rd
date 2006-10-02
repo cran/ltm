@@ -102,24 +102,24 @@ editors, \emph{Measuring and Analyzing Behavior in Organizations}. San Francisco
 
 # Examples for plot.grm()
 
-m <- grm(Science[c(1,3,4,7)])
+fit <- grm(Science[c(1,3,4,7)])
 
 ## Item Response Category Characteristic Curves for 
 ## the Science data
 op <- par(mfrow = c(2, 2))
-plot(m, lwd = 2, legend = TRUE, ncol = 2)
+plot(fit, lwd = 2, legend = TRUE, ncol = 2)
 # re-set par()
 par(op)
 
 ## Item Characteristic Curves for the 2nd category,
 ## and items 1 and 3
-plot(m, category = 2, items = c(1, 3), lwd = 2, legend = TRUE, cx = "right")
+plot(fit, category = 2, items = c(1, 3), lwd = 2, legend = TRUE, cx = "right")
 
 ## Item Information Curves for the Science data;
-plot(m, type = "IIC", legend = TRUE, cx = "topright", lwd = 2, cex = 1.4)
+plot(fit, type = "IIC", legend = TRUE, cx = "topright", lwd = 2, cex = 1.4)
 
 ## Test Information Function for the Science data;
-plot(m, type = "IIC", items = 0, lwd = 2)
+plot(fit, type = "IIC", items = 0, lwd = 2)
 
 ###################################################
 
@@ -128,21 +128,21 @@ plot(m, type = "IIC", items = 0, lwd = 2)
 
 ## Item Characteristic Curves for the two-parameter logistic
 ## model; plot only items 1, 2, 4 and 6:
-m <- ltm(Wirs ~ z1)
-plot(m, items = c(1, 2, 4, 6), lwd = 3, cex = 1.4)
+fit <- ltm(WIRS ~ z1)
+plot(fit, items = c(1, 2, 4, 6), lwd = 3, cex = 1.4)
 
 ## Test Information Function under the two-parameter logistic
 ## model for the Lsat data
-m <- ltm(Lsat ~ z1)
-plot(m, type = "IIC", items = 0, lwd = 2, cex.lab = 1.2, cex.main = 1.3)
-info <- information(m, c(-3, 0))
-text(x = 2, y = 0.5, labels = paste("Total Information:", round(info$Total, 3), 
-    "\n\nInformation in (-3, 0):", round(info$Info, 3), 
-    paste("(", round(100 * info$Proportion, 2), "\%)", sep = "")), cex = 1.2)
+fit <- ltm(LSAT ~ z1)
+plot(fit, type = "IIC", items = 0, lwd = 2, cex.lab = 1.2, cex.main = 1.3)
+info <- information(fit, c(-3, 0))
+text(x = 2, y = 0.5, labels = paste("Total Information:", round(info$InfoTotal, 3), 
+    "\n\nInformation in (-3, 0):", round(info$InfoRange, 3), 
+    paste("(", round(100 * info$PropRange, 2), "\%)", sep = "")), cex = 1.2)
 
 ## Item Characteristic Surfaces for the interaction model:
-m <- ltm(Wirs ~ z1 * z2)
-plot(m, ticktype = "detailed", theta = 30, phi = 30, expand = 0.5, d = 2, 
+fit <- ltm(WIRS ~ z1 * z2)
+plot(fit, ticktype = "detailed", theta = 30, phi = 30, expand = 0.5, d = 2, 
      cex = 0.7)
 
 ###################################################
@@ -150,34 +150,34 @@ plot(m, ticktype = "detailed", theta = 30, phi = 30, expand = 0.5, d = 2,
 
 # Examples for plot.rasch()
 
-## Item Characteristic Curves for the Wirs data;
+## Item Characteristic Curves for the WIRS data;
 ## plot only items 1, 3 and 5:
-m <- rasch(Wirs)
-plot(m, items = c(1, 3, 5), lwd = 3, cex = 1.4)
+fit <- rasch(WIRS)
+plot(fit, items = c(1, 3, 5), lwd = 3, cex = 1.4)
 
-m <- rasch(Lsat)
+fit <- rasch(LSAT)
 
 ## Item Characteristic Curves for the Lsat data;
 ## plot all items plus a legend and use only black:
-plot(m, legend = TRUE, cx = "right", lwd = 3, cex = 1.4, 
+plot(fit, legend = TRUE, cx = "right", lwd = 3, cex = 1.4, 
      cex.lab = 1.6, cex.main = 2, col = 1, lty = c(1, 1, 1, 2, 2),
      pch = c(16, 15, 17, 0, 1))
 
 ## Item Information Curves, for the first 3 items; include a legend
-plot(m, type = "IIC", items = 1:3, legend = TRUE, lwd = 2, cx = "topright")
+plot(fit, type = "IIC", items = 1:3, legend = TRUE, lwd = 2, cx = "topright")
 
 ## Test Information Function
-plot(m, type = "IIC", items = 0, lwd = 2, cex.lab = 1.1, 
-     sub = paste("Call: ", deparse(m$call)))
+plot(fit, type = "IIC", items = 0, lwd = 2, cex.lab = 1.1, 
+     sub = paste("Call: ", deparse(fit$call)))
 
 ## Total information in (-2, 0) based on all the items
-info.Tot <- information(m, c(-2, 0))$Info
+info.Tot <- information(fit, c(-2, 0))$InfoRange
 ## Information in (-2, 0) based on items 2 and 4
-info.35 <- information(m, c(-2, 0), items = c(2, 4))$Info
+info.24 <- information(fit, c(-2, 0), items = c(2, 4))$InfoRange
 text(x = 2, y = 0.5, labels = paste("Total Information in (-2, 0):", 
     round(info.Tot, 3), 
-    "\n\nInformation in (-2, 0) based on\n Items 2 and 4:", round(info.35, 3), 
-    paste("(", round(100 * info.35 / info.Tot, 2), "\%)", sep = "")), 
+    "\n\nInformation in (-2, 0) based on\n Items 2 and 4:", round(info.24, 3), 
+    paste("(", round(100 * info.24 / info.Tot, 2), "\%)", sep = "")), 
     cex = 1.2)
 
 ###################################################
@@ -190,11 +190,11 @@ text(x = 2, y = 0.5, labels = paste("Total Information in (-2, 0):",
 ## and the three parameter model assuming equal discrimination
 ## across items
 par(mfrow = c(2, 2))
-pl1 <- plot(rasch(Lsat, constr = cbind(length(Lsat) + 1, 1)))
+pl1 <- plot(rasch(LSAT, constr = cbind(length(LSAT) + 1, 1)))
 text(2, 0.35, "Rasch model\nDiscrimination = 1")
-pl2 <- plot(rasch(Lsat))
+pl2 <- plot(rasch(LSAT))
 text(2, 0.35, "Rasch model")
-pl3 <- plot(tpm(Lsat, type = "rasch", max.guessing = 1))
+pl3 <- plot(tpm(LSAT, type = "rasch", max.guessing = 1))
 text(2, 0.35, "Rasch model\nwith Guessing parameter")
 
 ## Compare the Item Characteristic Curves for Item 4

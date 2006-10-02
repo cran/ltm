@@ -36,7 +36,7 @@
   based on which the dichotomous outcomes arise (see Bartholomew and Knott, 1999, p.87-88 or Bartholomew 
   \emph{et al.}, 2002, p.191).
   
-  The standardized factor loadings are computed only for the linear one- and two-factor models.
+  The standardized factor loadings are computed only for the linear one- and two-factor models, fitted by \code{ltm()}.
 }
 
 \value{A list or a matrix of the estimated parameters for the fitted model.}
@@ -63,14 +63,14 @@ Social Scientists}. London: Chapman and Hall.
 
 \examples{
 
-m <- grm(Science[c(1,3,4,7)])
-coef(m)
+fit <- grm(Science[c(1,3,4,7)])
+coef(fit)
 
-m <- ltm(Lsat ~ z1)
-coef(m, TRUE, TRUE)
+fit <- ltm(LSAT ~ z1)
+coef(fit, TRUE, TRUE)
 
-m <- rasch(Lsat)
-coef(m, TRUE, TRUE)
+m <- rasch(LSAT)
+coef(fit, TRUE, TRUE)
 
 }
 

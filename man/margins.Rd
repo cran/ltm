@@ -96,21 +96,22 @@ Social Scientists}. London: Chapman and Hall.
 \examples{
 
 ## Two- and Three-way residuals for the Rasch model
-m <- rasch(Lsat)
-margins(m)
-margins(m, "three")
+fit <- rasch(LSAT)
+margins(fit)
+margins(fit, "three")
 
 
 ## Two- and Three-way residuals for the one-factor model
-m <- ltm(Wirs ~ z1)
-margins(m)
-margins(m, "three")
+fit <- ltm(WIRS ~ z1)
+margins(fit)
+margins(fit, "three")
 
 
 ## Two- and Three-way residuals for the graded response model
-m <- grm(Science[c(1,3,4,7)])
-margins(m)
-margins(m, "three")
+fit <- grm(Science[c(1,3,4,7)])
+margins(fit)
+margins(fit, "three")
 
 }
+
 \keyword{ multivariate }

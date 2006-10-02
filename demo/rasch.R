@@ -1,10 +1,10 @@
 
-## Here is a sample analysis of the Lsat data using the Rasch model
+## Here is a sample analysis of the LSAT data using the Rasch model
 
 
-## First some descriptives for Lsat
+## First some descriptives for LSAT
 
-descript(Lsat)
+descript(LSAT)
 
 
 ## First we fit the original form of the Rasch model assuming
@@ -12,16 +12,16 @@ descript(Lsat)
 ## under the usual IRT parameterization; in order to fix the
 ## discrimination parameter the 'constraint' argument is used
 
-m1 <- rasch(Lsat, constr = cbind(length(Lsat) + 1, 1))
+m1 <- rasch(LSAT, constr = cbind(length(LSAT) + 1, 1))
 
 summary(m1)
 
 
-## In order to check the fit of the model the anova() function 
+## In order to check the fit of the model the GoF.rasch() function 
 ## is used; This computes a Bootstrap p-value for the Pearson's 
 ## Chi-squared statistic
 
-anova(m1, B = 199) # B specifies the number of Bootstrap samples
+GoF.rasch(m1, B = 199) # B specifies the number of Bootstrap samples
 
 
 ## Alternatively, we could also check the fit on the margins
@@ -52,14 +52,14 @@ plot(m1, type = "IIC", items = 0, lwd = 2.3)
 
 ## We repeat the analysis without constaining discrimination parameter
 
-m2 <- rasch(Lsat)
+m2 <- rasch(LSAT)
 
 summary(m2)
 
 
 ## The Goodness-of-Fit is checked again
 
-anova(m2, B = 199) # B specifies the number of Bootstrap samples
+GoF.rasch(m2, B = 199) # B specifies the number of Bootstrap samples
 
 
 ## The fit on the margins

@@ -10,6 +10,8 @@ function (x, digits = max(3, getOption("digits") - 4), ...) {
     diag(mat) <- "****"
     cat("\n")
     print(noquote(mat))
+    cat("\nupper diagonal part contains correlation coefficient estimates",
+        "\nlower diagonal part contains corresponding p-values")
     cat("\n\n")
     invisible(x)
 }

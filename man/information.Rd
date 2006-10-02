@@ -27,12 +27,15 @@ information(object, range, items = NULL, ...)
 }
 
 \value{
-A list with components,
-    \item{Info in range}{the amount of information in the specified interval.}
-    \item{Total Info}{the total amount of information; typically this is computed as the amount of information 
+A list of class \code{information} with components,
+    \item{InfoRange}{the amount of information in the specified interval.}
+    \item{InfoTotal}{the total amount of information; typically this is computed as the amount of information 
             in the interval \eqn{(-10, 10)}.}
-    \item{Proportion in range}{the proportion of information in the specified range, i.e., 
+    \item{PropRange}{the proportion of information in the specified range, i.e., 
         \code{"Info in range" / "Total Info"}.}
+    \item{range}{the value of \code{range} argument.}
+    \item{items}{the value of \code{items} argument.}
+    \item{call}{the matched call for \code{object}.}
 }
 
 \author{
@@ -47,9 +50,9 @@ A list with components,
 
 \examples{
 
-m <- rasch(Lsat)
-information(m, c(-2, 0))
-information(m, c(0, 2), items = c(3, 5))
+fit <- rasch(LSAT)
+information(fit, c(-2, 0))
+information(fit, c(0, 2), items = c(3, 5))
 
 }
 

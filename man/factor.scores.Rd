@@ -5,7 +5,7 @@
 \alias{factor.scores.rasch}
 \alias{factor.scores.tpm}
 
-\title{ Factor Scores }
+\title{ Factor Scores - Ability Estimates }
 
 \description{
   Computation of factor scores for \code{grm}, \code{ltm}, \code{rasch} and \code{tpm} models.
@@ -42,8 +42,8 @@ factor.scores(object, \dots)
 }
 
 \details{
-  Factor scores are summary measures of the posterior distribution \eqn{p(z|x)}, where \eqn{z} denotes the
-  vector of latent variables and \eqn{x} the vector of manifest variables.
+  Factor scores or ability estimates are summary measures of the posterior distribution \eqn{p(z|x)}, 
+  where \eqn{z} denotes the vector of latent variables and \eqn{x} the vector of manifest variables.
   
   Usually as factor scores we assign the modes of the above posterior distribution evaluated at the MLEs. These
   Empirical Bayes estimates (use \code{method = "EB"}) and their associated variance are good measures of the 
@@ -109,17 +109,18 @@ with nonlinear terms. \emph{submitted for publication}.
 \examples{
 
 ## Factor Scores for the Rasch model
-m <- rasch(Lsat)
-factor.scores(m) # Empirical Bayes
+fit <- rasch(LSAT)
+factor.scores(fit) # Empirical Bayes
 
 
 ## Factor Scores for the two-parameter logistic model
-m <- ltm(Abortion ~ z1)
-factor.scores(m, method = "MI", B = 20) # Multiple Imputation
+fit <- ltm(Abortion ~ z1)
+factor.scores(fit, method = "MI", B = 20) # Multiple Imputation
 
 ## Factor Scores for the graded response model
-m <- grm(Science[c(1,3,4,7)])
-factor.scores(m, resp.patterns = rbind(1:4))
+fit <- grm(Science[c(1,3,4,7)])
+factor.scores(fit, resp.patterns = rbind(1:4))
 
 }
+
 \keyword{ multivariate }

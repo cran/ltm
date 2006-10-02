@@ -1,3 +1,22 @@
+Changes in version: ltm_0.6-1
+
+  o starting values for "ltm()" are now by default deterministic; for random starting values you may use 
+    'start.val = "random"'.
+
+  o "anova.rasch()" now only computes likelihood ratio test between nested models. The parametric Bootstrap 
+    goodness-of-fit test in now implemented in function "GoF.rasch()".
+
+  o "information()" returns now a list of class 'information' for which a "print()" method has been added.
+
+  o 'Lsat' and 'Wirs' data.frames have been renamed to 'LSAT' and 'WIRS', respectively.
+
+  o "rmvlogis()" has an extra argument 'link' that specifies the link function.
+
+  o additions and corrections in Rd files.
+
+
+==============================
+
 Changes in version: ltm_0.6-0
 
   o "tpm()" function is introduced for fitting Birnbaum's Three Parameter model.

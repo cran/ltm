@@ -63,8 +63,8 @@ An object of class \code{descript} with components,
 
 \examples{
 
-## Descriptives for Wirs data:
-descript(Wirs, 3)
+## Descriptives for WIRS data:
+descript(WIRS, 3)
 
 }
 

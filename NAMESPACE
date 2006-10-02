@@ -1,9 +1,9 @@
 # Exported functions
 export(anova.grm, anova.ltm, anova.rasch, anova.tpm, coef.grm, coef.ltm, coef.rasch, coef.tpm, descript, factor.scores, 
 	 factor.scores.grm, factor.scores.ltm, factor.scores.rasch, factor.scores.tpm, fitted.grm, fitted.ltm, fitted.rasch, 
-	 fitted.tpm, grm, information, ltm, margins, margins.grm, margins.ltm, margins.rasch, margins.tpm, mult.choice, 
-	 plot.grm, plot.ltm, plot.rasch, plot.tpm, rasch, rcor.test, rmvlogis, summary.grm, summary.ltm, summary.rasch, 
-	 summary.tpm, tpm, vcov.grm, vcov.ltm, vcov.rasch, vcov.tpm)
+	 fitted.tpm, GoF.rasch, grm, information, ltm, margins, margins.grm, margins.ltm, margins.rasch, margins.tpm, 
+	 mult.choice, plot.grm, plot.ltm, plot.rasch, plot.tpm, rasch, rcor.test, rmvlogis, summary.grm, summary.ltm, 
+	 summary.rasch, summary.tpm, tpm, vcov.grm, vcov.ltm, vcov.rasch, vcov.tpm)
 
 # Imported functions
 importFrom(MASS, mvrnorm)
@@ -49,7 +49,9 @@ S3method(print, aov.rasch)
 S3method(print, aov.tpm)
 S3method(print, descript)
 S3method(print, fscores)
+S3method(print, GoF.rasch)
 S3method(print, grm)
+S3method(print, information)
 S3method(print, ltm)
 S3method(print, margins.grm)
 S3method(print, margins.ltm)

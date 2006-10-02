@@ -7,8 +7,7 @@
 \title{ Anova method for fitted IRT models}
 
 \description{
-  Performs a Likelihood Ratio Test between two nested IRT models or performs a parametric 
-  Bootstrap test for Rasch models. 
+  Performs a Likelihood Ratio Test between two nested IRT models. 
 }
 
 \usage{
@@ -16,56 +15,30 @@
 
 \method{anova}{ltm}(object, object2, \dots)
 
-\method{anova}{rasch}(object, object2 = NULL, B = 49, \dots)
+\method{anova}{rasch}(object, object2, \dots)
 
 \method{anova}{tpm}(object, object2, \dots)
 }
 \arguments{
-  \item{object}{ an object inheriting from either class \code{grm}, class \code{ltm}, class \code{rasch} or class \code{tpm},
-                representing the model under the null hypothesis.}
-  \item{object2}{ an object inheriting from either class \code{grm}, class \code{ltm} or class \code{rasch},
-                representing the model under the alternative hypothesis.}  
-  \item{B}{ the number of Bootstrap samples. See \bold{Details} section for more info.}
+  \item{object}{ an object inheriting from either class \code{grm}, class \code{ltm}, class \code{rasch} 
+                 or class \code{tpm}, representing the model under the null hypothesis.}
+  \item{object2}{ an object inheriting from either class \code{grm}, class \code{ltm}, class \code{rasch},
+                 or class \code{tpm}, representing the model under the alternative hypothesis.}  
   \item{\dots}{ additional arguments; currently none is used.}
 }
-\details{
-  If \code{object} is only supplied and \code{object} inherits from class \code{rasch}, then \code{anova.rasch()} 
-  performs a parametric Bootstrap test based on Pearson's chi-squared statistic. The Bootstrap 
-  approximation to the reference distribution is preferable compared with 
-  the ordinary Chi-squared approximation since the latter is not valid especially
-  for large number of items (=> many response patterns with expected frequencies
-  smaller than 1).
-  
-  In particular, the Bootstrap test is implemented as follows:
-  \describe{
-    \item{Step 0:}{Based on \code{object} compute the observed value of the statistic \eqn{T_{obs}}.}
-    \item{Step 1:}{Simulate new parameter values, say \eqn{\theta^*}, from \eqn{N(\hat{\theta}, C(\hat{\theta}))},
-    where \eqn{\hat{\theta}} are the MLEs and \eqn{C(\hat{\theta})} their large sample covariance 
-    matrix.}
-    \item{Step 2:}{Using \eqn{\theta^*} simulate new data (with the same dimensions as the 
-    observed ones), fit the Rasch model and based on this fit calculate the value of the statistic \eqn{T_i}.}
-    \item{Step 3:}{Repeat steps 1-2 \code{B} times and estimate the \eqn{p}-value using 
-    \eqn{[1 + \sum\limits_{i=1}^B I(T_i  > T_{obs})] / (B + 1).}{[1 + \{\# T_i  > T_{obs}\}]/(B + 1).}}
-  }
-  
-  If both \code{object} and \code{object2} are supplied, then a likelihood ratio test between the two fitted
-  models is performed.  
-}
+
 \value{
 An object of either class \code{aov.grm}, class \code{aov.ltm} or class \code{aov.rasch} with components,
-    \item{Tobs}{the value of the Pearson's chi-squared statistic for the observed data. Returned if \code{object} is only supplied.}
-    \item{B}{the \code{B} argument specifying the number of Bootstrap samples used. Returned if \code{object} is only supplied.}
-    \item{call}{the matched call of \code{object}. Returned if only \code{object} is supplied.}
-    \item{nam0}{the name of \code{object}. Returned if \code{object2} is also supplied.}
-    \item{L0}{the log-likelihood under the null hypothesis (\code{object}). Returned if \code{object2} is also supplied.}
-    \item{aic0}{the AIC value for the model given by \code{object}. Returned if \code{object2} is also supplied.}
-    \item{bic0}{the BIC value for the model given by \code{object}. Returned if \code{object2} is also supplied.}
-    \item{nam1}{the name of \code{object2}. Returned if \code{object2} is also supplied.}
-    \item{L1}{the log-likelihood under the alternative hypothesis (\code{object2}). Returned if \code{object2} is also supplied.}
-    \item{aic1}{the AIC value for the model given by \code{object2}. Returned if \code{object2} is also supplied.}
-    \item{bic1}{the BIC value for the model given by \code{object2}. Returned if \code{object2} is also supplied.}
-    \item{LRT}{the value of the Likelihood Ratio Test statistic. Returned if \code{object2} is also supplied.}
-    \item{df}{the degrees of freedom for the test (i.e., the difference in the number of parameters). Returned if \code{object2} is also supplied.}
+    \item{nam0}{the name of \code{object}.}
+    \item{L0}{the log-likelihood under the null hypothesis (\code{object}).}
+    \item{aic0}{the AIC value for the model given by \code{object}.}
+    \item{bic0}{the BIC value for the model given by \code{object}. }
+    \item{nam1}{the name of \code{object2}.}
+    \item{L1}{the log-likelihood under the alternative hypothesis (\code{object2}).}
+    \item{aic1}{the AIC value for the model given by \code{object2}.}
+    \item{bic1}{the BIC value for the model given by \code{object2}.}
+    \item{LRT}{the value of the Likelihood Ratio Test statistic. }
+    \item{df}{the degrees of freedom for the test (i.e., the difference in the number of parameters).}
     \item{p.value}{the \eqn{p}-value of the test.}
 }
 
@@ -73,7 +46,7 @@ An object of either class \code{aov.grm}, class \code{aov.ltm} or class \code{ao
     The code does not check if the models are nested! The user is responsible to supply nested models in
     order the LRT to be valid.
     
-    In \code{anova.ltm} and \code{anova.rasch} and when \code{object2} represents a three parameter model, note that the
+    When \code{object2} represents a three parameter model, note that the
     null hypothesis in on the boundary of the parameter space for the guessing parameters. Thus, the Chi-squared reference 
     distribution used by these function might not be totally appropriate.
 }
@@ -93,38 +66,35 @@ An object of either class \code{aov.grm}, class \code{aov.ltm} or class \code{ao
 
 ## LRT between the constrained and unconstrained GRMs 
 ## for the Science data:
-m0 <- grm(Science[c(1,3,4,7)], constrained = TRUE)
-m1 <- grm(Science[c(1,3,4,7)])
-anova(m0, m1)
+fit0 <- grm(Science[c(1,3,4,7)], constrained = TRUE)
+fit1 <- grm(Science[c(1,3,4,7)])
+anova(fit0, fit1)
 
 
 ## LRT between the one- and two-factor models 
-## for the Wirs data:
-anova(ltm(Wirs ~ z1), ltm(Wirs ~ z1 + z2))
+## for the WIRS data:
+anova(ltm(WIRS ~ z1), ltm(WIRS ~ z1 + z2))
 
-
-## GoF for the Rasch model for the Lsat data:
-m <- rasch(Lsat)
-anova(m)
 
 ## An LRT between the Rasch and a constrained 
-## two-parameter logistic model for the Wirs data: 
-m0 <- rasch(Wirs)
-m1 <- ltm(Wirs ~ z1, constraint = cbind(c(1, 3, 5), 2, 1))
-anova(m0, m1)
+## two-parameter logistic model for the WIRS data: 
+fit0 <- rasch(WIRS)
+fit1 <- ltm(WIRS ~ z1, constraint = cbind(c(1, 3, 5), 2, 1))
+anova(fit0, fit1)
 
 
 ## An LRT between the constrained (discrimination 
 ## parameter equals 1) and the unconstrained Rasch
-## model for the Lsat data: 
-m0 <- rasch(Lsat, constraint = rbind(c(6, 1)))
-m1 <- rasch(Lsat)
-anova(m0, m1)
+## model for the LSAT data: 
+fit0 <- rasch(LSAT, constraint = rbind(c(6, 1)))
+fit1 <- rasch(LSAT)
+anova(fit0, fit1)
 
 
 ## An LRT between the Rasch and the two-parameter 
 ## logistic model for the Lsat data: 
-anova(rasch(Lsat), ltm(Lsat ~ z1))
+anova(rasch(LSAT), ltm(LSAT ~ z1))
 
 }
+
 \keyword{methods}

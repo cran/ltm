@@ -19,14 +19,17 @@ ltm(formula, constraint = NULL, IRT.param, start.val,
         of items and \eqn{q} the number of latent components plus the intercept), specifying fixed-value 
         constraints. The first column represents the item (i.e., \eqn{1} denotes the first item, \eqn{2} the 
         second, etc.), the second column represents the component of the latent structure (i.e., \eqn{1} 
-        denotes the intercept \eqn{\beta_{i0}}{beta_{i0}}, \eqn{2} the loadings of the first factor \eqn{\beta_
-        {i1}}{beta_{i1}}, etc.) and the third column denotes the value at which the corresponding parameter 
+        denotes the intercept \eqn{\beta_{0i}}{beta_{0i}}, \eqn{2} the loadings of the first factor \eqn{\beta_
+        {1i}}{beta_{1i}}, etc.) and the third column denotes the value at which the corresponding parameter 
         should be fixed. See \bold{Details} and \bold{Examples} for more info.}
   \item{IRT.param}{logical; if \code{TRUE} then the coefficients' estimates for the two-parameter logistic 
         model are reported under the usual IRT parameterization. See \bold{Details} for more info.}
-  \item{start.val}{ a numeric matrix of starting values for the
-        algorithm (rows denote items and columns latent structure, with the first column denoting the intercepts). 
-        If it is not supplied randomly chosen starting values are used instead.}
+  \item{start.val}{the character string "random" or a numeric matrix supplying starting values with \eqn{p} rows and 
+        \eqn{q} columns, with \eqn{p} denoting the number of items, and \code{q} denoting the number of terms in the 
+        right-hand side of \code{formula}. If \code{NULL} starting values are automatically computed. If "random", 
+        random starting values are used. If a matrix, then depending on the latent structure specified in \code{formula}, 
+        the first column should contain \eqn{\beta_{0i}}, the second \eqn{\beta_{1i}}, the third \eqn{\beta_{2i}}, and 
+        the remaing columns \eqn{\beta_{nl,i}} (see \bold{Details})}.
   \item{na.action}{ the \code{na.action} to be used on the data frame in the left side of \code{formula}.
         In case of missing data, if \code{na.action = NULL} the model uses the available cases, i.e., it takes 
         into account the observed part of sample units with missing values (valid under MAR mechanisms if the
@@ -47,8 +50,8 @@ ltm(formula, constraint = NULL, IRT.param, start.val,
     The latent trait model is the analogue of the factor analysis model for binary observed data. 
     The model assumes that the dependencies between the observed response variables (known as items) 
     can be interpreted by a small number of latent variables. The model formulation is under the IRT 
-    approach; in particular, \deqn{\log\left(\frac{\pi_{i}}{1-\pi_{i}}\right)=\beta_{i0} + \beta_{i1}z_1 + 
-    \beta_{i2}z_2,}{logit(pi_i)=beta_{i0} + beta_{i1}z_1 + beta_{i2}z_2,} where \eqn{\pi_i} is the the 
+    approach; in particular, \deqn{\log\left(\frac{\pi_{i}}{1-\pi_{i}}\right)=\beta_{0i} + \beta_{1i}z_1 + 
+    \beta_{2i}z_2,}{logit(pi_i)=beta_{0i} + beta_{1i}z_1 + beta_{2i}z_2,} where \eqn{\pi_i} is the the 
     probability of a positive response in the \eqn{i}th item, \eqn{\beta_{i0}} is the easiness parameter, 
     \eqn{\beta_{ij}} (\eqn{j=1,2}) are the discrimination parameters and \eqn{z_1, z_2} denote the two 
     latent variables.
@@ -57,15 +60,15 @@ ltm(formula, constraint = NULL, IRT.param, start.val,
     Knott, 1999; Moustaki and Knott, 2000). \code{ltm()} fits the linear one- and two-factor models but 
     also provides extensions described by Rizopoulos and Moustaki (2006) to include nonlinear latent 
     variable effects. These are incorporated in the linear predictor of the model, i.e., \deqn{\log\left
-    (\frac{\pi_{i}}{1-\pi_{i}}\right)=\beta_{i0} + \beta_{i1}z_1 + \beta_{i2}z_2 + \beta_{nl}^tf(z_1, z_2),
-    }{logit(pi_i)=beta_{i0} + beta_{i1}z_1 + beta_{i2}z_2 + beta_{nl}^tf(z_1, z_2),} where \eqn{f(z_1, z_2)} is
+    (\frac{\pi_{i}}{1-\pi_{i}}\right)=\beta_{0i} + \beta_{1i}z_1 + \beta_{2i}z_2 + \beta_{nl}^tf(z_1, z_2),
+    }{logit(pi_i)=beta_{0i} + beta_{1i}z_1 + beta_{2i}z_2 + beta_{nl}^tf(z_1, z_2),} where \eqn{f(z_1, z_2)} is
     a function of \eqn{z_1} and \eqn{z_2} (e.g., \eqn{f(z_1, z_2) = z_1z_2}, \eqn{f(z_1, z_2) = z_1^2}, etc.) and 
     \eqn{\beta_{nl}} is a matrix of nonlinear terms parameters (look also at the \bold{Examples}).
     
     If \code{IRT.param = TRUE}, then the parameters estimates for the two-parameter logistic
     model (i.e., the model with one factor) are reported under the usual IRT parameterization, i.e., 
-    \deqn{\log\left(\frac{\pi_i}{1-\pi_i}\right) = \beta_{i1} (z - \beta_{i0}^*).}{logit(\pi_i) = 
-    beta_{i1}(z - beta_{i0}^*).} 
+    \deqn{\log\left(\frac{\pi_i}{1-\pi_i}\right) = \beta_{1i} (z - \beta_{0i}^*).}{logit(\pi_i) = 
+    beta_{1i}(z - beta_{0i}^*).} 
     
     The linear two-factor model is unidentified under orthogonal rotations on the factors' 
     space. To achieve identifiability you can fix the value of one loading using the \code{constraint} 
@@ -94,7 +97,7 @@ ltm(formula, constraint = NULL, IRT.param, start.val,
 \value{
 An object of class \code{ltm} with components,
     \item{coefficients}{a matrix with the parameter values at convergence. These are always the estimates of 
-        \eqn{\beta_{il}, l = 0, 1, \ldots}{beta_{il}, l = 0, 1, ...} parameters, even if \code{IRT.param = TRUE}.}
+        \eqn{\beta_{li}, l = 0, 1, \ldots}{beta_{li}, l = 0, 1, ...} parameters, even if \code{IRT.param = TRUE}.}
     \item{log.Lik}{the log-likelihood value at convergence.}
     \item{convergence}{the convergence identifier returned by \code{optim()}.}
     \item{hessian}{the approximate Hessian matrix at convergence returned by \code{optim()}.}
@@ -166,7 +169,7 @@ with nonlinear terms. \emph{submitted for publication}.
 ## for the 1st item equals 1 and (ii) the discrimination
 ## parameter for the 6th item equals -0.5
 
-ltm(Wirs ~ z1, constr = rbind(c(1, 1, 1), c(6, 2, -0.5)))
+ltm(WIRS ~ z1, constr = rbind(c(1, 1, 1), c(6, 2, -0.5)))
 
 
 ## One-factor and a quadratic term
@@ -175,7 +178,7 @@ ltm(Mobility ~ z1 + I(z1^2))
 
 ## Two-factor model with an interaction term
 ## using the WIRS data
-ltm(Wirs ~ z1 * z2)
+ltm(WIRS ~ z1 * z2)
 
 
 ## The two-parameter logistic model for the Abortion data 
@@ -184,5 +187,6 @@ ltm(Wirs ~ z1 * z2)
 ltm(Abortion ~ z1, control = list(GHk = 20, iter.em = 20))
 
 }
+
 \keyword{multivariate}
 \keyword{regression}

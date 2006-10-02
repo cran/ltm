@@ -4,11 +4,11 @@ citEntry(entry = "Manual",
          title = "ltm: Latent Trait Models under IRT",
          author = personList(as.person("D. Rizopoulos")),
          year         = 2006,
-         note         = "R package version 0.6-0",
+         note         = "R package version 0.6-1",
          url          = "http://wiki.r-project.org/rwiki/doku.php?id=packages:cran:ltm",
          
          textVersion = 
          paste("Rizopoulos, D. (2006)", 
                "'ltm: Latent Trait Models under IRT'.",
-               "R package version 0.6-0.")
+               "R package version 0.6-1.")
 )

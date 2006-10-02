@@ -28,7 +28,7 @@ the estimates of the correlation coefficients, and the lower diagonal part conta
 }
 
 \note{
-    \code{rcor.test()} is more appropriate for informal testing of polytomous items.
+    \code{rcor.test()} is more appropriate for informal testing of association between polytomous items.
 }
 
 \author{
@@ -41,7 +41,7 @@ the estimates of the correlation coefficients, and the lower diagonal part conta
 rcor.test(data.matrix(Environment), method = "kendall")
 
 ## pairwise associations for independent normal random variates:
-mat <- matrix(rnorm(1000), 100, 10)
+mat <- matrix(rnorm(1000), 100, 10, dimnames = list(NULL, LETTERS[1:10]))
 rcor.test(mat)
 rcor.test(mat, method = "kendall")
 rcor.test(mat, method = "spearman")

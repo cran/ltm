@@ -1,5 +1,5 @@
-\name{Lsat}
-\alias{Lsat}
+\name{LSAT}
+\alias{LSAT}
 \docType{data}
 \title{ The Law School Admission Test (LSAT), Section VI }
 \description{
@@ -25,7 +25,7 @@ dichotomously scored items. \emph{Psychometrika}, \bold{35}, 179--197.
 \examples{
 
 ## Descriptive statistics for Lsat data
-descript(Lsat)
+descript(LSAT)
 
 
 }

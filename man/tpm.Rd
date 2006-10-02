@@ -25,11 +25,11 @@ tpm(data, type = c("latent.trait", "rasch"), constraint = NULL,
   \item{max.guessing}{a scalar between 0 and 1 denoting the upper bound for the guessing parameters.}
   \item{IRT.param}{logical; if \code{TRUE} then the coefficients' estimates are reported under the 
         usual IRT parameterization. See \bold{Details} for more info.}
-  \item{start.val}{the character string "random" or a numeric matrix with \eqn{p} rows and 3 columns, with \eqn{p} 
-        denoting the number of items. If \code{NULL} starting values are automatically computed. If "random", random 
-        starting values are used. If a matrix, then the first column should contain the guessing parameter, the second 
-        \eqn{\beta_{1i}}, and the third \eqn{\beta_{2i}} (see \bold{Details}). If \code{type == "rasch"}, then 
-        the third should contain the same number \eqn{p} times.}
+  \item{start.val}{the character string "random" or a numeric matrix supplying starting values with \eqn{p} rows and 
+        3 columns, with \eqn{p} denoting the number of items. If \code{NULL} starting values are automatically computed. 
+        If "random", random starting values are used. If a matrix, then the first column should contain the guessing 
+        parameter, the second \eqn{\beta_{1i}}, and the third \eqn{\beta_{2i}} (see \bold{Details}). 
+        If \code{type == "rasch"}, then the third should contain the same number \eqn{p} times.}
   \item{na.action}{ the \code{na.action} to be used on \code{data}. In case of missing data, if 
         \code{na.action = NULL} the model uses the available cases, i.e., it takes into account the observed 
         part of sample units with missing values (valid under MAR mechanisms if the model is correctly specified). 
@@ -134,17 +134,17 @@ M. R. Novick (Eds.), \emph{Statistical Theories of Mental Test Scores}, 397--479
 \examples{
 
 # the three parameter model
-tpm(Lsat)
+tpm(LSAT)
 
 # use 'nlminb' as optimizer
-tpm(Lsat, control = list(optimizer = "nlminb"))
+tpm(LSAT, control = list(optimizer = "nlminb"))
 
 
 # the three parameter model with equal 
 # discrimination parameter across items
 # fix the guessing parameter for the third item to zero
 # and allow the guessing parameter estimates to reach one
-tpm(Lsat, type = "rasch", constraint = cbind(3, 1, 0), max.guessing = 1)
+tpm(LSAT, type = "rasch", constraint = cbind(3, 1, 0), max.guessing = 1)
 
 
 # the three parameter model for the Abortion data

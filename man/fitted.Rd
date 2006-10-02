@@ -45,11 +45,11 @@ a numeric matrix including the response patterns of interest with their expected
 
 \examples{
 
-m <- grm(Science[c(1,3,4,7)])
-fitted(m, resp.patterns = matrix(1:4, nr = 4, nc = 4))
+fit <- grm(Science[c(1,3,4,7)])
+fitted(fit, resp.patterns = matrix(1:4, nr = 4, nc = 4))
 
-m <- ltm(Wirs ~ z1)
-fitted(m)
+fit <- ltm(WIRS ~ z1)
+fitted(fit)
 
 }
 \keyword{methods}

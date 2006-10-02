@@ -33,15 +33,7 @@ function (formula, constraint = NULL, IRT.param, start.val = NULL, na.action = N
     }
     p <- ncol(X)
     q. <- 1 + factors + sum(unlist(ltst[-1]))
-    betas <- if (!missing(start.val)) {
-        if(all(is.numeric(start.val), is.matrix(start.val), nrow(start.val) == p, ncol(start.val) == q.)) {
-            start.val
-        } else {
-            warning("'start.val' must be a ", ncol(X), " by ", q., " numeric matrix; random starting values are used instead.\n")
-            start.val.ltm(X, factors, formula)
-        } 
-    } else
-        start.val.ltm(X, factors, formula)
+    betas <- start.val.ltm(start.val, X, factors, formula)
     if (!is.null(constraint)) {
         if ((!is.numeric(constraint) | !is.matrix(constraint)) || (nrow(constraint) > p * q. - 1 | ncol(constraint) != 3))
             stop("'constraint' should be a 3-column numeric matrix with at most ", p * q. - 1, " rows (read help file).\n")

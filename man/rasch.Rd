@@ -17,7 +17,7 @@ rasch(data, constraint = NULL, IRT.param = TRUE, start.val = NULL,
         value at which the corresponding parameter should be fixed. See \bold{Examples} for more info.}
   \item{IRT.param}{logical; if \code{TRUE} then the coefficients' estimates are reported under the 
         usual IRT parameterization. See \bold{Details} for more info.}
-  \item{start.val}{ the character string "random" or a numeric vector of \eqn{p+1} starting values for the algorithm, 
+  \item{start.val}{ the character string "random" or a numeric vector of \eqn{p+1} starting values, 
         where the first \eqn{p} values correspond to the easiness parameters while the last value corresponds to the 
         discrimination parameter. If "random", random starting values are used. If \code{NULL} starting values
         are automatically computed. }
@@ -118,28 +118,29 @@ Institute.
 
 \examples{
 
-## The Rasch model for the Wirs data:
-rasch(Wirs)
+## The Rasch model for the WIRS data:
+rasch(WIRS)
 
 
-## The Rasch model for the Wirs data, under the 
+## The Rasch model for the WIRS data, under the 
 ## constraint that: (i) the easiness parameter 
 ## for the first item equals 0.5, (ii) the easiness 
 ## parameter for the second item equals 1.2, and 
 ## (iii) the discrimination parameter equals 1
 (constr <- rbind(c(1, 0.5), c(2, 1.2), c(7, 1)))
-rasch(Wirs, constraint = constr)
+rasch(WIRS, constraint = constr)
 
 
 ## The Rasch model for the Lsat data;
-rasch(Lsat)
+rasch(LSAT)
 
 
-## The Rasch model for the Lsat data, under the 
+## The Rasch model for the LSAT data, under the 
 ## constraint that the discrimination parameter
 ## equals 1
-rasch(Lsat, constraint = rbind(c(6, 1)))
+rasch(LSAT, constraint = rbind(c(6, 1)))
 
 }
+
 \keyword{multivariate}
 \keyword{regression}

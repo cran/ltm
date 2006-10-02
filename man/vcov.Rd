@@ -45,12 +45,12 @@
 
 \examples{
 
-m <- grm(Science[c(1,3,4,7)], Hessian = TRUE)
-vcov(m)
+fit <- grm(Science[c(1,3,4,7)], Hessian = TRUE)
+vcov(fit)
 
-m <- rasch(Wirs)
-vcov(m)
-sqrt(diag(vcov(m))) # standard errors
+fit <- rasch(WIRS)
+vcov(fit)
+sqrt(diag(vcov(fit))) # standard errors
 
 }
 \keyword{methods}
