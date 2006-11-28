@@ -1,4 +1,4 @@
-"coef.rasch" <-
+`coef.rasch` <-
 function (object, prob = FALSE, order = FALSE, ...) {
     if (!inherits(object, "rasch"))
         stop("Use only with 'rasch' objects.\n")

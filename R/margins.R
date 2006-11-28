@@ -1,4 +1,4 @@
-"margins" <-
+`margins` <-
 function (object, ...) {
     UseMethod("margins")
 }

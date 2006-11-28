@@ -1,4 +1,4 @@
-"fitted.rasch" <-
+`fitted.rasch` <-
 function (object, resp.patterns = NULL, ...) {
     if (!inherits(object, "rasch"))
         stop("Use only with 'rasch' objects.\n")

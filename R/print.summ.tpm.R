@@ -1,4 +1,4 @@
-"print.summ.tpm" <-
+`print.summ.tpm` <-
 function (x, digits = max(3, getOption("digits") - 3), ...){
     if (!inherits(x, "summ.tpm"))
         stop("Use only with 'summ.tpm' objects.\n")

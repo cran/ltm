@@ -1,4 +1,4 @@
-"probs" <-
+`probs` <-
 function (x) {
     pr <- plogis(x)
     if (any(ind <- pr == 1))

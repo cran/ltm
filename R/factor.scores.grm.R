@@ -1,4 +1,4 @@
-"factor.scores.grm" <-
+`factor.scores.grm` <-
 function (object, resp.patterns = NULL, method = c("EB", "MI"), B = 5, ...) {
     if (!inherits(object, "grm"))
         stop("Use only with 'rasch' objects.\n")

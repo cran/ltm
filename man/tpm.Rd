@@ -114,6 +114,9 @@ New York: Marcel Dekker.
 Birnbaum, A. (1968). Some latent trait models and their use in inferring an examinee's ability. In F. M. Lord and
 M. R. Novick (Eds.), \emph{Statistical Theories of Mental Test Scores}, 397--479. Reading, MA: Addison-Wesley.
 
+Rizopoulos, D. (2006) \bold{ltm}: An R package for latent variable modelling and item response theory analyses. 
+\emph{Journal of Statistical Software}, \bold{17(5)}, 1--25. URL \url{http://www.jstatsoft.org/v17/i05/}
+
 }
 
 \author{

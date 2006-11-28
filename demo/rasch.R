@@ -4,8 +4,9 @@
 
 ## First some descriptives for LSAT
 
-descript(LSAT)
-
+dsc <- descript(LSAT)
+dsc
+plot(dsc, type = "b", lty = 1)
 
 ## First we fit the original form of the Rasch model assuming
 ## fixed discrimination parameter equal to 1; results are reported

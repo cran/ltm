@@ -12,11 +12,13 @@
 GoF.rasch(object, B = 49, \dots)
 
 }
+
 \arguments{
   \item{object}{ an object inheriting from class \code{rasch}.}
   \item{B}{ the number of Bootstrap samples. See \bold{Details} section for more info.}
   \item{\dots}{ additional arguments; currently none is used.}
 }
+
 \details{
   \code{GoF.rasch} performs a parametric Bootstrap test based on Pearson's chi-squared statistic. The Bootstrap 
   approximation to the reference distribution is preferable compared with 

@@ -1,4 +1,4 @@
-"logLik.tpm" <-
+`logLik.tpm` <-
 function (object, ...) {
     if (!inherits(object, "tpm"))
         stop("Use only with 'tpm' objects.\n")

@@ -1,4 +1,4 @@
-"rmvordlogis" <-
+`rmvordlogis` <-
 function (n, betas) {
     p <- length(betas)
     ncatg <- sapply(betas, length)

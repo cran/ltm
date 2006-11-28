@@ -1,4 +1,4 @@
-"vcov.ltm" <-
+`vcov.ltm` <-
 function (object, robust = FALSE, ...) {
     if (!inherits(object, "ltm"))
         stop("Use only with 'ltm' objects.\n")

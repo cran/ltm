@@ -1,4 +1,4 @@
-"IRT.parm.tpm" <-
+`IRT.parm.tpm` <-
 function (object, standard.errors = FALSE, digits.abbrv = 6, ...) {
     if (!inherits(object, "tpm"))
         stop("Use only with 'tpm' objects.\n")

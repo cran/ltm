@@ -1,4 +1,4 @@
-"summary.ltm" <-
+`summary.ltm` <-
 function (object, robust.se = FALSE, ...) {
     if (!inherits(object, "ltm"))
         stop("Use only with 'ltm' objects.\n")

@@ -1,4 +1,4 @@
-"information" <-
+`information` <-
 function (object, range, items = NULL, ...) {
     if (!class(object) %in% c("grm", "ltm", "rasch", "tpm"))
         stop("'object' must inherit from either class 'grm', class 'ltm', class 'rasch' or class 'tpm'.\n")
@@ -36,7 +36,7 @@ function (object, range, items = NULL, ...) {
                 })
     }
     I0 <- integrate(f, -10, 10, ...)$value
-    I1 <- integrate(f, lower = range[1], upper = range[2], ...)$value
+    I1 <- integrate(f, range[1], range[2], ...)$value
     out <- list("InfoRange" = I1, "InfoTotal" = I0, "PropRange" = I1 / I0, range = range, items = items, 
                 call = object$call)
     class(out) <- "information"

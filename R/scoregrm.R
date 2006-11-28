@@ -1,4 +1,4 @@
-"scoregrm" <-
+`scoregrm` <-
 function (thetas, constrained) {
     betas <- betas.grm(thetas, constrained, ind1, ind2, p)
     k <- length(Z)

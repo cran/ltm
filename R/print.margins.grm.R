@@ -1,4 +1,4 @@
-"print.margins.grm" <-
+`print.margins.grm` <-
 function (x, digits = 2, ...) {
     if (!inherits(x, "margins.grm"))
         stop("Use only with 'margins.grm' objects.\n")    

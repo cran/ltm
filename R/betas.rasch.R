@@ -1,4 +1,4 @@
-"betas.rasch" <-
+`betas.rasch` <-
 function (betas, constraint, p) {
     if (!is.null(constraint)) {
         betas. <- numeric(p + 1)

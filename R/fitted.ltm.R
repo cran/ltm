@@ -1,4 +1,4 @@
-"fitted.ltm" <-
+`fitted.ltm` <-
 function (object, resp.patterns = NULL, ...) {
     if (!inherits(object, "ltm"))
         stop("Use only with 'ltm' objects.\n")

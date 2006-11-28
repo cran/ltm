@@ -1,4 +1,4 @@
-"matArrays" <-
+`matArrays` <-
 function (lis, na.rm = FALSE) {
     M <- length(lis)
     dims <- dim(lis[[1]])

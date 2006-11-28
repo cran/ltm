@@ -1,4 +1,4 @@
-"EM" <-
+`EM` <-
 function (betas, constraint, iter, verbose = FALSE) {
     for (it in 1:iter) {
         pr <- probs(Z %*% t(betas))

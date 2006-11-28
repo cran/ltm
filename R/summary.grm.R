@@ -1,4 +1,4 @@
-"summary.grm" <-
+`summary.grm` <-
 function (object, ...) {
     if (!inherits(object, "grm"))
         stop("Use only with 'grm' objects.\n")

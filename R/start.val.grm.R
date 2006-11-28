@@ -1,4 +1,4 @@
-"start.val.grm" <-
+`start.val.grm` <-
 function (start.val, data, weight, constrained, ncatg) {
     data <- na.exclude(data)    
     attr(data, "na.action") <- NULL

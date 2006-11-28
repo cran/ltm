@@ -1,4 +1,4 @@
-"ltm.fit" <-
+`ltm.fit` <-
 function (X, betas, constraint, formula, control) {
     n <- nrow(X)
     p <- ncol(X)

@@ -1,4 +1,4 @@
-"coef.ltm" <-
+`coef.ltm` <-
 function (object, standardized = FALSE, prob = FALSE, order = FALSE, ...) {
     if (!inherits(object, "ltm"))
         stop("Use only with 'ltm' objects.\n")

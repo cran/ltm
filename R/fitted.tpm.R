@@ -1,4 +1,4 @@
-"fitted.tpm" <-
+`fitted.tpm` <-
 function (object, resp.patterns = NULL, ...) {
     if (!inherits(object, "tpm"))
         stop("Use only with 'tpm' objects.\n")

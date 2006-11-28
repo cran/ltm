@@ -1,4 +1,4 @@
-"infoprobs" <-
+`infoprobs` <-
 function (betas, z) {
     cpr <- cprobs(betas, z)
     ipr <- iprobs(betas, z)

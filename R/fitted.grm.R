@@ -1,4 +1,4 @@
-"fitted.grm" <-
+`fitted.grm` <-
 function (object, resp.patterns = NULL, ...) {
     if (!inherits(object, "grm"))
         stop("Use only with 'grm' objects.\n")

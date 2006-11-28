@@ -1,4 +1,4 @@
-"fscores.t" <-
+`fscores.t` <-
 function (thetas, X, method) {
     logf.z <- function (z, y, thetas) {
         betas <- thetas[, 2:3]

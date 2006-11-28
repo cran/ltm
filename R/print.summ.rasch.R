@@ -1,4 +1,4 @@
-"print.summ.rasch" <-
+`print.summ.rasch` <-
 function (x, digits = max(3, getOption("digits") - 3), ...){
     if (!inherits(x, "summ.rasch"))
         stop("Use only with 'summ.rasch' objects.\n")

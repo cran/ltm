@@ -1,4 +1,4 @@
-"plot.tpm" <-
+`plot.tpm` <-
 function (x, type = c("ICC", "IIC"), items = NULL, z = seq(-3.8, 3.8, length = 100), annot, labels = NULL, 
                       legend = FALSE, cx = "topleft", cy = NULL, ncol = 1, bty = "n", col = palette(), lty = 1, 
                       pch, xlab, ylab, main, sub = NULL, cex = par("cex"), cex.lab = par("cex.lab"), 

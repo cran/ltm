@@ -1,3 +1,20 @@
+Changes in version: ltm_0.7-0
+
+  o function "biserial.cor()" has been included that computes the point biserial correlation between a dichotomous and 
+    a continuous variable.
+
+  o in the "plot()" method for 'grm' objects, the option for Operation Characteristic Curves has been added.
+
+  o "rmvlogis()" has a new argument 'IRT' specifying whether the parameters are under the IRT parameterization.
+
+  o "rmvlogis()" has extra available distributions for the latent variable.
+
+  o a "plot()" method has been added for 'descript' objects, producing the plot of Total Score versus Proportion of 
+    Correct for each item.
+
+
+==============================
+
 Changes in version: ltm_0.6-1
 
   o starting values for "ltm()" are now by default deterministic; for random starting values you may use 

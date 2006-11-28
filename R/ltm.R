@@ -1,4 +1,4 @@
-"ltm" <-
+`ltm` <-
 function (formula, constraint = NULL, IRT.param, start.val = NULL, na.action = NULL, control = list()) {
     cl <- match.call()
     tm <- terms(formula)

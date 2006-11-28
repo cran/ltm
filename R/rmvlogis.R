@@ -1,20 +1,30 @@
-"rmvlogis" <-
-function (n, thetas, guessing = FALSE, link = c("logit", "probit"), distr = c("normal", "logistic")) {
-    if (!is.matrix(thetas))
-        stop("'thetas' must be a matrix with rows representing the items.\n")
+`rmvlogis` <-
+function (n, thetas, IRT = TRUE, link = c("logit", "probit"), distr = c("normal", "logistic", "log-normal")) {
+    if (!is.matrix(thetas) || !is.numeric(thetas))
+        stop("'thetas' must be a numeric matrix with rows representing the items.\n")
     link <- match.arg(link)
     distr <- match.arg(distr)
-    z <- if (distr == "normal") cbind(1, rnorm(n)) else cbind(1, rlogis(n))
+    z <- switch(distr, 
+        "normal" = rnorm(n), 
+        "logistic" = sqrt(3) / pi * rlogis(n),
+        "log-normal" = (rlnorm(n) - exp(0.5)) / sqrt(exp(2) - exp(1)))
     p <- nrow(thetas)
-    pr <- if (guessing) {
-        if (!ncol(thetas) == 3)
-            stop("'thetas' must be a 3-column matrix with the 3rd column representing the guessing parameters.\n")
-        betas <- thetas[, 1:2]
-        cs <- thetas[, 3]
-        cs.mat <- matrix(cs, n, p, TRUE)
-        cs.mat + (1 - cs.mat) * if (link == "logit") plogis(z %*% t(betas)) else pnorm(z %*% t(betas))
+    if (ncol(thetas) < 2 || ncol(thetas) > 3)
+        stop("'thetas' must be either a two- or a three-column matrix.\n")
+    betas <- thetas[, 1:2]
+    eta <- if (IRT) {
+        outer(z, betas[, 1], "-") * rep(betas[, 2], each = n)
     } else {
-        if (link == "logit") plogis(z %*% t(thetas)) else pnorm(z %*% t(thetas))
+        cbind(1, z) %*% t(betas)
+    }
+    pr <- if (ncol(thetas) == 3) {
+        cs <- thetas[, 3]
+        if (any(cs < 0 | cs > 1))
+            stop("some guessing parameters are either smaller than zero or greater than one.\n")
+        cs.mat <- matrix(cs, n, p, TRUE)
+        cs.mat + (1 - cs.mat) * if (link == "logit") plogis(eta) else pnorm(eta)
+    } else {
+        if (link == "logit") plogis(eta) else pnorm(eta)
     }
     X <- matrix(0, n, p)
     for (i in 1:p)

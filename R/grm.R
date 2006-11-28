@@ -1,4 +1,4 @@
-"grm" <-
+`grm` <-
 function (data, constrained = FALSE, IRT.param = TRUE, Hessian = FALSE, start.val = NULL, na.action = na.omit, 
                  control = list()) {
     cl <- match.call()

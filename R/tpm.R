@@ -1,4 +1,4 @@
-"tpm" <-
+`tpm` <-
 function (data, type = c("latent.trait", "rasch"), constraint = NULL, max.guessing = 0.4, IRT.param = TRUE, 
                  start.val = NULL, na.action = NULL, control = list()) {
     cl <- match.call()

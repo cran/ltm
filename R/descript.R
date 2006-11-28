@@ -1,4 +1,4 @@
-"descript" <-
+`descript` <-
 function (data, n.print = 10, B = 1000) {
     if (!inherits(data, "matrix") && !inherits(data, "data.frame"))
         stop("'data' must be either a data.frame or a matrix")
@@ -29,8 +29,8 @@ function (data, n.print = 10, B = 1000) {
         })
     } else
         NULL
-    data <- na.exclude(data)    
-    attr(data, "na.action") <- NULL    
+    dat <- na.exclude(data)    
+    attr(dat, "na.action") <- NULL    
     ind <- combinations(p, 2)
     nind <- nrow(ind)
     pvals <- numeric(nind)
@@ -46,15 +46,15 @@ function (data, n.print = 10, B = 1000) {
     names(pw.ass) <- c("Item i", "Item j", "p.value")
     pw.ass <- pw.ass[order(pvals, decreasing = TRUE), ]
     row.names(pw.ass) <- 1:nind
-    levs. <- apply(data, 2, function (x) length(unique(x)))
+    levs. <- apply(dat, 2, function (x) length(unique(x)))
     levs <- pmax(2, levs.)
     levs <- if (all(levs == 2)) 0:sum(levs - 1) else p:sum(levs)
     totSc <- rowSums(X)
     itms <- rbind(Freq = table( factor(totSc, levels = levs) ))
     out <- list(sample = c(p, n), perc = perc, items = itms, pw.ass = pw.ass, n.print = n.print, name = nam, 
-                missin = missin)
+                missin = missin, data = data)
     if (all(levs. == 2)) {
-        out$bisCorr <- apply(X, 2, biserial.cor, x = totSc, use = "pairwise.complete.obs")
+        out$bisCorr <- apply(X, 2, biserial.cor, x = totSc, use = "complete.obs", level = 2)
         out$perc <- rbind(out$perc, "logit" = qlogis(out$perc[2, ]))
     }
     class(out) <- "descript"

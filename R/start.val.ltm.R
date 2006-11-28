@@ -1,4 +1,4 @@
-"start.val.ltm" <-
+`start.val.ltm` <-
 function (start.val, data, factors, formula) {
     data <- na.exclude(data)
     attr(data, "na.action") <- NULL

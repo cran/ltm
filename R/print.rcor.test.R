@@ -1,4 +1,4 @@
-"print.rcor.test" <-
+`print.rcor.test` <-
 function (x, digits = max(3, getOption("digits") - 4), ...) {
     mat <- x$cor.mat
     mat[lower.tri(mat)] <- x$p.values[, 3]

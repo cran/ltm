@@ -1,4 +1,4 @@
-"print.margins.ltm" <-
+`print.margins.ltm` <-
 function (x, digits = 2, ...) {
     if (!inherits(x, "margins.ltm"))
         stop("Use only with 'margins.ltm' objects.\n")    

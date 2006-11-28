@@ -33,7 +33,9 @@
 \examples{
 
 ## Descriptive statistics for Abortion data
-descript(Abortion)
+dsc <- descript(Abortion)
+dsc
+plot(dsc)
 
 }
 \keyword{datasets}

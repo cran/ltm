@@ -1,4 +1,4 @@
-"coef.tpm" <-
+`coef.tpm` <-
 function (object, prob = FALSE, order = FALSE, ...) {
     if (!inherits(object, "tpm"))
         stop("Use only with 'tpm' objects.\n")

@@ -1,4 +1,4 @@
-"jacobian" <-
+`jacobian` <-
 function (thetas, constrained, ind1, ind2, p) {
     lis.mat <- vector("list", p)
     for (j in 1:p) {

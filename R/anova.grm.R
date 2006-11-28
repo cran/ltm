@@ -1,4 +1,4 @@
-"anova.grm" <-
+`anova.grm` <-
 function (object, object2, ...) {
     if (!inherits(object, "grm"))
         stop("Use only with 'grm' objects.\n")

@@ -1,4 +1,4 @@
-"print.summ.grm" <-
+`print.summ.grm` <-
 function (x, digits = max(3, getOption("digits") - 4), ...) {
     if (!inherits(x, "summ.grm"))
         stop("Use only with 'summ.grm' objects.\n")

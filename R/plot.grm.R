@@ -1,7 +1,8 @@
-"plot.grm" <-
-function (x, type = c("ICC", "IIC"), items = NULL, category = NULL, z = seq(-3.8, 3.8, length = 100), 
-                      annot, labels = NULL, legend = FALSE, cx = "top", cy = NULL, ncol = 1, bty = "n", col = palette(), 
-                      lty = 1, pch, xlab, ylab, main, sub = NULL, cex = par("cex"), cex.lab = par("cex.lab"), 
+`plot.grm` <-
+function (x, type = c("ICC", "IIC", "OCCu", "OCCl"), items = NULL, category = NULL, 
+                      z = seq(-3.8, 3.8, length = 100), annot, labels = NULL, legend = FALSE, 
+                      cx = "top", cy = NULL, ncol = 1, bty = "n", col = palette(), lty = 1, pch, 
+                      xlab, ylab, main, sub = NULL, cex = par("cex"), cex.lab = par("cex.lab"), 
                       cex.main = par("cex.main"), cex.sub = par("cex.sub"), cex.axis = par("cex.axis"), ...) {
     if (!inherits(x, "grm"))
         stop("Use only with 'grm' objects.\n")
@@ -35,11 +36,16 @@ function (x, type = c("ICC", "IIC"), items = NULL, category = NULL, z = seq(-3.8
         category
     } else
         "all"
-    cpr <- if (type == "ICC") iprobs(betas, z) else infoprobs(betas, z)
+    cpr <- switch(type, "ICC" = iprobs(betas, z), "IIC" = infoprobs(betas, z), 
+                    "OCCl" = cumprobs(betas, z), "OCCu" = cumprobs(betas, z, FALSE))
     plot.items <- type == "ICC" || (type == "IIC" & (is.null(items) || all(items > 0)))
     plot.info <- !plot.items
     if (missing(main)) {
-        Main <- if (type == "ICC") "Item Response Category Characteristic Curves" else { 
+        Main <- if (type == "ICC") {
+            "Item Response Category Characteristic Curves"
+        } else if (type == "OCCl" || type == "OCCu") {
+            "Item Operation Characteristic Curves"
+        } else {
             if (plot.items) "Item Information Curves" else "Test Information Function"
         }
         mis.ind <- TRUE
@@ -54,7 +60,7 @@ function (x, type = c("ICC", "IIC"), items = NULL, category = NULL, z = seq(-3.8
     if (missing(annot)) {
         annot <- !legend
     }
-    if (type == "ICC") {
+    if (type == "ICC" || (type == "OCCl" | type == "OCCu")) {
         if (ctg == "all") {
             old.par <- par(ask = TRUE)
             on.exit(par(old.par))
@@ -89,7 +95,10 @@ function (x, type = c("ICC", "IIC"), items = NULL, category = NULL, z = seq(-3.8
                     } else
                         ncol
                     lab <- if (missing(labels)) {
-                        if (is.factor(x$X[[i]])) levels(x$X[[i]]) else 1:ncatg[i]
+                        switch(type,
+                            "ICC" = if (is.factor(x$X[[i]])) levels(x$X[[i]]) else 1:ncatg[i],
+                            "OCCu" = paste(if (is.factor(x$X[[i]])) levels(x$X[[i]])[-1] else 2:ncatg[i], "or higher"),
+                            "OCCl" = paste(if (is.factor(x$X[[i]])) levels(x$X[[i]])[-1] else 2:ncatg[i], "or lower"))
                     } else
                         labels
                     legend(cx, cy, legend = lab, lty = lty, pch = pch, col = col, bty = bty, ncol = ncol., cex = cex, ...)

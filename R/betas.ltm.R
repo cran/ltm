@@ -1,4 +1,4 @@
-"betas.ltm" <-
+`betas.ltm` <-
 function (betas, constraint, p, q.) {
     if (!is.null(constraint)) {
         betas. <- matrix(0, p, q.)

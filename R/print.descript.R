@@ -1,5 +1,7 @@
-"print.descript" <-
+`print.descript` <-
 function (x, digits = max(3, getOption("digits") - 4), ...) {
+    if (!inherits(x, "descript"))
+        stop("Use only with 'descript' objects.\n")
     cat("\nDescriptive statistics for", paste("'", x$name, "'", sep = ""), "data-set\n")
     cat("\nSample:\n", x$sample[1], "items and", x$sample[2], "sample units;", if (!is.null(x$missin))
         sum(x$missin[1, ]) else 0, "missing values\n")

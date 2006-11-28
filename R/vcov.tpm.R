@@ -1,4 +1,4 @@
-"vcov.tpm" <-
+`vcov.tpm` <-
 function (object, ...) {
     if (!inherits(object, "tpm"))
         stop("Use only with 'tpm' objects.\n")

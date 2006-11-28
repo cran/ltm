@@ -1,4 +1,4 @@
-"fscores.r" <-
+`fscores.r` <-
 function (betas, X, method) {
     logf.z <- function (z, y, betas) {
         pr <- probs(c(betas %*% c(1, z)))

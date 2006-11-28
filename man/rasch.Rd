@@ -1,13 +1,16 @@
 \name{rasch}
 \alias{rasch}
 \title{ Rasch Model }
+
 \description{
   Fit the Rasch model under the Item Response Theory approach.
 }
+
 \usage{
 rasch(data, constraint = NULL, IRT.param = TRUE, start.val = NULL, 
     na.action = NULL, control = list())
 }
+
 \arguments{
   \item{data}{a data.frame (that will be converted to a numeric matrix using 
         \code{data.matrix()}) or a numeric matrix of manifest variables.}
@@ -99,6 +102,10 @@ New York: Marcel Dekker.
 Rasch, G. (1960) \emph{Probabilistic Models for Some 
 Intelligence and  Attainment Tests}. Copenhagen: Paedagogiske 
 Institute.
+
+Rizopoulos, D. (2006) \bold{ltm}: An R package for latent variable modelling and item response theory analyses. 
+\emph{Journal of Statistical Software}, \bold{17(5)}, 1--25. URL \url{http://www.jstatsoft.org/v17/i05/}
+
 }
 
 \author{

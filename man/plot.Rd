@@ -11,11 +11,11 @@
 }
 
 \usage{
-\method{plot}{grm}(x, type = c("ICC", "IIC"), items = NULL, category = NULL, 
-     z = seq(-3.8, 3.8, length = 100), annot, labels = NULL, 
-     legend = FALSE, cx = "top", cy = NULL, ncol = 1, bty = "n", 
-     col = palette(), lty = 1, pch, xlab, ylab, main, sub = NULL, 
-     cex = par("cex"), cex.lab = par("cex.lab"), 
+\method{plot}{grm}(x, type = c("ICC", "IIC", "OCCu", "OCCl"), items = NULL, 
+     category = NULL, z = seq(-3.8, 3.8, length = 100), annot, 
+     labels = NULL, legend = FALSE, cx = "top", cy = NULL, ncol = 1, 
+     bty = "n", col = palette(), lty = 1, pch, xlab, ylab, main, 
+     sub = NULL, cex = par("cex"), cex.lab = par("cex.lab"), 
      cex.main = par("cex.main"), cex.sub = par("cex.sub"), 
      cex.axis = par("cex.axis"), \dots)
 
@@ -47,7 +47,8 @@
   \item{x}{ an object inheriting from either class \code{grm}, class \code{ltm}, class \code{rasch} or class \code{tpm}. }
   \item{type}{ the type of plot; "ICC" refers to Item Response Category Characteristic Curves whereas "IIC" to 
                 Item Information Curves. For \code{ltm} objects the option "loadings" is also available that produces
-                the scatter plot of the standardized loadings. }
+                the scatter plot of the standardized loadings. For \code{grm} objects the options "OCCu" and "OCCl" are 
+                also available that produces the item operation characteristic curves. }
   \item{items}{ a numeric vector denoting which items to plot; if \code{NULL} all items are plotted; if 0 and
                 \code{type = "IIC"} the Test Information Curve is plotted. }
   \item{category}{ a scalar indicating the response category for which the curves should be plotted; if \code{NULL}
@@ -65,6 +66,7 @@
   \item{\dots}{ extra graphical parameters to be passed to \code{plot()}, \code{lines()}, \code{legend()} and 
                 \code{text()}.}
 }
+
 \details{
   Item response category characteristic curves show how the probability of responding in the \eqn{k}th category, 
   in each item, changes with the values of the latent variable (ability).

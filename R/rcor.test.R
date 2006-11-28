@@ -1,4 +1,4 @@
-"rcor.test" <-
+`rcor.test` <-
 function (mat, ...) {
     cor.mat <- cor(mat, ...)
     p <- ncol(mat)

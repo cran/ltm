@@ -1,4 +1,4 @@
-"start.val.tpm" <-
+`start.val.tpm` <-
 function (start.val, data, type, constraint) {
     data <- na.exclude(data)
     attr(data, "na.action") <- NULL

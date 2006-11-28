@@ -24,9 +24,10 @@ dichotomously scored items. \emph{Psychometrika}, \bold{35}, 179--197.
 }
 \examples{
 
-## Descriptive statistics for Lsat data
-descript(LSAT)
-
+## Descriptive statistics for LSAT data
+dsc <- descript(LSAT)
+dsc
+plot(dsc)
 
 }
 \keyword{datasets}

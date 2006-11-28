@@ -1,4 +1,4 @@
-"print.summ.ltm" <-
+`print.summ.ltm` <-
 function (x, digits = max(3, getOption("digits") - 3), ...) {
     if (!inherits(x, "summ.ltm"))
         stop("Use only with 'summ.ltm' objects.\n")

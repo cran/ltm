@@ -1,4 +1,4 @@
-"print.aov.ltm" <-
+`print.aov.ltm` <-
 function (x, digits = 3, ...) {
     if (!inherits(x, "aov.ltm"))
         stop("Use only with 'aov.ltm' objects.\n")

@@ -1,4 +1,4 @@
-"start.val.rasch" <-
+`start.val.rasch` <-
 function (start.val, data) {
     data <- na.exclude(data)
     attr(data, "na.action") <- NULL

@@ -1,4 +1,4 @@
-"mult.choice" <-
+`mult.choice` <-
 function (data, correct) {
     X <- data.matrix(data)
     p <- ncol(X)

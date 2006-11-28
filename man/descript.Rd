@@ -39,6 +39,10 @@ descript(data, n.print = 10, B = 1000)
                 are smaller than 5, \code{simulate.p.value} is turned to \code{TRUE} in \code{chisq.test()}, 
                 using \code{B} resamples.}
     }
+    
+    The plot method for \code{descript} objects currently works for dichotomous response patterns, and produces the 
+    xy-plot of the total score versus the proportion of correct responses for each item.
+     
 }
 
 \value{
@@ -55,6 +59,7 @@ An object of class \code{descript} with components,
                   returned only if any \code{NA}'s exist in \code{data}.}
     \item{bisCorr}{a numeric vector containing sample estimates of the biserial correlation of dichotomous manifest
     variables with the total score.}
+    \item{data}{a copy of the \code{data}.}
 }
 
 \author{
@@ -63,8 +68,11 @@ An object of class \code{descript} with components,
 
 \examples{
 
-## Descriptives for WIRS data:
-descript(WIRS, 3)
+## Descriptives for LSAT data:
+dsc <- descript(LSAT, 3)
+dsc
+plot(dsc, type = "b", lty = 1, pch = 1:5)
+legend("topleft", names(LSAT), pch = 1:5, col = 1:5, lty = 1, bty = "n")
 
 }
 

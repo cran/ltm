@@ -1,4 +1,4 @@
-"print.aov.rasch" <-
+`print.aov.rasch` <-
 function (x, digits = 3, ...) {
     if (!inherits(x, "aov.rasch"))
         stop("Use only with 'aov.rasch' objects.\n")

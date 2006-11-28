@@ -1,4 +1,4 @@
-"fscores.g" <-
+`fscores.g` <-
 function (betas, X, method) {
     logf.z <- function (z, y, betas) {
         gammas <- lapply(betas, function (x) {

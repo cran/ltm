@@ -1,4 +1,4 @@
-"matches" <-
+`matches` <-
 function (subs, mat) {
     m1 <- subs
     m2 <- mat[, -ncol(mat)]

@@ -1,4 +1,4 @@
-"anova.rasch" <-
+`anova.rasch` <-
 function (object, object2, ...) {
     if (!inherits(object, "rasch"))
         stop("Use only with 'rasch' objects.\n")

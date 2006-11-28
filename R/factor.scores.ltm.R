@@ -1,4 +1,4 @@
-"factor.scores.ltm" <-
+`factor.scores.ltm` <-
 function (object, resp.patterns = NULL, method = c("EB", "MI", "Component"), B = 5, 
                                 robust.se = FALSE, ...) {
     if (!inherits(object, "ltm"))

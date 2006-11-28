@@ -1,4 +1,4 @@
-"iprobs" <-
+`iprobs` <-
 function (betas, z) {
     n <- length(z)
     gammas <- lapply(betas, function (x) {

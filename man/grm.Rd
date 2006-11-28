@@ -96,7 +96,10 @@ Baker, F. and Kim, S-H. (2004) \emph{Item Response Theory}, 2nd ed.
 New York: Marcel Dekker.
 
 Samejima, F. (1969). Estimation of latent ability using a response pattern of graded scores. 
-\emph{Psychometrika Monograph Supplement}, \bold{34}, 100--114. 
+\emph{Psychometrika Monograph Supplement}, \bold{34}, 100--114.
+
+Rizopoulos, D. (2006) \bold{ltm}: An R package for latent variable modelling and item response theory analyses. 
+\emph{Journal of Statistical Software}, \bold{17(5)}, 1--25. URL \url{http://www.jstatsoft.org/v17/i05/}
 
 }
 
