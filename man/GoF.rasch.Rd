@@ -20,11 +20,12 @@ GoF.rasch(object, B = 49, \dots)
 }
 
 \details{
-  \code{GoF.rasch} performs a parametric Bootstrap test based on Pearson's chi-squared statistic. The Bootstrap 
-  approximation to the reference distribution is preferable compared with 
-  the ordinary Chi-squared approximation since the latter is not valid especially
-  for large number of items (=> many response patterns with expected frequencies
-  smaller than 1).
+  \code{GoF.rasch} performs a parametric Bootstrap test based on Pearson's chi-squared statistic defined as
+  \deqn{\sum\limits_{r = 1}^{2^p} \frac{\{O(r) - E(r)\}^2}{E(r)},}{\sum_{r=1}^{2^p} (O_r - E_r)^2 / E_r,} where \eqn{r}
+  represents a response pattern, \eqn{O(r)}{O_r} and \eqn{E(r)}{E_r} represent the observed and expected frequencies, 
+  respectively and \eqn{p} denotes the number of items. The Bootstrap approximation to the reference distribution is preferable compared with 
+  the ordinary Chi-squared approximation since the latter is not valid especially for large number of items 
+  (=> many response patterns with expected frequencies smaller than 1).
   
   In particular, the Bootstrap test is implemented as follows:
   \describe{

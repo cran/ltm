@@ -56,6 +56,7 @@ An object of either class \code{aov.grm}, class \code{aov.ltm} or class \code{ao
 }
 
 \seealso{
+    \code{\link{GoF.rasch}},
     \code{\link{grm}},
     \code{\link{ltm}},
     \code{\link{rasch}},
@@ -92,7 +93,7 @@ anova(fit0, fit1)
 
 
 ## An LRT between the Rasch and the two-parameter 
-## logistic model for the Lsat data: 
+## logistic model for the LSAT data: 
 anova(rasch(LSAT), ltm(LSAT ~ z1))
 
 }

@@ -91,6 +91,9 @@ Bartholomew, D., Steel, F., Moustaki, I. and Galbraith, J. (2002)
 \emph{The Analysis and Interpretation of Multivariate Data for
 Social Scientists}. London: Chapman and Hall.
 
+Rizopoulos, D. (2006) \bold{ltm}: An R package for latent variable modelling and item response theory analyses. 
+\emph{Journal of Statistical Software}, \bold{17(5)}, 1--25. URL \url{http://www.jstatsoft.org/v17/i05/}
+
 Rizopoulos, D. and Moustaki, I. (2006) Generalized latent variable models
 with nonlinear terms. \emph{submitted for publication}.
 }

@@ -17,7 +17,7 @@ function (object, type = c("two-way", "three-way"), rule = 3.5, nprint = 3, ...)
     X <- object$patterns$X
     Obs <- object$patterns$obs
     if (type == "two-way") {
-        index <- combinations(p, 2)
+        index <- t(combn(p, 2))
         nindex <- nrow(index)
         combs <- as.matrix(expand.grid(lapply(1:2, function(x) 0:1)))
         dimnames(combs) <- NULL
@@ -37,7 +37,7 @@ function (object, type = c("two-way", "three-way"), rule = 3.5, nprint = 3, ...)
         }
     }
     if (type == "three-way") {
-        index <- combinations(p, 3)
+        index <- t(combn(p, 3))
         nindex <- nrow(index)
         combs <- as.matrix(expand.grid(lapply(1:3, function(x) 0:1)))
         dimnames(combs) <- NULL

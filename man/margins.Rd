@@ -49,7 +49,7 @@ margins(object, \dots)
 }
 
 \note{
-    \code{margins.rasch()} \code{margins.tpm()} and are in fact a copy of \code{margins.ltm()}.
+    \code{margins.rasch()} and \code{margins.tpm()} are in fact a copy of \code{margins.ltm()}.
 }
 
 \value{
@@ -80,6 +80,10 @@ and Factor Analysis}, 2nd ed. London: Arnold.
 Bartholomew, D., Steel, F., Moustaki, I. and Galbraith, J. (2002)
 \emph{The Analysis and Interpretation of Multivariate Data for
 Social Scientists}. London: Chapman and Hall.
+
+Rizopoulos, D. (2006) \bold{ltm}: An R package for latent variable modelling and item response theory analyses. 
+\emph{Journal of Statistical Software}, \bold{17(5)}, 1--25. URL \url{http://www.jstatsoft.org/v17/i05/}
+
 }
 
 \author{

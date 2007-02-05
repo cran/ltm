@@ -24,7 +24,7 @@ grm(data, constrained = FALSE, IRT.param = TRUE, Hessian = FALSE,
   \item{control}{a list of control values,
     \describe{
         \item{iter.qN}{ the number of quasi-Newton iterations. Default 150.}
-        \item{GHk}{ the number of Gauss-Hermite quadrature points. Default 15.}
+        \item{GHk}{ the number of Gauss-Hermite quadrature points. Default 21.}
         \item{method}{ the optimization method to be used in \code{optim()}. Default "BFGS".}
         \item{verbose}{ logical; if \code{TRUE} info about the optimization procedure are printed.}
         \item{digits.abbrv}{ numeric value indicating the number of digits used in abbreviating the Item's names.

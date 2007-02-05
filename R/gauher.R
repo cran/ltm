@@ -38,7 +38,7 @@ function (n) {
         }
         x[i] <- z
         x[n + 1 - i] <- -z
-        w[i] <- 2/(pp * pp)
+        w[i] <- 2 / (pp * pp)
         w[n + 1 - i] <- w[i]
     }
     list(x = x, w = w)

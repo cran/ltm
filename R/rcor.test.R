@@ -1,8 +1,9 @@
 `rcor.test` <-
 function (mat, ...) {
+    mat <- data.matrix(mat)
     cor.mat <- cor(mat, ...)
     p <- ncol(mat)
-    index <- combinations(p, 2)
+    index <- t(combn(p, 2))
     nindex <- nrow(index)
     pvals <- numeric(nindex)
     for (i in 1:nindex) {

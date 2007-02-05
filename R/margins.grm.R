@@ -12,7 +12,7 @@ function (object, type = c("two-way", "three-way"), rule = 3.5, ...) {
     GHw <- object$GH$GHw
     X <- object$na.action(data.matrix(object$X))
     if (type == "two-way") {
-        index <- combinations(p, 2)
+        index <- t(combn(p, 2))
         nindex <- nrow(index)
         margins <- vector("list", nindex)
         for (i in 1:nindex) {
@@ -29,7 +29,7 @@ function (object, type = c("two-way", "three-way"), rule = 3.5, ...) {
         }
     }
     if (type == "three-way") {
-        index <- combinations(p, 3)
+        index <- t(combn(p, 3))
         nindex <- nrow(index)
         margins <- vector("list", nindex)
         for (i in 1:nindex) {

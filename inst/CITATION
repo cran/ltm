@@ -12,6 +12,6 @@ citEntry(entry = "Article",
          
          textVersion  = paste("Dimitris Rizopoulos (2006).", 
                "ltm: An R package for Latent Variable Modelling and Item Response Theory Analyses,",
-               "Journal of Statistical Software, 17(5), 1-25.",
+               "Journal of Statistical Software, 17 (5), 1-25.",
 	         "URL http://www.jstatsoft.org/v17/i05/")
 )

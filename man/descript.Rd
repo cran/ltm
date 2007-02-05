@@ -39,14 +39,10 @@ descript(data, n.print = 10, B = 1000)
                 are smaller than 5, \code{simulate.p.value} is turned to \code{TRUE} in \code{chisq.test()}, 
                 using \code{B} resamples.}
     }
-    
-    The plot method for \code{descript} objects currently works for dichotomous response patterns, and produces the 
-    xy-plot of the total score versus the proportion of correct responses for each item.
-     
 }
 
 \value{
-An object of class \code{descript} with components,
+\code{descript()} returns an object of class \code{descript} with components,
     \item{sample}{a numeric vector of length 2, with elements the number of items and the number of sample units.}
     \item{perc}{a numeric matrix containing the percentages of negative and positive responses for each item. If
                 \code{data} contains only dichotomous manifest variables the logit of the positive responses (i.e.,

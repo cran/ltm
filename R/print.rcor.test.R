@@ -3,16 +3,15 @@ function (x, digits = max(3, getOption("digits") - 4), ...) {
     mat <- x$cor.mat
     mat[lower.tri(mat)] <- x$p.values[, 3]
     mat <- round(mat, digits)
-    low.part <- format.pval(mat[lower.tri(mat)], eps = 1/10^digits)
-    upp.part <- format(mat[upper.tri(mat)])
-    mat[lower.tri(mat)] <- low.part
-    mat[upper.tri(mat)] <- upp.part
-    diag(mat) <- "****"
+    mat[lower.tri(mat)] <- sprintf("%6.3f", format(mat[lower.tri(mat)]))
+    ind <- mat[lower.tri(mat)] == paste(" 0.", paste(rep(0, digits), collapse = ""), sep = "")
+    mat[lower.tri(mat)][ind] <- "<0.001"
+    mat[upper.tri(mat)] <- sprintf("%6.3f", format(mat[upper.tri(mat)]))
+    diag(mat) <- " *****"
     cat("\n")
     print(noquote(mat))
     cat("\nupper diagonal part contains correlation coefficient estimates",
-        "\nlower diagonal part contains corresponding p-values")
-    cat("\n\n")
+        "\nlower diagonal part contains corresponding p-values\n\n")
     invisible(x)
 }
 

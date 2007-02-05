@@ -12,36 +12,37 @@
 
 \usage{
 \method{plot}{grm}(x, type = c("ICC", "IIC", "OCCu", "OCCl"), items = NULL, 
-     category = NULL, z = seq(-3.8, 3.8, length = 100), annot, 
+     category = NULL, zrange = c(-3.8, 3.8), 
+     z = seq(zrange[1], zrange[2], length = 100), annot, 
      labels = NULL, legend = FALSE, cx = "top", cy = NULL, ncol = 1, 
      bty = "n", col = palette(), lty = 1, pch, xlab, ylab, main, 
      sub = NULL, cex = par("cex"), cex.lab = par("cex.lab"), 
      cex.main = par("cex.main"), cex.sub = par("cex.sub"), 
-     cex.axis = par("cex.axis"), \dots)
+     cex.axis = par("cex.axis"), plot = TRUE, \dots)
 
 \method{plot}{ltm}(x, type = c("ICC", "IIC", "loadings"), items = NULL, 
-     z = seq(-3.8, 3.8, length = 100), annot, labels = NULL, 
-     legend = FALSE, cx = "topleft", cy = NULL, ncol = 1, 
-     bty = "n", col = palette(), lty = 1, pch, xlab, ylab, zlab, 
-     main, sub = NULL, cex = par("cex"), cex.lab = par("cex.lab"), 
+     zrange = c(-3.8, 3.8), z = seq(zrange[1], zrange[2], length = 100), 
+     annot, labels = NULL, legend = FALSE, cx = "topleft", cy = NULL, 
+     ncol = 1, bty = "n", col = palette(), lty = 1, pch, xlab, ylab, 
+     zlab, main, sub = NULL, cex = par("cex"), cex.lab = par("cex.lab"), 
      cex.main = par("cex.main"), cex.sub = par("cex.sub"), 
-     cex.axis = par("cex.axis"), \dots)
+     cex.axis = par("cex.axis"), plot = TRUE, \dots)
 
 \method{plot}{rasch}(x, type = c("ICC", "IIC"), items = NULL, 
-     z = seq(-3.8, 3.8, length = 100), annot, labels = NULL, 
-     legend = FALSE, cx = "topleft", cy = NULL, ncol = 1, 
-     bty = "n", col = palette(), lty = 1, pch, xlab, ylab, main, 
-     sub = NULL, cex = par("cex"), cex.lab = par("cex.lab"), 
+     zrange = c(-3.8, 3.8), z = seq(zrange[1], zrange[2], length = 100), 
+     annot, labels = NULL, legend = FALSE, cx = "topleft", cy = NULL, 
+     ncol = 1, bty = "n", col = palette(), lty = 1, pch, xlab, ylab, 
+     main, sub = NULL, cex = par("cex"), cex.lab = par("cex.lab"), 
      cex.main = par("cex.main"), cex.sub = par("cex.sub"), 
-     cex.axis = par("cex.axis"), \dots)
+     cex.axis = par("cex.axis"), plot = TRUE, \dots)
 
 \method{plot}{tpm}(x, type = c("ICC", "IIC"), items = NULL, 
-     z = seq(-3.8, 3.8, length = 100), annot, labels = NULL, 
-     legend = FALSE, cx = "topleft", cy = NULL, ncol = 1, bty = "n", 
-     col = palette(), lty = 1, pch, xlab, ylab, main, 
+     zrange = c(-3.8, 3.8), z = seq(zrange[1], zrange[2], length = 100), 
+     annot, labels = NULL, legend = FALSE, cx = "topleft", cy = NULL, 
+     ncol = 1, bty = "n", col = palette(), lty = 1, pch, xlab, ylab, main, 
      sub = NULL, cex = par("cex"), cex.lab = par("cex.lab"), 
      cex.main = par("cex.main"), cex.sub = par("cex.sub"), 
-     cex.axis = par("cex.axis"), \dots)
+     cex.axis = par("cex.axis"), plot = TRUE, \dots)
 }
 \arguments{
   \item{x}{ an object inheriting from either class \code{grm}, class \code{ltm}, class \code{rasch} or class \code{tpm}. }
@@ -53,6 +54,7 @@
                 \code{type = "IIC"} the Test Information Curve is plotted. }
   \item{category}{ a scalar indicating the response category for which the curves should be plotted; if \code{NULL}
                 all categories are considered. This argument is only relevant for \code{grm} objects. }
+  \item{zrange}{a numeric vector of length 2 indicating the range for the latent variable values.}
   \item{z}{ a numeric vector denoting the values for the latent variable(s) values to be used in the plots. }
   \item{annot}{logical; if \code{TRUE} the plotted lines are annotated. }
   \item{labels}{character vector; the labels to use in either the annotation or legend. If \code{NULL} 
@@ -63,6 +65,8 @@
   \item{col, lty, pch}{ control values, see \code{\link{par}}; recycling is used if necessary. }
   \item{xlab, ylab, zlab, main, sub}{ character string or an \code{\link{expression}}; see \code{\link{title}}. }
   \item{cex, cex.lab, cex.main, cex.sub, cex.axis}{ the cex family of argument; see \code{\link{par}}. }
+  \item{plot}{logical; if \code{TRUE} the plot(s) is(are) produced otherwise only the values used to create the plot(s)
+                are returned.}
   \item{\dots}{ extra graphical parameters to be passed to \code{plot()}, \code{lines()}, \code{legend()} and 
                 \code{text()}.}
 }
@@ -123,15 +127,17 @@ plot(fit, type = "IIC", legend = TRUE, cx = "topright", lwd = 2, cex = 1.4)
 ## Test Information Function for the Science data;
 plot(fit, type = "IIC", items = 0, lwd = 2)
 
+
 ###################################################
 
 
 # Examples for plot.ltm()
 
 ## Item Characteristic Curves for the two-parameter logistic
-## model; plot only items 1, 2, 4 and 6:
+## model; plot only items 1, 2, 4 and 6; take the range of the
+## latent ability to be (-2.5, 2.5):
 fit <- ltm(WIRS ~ z1)
-plot(fit, items = c(1, 2, 4, 6), lwd = 3, cex = 1.4)
+plot(fit, items = c(1, 2, 4, 6), zrange = c(-2.5, 2.5), lwd = 3, cex = 1.4)
 
 ## Test Information Function under the two-parameter logistic
 ## model for the Lsat data
@@ -182,6 +188,12 @@ text(x = 2, y = 0.5, labels = paste("Total Information in (-2, 0):",
     paste("(", round(100 * info.24 / info.Tot, 2), "\%)", sep = "")), 
     cex = 1.2)
 
+## The Standard Error of Measurement can be plotted by
+vals <- plot(fit, type = "IIC", items = 0, plot = FALSE)
+plot(vals[, "z"], 1 / sqrt(vals[, "info"]), type = "l", lwd = 2,
+     xlab = "Ability", ylab = "Standard Error", 
+     main = "Standard Error of Measurement")
+
 ###################################################
 
 
@@ -203,11 +215,12 @@ text(2, 0.35, "Rasch model\nwith Guessing parameter")
 ## (you have to run the above first)
 plot(range(pl1[, "z"]), c(0, 1), type = "n", xlab = "Ability", 
      ylab = "Probability", main = "Item Characteristic Curves - Item 4")
-lines(pl1[, "z"], pl1[, "Item 4"], lwd = 2)
-lines(pl2[, "z"], pl2[, "Item 4"], lwd = 2, col = "red")
-lines(pl3[, "z"], pl3[, "Item 4"], lwd = 2, col = "blue")
+lines(pl1[, c("z", "Item 4")], lwd = 2, col = "black")
+lines(pl2[, c("z", "Item 4")], lwd = 2, col = "red")
+lines(pl3[, c("z", "Item 4")], lwd = 2, col = "blue")
 legend("right", c("Rasch model Discrimination = 1", "Rasch model", 
        "Rasch model with\nGuessing parameter"), lwd = 2, col = c("black", 
        "red", "blue"), bty = "n")
+
 }
 \keyword{methods}

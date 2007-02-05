@@ -17,7 +17,7 @@ function (x, digits = 2, ...) {
             cat("\n'***' denotes pairs of items with lack-of-fit\n")
     } else {
         cat("\nFit on the Three-Way Margins\n\n")
-        out <- data.frame(combinations(x$nitems, 3))
+        out <- data.frame(t(combn(x$nitems, 3)))
         names(out) <- c("Item i", "Item j", "Item k")
         out$"(O-E)^2/E" <- round(sapply(x$margins, "[[", "TotalResid"), digits = 2)
         out$" " <- sapply(x$margins, function (x) if (x$TotalResid > x$rule) "***" else "")

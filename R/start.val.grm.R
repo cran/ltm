@@ -32,7 +32,7 @@ function (start.val, data, weight, constrained, ncatg) {
             y1 <- (y > q1)
             fit <- glm.fit(cbind(1, z), y1, weight, family = binomial())
             coefs <- fit$coefficients
-            spacing <- logit((1:q) / (q + 1))
+            spacing <- qlogis((1:q) / (q + 1))
             thets <- -coefs[1] + spacing - spacing[q1]
             out <- c(thets[1], log(diff(thets)), coefs[-1])
             names(out) <- NULL

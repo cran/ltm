@@ -31,7 +31,7 @@ function (data, n.print = 10, B = 1000) {
         NULL
     dat <- na.exclude(data)    
     attr(dat, "na.action") <- NULL    
-    ind <- combinations(p, 2)
+    ind <- t(combn(p, 2))
     nind <- nrow(ind)
     pvals <- numeric(nind)
     old <- options(warn = (-1))

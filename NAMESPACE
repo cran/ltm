@@ -2,12 +2,12 @@
 export(anova.grm, anova.ltm, anova.rasch, anova.tpm, biserial.cor, coef.grm, coef.ltm, coef.rasch, coef.tpm, descript, 
 	 factor.scores, factor.scores.grm, factor.scores.ltm, factor.scores.rasch, factor.scores.tpm, fitted.grm, 
 	 fitted.ltm, fitted.rasch, fitted.tpm, GoF.rasch, grm, information, ltm, margins, margins.grm, margins.ltm, 
-	 margins.rasch, margins.tpm, mult.choice, plot.grm, plot.ltm, plot.rasch, plot.tpm, rasch, rcor.test, rmvlogis, 
-	 summary.grm, summary.ltm, summary.rasch, summary.tpm, tpm, vcov.grm, vcov.ltm, vcov.rasch, vcov.tpm)
+	 margins.rasch, margins.tpm, mult.choice, plot.descript, plot.grm, plot.ltm, plot.rasch, plot.tpm, rasch, 
+	 rcor.test, rmvlogis, summary.grm, summary.ltm, summary.rasch, summary.tpm, tpm, vcov.grm, vcov.ltm, vcov.rasch, 
+	 vcov.tpm)
 
 # Imported functions
 importFrom(MASS, mvrnorm)
-importFrom(gtools, combinations)
 importFrom(msm, deltamethod)
 
 # S3 methods

@@ -1,3 +1,19 @@
+Changes in version: ltm_0.7-1
+
+  o a bug was fixed in "grm()".
+
+  o the "plot()" method for all IRT models has an extra logical argument 'plot' that controls whether the plot will
+    be produced or not. If 'plot = FALSE', then the values used to create the plot are returned.
+
+  o the "plot()" methods for 'descript' objects has an extra argument 'items' specifying which items to plot.
+
+  o a better "print()" method for 'rcor.test' objects has been added.
+
+  o package 'gtools' is no longer required.
+
+
+==============================
+
 Changes in version: ltm_0.7-0
 
   o function "biserial.cor()" has been included that computes the point biserial correlation between a dichotomous and 
