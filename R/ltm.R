@@ -4,6 +4,7 @@ function (formula, constraint = NULL, IRT.param, start.val = NULL, na.action = N
     tm <- terms(formula)
     av <- all.vars(formula)
     X <- eval(attr(tm, "variables"), list(z1 = 0, z2 = 0), parent.frame())[[1]]
+    oX <- X
     if ((!is.data.frame(X) & !is.matrix(X)) || ncol(X) == 1)
         stop("\nthe left-hand side of 'formula' must be either a numeric matrix or a data.frame, with at least two columns.\n")    
     X <- data.matrix(X)
@@ -29,7 +30,7 @@ function (formula, constraint = NULL, IRT.param, start.val = NULL, na.action = N
             warning("conversion to the IRT parameterization works only for the two-parameter logistic model.\n")
             FALSE
         } else
-            TRUE
+            IRT.param
     }
     p <- ncol(X)
     q. <- 1 + factors + sum(unlist(ltst[-1]))
@@ -52,10 +53,11 @@ function (formula, constraint = NULL, IRT.param, start.val = NULL, na.action = N
     fit <- ltm.fit(X, betas, constraint, formula, con)
     ltst$nams <- colnames(fit$coefficients)
     fit$ltst <- ltst
-    fit$X <- X
+    fit$X <- oX
     fit$control <- con
     fit$IRT.param <- IRT.param
     fit$constraint <- constraint
+    fit$formula <- formula
     fit$call <- cl
     class(fit) <- "ltm"
     fit

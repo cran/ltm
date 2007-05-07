@@ -11,9 +11,10 @@ function (betas, X, method) {
             log(c(x[1], x[2:nc] - x[1:(nc - 1)]))
         })
         log.pxz <- numeric(p)
-        for (i in 1:p)
-            log.pxz[i] <- log.prs[[i]][y[i]]
-        - (sum(log.pxz) + dnorm(z, log = TRUE))
+        for (i in 1:p) {
+            log.pxz[i] <- if (!is.na(y[i])) log.prs[[i]][y[i]] else 0
+        }
+        - (sum(log.pxz, na.rm = TRUE) + dnorm(z, log = TRUE))
     }
     fscore <- function (logf.z, y, betas) {
         opt <- optim(0.0, fn = logf.z, method = "BFGS", hessian = TRUE, y = y, betas = betas)

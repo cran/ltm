@@ -1,7 +1,5 @@
 `start.val.ltm` <-
 function (start.val, data, factors, formula) {
-    data <- na.exclude(data)
-    attr(data, "na.action") <- NULL
     n <- nrow(data)
     p <- ncol(data)
     cf <- paste(formula[3])
@@ -16,7 +14,7 @@ function (start.val, data, factors, formula) {
             if (factors > 1)
                 Z$z2 <- rnorm(n)
         } else {
-            rs <- as.vector(rowSums(data))
+            rs <- as.vector(rowSums(data, na.rm = TRUE))
             len.uni <- length(unique(rs))
             rs <- factor(rs, labels = 1:len.uni)
             rs <- as.numeric(levels(rs))[as.integer(rs)]
@@ -24,6 +22,8 @@ function (start.val, data, factors, formula) {
             if (factors > 1)
                 Z$z2 <- seq(3, -3, len = n)
         }
+        old <- options(warn = (2))
+        on.exit(options(old))
         coefs <- matrix(0, p, q.)
         for (i in 1:p) {
             Z$y <- data[, i]
@@ -31,10 +31,7 @@ function (start.val, data, factors, formula) {
             coefs[i, ] <- if (!inherits(fm, "try-error")) {
                 fm$coef
             } else {
-                Z$z1 <- rnorm(n)
-                if (factors > 1)
-                    Z$z2 <- rnorm(n)               
-                glm(form, family = binomial(), data = Z)$coef
+                c(0, rep(1, q. - 1))
             }
         }
         dimnames(coefs) <- NULL

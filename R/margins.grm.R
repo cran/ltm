@@ -10,7 +10,7 @@ function (object, type = c("two-way", "three-way"), rule = 3.5, ...) {
     p <- length(betas)
     pr <- iprobs(betas, object$GH$Z)
     GHw <- object$GH$GHw
-    X <- object$na.action(data.matrix(object$X))
+    X <- data.matrix(object$X)[complete.cases(X), ]
     if (type == "two-way") {
         index <- t(combn(p, 2))
         nindex <- nrow(index)

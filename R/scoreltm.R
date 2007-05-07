@@ -4,13 +4,13 @@ function (betas, constraint) {
     pr <- probs(Z %*% t(betas))
     p.xz <- exp(X %*% t(log(pr)) + mX %*% t(log(1 - pr)))
     p.x <- c(p.xz %*% GHw)
-    p.zx <- p.xz / p.x
-    Nt <- GHw * colSums(p.zx * obs)
+    p.zx <- (p.xz / p.x) * obs
     scores <- matrix(0, p, q.)
     for (i in 1:p) {
-        ind. <- !na.ind[, i]
-        rit <- if (all(ind.)) GHw * colSums(p.zx * X[, i] * obs) else GHw * colSums(p.zx[ind., ] * X[ind., i] * obs[ind.])
-        scores[i, ] <- -c(crossprod(rit - pr[, i] * Nt, Z))
+        ind. <- na.ind[, i]
+        Y <- outer(X[, i], pr[, i], "-")
+        Y[ind., ] <- 0
+        scores[i, ] <- -colSums((p.zx * Y) %*% (Z * GHw))
     }
     if (!is.null(constraint))
         scores[-((constraint[, 2] - 1) * p + constraint[, 1])]

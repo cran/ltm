@@ -54,7 +54,7 @@ function (x, type = c("ICC", "IIC", "OCCu", "OCCl"), items = NULL, category = NU
     } else 
         mis.ind <- FALSE
     if (missing(ylab)) {
-        ylab <- if (type == "ICC") "Probability" else "Information"
+        ylab <- if (type == "ICC" || (type == "OCCl" | type == "OCCu")) "Probability" else "Information"
     }
     if (missing(xlab)) {
         xlab <- "Ability"

@@ -6,7 +6,7 @@
 }
 \usage{
 grm(data, constrained = FALSE, IRT.param = TRUE, Hessian = FALSE, 
-    start.val = NULL, na.action = na.omit, control = list())
+    start.val = NULL, na.action = NULL, control = list())
 }
 \arguments{
   \item{data}{a data.frame (that will be converted to a numeric matrix using 
@@ -20,7 +20,9 @@ grm(data, constrained = FALSE, IRT.param = TRUE, Hessian = FALSE,
         elements corresponds to each item and should contain a numeric vector with initial values for the 
         extremity parameters and discrimination parameter; even if \code{constrained = TRUE} the discrimination 
         parameter should be provided for all the items. If \code{"random"} random starting values are computed.}
-  \item{na.action}{ the \code{na.action} to be used on \code{data}; default \code{na.omit}.}
+  \item{na.action}{ the \code{na.action} to be used on \code{data}; default \code{NULL} the model uses the available 
+        cases, i.e., it takes into account the observed part of sample units with missing values (valid under MAR 
+        mechanisms if the model is correctly specified)..}
   \item{control}{a list of control values,
     \describe{
         \item{iter.qN}{ the number of quasi-Newton iterations. Default 150.}
@@ -38,14 +40,14 @@ grm(data, constrained = FALSE, IRT.param = TRUE, Hessian = FALSE,
     This model was first discussed by Samejima (1969) and it is mainly used in cases where the assumption of ordinal 
     levels of response options is plausible.
 
-    The model is defined as follows \deqn{\log\left(\frac{\gamma_{ik}}{1-\gamma_{ik}}\right) = \beta_{ik} + 
-    \beta_i z,}{ logit(\gamma_ik) = beta_ik + beta_i z, } where \eqn{\gamma_{ik}} denotes the cumulative 
+    The model is defined as follows \deqn{\log\left(\frac{\gamma_{ik}}{1-\gamma_{ik}}\right) = \beta_{ik} - 
+    \beta_i z,}{ logit(\gamma_ik) = beta_ik - beta_i z, } where \eqn{\gamma_{ik}} denotes the cumulative 
     probability of a response in category \eqn{k}th or lower to the \eqn{i}th item, given the latent ability \eqn{z}. 
     If \code{constrained = TRUE} it is assumed that all \eqn{\beta_i} are equal.
     
     If \code{IRT.param = TRUE}, then the parameters estimates are reported under the usual IRT parameterization,
-    i.e., \deqn{\log\left(\frac{\gamma_{ik}}{1-\gamma_{ik}}\right) = \beta_i (z - \beta_{ik}^*).}{ logit
-    (\gamma_ik) = beta_i (z - beta_ik^*).}
+    i.e., \deqn{\log\left(\frac{\gamma_{ik}}{1-\gamma_{ik}}\right) = \beta_i (z - \beta_{ik}^*),}{ logit
+    (\gamma_ik) = beta_i (z - beta_ik^*),} where \eqn{\beta_{ik}^* = \beta_{ik} / \beta_i}{beta_ik^* = beta_ik / beta_i}.
 
     The fit of the model is based on approximate marginal Maximum Likelihood, using the Gauss-Hermite quadrature rule 
     for the approximation of the required integrals.

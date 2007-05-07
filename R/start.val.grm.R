@@ -1,7 +1,5 @@
 `start.val.grm` <-
 function (start.val, data, weight, constrained, ncatg) {
-    data <- na.exclude(data)    
-    attr(data, "na.action") <- NULL
     n <- nrow(data)
     p <- ncol(data)
     computeStartVals <- function (start.val) {
@@ -23,14 +21,18 @@ function (start.val, data, weight, constrained, ncatg) {
     comp <- computeStartVals(start.val)
     if (comp$compute) {
         res <- vector("list", p)
-        z <- if (comp$random) rnorm(n) else seq(-3, 3, length = n)[order(rowSums(data))]
+        z <- if (comp$random) rnorm(n) else seq(-3, 3, length = n)[order(rowSums(data, na.rm = TRUE))]
         for (i in 1:p) {
             y <- data[, i]
-            lev <- length(unique(y))
+            na.ind <- !is.na(y)
+            y. <- y[na.ind]
+            z. <- z[na.ind]
+            weight. <- weight[na.ind]
+            lev <- length(unique(y.))
             q <- lev - 1
             q1 <- lev %/% 2
-            y1 <- (y > q1)
-            fit <- glm.fit(cbind(1, z), y1, weight, family = binomial())
+            y1 <- (y. > q1)
+            fit <- glm.fit(cbind(1, z.), y1, weight., family = binomial())
             coefs <- fit$coefficients
             spacing <- qlogis((1:q) / (q + 1))
             thets <- -coefs[1] + spacing - spacing[q1]

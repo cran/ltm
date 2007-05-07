@@ -2,6 +2,8 @@
 function (object, type = c("two-way", "three-way"), rule = 3.5, nprint = 3, ...) {
     if (!class(object) %in% c("ltm", "rasch", "tpm"))
         stop("Use only with 'ltm', 'rasch' or 'tpm' objects.\n")
+    if (any(is.na(object$X)) && is.null(object$na.action))
+        stop("\nmargins() cannot be currently used in the presense of missing values.\n")    
     type <- match.arg(type)
     n <- nrow(object$X)
     p <- ncol(object$X)

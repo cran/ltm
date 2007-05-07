@@ -62,6 +62,11 @@ descript(data, n.print = 10, B = 1000)
     Dimitris Rizopoulos \email{dimitris.rizopoulos@med.kuleuven.be}
 }
 
+\seealso{
+    \code{\link{plot.descript}},
+    \code{\link{unidimTest}}
+}
+
 \examples{
 
 ## Descriptives for LSAT data:

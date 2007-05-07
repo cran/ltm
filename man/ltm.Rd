@@ -147,8 +147,8 @@ models. \emph{Psychometrika}, \bold{65}, 391--411.
 Rizopoulos, D. (2006) \bold{ltm}: An R package for latent variable modelling and item response theory analyses. 
 \emph{Journal of Statistical Software}, \bold{17(5)}, 1--25. URL \url{http://www.jstatsoft.org/v17/i05/}
 
-Rizopoulos, D. and Moustaki, I. (2006) Generalized latent variable models
-with nonlinear terms. \emph{submitted for publication}.
+Rizopoulos, D. and Moustaki, I. (2007) Generalized latent variable models
+with nonlinear effects. \emph{British Journal of Mathematical and Statistical Psychology}, to appear.
 }
 
 \author{
@@ -162,6 +162,8 @@ with nonlinear terms. \emph{submitted for publication}.
   \code{\link{anova.ltm}},
   \code{\link{plot.ltm}},
   \code{\link{vcov.ltm}},
+  \code{\link{item.fit}},
+  \code{\link{person.fit}},  
   \code{\link{margins}},
   \code{\link{factor.scores}}
 }

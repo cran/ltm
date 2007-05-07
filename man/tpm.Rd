@@ -8,7 +8,7 @@
 }
 \usage{
 tpm(data, type = c("latent.trait", "rasch"), constraint = NULL, 
-    max.guessing = 0.4, IRT.param = TRUE, start.val = NULL, 
+    max.guessing = 1, IRT.param = TRUE, start.val = NULL, 
     na.action = NULL, control = list())
 }
 \arguments{
@@ -130,6 +130,8 @@ Rizopoulos, D. (2006) \bold{ltm}: An R package for latent variable modelling and
   \code{\link{anova.tpm}},
   \code{\link{plot.tpm}},
   \code{\link{vcov.tpm}},
+  \code{\link{item.fit}},
+  \code{\link{person.fit}},  
   \code{\link{margins}},
   \code{\link{factor.scores}}
 }
@@ -146,7 +148,6 @@ tpm(LSAT, control = list(optimizer = "nlminb"))
 # the three parameter model with equal 
 # discrimination parameter across items
 # fix the guessing parameter for the third item to zero
-# and allow the guessing parameter estimates to reach one
 tpm(LSAT, type = "rasch", constraint = cbind(3, 1, 0), max.guessing = 1)
 
 

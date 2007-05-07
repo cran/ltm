@@ -9,14 +9,16 @@ function (betas, constraint, iter, verbose = FALSE) {
         lgLik <- sum(log(rep(p.x, obs)))
         if (verbose)
             cat("EM iteration:", it, "  -logLik:", -lgLik, "\n")
-        p.zx <- p.xz / p.x
-        Nt <- GHw * colSums(p.zx * obs)
+        p.zx <- (p.xz / p.x) * obs
+        Nt <- GHw * colSums(p.zx)
         nb <- matrix(0, p, q.)
         for (i in 1:p) {
-            ind <- !na.ind[, i]
-            rit <- if (all(ind)) GHw * colSums(p.zx * X[, i] * obs) else GHw * colSums(p.zx[ind, ] * X[ind, i] * obs[ind])
+            ind <- na.ind[, i]
+            Y <- outer(X[, i], pr[, i], "-")
+            Y[ind, ] <- 0
+            sc <- colSums((p.zx * Y) %*% (Z * GHw))
             hes <- crossprod(Z, (dvar[, i] * Nt) * Z)
-            nb[i, ] <- betas[i, ] + solve(hes, c(crossprod(rit - pr[, i] * Nt, Z)))
+            nb[i, ] <- betas[i, ] + solve(hes, sc)
         }
         betas <- nb
         if (!is.null(constraint))

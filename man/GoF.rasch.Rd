@@ -53,6 +53,9 @@ An object of class \code{GoF.rasch} with components,
 }
 
 \seealso{
+    \code{\link{person.fit}},
+    \code{\link{item.fit}},
+    \code{\link{margins}},    
     \code{\link{rasch}}
 }
 

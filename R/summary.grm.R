@@ -37,6 +37,8 @@ function (object, ...) {
     out$counts <- object$counts
     out$call <- object$call
     out$control <- object$control
+    out$attr <- attr(object$X, "items")
+    out$ancr <- attr(object$X, "anchoring")
     class(out) <- "summ.grm"
     out
 }

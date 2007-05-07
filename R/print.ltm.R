@@ -6,7 +6,7 @@ function (x, digits = max(3, getOption("digits") - 3), ...) {
     if (is.matrix(coefs <- coef(x))) {
         cat("Coefficients:\n")
         if (x$IRT.param)
-            coefs <- round(IRT.parm(x)$parms, 3)
+            coefs <- round(IRT.parm(x)$parms, digits)
         print(coefs, print.gap = 2, quote = FALSE)
     } else
         cat("No coefficients\n")

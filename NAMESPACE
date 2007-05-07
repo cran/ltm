@@ -1,14 +1,16 @@
 # Exported functions
 export(anova.grm, anova.ltm, anova.rasch, anova.tpm, biserial.cor, coef.grm, coef.ltm, coef.rasch, coef.tpm, descript, 
 	 factor.scores, factor.scores.grm, factor.scores.ltm, factor.scores.rasch, factor.scores.tpm, fitted.grm, 
-	 fitted.ltm, fitted.rasch, fitted.tpm, GoF.rasch, grm, information, ltm, margins, margins.grm, margins.ltm, 
-	 margins.rasch, margins.tpm, mult.choice, plot.descript, plot.grm, plot.ltm, plot.rasch, plot.tpm, rasch, 
-	 rcor.test, rmvlogis, summary.grm, summary.ltm, summary.rasch, summary.tpm, tpm, vcov.grm, vcov.ltm, vcov.rasch, 
+	 fitted.ltm, fitted.rasch, fitted.tpm, GoF.rasch, grm, information, item.fit, ltm, margins, margins.grm, 
+	 margins.ltm, margins.rasch, margins.tpm, mult.choice, person.fit, plot.descript, plot.grm, plot.ltm, plot.rasch, 
+	 plot.tpm, rasch, rcor.test, residuals.grm, residuals.ltm, residuals.rasch, residuals.tpm, rmvlogis, summary.grm, 
+	 summary.ltm, summary.rasch, summary.tpm, testEquatingData, tpm, unidimTest, vcov.grm, vcov.ltm, vcov.rasch, 
 	 vcov.tpm)
 
 # Imported functions
 importFrom(MASS, mvrnorm)
 importFrom(msm, deltamethod)
+importFrom(polycor, polychor)
 
 # S3 methods
 S3method(anova, grm)
@@ -44,6 +46,7 @@ S3method(plot, grm)
 S3method(plot, ltm)
 S3method(plot, rasch)
 S3method(plot, tpm)
+S3method(plot, unidimTest)
 S3method(print, aov.grm)
 S3method(print, aov.ltm)
 S3method(print, aov.rasch)
@@ -53,9 +56,11 @@ S3method(print, fscores)
 S3method(print, GoF.rasch)
 S3method(print, grm)
 S3method(print, information)
+S3method(print, itemFit)
 S3method(print, ltm)
 S3method(print, margins.grm)
 S3method(print, margins.ltm)
+S3method(print, persFit)
 S3method(print, rasch)
 S3method(print, rcor.test)
 S3method(print, summ.grm)
@@ -63,10 +68,15 @@ S3method(print, summ.ltm)
 S3method(print, summ.rasch)
 S3method(print, summ.tpm)
 S3method(print, tpm)
-S3method(summary, grm)
-S3method(summary, ltm)
-S3method(summary, rasch)
-S3method(summary, tpm)
+S3method(print, unidimTest)
+S3method(coef, grm)
+S3method(coef, ltm)
+S3method(coef, rasch)
+S3method(coef, tpm)
+S3method(residuals, grm)
+S3method(residuals, ltm)
+S3method(residuals, rasch)
+S3method(residuals, tpm)
 S3method(vcov, grm)
 S3method(vcov, ltm)
 S3method(vcov, rasch)

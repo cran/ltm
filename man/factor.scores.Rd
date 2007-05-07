@@ -28,7 +28,8 @@ factor.scores(object, \dots)
 }
 
 \arguments{
-  \item{object}{ an object inheriting either from class \code{grm}, class \code{ltm} or class \code{rasch}.}
+  \item{object}{ an object inheriting either from class \code{grm}, class \code{ltm}, class \code{rasch} or class 
+        \code{tpm}.}
   \item{resp.patterns}{a matrix or a data.frame of response patterns with columns denoting the items; if \code{NULL} 
         the factor scores are computed for the observed response patterns.}
   \item{method}{a character supplying the scoring method. For \code{ltm} objects available methods are:
@@ -94,8 +95,8 @@ Social Scientists}. London: Chapman and Hall.
 Rizopoulos, D. (2006) \bold{ltm}: An R package for latent variable modelling and item response theory analyses. 
 \emph{Journal of Statistical Software}, \bold{17(5)}, 1--25. URL \url{http://www.jstatsoft.org/v17/i05/}
 
-Rizopoulos, D. and Moustaki, I. (2006) Generalized latent variable models
-with nonlinear terms. \emph{submitted for publication}.
+Rizopoulos, D. and Moustaki, I. (2007) Generalized latent variable models
+with nonlinear effects. \emph{British Journal of Mathematical and Statistical Psychology}, to appear.
 }
 
 \author{
@@ -115,6 +116,11 @@ with nonlinear terms. \emph{submitted for publication}.
 fit <- rasch(LSAT)
 factor.scores(fit) # Empirical Bayes
 
+## Factor scores for specific patterns,
+## including NA's, can be obtained by 
+factor.scores(fit, resp.patterns = rbind(c(1,0,1,0,1), c(NA,1,0,NA,1)))
+
+
 
 ## Factor Scores for the two-parameter logistic model
 fit <- ltm(Abortion ~ z1)
@@ -122,7 +128,7 @@ factor.scores(fit, method = "MI", B = 20) # Multiple Imputation
 
 ## Factor Scores for the graded response model
 fit <- grm(Science[c(1,3,4,7)])
-factor.scores(fit, resp.patterns = rbind(1:4))
+factor.scores(fit, resp.patterns = rbind(1:4, c(NA,1,2,3)))
 
 }
 

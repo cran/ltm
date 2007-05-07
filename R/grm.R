@@ -1,15 +1,19 @@
 `grm` <-
-function (data, constrained = FALSE, IRT.param = TRUE, Hessian = FALSE, start.val = NULL, na.action = na.omit, 
+function (data, constrained = FALSE, IRT.param = TRUE, Hessian = FALSE, start.val = NULL, na.action = NULL, 
                  control = list()) {
     cl <- match.call()
     if ((!is.data.frame(data) & !is.matrix(data)) || ncol(data) == 1)
         stop("'data' must be either a numeric matrix or a data.frame, with at least two columns.\n")
     X <- data.matrix(data)
-    X <- na.action(X)
-    X <- apply(X, 2, function (x) if (any(x == 0)) x + 1 else x)
+    if (!is.null(na.action))
+        X <- na.action(X)
+    X <- apply(X, 2, function (x) {
+        y <- x[!is.na(x)]
+        if (any(y == 0)) x + 1 else x
+    })
     colnamsX <- colnames(X)
     dimnames(X) <- NULL
-    ncatg <- apply(X, 2, function (x) length(unique(x)))
+    ncatg <- apply(X, 2, function (x) if (any(is.na(x))) length(unique(x)) - 1 else length(unique(x)))
     n <- nrow(X)
     p <- ncol(X)
     pats <- apply(X, 1, paste, collapse = "/")
@@ -28,7 +32,7 @@ function (data, constrained = FALSE, IRT.param = TRUE, Hessian = FALSE, start.va
     betas <- start.val.grm(start.val, X, obs, constrained, ncatg)
     environment(loglikgrm) <- environment(scoregrm) <- environment()
     old <- options(warn = (-1))
-    on.exit(options(old))    
+    on.exit(options(old))
     res.qN <- optim(unlist(betas), fn = loglikgrm, gr = scoregrm, method = con$method, hessian = Hessian, 
                     control = list(maxit = con$iter.qN, trace = as.numeric(con$verbose)), constrained = constrained)
     if (Hessian) {

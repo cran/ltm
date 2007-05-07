@@ -4,7 +4,7 @@ function (thetas, X, method) {
         betas <- thetas[, 2:3]
         cs <- plogis(thetas[, 1]) * object$max.guessing
         pr <- cs + (1 - cs) * probs(c(betas %*% c(1, z)))
-        -(sum(y * log(pr) + (1 - y) * log(1 - pr)) + dnorm(z, log = TRUE))
+        -sum(dbinom(y, 1, pr, log = TRUE), na.rm = TRUE) - dnorm(z, log = TRUE)
     }
     fscore <- function (logf.z, y, thetas) {
         opt <- optim(0, fn = logf.z, method = "BFGS", hessian = TRUE, y = y, thetas = thetas)

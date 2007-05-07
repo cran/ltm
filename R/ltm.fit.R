@@ -24,7 +24,6 @@ function (X, betas, constraint, formula, control) {
     GHw <- GH$w
     q. <- ncol(Z)
     environment(EM) <- environment(loglikltm) <- environment(scoreltm) <- environment()
-    gc()
     res.EM <- EM(betas, constraint, control$iter.em, control$verbose)
     if (!is.null(constraint))
         res.EM[constraint[, 1:2, drop = FALSE]] <- NA
@@ -42,6 +41,7 @@ function (X, betas, constraint, formula, control) {
     if (q. == 2 && sign(betas[1, 2]) == -1)
         betas[, 2] <- -betas[, 2]
     max.sc <- max(abs(scoreltm(res.qN$par, constraint)))
+    X[na.ind] <- NA
     list(coefficients = betas, log.Lik = -res.qN$value, convergence = res.qN$conv, hessian = res.qN$hessian, 
             counts = res.qN$counts, patterns = list(X = X, obs = obs), GH = list(Z = Z, GHw = GHw), max.sc = max.sc)
 }

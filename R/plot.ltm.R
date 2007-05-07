@@ -10,8 +10,8 @@ function (x, type = c("ICC", "IIC", "loadings"), items = NULL, zrange = c(-3.8, 
     type <- match.arg(type)
     if (type == "IIC" && any(x$ltst$factors == 2, x$ltst$inter, x$ltst$quad.z1, x$ltst$quad.z2))
         stop("Item Information Curves are currently plotted only for the one-factor model.\n")
-    if (type %in% c("loadings", "persp", "contour") && x$ltst$factors == 1)
-        stop("'loadings', 'persp' and 'contour' are used only for two-factor models.\n")
+    if (type == "loadings" && x$ltst$factors == 1)
+        stop("type = 'loadings' is only valid for the linear two-factor model.\n")
     betas <- x$coefficients
     p <- nrow(betas)
     itms <- if (!is.null(items)) {
@@ -144,6 +144,7 @@ function (x, type = c("ICC", "IIC", "loadings"), items = NULL, zrange = c(-3.8, 
                     zlab <- "Probability"
                 if (missing(main))
                     main <- "Item Characteristic Surfaces"
+                col <- if (missing(col)) rep("white", length.out = length(itms)) else rep(col, length.out = length(itms))
                 old.par <- par(ask = TRUE)
                 on.exit(par(old.par))
             }
@@ -158,7 +159,7 @@ function (x, type = c("ICC", "IIC", "loadings"), items = NULL, zrange = c(-3.8, 
                     persp(z1, z2, z[[it]], cex = cex, xlab = list(xlab, cex = cex.lab), 
                           ylab = list(ylab, cex = cex.lab), zlab = list(zlab, cex = cex.lab), 
                           main = list(main, cex = cex.main), sub = list(if (is.null(labels)) nams[item] else labels[it], 
-                          cex = cex.sub), ...)
+                          cex = cex.sub), col = col[it], ...)
                 }
             }
             return.value <- list(Factor1 = z1, Factor2 = z2, Prob = z)

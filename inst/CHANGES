@@ -1,3 +1,52 @@
+Changes in version: ltm_0.8-0
+
+  o "person.fit()" and "item.fit()" functions have been included that compute p-values for person- and item-fit 
+    statistics for IRT models for dichotomous data. The 'simulate.p.value' argument enables the computation of p-values
+    based on a parametric Bootstrap procedure.
+
+  o "unidimTest()" function has been included that can be used to check the unidimensionality assumption for IRT models 
+    for dichotomous data using Modified Parallel Analysis.
+
+  o "testEquatingData()" function has been included for preparing data-sets for test equating by common items and 
+    common subjects.
+
+  o "grm()" works now with the available cases when incomplete response patterns (i.e., in the presence of NAs) are 
+    considered.
+
+  o better algorithms, for Missing At Random missing values, have been written for "grm()", "ltm()", "rasch()" and "tpm()".
+
+  o "factor.scores()" and "fitted()" methods for classes 'grm', 'ltm', 'rasch', and 'tpm' allow for NAs in the
+    'resp.patterns' argument.
+
+  o a "residuals()" method has been added for 'grm', 'ltm', 'rasch', and 'tpm' objects that computed Pearson-type 
+    residuals.
+
+  o the "fitted()" method now allows also for the computation of marginal and conditional probabilities; this feature
+    is controled by the 'type' argument.
+
+  o "rmvlogis()" has the an extra option to simulate under the U(-3.5, 3.5) distribution for the latent variable.
+
+  o "rmvlogis()" has the extra argument 'z.vals' that can be used to specify the values of the latent variable (ability)
+    to be used in the simulation.
+
+  o the default value for the 'max.guessing' argument of "tpm()" has been set to one.
+
+  o package ltm requires now two extra packages, namely package mvtnorm and package polycor.
+
+  o a bug was fixed in "plot.ltm()" to allow for different colours for the Item Characteristic Surfaces.
+
+  o a bug was fixed in the "print()" method for 'ltm' objects that outputed the parameter estimates under the IRT
+    parameterization, even when argument 'IRT.parm' was set to FALSE.
+
+  o a bug was fixed in "tpm()" that was not passing used-defined starting values correctly.
+
+  o an "ltm-package" Rd file has been included.
+
+  o additions and corrections in Rd files.
+
+
+==============================
+
 Changes in version: ltm_0.7-1
 
   o a bug was fixed in "grm()".

@@ -3,7 +3,7 @@ function (object, object2, ...) {
     if (!inherits(object, "ltm"))
         stop("Use only with 'ltm' objects.\n")
     if (missing(object2))
-        stop("anova.ltm() computes LRTs between two fitted latent trait models.")
+        stop("anova.ltm() computes LRTs between two nested IRT models.")
     if (!inherits(object2, "ltm") && !inherits(object2, "tpm"))
         stop("'object2' must inherit from either class 'ltm' or class 'tpm'.\n")
     if (!isTRUE(all.equal(object$X, object2$X)))

@@ -25,7 +25,7 @@ function (data, n.print = 10, B = 1000) {
     missin <- if (any(is.na(X))) {
         apply(X, 2, function (x) {
             nas <- sum(is.na(x))
-            c(Freq = nas, Percs = 100 * nas / n)
+            c(Freq = nas, "(%)" = 100 * nas / n)
         })
     } else
         NULL

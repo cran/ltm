@@ -8,7 +8,12 @@ function (thetas, constrained) {
     log.p.xz <- matrix(0, nfreqs, k)
     for (j in 1:p) {
         log.pr <- log.diff.cprs[[j]]
-        log.p.xz <- log.p.xz + log.pr[X[, j], ]
+        xj <- X[, j]
+        na.ind <- is.na(xj)
+        log.pr <- log.pr[xj, ]
+        if (any(na.ind))
+            log.pr[na.ind, ] <- 0
+        log.p.xz <- log.p.xz + log.pr
     }
     p.xz <- exp(log.p.xz)
     p.x <- c(p.xz %*% GHw)
@@ -28,14 +33,19 @@ function (thetas, constrained) {
         pr3 <- sum.cprs[[j]]
         for (h in seq(1, ncatg[j] - 1)) {
             mat <- matrix(0, k, nfreqs)
+            na.ind <- is.na(X[, j])
             Ind1 <- X[, j] == h
+            if (any(na.ind))
+                Ind1[na.ind] <- FALSE
             Ind2 <- X[, j] == h + 1
+            if (any(na.ind))
+                Ind2[na.ind] <- FALSE
             mat[, Ind1] <- pr2[h, ] / pr1[h, ]
             mat[, Ind2] <- -pr2[h, ] / pr1[h + 1, ]
             scores.alpha[[j]][h] <- -sum((p.zx * t(mat) * obs) %*% GHw)
         }
         scores.alpha[[j]] <- scores.alpha[[j]] %*% jac[[j]]
-        scores.beta[j] <- sum((p.zx * pr3[X[, j], ] * obs) %*% (Z * GHw))
+        scores.beta[j] <- sum((p.zx * pr3[X[, j], ] * obs) %*% (Z * GHw), na.rm = TRUE)
         scores[[j]] <- if (constrained) scores.alpha[[j]] else c(scores.alpha[[j]], scores.beta[j])
     }
     if (constrained)

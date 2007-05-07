@@ -7,7 +7,16 @@ function (x, digits = max(3, getOption("digits") - 3), ...){
     model.sum <- data.frame(log.Lik = x$logLik, AIC = x$AIC, BIC = x$BIC, row.names = "")
     print(model.sum)
     cat("\nCoefficients:\n")
-    print(round(x$coef, digits = digits))
+    if (is.null(x$attr)) {
+        print(round(x$coef, digits = digits))
+    } else {
+        dat <- data.frame(x$coef, check.names = FALSE)
+        dat[] <- lapply(dat, round, digits = digits)
+        nr <- nrow(dat)
+        dat$" " <- if (x$type == "rasch") c(rep(x$attr, length.out = nr - 1), "") else rep(x$attr, length.out = nr)
+        print(dat)
+        if (x$ancr) cat("\n'*' denotes an anchoring item\n\n") else cat("\n'*' denotes a linking item\n\n")
+    }
     cat("\nIntegration:\n")
     cat("method: Gauss-Hermite\n")
     cat("quadrature points:", x$control$GHk, "\n")

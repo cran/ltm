@@ -1,5 +1,5 @@
 `tpm` <-
-function (data, type = c("latent.trait", "rasch"), constraint = NULL, max.guessing = 0.4, IRT.param = TRUE, 
+function (data, type = c("latent.trait", "rasch"), constraint = NULL, max.guessing = 1, IRT.param = TRUE, 
                  start.val = NULL, na.action = NULL, control = list()) {
     cl <- match.call()
     if ((!is.data.frame(data) & !is.matrix(data)) || ncol(data) == 1)
@@ -19,7 +19,7 @@ function (data, type = c("latent.trait", "rasch"), constraint = NULL, max.guessi
         if (!is.matrix(constraint) || ncol(constraint) != 3)
             stop("'constraint' should be a 3-column matrix rows (read help file).\n")
         if (any(constraint[, 1] < 1 | constraint[, 1] > p))
-            stop("the 1st column of 'constraint' denotes the items and it should between 1 and ", p, " (read help file).\n")
+            stop("the 1st column of 'constraint' denotes the items and it should be a number between 1 and ", p, " (read help file).\n")
         if (any(constraint[, 2] < 1 | constraint[, 2] > 3))
             stop("the 2nd column of 'constraint' should contain numbers between 1 and 3 (read help file).\n")
         constraint[, 1:2] <- round(constraint[, 1:2])
@@ -86,9 +86,10 @@ function (data, type = c("latent.trait", "rasch"), constraint = NULL, max.guessi
     rownames(thetas) <- if (!is.null(colnamsX)) colnamsX else paste("Item", 1:p)
     colnames(thetas) <- c("c.i", "beta.1i", "beta.2i")
     max.sc <- max(abs(scoretpm(res.qN$par, type, constraint, max.guessing)))
+    X[na.ind] <- NA
     fit <- list(coefficients = thetas, log.Lik = -res.qN$value, convergence = res.qN$convergence, hessian = res.qN$hessian, 
                 counts = res.qN$counts, patterns = list(X = X, obs = obs), GH = list(Z = Z, GHw = GHw), max.sc = max.sc, 
-                type = type, constraint = constraint, max.guessing = max.guessing, IRT.param = IRT.param, X = oX, 
+                type = type, constraint = constraint, max.guessing = max.guessing, IRT.param = IRT.param, X = data, 
                 control = con, na.action = na.action, call = cl)
     class(fit) <- "tpm"
     fit

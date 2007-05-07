@@ -29,6 +29,9 @@ function (object, ...) {
     out$call <- object$call
     out$control <- object$control
     out$IRT.param <- object$IRT.param
+    out$type <- object$type
+    out$attr <- attr(object$X, "items")
+    out$ancr <- attr(object$X, "anchoring")
     class(out) <- "summ.tpm"
     out
 }

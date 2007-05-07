@@ -3,7 +3,7 @@ function (object, object2, ...) {
     if (!inherits(object, "rasch"))
         stop("Use only with 'rasch' objects.\n")
     if (missing(object2))
-        stop("anova.rasch() computes LRTs between two fitted Rasch models.")
+        stop("anova.rasch() computes LRTs between two nested IRT models.")
     if (!class(object2) %in% c("ltm", "rasch", "tpm"))
         stop("'object2' must inherit from either class 'ltm', 'rasch', or 'tpm'.\n")
     if (inherits(object2, "rasch") && is.null(object$constraint))

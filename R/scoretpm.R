@@ -1,5 +1,6 @@
 `scoretpm` <-
 function (thetas, type, constraint, max.guessing) {
+    thetas. <- thetas
     thetas <- thetas.tpm(thetas, type, constraint, p)
     betas <- thetas[, 2:3]
     cs <- plogis(thetas[, 1]) * max.guessing
@@ -17,8 +18,13 @@ function (thetas, type, constraint, max.guessing) {
         ypi <- X[, i] - matrix(prc[, i], n, k, TRUE)
         ypi[na.ind[, i], ] <- 0
         mat <- (ypi * p.zx) %*% (GHw * (1 - cs[i]) * pqr[, i] * Z / pqrc[, i])
-        out[i, 1] <- sum(rep((ypi * p.zx) %*% (GHw * pqc[i] * (1 - pr[, i]) / pqrc[, i]), obs))
+        if (max.guessing == 1) {
+            out[i, 1] <- sum(rep((ypi * p.zx) %*% (GHw * pqc[i] * (1 - pr[, i]) / pqrc[, i]), obs))
+        }
         out[i, 2:3] <- colSums(mat[rep(1:n, obs), ])
+    }
+    if (max.guessing < 1) {
+        out[, 1] <- -cd.tpm(thetas., logLiktpm, type = type, constraint = constraint, max.guessing = max.guessing, k = p)
     }
     if (type == "rasch")
         out <- c(out[, 1:2], sum(out[, 3]))

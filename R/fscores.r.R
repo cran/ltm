@@ -2,22 +2,17 @@
 function (betas, X, method) {
     logf.z <- function (z, y, betas) {
         pr <- probs(c(betas %*% c(1, z)))
-        -(sum(y * log(pr) + (1 - y) * log(1 - pr)) + dnorm(z, log = TRUE))
+        -sum(dbinom(y, 1, pr, log = TRUE), na.rm = TRUE) - dnorm(z, log = TRUE)
     }
-    logg.z <- function (z, y, betas) {
-        pr <- probs(c(betas %*% c(1, z)))
-        fits <- y - pr
-        z - sum(fits * betas[, 2])
-    }    
-    fscore <- function (logf.z, logg.z, y, betas) {
-        opt <- optim(0, fn = logf.z, gr = logg.z, method = "BFGS", hessian = TRUE, y = y, betas = betas)
+    fscore <- function (logf.z, y, betas) {
+        opt <- optim(0, fn = logf.z, method = "BFGS", hessian = TRUE, y = y, betas = betas)
         hc <- c(1/opt$hes)
         list(mu = opt$par, hes = hc)
     }
     if (method == "EB") {
         scores.ML <- hes.ML <- numeric(nx)
         for (i in 1:nx) {
-            out <- fscore(logf.z = logf.z, logg.z = logg.z, y = X[i, ], betas = betas)
+            out <- fscore(logf.z = logf.z, y = X[i, ], betas = betas)
             scores.ML[i] <- out$mu
             hes.ML[i] <- out$hes
         }
@@ -35,7 +30,7 @@ function (betas, X, method) {
             betas. <- mvrnorm(1, betas, Var.betas)
             betas. <- betas.rasch(betas., constraint, p)
             for (i in 1:nx) {
-                out <- fscore(logf.z = logf.z, logg.z = logg.z, y = X[i, ], betas = betas.)
+                out <- fscore(logf.z = logf.z, y = X[i, ], betas = betas.)
                 scores.B[i, b] <- out$mu
                 hes.B[i, b] <- out$hes
             }

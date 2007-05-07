@@ -8,13 +8,8 @@ function (object, resp.patterns = NULL, method = c("EB", "MI"), B = 5, ...) {
     nx <- nrow(X)
     p <- ncol(X)
     method <- match.arg(method)
-    Obs <- if (!is.null(resp.patterns)) {
-        ind <- match(apply(X, 1, paste, collapse = ""), apply(object$patterns$X, 1, paste, collapse = ""))
-        obs <- rep(0, nrow(X))
-        obs[!is.na(ind)] <- object$patterns$obs[ind[!is.na(ind)]]
-        obs
-    } else
-        object$patterns$obs
+    vals <- lapply(1:ncol(X), function (i) c(0,1))
+    Obs <- observedFreqs(object, X, vals)
     res <- data.frame(X, Obs = Obs, Exp = fits[, ncol(fits)])
     names(res)[1:p] <- rownames(thetas)
     environment(fscores.t) <- environment()

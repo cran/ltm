@@ -105,7 +105,6 @@ Institute.
 
 Rizopoulos, D. (2006) \bold{ltm}: An R package for latent variable modelling and item response theory analyses. 
 \emph{Journal of Statistical Software}, \bold{17(5)}, 1--25. URL \url{http://www.jstatsoft.org/v17/i05/}
-
 }
 
 \author{
@@ -119,34 +118,37 @@ Rizopoulos, D. (2006) \bold{ltm}: An R package for latent variable modelling and
   \code{\link{anova.rasch}},
   \code{\link{plot.rasch}},
   \code{\link{vcov.rasch}},
+  \code{\link{GoF.rasch}},
+  \code{\link{item.fit}},
+  \code{\link{person.fit}},  
   \code{\link{margins}},
   \code{\link{factor.scores}}
 }
 
 \examples{
-
-## The Rasch model for the WIRS data:
-rasch(WIRS)
-
-
-## The Rasch model for the WIRS data, under the 
-## constraint that: (i) the easiness parameter 
-## for the first item equals 0.5, (ii) the easiness 
-## parameter for the second item equals 1.2, and 
-## (iii) the discrimination parameter equals 1
-(constr <- rbind(c(1, 0.5), c(2, 1.2), c(7, 1)))
-rasch(WIRS, constraint = constr)
+## The common form of the Rasch model for the 
+## LSAT data, assuming that the discrimination
+## parameter equals 1
+rasch(LSAT, constraint = cbind(ncol(LSAT) + 1, 1))
 
 
-## The Rasch model for the Lsat data;
+## The Rasch model for the LSAT data under the 
+## normal ogive; to do that fix the discrimination
+## parameter to 1.702
+rasch(LSAT, constraint = cbind(ncol(LSAT) + 1, 1.702))
+
+## The Rasch model for the LSAT data with
+## unconstraint discrimination parameter
 rasch(LSAT)
 
-
-## The Rasch model for the LSAT data, under the 
-## constraint that the discrimination parameter
-## equals 1
-rasch(LSAT, constraint = rbind(c(6, 1)))
-
+## The Rasch model with (artificially created) 
+## missing data
+data <- LSAT
+data[] <- lapply(data, function(x){
+    x[sample(1:length(x), sample(15, 1))] <- NA
+    x
+})
+rasch(data)
 }
 
 \keyword{multivariate}

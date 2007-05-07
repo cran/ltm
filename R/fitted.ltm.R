@@ -1,7 +1,9 @@
 `fitted.ltm` <-
-function (object, resp.patterns = NULL, ...) {
+function (object, resp.patterns = NULL, 
+    type = c("expected", "marginal-probabilities", "conditional-probabilities"), ...) {
     if (!inherits(object, "ltm"))
         stop("Use only with 'ltm' objects.\n")
+    type <- match.arg(type)
     X <- if (is.null(resp.patterns)) {
         data.matrix(object$patterns$X)
     } else {
@@ -11,10 +13,10 @@ function (object, resp.patterns = NULL, ...) {
         p <- ncol(object$X)
         if (ncol(resp.patterns) != p)
             stop("the number of items in ", deparse(substitute(object)), 
-                    " and the columns of 'resp.patterns' do not much.\n")
+                    " and the number of columns of 'resp.patterns' do not much.\n")
         check.items <- vector("logical", p)
         for (i in 1:p)
-            check.items[i] <- all(unique(resp.patterns[, i]) %in% unique(object$patterns$X[, i]))
+            check.items[i] <- all(unique(resp.patterns[, i]) %in% c(unique(object$patterns$X[, i]), NA))
         if (!all(check.items)) {
             its <- paste((1:p)[!check.items], collapse = ", ")
             stop("the number of levels in 'resp.patterns' does not much for item(s): ", its, "\n")
@@ -25,10 +27,22 @@ function (object, resp.patterns = NULL, ...) {
     mX <- 1 - X
     if (any(na.ind <- is.na(X)))
         X[na.ind] <- mX[na.ind] <- 0
-    pr <- probs(object$GH$Z %*% t(object$coef))
+    pr <- if (type == "expected" || type == "marginal-probabilities") {
+        probs(object$GH$Z %*% t(object$coef))
+    } else {
+        dat <- factor.scores(object, resp.patterns = resp.patterns)$score.dat
+        form <- as.character(object$formula)
+        form <- as.formula(paste(form[c(1, 3)], collapse = ""))
+        Z <- model.matrix(form, data = dat)
+        probs(Z %*% t(object$coef))
+    }
     p.xz <- exp(X %*% t(log(pr)) + mX %*% t(log(1 - pr)))
-    out <- cbind(X, exp = round(nrow(object$X) * colSums(object$GH$GHw * t(p.xz)), 3))
-    rownames(out) <- 1:nrow(out)
+    X[na.ind] <- NA
+    out <- switch(type,
+        "expected" = cbind(X, Exp = round(nrow(object$X) * colSums(object$GH$GHw * t(p.xz)), 3)),
+        "marginal-probabilities" = cbind(X, "Marg-Probs" = round(colSums(object$GH$GHw * t(p.xz)), 4)),
+        "conditional-probabilities" = round(pr, 4))
+    rownames(out) <- if (!is.null(resp.patterns) && !is.null(nams <- rownames(resp.patterns))) nams else NULL
     out
 }
 

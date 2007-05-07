@@ -1,4 +1,4 @@
-\name{plot.descript}
+\name{plot descript}
 \alias{plot.descript}
 
 \title{Descriptive Statistics Plot method}

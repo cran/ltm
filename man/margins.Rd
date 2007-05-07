@@ -91,10 +91,9 @@ Rizopoulos, D. (2006) \bold{ltm}: An R package for latent variable modelling and
 }
 
 \seealso{
-    \code{\link{grm}},
-    \code{\link{ltm}},
-    \code{\link{rasch}},
-    \code{\link{tpm}}
+    \code{\link{person.fit}},
+    \code{\link{item.fit}},
+    \code{\link{GoF.rasch}},
 }
 
 \examples{

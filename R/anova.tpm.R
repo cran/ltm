@@ -3,7 +3,7 @@ function (object, object2, ...) {
     if (!inherits(object, "tpm"))
         stop("Use only with 'tpm' objects.\n")
     if (missing(object2))
-        stop("anova.tpm() computes LRTs between two fitted Three Parameter models.\n")
+        stop("anova.tpm() computes LRTs between two nested Three Parameter models.\n")
     if (!inherits(object2, "tpm"))
         stop("'object2' must inherit from class 'tpm'.\n")
     if (object$type == object2$type && is.null(object$constraint))

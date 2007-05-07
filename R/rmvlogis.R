@@ -1,13 +1,19 @@
 `rmvlogis` <-
-function (n, thetas, IRT = TRUE, link = c("logit", "probit"), distr = c("normal", "logistic", "log-normal")) {
+function (n, thetas, IRT = TRUE, link = c("logit", "probit"), 
+        distr = c("normal", "logistic", "log-normal", "uniform"), z.vals = NULL) {
     if (!is.matrix(thetas) || !is.numeric(thetas))
         stop("'thetas' must be a numeric matrix with rows representing the items.\n")
     link <- match.arg(link)
     distr <- match.arg(distr)
-    z <- switch(distr, 
-        "normal" = rnorm(n), 
-        "logistic" = sqrt(3) / pi * rlogis(n),
-        "log-normal" = (rlnorm(n) - exp(0.5)) / sqrt(exp(2) - exp(1)))
+    z <- if (is.null(z.vals) || length(z.vals) != n) {
+        switch(distr, 
+            "normal" = rnorm(n), 
+            "logistic" = sqrt(3) / pi * rlogis(n),
+            "log-normal" = (rlnorm(n) - exp(0.5)) / sqrt(exp(2) - exp(1)),
+            "uniform" = runif(n, -3.5, 3.5) / sqrt(7^2/ 12))
+    } else {
+        z.vals
+    }
     p <- nrow(thetas)
     if (ncol(thetas) < 2 || ncol(thetas) > 3)
         stop("'thetas' must be either a two- or a three-column matrix.\n")

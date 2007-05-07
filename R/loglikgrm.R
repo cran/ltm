@@ -7,7 +7,12 @@ function (thetas, constrained) {
     log.p.xz <- matrix(0, nfreqs, k)
     for (j in 1:p) {
         log.pr <- cpr[[j]]
-        log.p.xz <- log.p.xz + log.pr[X[, j], ]
+        xj <- X[, j]
+        na.ind <- is.na(xj)
+        log.pr <- log.pr[xj, ]
+        if (any(na.ind))
+            log.pr[na.ind, ] <- 0
+        log.p.xz <- log.p.xz + log.pr
     }
     p.x <- rep(exp(log.p.xz) %*% GHw, obs)
     - sum(log(p.x))

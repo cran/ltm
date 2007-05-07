@@ -11,61 +11,18 @@ function (betas, X, method) {
             Z <- c(Z, "I(z2^2)" = z[2] * z[2])            
         Z <- Z[match(colnames(betas), names(Z))]
         pr <- probs(c(betas %*% Z))
-        -(sum(y * log(pr) + (1 - y) * log(1-pr)) + sum(dnorm(z, log = TRUE)))
+        -sum(dbinom(y, 1, pr, log = TRUE), na.rm = TRUE) - sum(dnorm(z, log = TRUE))
     }
-    logg.z <- function (z, y, betas) {
-        Z <- c(1, z)
-        names(Z) <- if (length(z) == 1) c("(Intercept)", "z1") else c("(Intercept)", "z1", "z2")
-        if (inter)
-            Z <- c(Z, "z1:z2" = z[1] * z[2])
-        if (quad.z1)
-            Z <- c(Z, "I(z1^2)" = z[1] * z[1])
-        if (quad.z2)
-            Z <- c(Z, "I(z2^2)" = z[2] * z[2])            
-        Z <- Z[match(colnames(betas), names(Z))]
-        pr <- probs(c(betas %*% Z))
-        fits <- y - pr
-        out <- if (factors == 1){
-            if (quad.z1)
-                z[1] - sum(fits * (betas[, 2] + 2 * z[1] * betas[, 3]))
-            else
-                z[1] - sum(fits * betas[, 2])
-        } else if (factors == 2) {
-                fac1 <- betas[, 2]
-                fac2 <- betas[, 3]
-                if (inter) {
-                    fac1 <- fac1 + z[2] * betas[, 4]
-                    fac2 <- fac2 + z[1] * betas[, 4]
-                }
-                if (quad.z1) {
-                    fac1 <- if (inter) fac1 + 2 * z[1] * betas[, 5] else fac1 + 2 * z[1] * betas[, 4]
-                }
-                if (quad.z2) {
-                    if (inter || quad.z1) 
-                        fac2 <- fac2 + 2 * z[2] * betas[, 5]
-                    if (inter && quad.z1) 
-                        fac2 <- fac2 + 2 * z[2] * betas[, 6]
-                }
-            c(z[1] - sum(fits * fac1), z[2] - sum(fits * fac2))
-        }
-        out
-    }
-    fscore <- function (logf.z, logg.z, y, betas) {
-        if (factors == 1) {
-            opt <- optim(0, fn = logf.z, gr = logg.z, method = "BFGS", hessian = TRUE, y = y, betas = betas)
-            hc <- c(1/opt$hes)
-        }
-        if (factors == 2) {
-            opt <- optim(c(0, 0), fn = logf.z, gr = logg.z, method = "BFGS", hessian = TRUE, y = y, betas = betas)
-            hc <- solve(opt$hessian)
-        }
+    fscore <- function (logf.z, y, betas) {
+        opt <- optim(rep(0, factors), fn = logf.z, method = "BFGS", hessian = TRUE, y = y, betas = betas)
+        hc <- if (factors == 1) c(1/opt$hes) else solve(opt$hessian)
         list(mu = opt$par, hes = hc)
     }
     if (method == "EB") {
         scores.ML <- matrix(0, nx, factors)
         hes.ML <- array(data = 0, dim = c(factors, factors, nx))
         for (i in 1:nx) {
-            out <- fscore(logf.z = logf.z, logg.z = logg.z, y = X[i, ], betas = betas)
+            out <- fscore(logf.z = logf.z, y = X[i, ], betas = betas)
             scores.ML[i, ] <- out$mu
             hes.ML[, , i] <- out$hes
         }
@@ -89,7 +46,7 @@ function (betas, X, method) {
             betas. <- betas.ltm(betas., constraint, p, q.)
             colnames(betas.) <- colnames(betas)
             for (i in 1:nx) {
-                out <- fscore(logf.z = logf.z, logg.z = logg.z, y = X[i, ], betas = betas.)
+                out <- fscore(logf.z = logf.z, y = X[i, ], betas = betas.)
                 scores.B[[b]][i, ] <- out$mu
                 hes.B[[b]][, , i] <- out$hes
             }

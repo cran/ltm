@@ -24,6 +24,8 @@ function (object, robust.se = FALSE, ...) {
     out$call <- object$call
     out$control <- object$control
     out$IRT.param <- object$IRT.param
+    out$attr <- attr(object$X, "items")
+    out$ancr <- attr(object$X, "anchoring")
     class(out) <- "summ.rasch"
     out
 }

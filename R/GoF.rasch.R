@@ -2,15 +2,19 @@
 function (object, B = 49, ...) {
     if (!inherits(object, "rasch"))
         stop("Use only with 'rasch' objects.\n")
-    if (any(is.na(object$X)) && is.null(object$na.action))
-        stop("\nIn the presense of missing values the parametric Bootstrap test is not currently implemented.\n")
+    nas <- any(na.ind <- is.na(object$X))
     pearson.chi <- function (object) {
-        Obs <- object$patterns$obs
         fits <- fitted(object)
+        X <- fits[, -ncol(fits), drop = FALSE]
+        vals <- lapply(1:p, function (i) c(0,1))
+        Obs <- observedFreqs(object, X, vals)
         Exp <- fits[, ncol(fits)]
         if (any(ind <- Exp == 0))
             Exp[ind] <- 0.001
-        sum((Obs - Exp)^2/Exp) + n - sum(Exp)
+        if (nas)
+            sum((Obs - Exp)^2/Exp, na.rm = TRUE)
+        else
+            sum((Obs - Exp)^2/Exp, na.rm = TRUE) + sum(Obs) - sum(Exp)
     }
     rmvlogis <- function (betas) {
         z <- rnorm(n)
@@ -20,8 +24,6 @@ function (object, B = 49, ...) {
             X[, i] <- ifelse(runif(n) < pr[, i], 1, 0)
         X
     }
-    old <- options(warn = (-1))
-    on.exit(options(old))
     constraint <- object$constraint
     betas <- object$coef
     betas <- c(betas[, -2], betas[1, 2])
@@ -36,6 +38,8 @@ function (object, B = 49, ...) {
         betas. <- mvrnorm(1, betas, Var.betas)
         betas. <- betas.rasch(betas., constraint, p)
         X <- rmvlogis(betas.)
+        if (nas)
+            X[na.ind] <- NA
         Ts[i] <- pearson.chi(rasch(X, constraint = constraint, start.val = c(betas.[, 1], betas.[1, 2]), 
                                     control = object$control))
     }

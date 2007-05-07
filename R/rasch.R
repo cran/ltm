@@ -4,19 +4,18 @@ function (data, constraint = NULL, IRT.param = TRUE, start.val = NULL, na.action
     if ((!is.data.frame(data) & !is.matrix(data)) || ncol(data) == 1)
         stop("'data' must be either a numeric matrix or a data.frame, with at least two columns.\n")
     X <- data.matrix(data)
-    if (!all(its <- apply(X, 2, function (x) { x <- x[!is.na(x)]; length(unique(x)) } ) == 2))
+    if (any(its <- apply(X, 2, function (x) { x <- x[!is.na(x)]; length(unique(x)) } ) > 2))
         stop("'data' contain more that 2 distinct values for item(s): ", paste(which(!its), collapse = ", "))
     X <- apply(X, 2, function (x) if (all(unique(x) %in% c(1, 0, NA))) x else x - 1)
     if (!is.null(na.action))
-        X <- na.action(X)    
-    oX <- X
+        X <- na.action(X)
     colnamsX <- colnames(X)
     dimnames(X) <- NULL
     n <- nrow(X)
     p <- ncol(X)
     con <- list(iter.qN = 150, GHk = 21, method = "BFGS", verbose = getOption("verbose"))
     con[names(control)] <- control
-    betas <- start.val.rasch(start.val, oX)
+    betas <- start.val.rasch(start.val, X)
     if (!is.null(constraint)) {
         if (!is.matrix(constraint) || (nrow(constraint) > p + 1 | ncol(constraint) != 2))
             stop("'constraint' should be a 2-column matrix with at most ", p + 1, " rows (read help file).\n")
@@ -56,13 +55,13 @@ function (data, constraint = NULL, IRT.param = TRUE, start.val = NULL, na.action
         pr <- probs(Z %*% t(betas))
         p.xz <- exp(X %*% t(log(pr)) + mX %*% t(log(1 - pr)))
         p.x <- c(p.xz %*% GHw)
-        p.zx <- p.xz / p.x
-        Nt <- GHw * colSums(p.zx * obs)
+        p.zx <- (p.xz / p.x) * obs
         scores <- matrix(0, p, 2)
         for (i in 1:p) {
-            ind <- !na.ind[, i]
-            rit <- if (all(ind)) GHw * colSums(p.zx * X[, i] * obs) else GHw * colSums(p.zx[ind, ] * X[ind, i] * obs[ind])
-            scores[i, ] <- -c(crossprod(rit - pr[, i] * Nt, Z))
+            ind <- na.ind[, i]
+            Y <- outer(X[, i], pr[, i], "-")
+            Y[ind, ] <- 0
+            scores[i, ] <- -colSums((p.zx * Y) %*% (Z * GHw))
         }    
         if (!is.null(constraint))
             c(scores[, 1], sum(scores[, 2]))[-constraint[, 1]]
@@ -71,7 +70,7 @@ function (data, constraint = NULL, IRT.param = TRUE, start.val = NULL, na.action
     }
     environment(logLik.rasch) <- environment(score.rasch) <- environment()
     res.qN <- optim(betas[!is.na(betas)], fn = logLik.rasch, gr = score.rasch, method = con$method, hessian = TRUE, 
-                control = list(maxit = con$iter.qN, trace = as.numeric(con$verbose)), constraint = constraint)
+                control = list(maxit = con$iter.qN, trace = as.numeric(con$verbose)), constraint = constraint)                
     if (all(!is.na(res.qN$hessian) & is.finite(res.qN$hessian))) {
         ev <- eigen(res.qN$hessian, TRUE, TRUE)$values
         if (!all(ev >= -1e-06 * abs(ev[1]))) 
@@ -82,9 +81,10 @@ function (data, constraint = NULL, IRT.param = TRUE, start.val = NULL, na.action
     rownames(betas) <- if (!is.null(colnamsX)) colnamsX else paste("Item", 1:p)
     colnames(betas) <- c("beta.i", "beta")
     max.sc <- max(abs(score.rasch(res.qN$par, constraint)))
+    X[na.ind] <- NA
     fit <- list(coefficients = betas, log.Lik = -res.qN$value, convergence = res.qN$conv, hessian = res.qN$hessian, 
                 counts = res.qN$counts, patterns = list(X = X, obs = obs), GH = list(Z = Z, GHw = GHw), max.sc = max.sc, 
-                constraint = constraint, IRT.param = IRT.param, X = oX, control = con, na.action = na.action, call = cl)
+                constraint = constraint, IRT.param = IRT.param, X = data, control = con, na.action = na.action, call = cl)
     class(fit) <- "rasch"
     fit
 }
