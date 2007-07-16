@@ -13,7 +13,9 @@ unidimTest(object, data, thetas, IRT = TRUE, z.vals = NULL,
 }
 
 \arguments{
-  \item{object}{a model object inheriting either from class \code{ltm}, class \code{rasch} or class \code{tpm}.}
+  \item{object}{a model object inheriting either from class \code{ltm}, class \code{rasch} or class \code{tpm}. For
+        \code{ltm()} it is assumed that the two-parameter logistic model has been fitted (i.e., one latent variable and
+        no nonlinear terms); see \bold{Note} for an extra option.}
   \item{data}{a \code{matrix} or a \code{data.frame} of response patterns with columns denoting the items; used 
         if \code{object} is missing.}
   \item{thetas}{a numeric \code{matrix} with IRT model parameter values to be used in \code{\link{rmvlogis}}; used if 
@@ -53,6 +55,11 @@ unidimTest(object, data, thetas, IRT = TRUE, z.vals = NULL,
   \eqn{p}-value is approximated according to the formula \eqn{\left(1 + \sum_{b = 1}^B I(T_b \geq T_{obs})\right) / 
   (1 + B)}{(1 + sum_{b = 1}^B I(T_b >= T_{obs})) / (1 + B)}, where \eqn{I(.)} denotes the indicator function, and 
   \eqn{T_b} denotes the value of the statistic in the \eqn{b}th data-set.
+}
+
+\note{
+  For \code{ltm} objects you can also use a likelihood ratio test to check unidimensionality. In particular, 
+  \code{fit0 <- ltm(data ~ z1); fit1 <- ltm(data ~ z1 + z2); anova(fit0, fit1)}.
 }
 
 \value{

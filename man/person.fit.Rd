@@ -47,7 +47,7 @@ person.fit(object, alternative = c("less", "greater", "two.sided"),
         estimate of the response pattern under the fitted model (i.e., \code{object}), and standard 
         deviation the standard error of the ability estimate, as returned by the \code{\link{factor.scores}} function.}
     \item{Step 2:}{Simulate a new response pattern of dichotomous items under the assumed IRT model, using \eqn{z^*} and 
-       the maximum likelihood estimates.}
+       the maximum likelihood estimates under \code{object}.}
     \item{Step 4:}{For the new response pattern and using \eqn{z^*} and the MLEs, compute the values 
         of the person-fit statistic.}
   }

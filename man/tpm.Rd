@@ -12,8 +12,8 @@ tpm(data, type = c("latent.trait", "rasch"), constraint = NULL,
     na.action = NULL, control = list())
 }
 \arguments{
-  \item{data}{a data.frame (that will be converted to a numeric matrix using 
-        \code{data.matrix()}) or a numeric matrix of manifest variables.}
+  \item{data}{a \code{data.frame} (that will be converted to a numeric matrix using 
+        \code{data.matrix()}) or a numeric \code{matrix} of manifest variables.}
   \item{type}{a character string indicating the type of model to fit. Available options are `rasch' that
         assumes equal discrimination parameter among items, and `latent.trait' (default) that assumes a different 
         discrimination parameter per item.}

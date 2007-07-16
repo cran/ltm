@@ -43,8 +43,6 @@ function (data, constrained = FALSE, IRT.param = TRUE, Hessian = FALSE, start.va
         } else 
             warning("Hessian matrix at convergence contains infinite or missing values; unstable solution.\n")
     }
-    if (sign(res.qN$par[ind2[1]]) == -1)
-        res.qN$par[ind2] <- - res.qN$par[ind2]
     betas <- betas.grm(res.qN$par, constrained, ind1, ind2, p)
     names(betas) <- if (!is.null(colnamsX)) colnamsX else paste("Item", 1:p)
     betas <- lapply(betas, function (x) { names(x) <- c(paste("beta.", seq(1, length(x) - 1), sep = ""), "beta"); x } )

@@ -31,6 +31,28 @@ function (betas, X, method) {
         res$z1 <- scores.ML
         res$se.z1 <- sqrt(hes.ML)
     }
+    if (method == "EAP") {
+        Z <- object$GH$Z
+        GHw <- object$GH$GHw
+        cpr <- cprobs(betas, Z)
+        diff.cprs <- lapply(cpr, function (x) rbind(x[1, ], diff(x)))
+        log.diff.cprs <- lapply(diff.cprs, log)
+        log.p.xz <- matrix(0, nrow(X), length(Z))
+        for (j in 1:p) {
+            log.pr <- log.diff.cprs[[j]]
+            xj <- X[, j]
+            na.ind <- is.na(xj)
+            log.pr <- log.pr[xj, ]
+            if (any(na.ind))
+                log.pr[na.ind, ] <- 0
+            log.p.xz <- log.p.xz + log.pr
+        }
+        p.xz <- exp(log.p.xz)
+        p.x <- c(p.xz %*% GHw)
+        p.zx <- p.xz / p.x
+        res$z1 <- c(p.zx %*% (Z * GHw))
+        res$se.z1 <- sqrt(c(p.zx %*% (Z * Z * GHw)) - res$z1^2)        
+    }
     if (method == "MI") {
         constrained <- object$constrained
         p <- length(betas)

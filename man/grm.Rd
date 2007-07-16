@@ -9,8 +9,8 @@ grm(data, constrained = FALSE, IRT.param = TRUE, Hessian = FALSE,
     start.val = NULL, na.action = NULL, control = list())
 }
 \arguments{
-  \item{data}{a data.frame (that will be converted to a numeric matrix using 
-        \code{data.matrix()}) or a numeric matrix of manifest variables.}
+  \item{data}{a \code{data.frame} (that will be converted to a numeric matrix using 
+        \code{data.matrix()}) or a numeric \code{matrix} of manifest variables.}
   \item{constrained}{logical; if \code{TRUE} the model with equal discrimination parameters across items is fitted. 
         See \bold{Examples} for more info.}
   \item{IRT.param}{logical; if \code{TRUE} then the coefficients' estimates are reported under the 
@@ -43,7 +43,7 @@ grm(data, constrained = FALSE, IRT.param = TRUE, Hessian = FALSE,
     The model is defined as follows \deqn{\log\left(\frac{\gamma_{ik}}{1-\gamma_{ik}}\right) = \beta_{ik} - 
     \beta_i z,}{ logit(\gamma_ik) = beta_ik - beta_i z, } where \eqn{\gamma_{ik}} denotes the cumulative 
     probability of a response in category \eqn{k}th or lower to the \eqn{i}th item, given the latent ability \eqn{z}. 
-    If \code{constrained = TRUE} it is assumed that all \eqn{\beta_i} are equal.
+    If \code{constrained = TRUE} it is assumed that \eqn{\beta_i = \beta} for all \eqn{i}.
     
     If \code{IRT.param = TRUE}, then the parameters estimates are reported under the usual IRT parameterization,
     i.e., \deqn{\log\left(\frac{\gamma_{ik}}{1-\gamma_{ik}}\right) = \beta_i (z - \beta_{ik}^*),}{ logit

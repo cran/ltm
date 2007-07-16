@@ -14,7 +14,7 @@ rcor.test(mat, \dots)
 }
 
 \arguments{
-  \item{mat}{ a numeric matrix or numeric data.frame containing the manifest variables. }
+  \item{mat}{ a numeric \code{matrix} or a numeric \code{data.frame} containing the manifest variables as columns. }
   \item{\dots}{extra arguments passed to \code{cor()} and \code{cor.test()}.}
 }
 

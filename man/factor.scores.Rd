@@ -14,28 +14,28 @@
 \usage{
 factor.scores(object, \dots)
 
-\method{factor.scores}{grm}(object, resp.patterns = NULL, method = c("EB", "MI"), 
-                    B = 5, \dots)
+\method{factor.scores}{grm}(object, resp.patterns = NULL, 
+        method = c("EB", "EAP", "MI"), B = 5, \dots)
 
-\method{factor.scores}{ltm}(object, resp.patterns = NULL, method = c("EB", "MI", 
-                    "Component"), B = 5, robust.se = FALSE, \dots)
+\method{factor.scores}{ltm}(object, resp.patterns = NULL, 
+        method = c("EB", "EAP", "MI", "Component"), B = 5, 
+        robust.se = FALSE, \dots)
 
-\method{factor.scores}{rasch}(object, resp.patterns = NULL, method = c("EB", "MI"), 
-                    B = 5, robust.se = FALSE, \dots)
+\method{factor.scores}{rasch}(object, resp.patterns = NULL, 
+        method = c("EB", "EAP", "MI"), B = 5, robust.se = FALSE, \dots)
 
-\method{factor.scores}{tpm}(object, resp.patterns = NULL, method = c("EB", "MI"), 
-                    B = 5, \dots)
+\method{factor.scores}{tpm}(object, resp.patterns = NULL, 
+        method = c("EB", "EAP", "MI"), B = 5, \dots)
 }
 
 \arguments{
-  \item{object}{ an object inheriting either from class \code{grm}, class \code{ltm}, class \code{rasch} or class 
+  \item{object}{an object inheriting either from class \code{grm}, class \code{ltm}, class \code{rasch} or class 
         \code{tpm}.}
   \item{resp.patterns}{a matrix or a data.frame of response patterns with columns denoting the items; if \code{NULL} 
         the factor scores are computed for the observed response patterns.}
-  \item{method}{a character supplying the scoring method. For \code{ltm} objects available methods are:
-  Component scores, Empirical Bayes and Multiple Imputation.
-  For \code{grm} and \code{rasch} objects available methods are: Empirical Bayes and Multiple Imputation. 
-  See \bold{Details} section for more info.}
+  \item{method}{a character supplying the scoring method; available methods are:
+        Empirical Bayes, Expected a Posteriori, Multiple Imputation, and Component. See \bold{Details} section for 
+        more info.}
   \item{B}{the number of multiple imputations to be used if \code{method = "MI"}.}
   \item{robust.se}{logical; if \code{TRUE} the sandwich estimator is used for the estimation of the covariance
   matrix of the MLEs. See \bold{Details} section for more info.}
@@ -67,6 +67,9 @@ factor.scores(object, \dots)
   posterior distribution while taking into account the sampling error. The modes of the posterior distribution 
   \eqn{p(z|x; \theta)}{p(z|x; theta)} are numerically approximated using the BFGS algorithm in \code{optim()}. 
   
+  The Expected a posteriori scores (use \code{method = "EAP"}) computed by \code{factor.scores()} are defined as 
+  follows: \deqn{\int z p(z | x; \hat{\theta}) dz.}
+  
   The Component scores (use \code{method = "Component"}) proposed by Bartholomew (1984) is an alternative method
   to scale the sample units in the latent dimensions identified by the model that avoids the calculation of the 
   posterior mode. However, this method is not valid in the general case where nonlinear latent terms are assumed.
@@ -79,6 +82,9 @@ factor.scores(object, \dots)
   \item{method}{a character giving the scoring method used.}
   \item{B}{the number of multiple imputations used; relevant only if \code{method = "MI"}.}
   \item{call}{a copy of the matched call of \code{object}.}
+  \item{resp.pats}{logical; is \code{TRUE} if \code{resp.patterns} argument has been specified.}
+  \item{coef}{the parameter estimates returned by \code{coef(object)}; this is \code{NULL} when \code{object}
+        inherits from class \code{grm}.}
 }
 
 \references{
@@ -104,6 +110,7 @@ with nonlinear effects. \emph{British Journal of Mathematical and Statistical Ps
 }
 
 \seealso{
+    \code{\link{plot.fscores}},
     \code{\link{grm}},
     \code{\link{ltm}},
     \code{\link{rasch}},

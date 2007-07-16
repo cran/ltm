@@ -62,6 +62,8 @@ function (x, type = c("ICC", "IIC", "OCCu", "OCCl"), items = NULL, category = NU
     if (missing(annot)) {
         annot <- !legend
     }
+    col. <- col
+    lty. <- lty
     if (type == "ICC" || (type == "OCCl" | type == "OCCu")) {
         if (ctg == "all") {
             if (plot) {
@@ -78,8 +80,8 @@ function (x, type = c("ICC", "IIC", "OCCu", "OCCl"), items = NULL, category = NU
                          cex.lab = cex.lab, cex.main = cex.main, cex.axis = cex.axis, cex.sub = cex.sub, ...)
                     p <- cpr[[ii]]
                     pos <- round(seq(10, 90, length = ncol(p)))
-                    col <- rep(col, length.out = ncatg[ii])
-                    lty <- rep(lty, length.out = ncatg[ii])
+                    col <- rep(col., length.out = ncatg[ii])
+                    lty <- rep(lty., length.out = ncatg[ii])
                     if (!missing(pch)) {
                         pch <- rep(pch, length.out = ncatg[ii])
                         pch.ind <- round(seq(15, 85, length = 4))
@@ -122,8 +124,8 @@ function (x, type = c("ICC", "IIC", "OCCu", "OCCl"), items = NULL, category = NU
                 plot(range(z), c(0, 1), type = "n", xlab = xlab, ylab = ylab, main = main, sub = sub, cex = cex, 
                      cex.lab = cex.lab, cex.main = cex.main, cex.axis = cex.axis, cex.sub = cex.sub, ...)
                 pos <- round(seq(10, 90, length = ncol(p)))
-                col <- rep(col, length.out = length(itms))
-                lty <- rep(lty, length.out = length(itms))
+                col <- rep(col., length.out = length(itms))
+                lty <- rep(lty., length.out = length(itms))
                 if (!missing(pch)) {
                     pch <- rep(pch, length.out = length(itms))
                     pch.ind <- round(seq(15, 85, length = 4))
@@ -159,8 +161,8 @@ function (x, type = c("ICC", "IIC", "OCCu", "OCCl"), items = NULL, category = NU
             plot(range(z), r, type = "n", xlab = xlab, ylab = ylab, main = main, sub = sub, cex = cex, 
                  cex.lab = cex.lab, cex.main = cex.main, cex.axis = cex.axis, cex.sub = cex.sub, ...)
             if (plot.items) {
-                col <- rep(col, length.out = length(itms))
-                lty <- rep(lty, length.out = length(itms))
+                col <- rep(col., length.out = length(itms))
+                lty <- rep(lty., length.out = length(itms))
                 if (!missing(pch)) {
                     pch <- rep(pch, length.out = length(itms))
                     pch.ind <- round(seq(15, 85, length = 4))
@@ -180,8 +182,8 @@ function (x, type = c("ICC", "IIC", "OCCu", "OCCl"), items = NULL, category = NU
                            col = col, bty = bty, ncol = ncol., cex = cex, ...)
                 }
             } else {
-                col <- col[1]
-                lty <- lty[1]
+                col <- col.[1]
+                lty <- lty.[1]
                 p <- rowSums(cpr)
                 lines(z, p, lty = lty, col = col, ...)
                 if (!missing(pch))

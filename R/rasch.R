@@ -5,7 +5,7 @@ function (data, constraint = NULL, IRT.param = TRUE, start.val = NULL, na.action
         stop("'data' must be either a numeric matrix or a data.frame, with at least two columns.\n")
     X <- data.matrix(data)
     if (any(its <- apply(X, 2, function (x) { x <- x[!is.na(x)]; length(unique(x)) } ) > 2))
-        stop("'data' contain more that 2 distinct values for item(s): ", paste(which(!its), collapse = ", "))
+        stop("'data' contain more that 2 distinct values for item(s): ", paste(which(its), collapse = ", "))
     X <- apply(X, 2, function (x) if (all(unique(x) %in% c(1, 0, NA))) x else x - 1)
     if (!is.null(na.action))
         X <- na.action(X)

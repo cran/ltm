@@ -14,7 +14,7 @@ mult.choice(data, correct)
 }
 
 \arguments{
-  \item{data}{ a matrix or data.frame containing the manifest variables. }
+  \item{data}{ a \code{matrix} or a \code{data.frame} containing the manifest variables as columns. }
   \item{correct}{a vector of length \code{ncol(data)} with the correct responses.}
 }
 

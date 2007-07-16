@@ -53,9 +53,7 @@ each response pattern.
 
 fit <- ltm(LSAT ~ z1)
 residuals(fit)
-
-fit <- rasch(LSAT)
-residuals(fit)
+residuals(fit, order = FALSE)
 
 }
 

@@ -7,7 +7,7 @@ function (object, data, thetas, IRT = TRUE, z.vals = NULL, B = 100, ...) {
             stop("'data' must be either a data.frame or a matrix")
         data <- data.matrix(data)
         if (any(its <- apply(data, 2, function (x) { x <- x[!is.na(x)]; length(unique(x)) } ) > 2))
-            stop("'data' contain more that 2 distinct values for item(s): ", paste(which(!its), collapse = ", "))
+            stop("'data' contain more that 2 distinct values for item(s): ", paste(which(its), collapse = ", "))
         data <- apply(data, 2, function (x) if (all(unique(x) %in% c(1, 0, NA))) x else x - 1)
         data <- data[complete.cases(data), ]
         n <- nrow(data)
@@ -20,6 +20,8 @@ function (object, data, thetas, IRT = TRUE, z.vals = NULL, B = 100, ...) {
     } else {
         if (!class(object) %in% c("ltm", "rasch", "tpm"))
             stop("Use only with 'ltm', 'rasch' or 'tpm' objects.\n")
+        if (inherits(object, "ltm") && any(c(object$ltst$factors > 1, object$ltst$quad.z1)))
+            stop("\nfor 'ltm' objects it is assumed that the two-parameter logistic model has been fitted\n\t(i.e., one latent variable and no nonlinear terms).")
         data <- object$X    
         data <- data.matrix(data)
         data <- data[complete.cases(data), ]

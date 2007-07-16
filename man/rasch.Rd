@@ -12,8 +12,8 @@ rasch(data, constraint = NULL, IRT.param = TRUE, start.val = NULL,
 }
 
 \arguments{
-  \item{data}{a data.frame (that will be converted to a numeric matrix using 
-        \code{data.matrix()}) or a numeric matrix of manifest variables.}
+  \item{data}{a \code{data.frame} (that will be converted to a numeric matrix using 
+        \code{data.matrix()}) or a numeric \code{matrix} of manifest variables.}
   \item{constraint}{a two-column numeric matrix with at most \eqn{p} rows (where \eqn{p} is the number of items), 
         specifying fixed-value constraints. The first column represents the item (i.e., \eqn{1} denotes the first item,
         \eqn{2} the second, etc., and \eqn{p+1} the discrimination parameter) and the second column the 

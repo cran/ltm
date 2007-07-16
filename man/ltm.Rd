@@ -10,8 +10,8 @@ ltm(formula, constraint = NULL, IRT.param, start.val,
 }
 \arguments{
   \item{formula}{ a two-sided formula providing the responses data matrix and describing the latent 
-        structure. In the left side of \code{formula} either a data.frame (that will be converted to 
-        a numeric matrix using \code{data.matrix()}) or a numeric matrix of manifest variables must be 
+        structure. In the left side of \code{formula} either a \code{data.frame} (that will be converted to 
+        a numeric matrix using \code{data.matrix()}) or a numeric \code{matrix} of manifest variables must be 
         supplied. In the right side of \code{formula} only 
         two latent variables are allowed with codenames \code{z1}, \code{z2}. Interaction and quadratic 
         terms can also be used (see \bold{Details} and \bold{Examples} for more info).}

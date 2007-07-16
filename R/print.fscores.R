@@ -4,8 +4,13 @@ function (x, ...) {
         stop("Use only with 'fscores' objects.\n")
     cat("\nCall:\n", paste(deparse(x$call), sep = "\n", collapse = "\n"), "\n", sep = "")
     methodMI <- x$method == "MI"
-    cat("\nScoring Method:", if (methodMI) "Multiple Imputation\n" else if (x$method == "EB") "Empirical Bayes\n" else "Component\n")
-    if (methodMI) cat("# Imputations:", x$B, "\n")
+    cat("\nScoring Method:", 
+        if (methodMI) "Multiple Imputation\n" 
+        else if (x$method == "EB") "Empirical Bayes\n" 
+        else if (x$method == "EAP") "Expected A Posteriori\n"
+        else "Component\n")
+    if (methodMI)
+        cat("# Imputations:", x$B, "\n")
     if (x$resp.pats)
         cat("\nFactor-Scores for specified response patterns:\n")
     else

@@ -51,12 +51,22 @@ function (data, n.print = 10, B = 1000) {
     levs <- if (all(levs == 2)) 0:sum(levs - 1) else p:sum(levs)
     totSc <- rowSums(X)
     itms <- rbind(Freq = table( factor(totSc, levels = levs) ))
-    out <- list(sample = c(p, n), perc = perc, items = itms, pw.ass = pw.ass, n.print = n.print, name = nam, 
+    out <- list(sample = c(p, n), perc = t(perc), items = itms, pw.ass = pw.ass, n.print = n.print, name = nam, 
                 missin = missin, data = data)
     if (all(levs. == 2)) {
         out$bisCorr <- apply(X, 2, biserial.cor, x = totSc, use = "complete.obs", level = 2)
-        out$perc <- rbind(out$perc, "logit" = qlogis(out$perc[2, ]))
+        res <- numeric(p)
+        for (i in 1:p) {
+            res[i] <- biserial.cor(rowSums(X[, -i]), X[, i], use = "complete.obs", level = 2)
+        }
+        out$ExBisCorr <- res
+        out$perc <- cbind(out$perc, "logit" = qlogis(out$perc[, 2]))
     }
+    alpha <- cbind(c(cronbach.alpha(X, na.rm = TRUE)$alpha, 
+                    sapply(1:p, function (i) cronbach.alpha(X[, -i], na.rm = TRUE)$alpha)))
+    nams <- if (is.null(cnams <- colnames(X))) paste("Excluding Item", 1:p) else paste("Excluding", cnams)
+    dimnames(alpha) <- list(c("All Items", nams), "value")
+    out$alpha <- alpha
     class(out) <- "descript"
     out
 }

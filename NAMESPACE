@@ -1,11 +1,11 @@
 # Exported functions
-export(anova.grm, anova.ltm, anova.rasch, anova.tpm, biserial.cor, coef.grm, coef.ltm, coef.rasch, coef.tpm, descript, 
-	 factor.scores, factor.scores.grm, factor.scores.ltm, factor.scores.rasch, factor.scores.tpm, fitted.grm, 
-	 fitted.ltm, fitted.rasch, fitted.tpm, GoF.rasch, grm, information, item.fit, ltm, margins, margins.grm, 
-	 margins.ltm, margins.rasch, margins.tpm, mult.choice, person.fit, plot.descript, plot.grm, plot.ltm, plot.rasch, 
-	 plot.tpm, rasch, rcor.test, residuals.grm, residuals.ltm, residuals.rasch, residuals.tpm, rmvlogis, summary.grm, 
-	 summary.ltm, summary.rasch, summary.tpm, testEquatingData, tpm, unidimTest, vcov.grm, vcov.ltm, vcov.rasch, 
-	 vcov.tpm)
+export(anova.grm, anova.ltm, anova.rasch, anova.tpm, biserial.cor, coef.grm, coef.ltm, coef.rasch, coef.tpm, 
+	 cronbach.alpha, descript, factor.scores, factor.scores.grm, factor.scores.ltm, factor.scores.rasch, 
+	 factor.scores.tpm, fitted.grm, fitted.ltm, fitted.rasch, fitted.tpm, GoF.rasch, grm, information, item.fit, ltm, 
+	 margins, margins.grm, margins.ltm, margins.rasch, margins.tpm, mult.choice, person.fit, plot.descript, 
+	 plot.fscores, plot.grm, plot.ltm, plot.rasch, plot.tpm, rasch, rcor.test, residuals.grm, residuals.ltm, 
+	 residuals.rasch, residuals.tpm, rmvlogis, summary.grm, summary.ltm, summary.rasch, summary.tpm, testEquatingData, 
+	 tpm, unidimTest, vcov.grm, vcov.ltm, vcov.rasch, vcov.tpm)
 
 # Imported functions
 importFrom(MASS, mvrnorm)
@@ -42,6 +42,7 @@ S3method(margins, ltm)
 S3method(margins, rasch)
 S3method(margins, tpm)
 S3method(plot, descript)
+S3method(plot, fscores)
 S3method(plot, grm)
 S3method(plot, ltm)
 S3method(plot, rasch)
@@ -51,6 +52,7 @@ S3method(print, aov.grm)
 S3method(print, aov.ltm)
 S3method(print, aov.rasch)
 S3method(print, aov.tpm)
+S3method(print, cronbachAlpha)
 S3method(print, descript)
 S3method(print, fscores)
 S3method(print, GoF.rasch)

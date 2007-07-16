@@ -1,3 +1,21 @@
+Changes in version: ltm_0.8-1
+
+  o the new function "cronbach.alpha()" computes Cronbach's alpha for given data-sets. The function can also compute
+    a Bootstrap confidence interval for alpha.
+
+  o a "plot()" method has been added for 'fscores' objects. It plots a Kernel Density Estimation of the distribution 
+    of the factor scores (i.e., person parameters). Provides also the option to include in the plot the item difficulty 
+    parameters (similar to the Item Person Maps).
+
+  o "factor.scores()" have now the extra option (specified via the 'method' argument) to compute expected a posteriori 
+    scores.
+
+  o the "descript()" function also returns Cronbach's alpha estimates, and biserial correlation with the total score by 
+    excluding each time the item under consideration.
+
+
+==============================
+
 Changes in version: ltm_0.8-0
 
   o "person.fit()" and "item.fit()" functions have been included that compute p-values for person- and item-fit 
@@ -13,7 +31,7 @@ Changes in version: ltm_0.8-0
   o "grm()" works now with the available cases when incomplete response patterns (i.e., in the presence of NAs) are 
     considered.
 
-  o better algorithms, for Missing At Random missing values, have been written for "grm()", "ltm()", "rasch()" and "tpm()".
+  o better algorithms, for Missing At Random missing values, have been writen for "grm()", "ltm()", "rasch()" and "tpm()".
 
   o "factor.scores()" and "fitted()" methods for classes 'grm', 'ltm', 'rasch', and 'tpm' allow for NAs in the
     'resp.patterns' argument.
@@ -38,7 +56,7 @@ Changes in version: ltm_0.8-0
   o a bug was fixed in the "print()" method for 'ltm' objects that outputed the parameter estimates under the IRT
     parameterization, even when argument 'IRT.parm' was set to FALSE.
 
-  o a bug was fixed in "tpm()" that was not passing used-defined starting values correctly.
+  o a bug was fixed in "tpm()" that was not passing user-defined starting values correctly.
 
   o an "ltm-package" Rd file has been included.
 

@@ -16,6 +16,8 @@
 \method{summary}{ltm}(object, robust.se = FALSE, \dots)
 
 \method{summary}{rasch}(object, robust.se = FALSE, \dots)
+
+\method{summary}{tpm}(object, \dots)
 }
 
 \arguments{

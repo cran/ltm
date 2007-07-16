@@ -2,7 +2,7 @@
 function (x, digits = max(3, getOption("digits") - 4), ...) {
     if (!inherits(x, "descript"))
         stop("Use only with 'descript' objects.\n")
-    cat("\nDescriptive statistics for", paste("'", x$name, "'", sep = ""), "data-set\n")
+    cat("\nDescriptive statistics for the", paste("'", x$name, "'", sep = ""), "data-set\n")
     cat("\nSample:\n", x$sample[1], "items and", x$sample[2], "sample units;", if (!is.null(x$missin))
         sum(x$missin[1, ]) else 0, "missing values\n")
     cat("\nProportions for each level of response:\n")
@@ -18,8 +18,12 @@ function (x, digits = max(3, getOption("digits") - 4), ...) {
     print(x$items)
     if (!is.null(x$bisCorr)) {
         cat("\n\nBiserial correlation with Total Score:\n")
-        print(round(x$bisCorr, digits))
-    } 
+        mat <- round(cbind(x$bisCorr, x$ExBisCorr), digits) 
+        colnames(mat) <- c("Included", "Excluded")
+        print(mat)
+    }
+    cat("\n\nCronbach's alpha:\n")
+        print(round(x$alpha, digits))
     cat("\n\nPairwise Associations:\n")
     print(x$pw.ass[seq(1, min(x$n.print, nrow(x$pw.ass))), ])
     cat("\n\n")

@@ -61,7 +61,7 @@ An object of class \code{GoF.rasch} with components,
 
 \examples{
 
-## GoF for the Rasch model for the Lsat data:
+## GoF for the Rasch model for the LSAT data:
 fit <- rasch(LSAT)
 GoF.rasch(fit)
 

@@ -151,7 +151,7 @@ text(x = 2, y = 0.5, labels = paste("Total Information:", round(info$InfoTotal, 
 ## Item Characteristic Surfaces for the interaction model:
 fit <- ltm(WIRS ~ z1 * z2)
 plot(fit, ticktype = "detailed", theta = 30, phi = 30, expand = 0.5, d = 2, 
-     cex = 0.7)
+     cex = 0.7, col = "lightblue")
 
 ###################################################
 
@@ -162,14 +162,16 @@ plot(fit, ticktype = "detailed", theta = 30, phi = 30, expand = 0.5, d = 2,
 ## plot only items 1, 3 and 5:
 fit <- rasch(WIRS)
 plot(fit, items = c(1, 3, 5), lwd = 3, cex = 1.4)
+abline(v = -4:4, h = seq(0, 1, 0.2), col = "lightgray", lty = "dotted")
 
 fit <- rasch(LSAT)
 
-## Item Characteristic Curves for the Lsat data;
+## Item Characteristic Curves for the LSAT data;
 ## plot all items plus a legend and use only black:
 plot(fit, legend = TRUE, cx = "right", lwd = 3, cex = 1.4, 
      cex.lab = 1.6, cex.main = 2, col = 1, lty = c(1, 1, 1, 2, 2),
      pch = c(16, 15, 17, 0, 1))
+abline(v = -4:4, h = seq(0, 1, 0.2), col = "lightgray", lty = "dotted")
 
 ## Item Information Curves, for the first 3 items; include a legend
 plot(fit, type = "IIC", items = 1:3, legend = TRUE, lwd = 2, cx = "topright")

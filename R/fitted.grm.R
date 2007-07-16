@@ -54,6 +54,7 @@ function (object, resp.patterns = NULL,
             rownames(res) <- if (!is.null(resp.patterns) && !is.null(nams <- rownames(resp.patterns))) nams else NULL
             res
         })
+        print(out)
         for (i in seq_along(out)) {
             if (is.factor(object$X[[i]]))
                 colnames(out[[i]]) <- levels(object$X[[i]])
