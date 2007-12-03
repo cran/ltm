@@ -46,7 +46,7 @@ function (data, constrained = FALSE, IRT.param = TRUE, Hessian = FALSE, start.va
     betas <- betas.grm(res.qN$par, constrained, ind1, ind2, p)
     names(betas) <- if (!is.null(colnamsX)) colnamsX else paste("Item", 1:p)
     betas <- lapply(betas, function (x) { names(x) <- c(paste("beta.", seq(1, length(x) - 1), sep = ""), "beta"); x } )
-    max.sc <- max(abs(scoregrm(res.qN$par, constrained)))
+    max.sc <- max(abs(scoregrm(res.qN$par, constrained)), na.rm = TRUE)
     fit <- list(coefficients = betas, log.Lik = -res.qN$value, convergence = res.qN$conv, hessian = res.qN$hessian, 
                 counts = res.qN$counts, patterns = list(X = X, obs = obs), GH = list(Z = Z, GHw = GHw), max.sc = max.sc, 
                 constrained = constrained, IRT.param = IRT.param, X = data, control = con, na.action = na.action,

@@ -40,7 +40,7 @@ cronbach.alpha(data, standardized = FALSE, CI = FALSE,
   The standardized Cronbach's alpha computed by \code{cronbach.alpha()} is defined as follows \deqn{\alpha_s = 
   \frac{p \cdot \bar{r}}{1 + (p - 1) \cdot \bar{r}},}{alpha_s = (p r) / (1 + (p - 1) r),} where \eqn{p} is the 
   number of items, and \eqn{\bar{r}}{r} is the average of all (Pearson) correlation coefficients between the 
-  items.
+  items. In this case if \code{na.rm = TRUE}, then the complete observations (i.e., rows) are used.
   
   The Bootstrap confidence interval is calculated by simply taking \code{B} samples with replacement from \code{data},
   calculating for each \eqn{\alpha}{alpha} or \eqn{\alpha_s}{alpha_s}, and computing the quantiles according to 

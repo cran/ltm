@@ -10,11 +10,13 @@
 }
 
 \usage{
-rcor.test(mat, \dots)
+rcor.test(mat, p.adjust = FALSE, p.adjust.method = "holm", \dots)
 }
 
 \arguments{
   \item{mat}{ a numeric \code{matrix} or a numeric \code{data.frame} containing the manifest variables as columns. }
+  \item{p.adjust}{logical; if \code{TRUE} the \eqn{p}-values are adjusted for multiple comparisons.}
+  \item{p.adjust.method}{the \code{method} argument of \code{p.adjust()}.}
   \item{\dots}{extra arguments passed to \code{cor()} and \code{cor.test()}.}
 }
 

@@ -23,7 +23,7 @@ function (x, digits = 2, ...) {
         out$" " <- sapply(x$margins, function (x) if (x$TotalResid > x$rule) "***" else "")
         print(out)
         if (any(out == "***"))
-            cat("\n'***' denotes pairs of items with lack-of-fit\n")
+            cat("\n'***' denotes triplets of items with lack-of-fit\n")
     }
     cat("\n")
     invisible(x)

@@ -13,7 +13,7 @@ function (data, standardized = FALSE, CI = FALSE, probs = c(0.025, 0.975), B = 1
         VarInd <- sum(sd(data, na.rm = na.rm)^2)
         (p / (p - 1)) * (1 - (VarInd / VarTot))
     } else {
-        mat <- cor(data)
+        mat <- if (na.rm) cor(data, use = "complete.obs") else cor(data)
         ave.rho <- mean(mat[upper.tri(mat)])
         (p * ave.rho) / (1 + (p - 1) * ave.rho)
     }
@@ -27,7 +27,7 @@ function (data, standardized = FALSE, CI = FALSE, probs = c(0.025, 0.975), B = 1
                 VarInd <- sum(sd(data.boot, na.rm = na.rm)^2)
                 (p / (p - 1)) * (1 - (VarInd / VarTot))
             } else {
-                mat <- cor(data.boot)
+                mat <- if (na.rm) cor(data.boot, use = "complete.obs") else cor(data.boot)
                 ave.rho <- mean(mat[upper.tri(mat)])
                 (p * ave.rho) / (1 + (p - 1) * ave.rho)
             }

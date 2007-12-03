@@ -1,3 +1,15 @@
+Changes in version: ltm_0.8-2
+
+  o a bug was fixed in "cronbach.alpha()" for the case both arguments 'standardized' and 'na.rm' are TRUE.
+
+  o "rcor.test()" has two new arguments, namely 'p.adjust' and 'p.adjust.method' that correct the reported p-values
+    for multiple testing.
+
+  o a bug was corrected in the "factor.scores()" method when "testEquatingData()" has been used.
+
+
+==============================
+
 Changes in version: ltm_0.8-1
 
   o the new function "cronbach.alpha()" computes Cronbach's alpha for given data-sets. The function can also compute

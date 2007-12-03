@@ -1,5 +1,5 @@
 `print.descript` <-
-function (x, digits = max(3, getOption("digits") - 4), ...) {
+function (x, digits = max(4, getOption("digits") - 4), ...) {
     if (!inherits(x, "descript"))
         stop("Use only with 'descript' objects.\n")
     cat("\nDescriptive statistics for the", paste("'", x$name, "'", sep = ""), "data-set\n")
@@ -24,8 +24,10 @@ function (x, digits = max(3, getOption("digits") - 4), ...) {
     }
     cat("\n\nCronbach's alpha:\n")
         print(round(x$alpha, digits))
-    cat("\n\nPairwise Associations:\n")
-    print(x$pw.ass[seq(1, min(x$n.print, nrow(x$pw.ass))), ])
+    if (!is.null(x$pw.ass)) {
+        cat("\n\nPairwise Associations:\n")
+        print(x$pw.ass[seq(1, min(x$n.print, nrow(x$pw.ass))), ])
+    }
     cat("\n\n")
     invisible(x)
 }

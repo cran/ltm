@@ -18,15 +18,15 @@ Random missing data mechanisms.
 \tabular{ll}{
 Package: \tab ltm\cr
 Type: \tab Package\cr
-Version: \tab 0.8-1\cr
-Date: \tab 2007-07-16\cr
+Version: \tab 0.8-2\cr
+Date: \tab 2007-12-03\cr
 License: \tab \acronym{GPL} \cr
 }
 The following features are available:
 \describe{
   \item{Descriptives:}{samples proportions, missing values information, biserial correlation of items with total score, 
-        pairwise associations between items, unidimensionality check using modified parallel analysis, nonparametric 
-        correlation coefficient, plotting of sample proportions versus total score.}
+        pairwise associations between items, Cronbach's \eqn{\alpha}{alpha}, unidimensionality check using modified 
+        parallel analysis, nonparametric correlation coefficient, plotting of sample proportions versus total score.}
   \item{Dichotomous data:}{Rasch Model, Two Parameter Logistic Model, Birnbaum's Three Parameter Model, and 
         Latent Trait Model up to two latent variables (allowing also for nonlinear terms between the latent traits).}
   \item{Polytomous data:}{Samejima's Graded Response Model.}

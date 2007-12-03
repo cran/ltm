@@ -4,7 +4,7 @@ function (object, ...) {
         stop("Use only with 'grm' objects.\n")
     if (is.null(object$hessian))
         stop("you should re-fit the model using 'Hessian = TRUE' in order to get standard errors.\n")
-    inv.hes <- solve(object$hessian)
+    inv.hes <- ginv(object$hessian)
     pars <- if (object$IRT.param) IRT.parm(object, digits.abbrv = object$control$digits.abbrv)$parms else object$coef
     p <- length(pars)
     ncatg <- sapply(pars, length)

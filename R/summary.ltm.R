@@ -18,9 +18,9 @@ function (object, robust.se = FALSE, ...) {
     coef.tab <- cbind(value = c(coefs), std.err = se, z.vals = z.vals)
     p <- nrow(coefs)
     rownames(coef.tab) <- if (object$IRT & (object$ltst$factors == 1 & !object$ltst$quad.z1))
-            paste(rep(colnames(coefs), each = p), abbreviate(rownames(coefs), 3), sep = ".")
+            paste(rep(colnames(coefs), each = p), abbreviate(rownames(coefs), 5), sep = ".")
         else
-            paste(rep(object$ltst$nams, each = p), abbreviate(rownames(coefs), 3), sep = ".")
+            paste(rep(object$ltst$nams, each = p), abbreviate(rownames(coefs), 5), sep = ".")
     out <- list(coefficients = coef.tab, Var.betas = Var.betas)
     out$logLik <- object$log.Lik
     out$AIC <- -2 * object$log.Lik + 2 * length(coefs)

@@ -10,14 +10,17 @@
 }
 
 \usage{
-descript(data, n.print = 10, B = 1000)
+descript(data, n.print = 10, chi.squared = TRUE, B = 1000)
 }
 
 \arguments{
   \item{data}{ a \code{matrix} or a \code{data.frame} containing the manifest variables as columns. }
   \item{n.print}{numeric indicating the number of pairwise associations with the highest \eqn{p}-values 
         to be printed.}
-  \item{B}{the \code{B} argument of \code{chisq.test()}.}
+  \item{chi.squared}{logical; if \code{TRUE} the chi-squared test for the pairwise associations between items
+        is performed. See \bold{Details} for more info.}
+  \item{B}{an integer specifying the number of replicates used in the Monte Carlo test (i.e., this is the \code{B} 
+        argument of \code{chisq.test()}).}
 }
 
 \details{

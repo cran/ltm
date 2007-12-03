@@ -1,4 +1,4 @@
 ".onAttach" <-
 function (...) {
-    cat("\nThis is package 'ltm' version '0.8-1'\n\n")
+    cat("\nThis is package 'ltm' version '0.8-2'\n\n")
 }

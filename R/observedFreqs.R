@@ -35,7 +35,8 @@ function (object, Y, vals) {
         }
     })
     outY <- if (is.matrix(outY)) t(outY) else do.call(rbind, outY)
-    outY
+    if (is.null(colnames(outY)))
+        colnames(outY) <- c(paste("It", seq(1, ncol(outY) - 1)), "Ind")
     Obs. <- outX[, ncol(outX)]
     obs <- numeric(nrY)
     for (i in 1:nrY) {

@@ -14,5 +14,6 @@ function (x, digits = 3, ...) {
         print(round(x$ci, digits))
     }
     cat("\n\n")
+    invisible(x)
 }
 
