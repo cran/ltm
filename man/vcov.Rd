@@ -23,13 +23,17 @@
 }
 
 \arguments{
-  \item{object}{ an object inheriting from either class \code{grm}, class \code{ltm}, class \code{rasch} or class \code{tpm}. }
+  \item{object}{ an object inheriting from either class \code{grm}, class \code{ltm}, class \code{rasch} or class 
+    \code{tpm}. }
   \item{robust}{ logical; if \code{TRUE} the sandwich estimator is used. }
   \item{\dots}{ additional arguments; currently none is used. }
 }
 
 \value{
-    a numeric matrix representing the estimated covariance matrix of the maximum likelihood estimates.
+    a numeric matrix representing the estimated covariance matrix of the maximum likelihood estimates. Note that this 
+    covariance matrix is for the parameter estimates under the additive parameterization and not under the usual IRT 
+    parameterization; for more info check the \bold{Details} section of \code{\link{grm}}, \code{\link{ltm}}, 
+    \code{\link{rasch}}, and \code{\link{tpm}}.
 }
 
 \author{
@@ -46,7 +50,7 @@
 \examples{
 fit <- rasch(WIRS)
 vcov(fit)
-sqrt(diag(vcov(fit))) # standard errors
+sqrt(diag(vcov(fit))) # standard errors under additive parameterization
 }
 
 \keyword{methods}

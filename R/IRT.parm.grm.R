@@ -17,11 +17,16 @@ function (object, standard.errors = FALSE, digits.abbrv = 6, ...) {
         Var <- vcov(object)
         ind1 <- if (object$constrained) sum(ncatg) - length(ncatg) + 1 else cumsum(ncatg)
         ind2 <- if (object$constrained) seq(1, sum(ncatg - 1)) else (1:length(thets))[-ind1]
+        if (object$constrained) {
+            ll <- cumsum(ncatg)
+            thets <- thets[-ll[-length(ll)]]
+        }
         ses <- numeric(nrow(Var))
         ses[ind1] <- sqrt(diag(as.matrix(Var[ind1, ind1])))
         ind1 <- if (object$constrained) rep(ind1, length(ind2)) else rep(ind1, ncatg - 1)
         for (i in seq(along = ind2)) {
-            ses[ind2[i]] <- deltamethod(~ x1 / x2, c(thets[ind2[i]], thets[ind1[i]]), Var[c(i, ind1[i]), c(i, ind1[i])])
+            ses[ind2[i]] <- deltamethod(~ x1 / x2,
+                c(thets[ind2[i]], thets[ind1[i]]), Var[c(ind2[i], ind1[i]), c(ind2[i], ind1[i])])
         }
         names(ses) <- colnames(Var)
         ses

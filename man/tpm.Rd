@@ -99,11 +99,11 @@ tpm(data, type = c("latent.trait", "rasch"), constraint = NULL,
 \section{Warning}{ 
     The three parameter model is known to have numerical problems like non-convergence or convergence on the boundary,
     especially for the guessing parameters. These problems usually result in a zero estimate for some guessing 
-    parameters or in a non positive definite Hessian matrix or in a high absolute value for the score vector (returned 
-    by the \code{summary} method) at convergence. In case of estimates on the boundary, the \code{constraint} argument 
-    can be used to set the guessing parameter(s) for the problematic item(s) to zero. In addition, \code{tpm()} has a 
-    number of control parameters that can be tuned in order to obtain successful convergence; the most important of 
-    these are the starting values, the parameter scaling vector and the optimizer.
+    parameters and/or in a non positive definite Hessian matrix or in a high absolute value for the score vector 
+    (returned by the \code{summary} method) at convergence. In case of estimates on the boundary, the \code{constraint} 
+    argument can be used to set the guessing parameter(s) for the problematic item(s) to zero. In addition, 
+    \code{tpm()} has a number of control parameters that can be tuned in order to obtain successful convergence; 
+    the most important of these are the starting values, the parameter scaling vector and the optimizer.
 }
 
 \references{

@@ -1,3 +1,15 @@
+Changes in version: ltm_0.8-3
+
+  o a bug was fixed in the application of the Delta method for computing the standard errors for 'grm' objects.
+
+  o factor.scores() no longer returns the observed and expected frequencies of the response patterns when missing 
+    data are present in the response data.
+
+  o some additions in .Rd files.
+
+
+==============================
+
 Changes in version: ltm_0.8-2
 
   o a bug was fixed in "cronbach.alpha()" for the case both arguments 'standardized' and 'na.rm' are TRUE.

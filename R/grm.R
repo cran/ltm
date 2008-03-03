@@ -35,14 +35,6 @@ function (data, constrained = FALSE, IRT.param = TRUE, Hessian = FALSE, start.va
     on.exit(options(old))
     res.qN <- optim(unlist(betas), fn = loglikgrm, gr = scoregrm, method = con$method, hessian = Hessian, 
                     control = list(maxit = con$iter.qN, trace = as.numeric(con$verbose)), constrained = constrained)
-    if (Hessian) {
-        if (all(!is.na(res.qN$hessian) & is.finite(res.qN$hessian))) {
-            ev <- eigen(res.qN$hessian, TRUE, TRUE)$values
-            if (!all(ev >= -1e-06 * abs(ev[1]))) 
-                warning("Hessian matrix at convergence is not positive definite; unstable solution.\n")
-        } else 
-            warning("Hessian matrix at convergence contains infinite or missing values; unstable solution.\n")
-    }
     betas <- betas.grm(res.qN$par, constrained, ind1, ind2, p)
     names(betas) <- if (!is.null(colnamsX)) colnamsX else paste("Item", 1:p)
     betas <- lapply(betas, function (x) { names(x) <- c(paste("beta.", seq(1, length(x) - 1), sep = ""), "beta"); x } )

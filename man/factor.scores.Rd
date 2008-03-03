@@ -78,7 +78,8 @@ factor.scores(object, \dots)
 \value{
   An object of class \code{fscores} is a list with components,
   \item{score.dat}{the \code{data.frame} of observed response patterns including, observed and expected 
-        frequencies as well as the factor scores.}
+        frequencies (only if the observed data response matrix contains no missing vales), the factor scores 
+        and their standard errors.}
   \item{method}{a character giving the scoring method used.}
   \item{B}{the number of multiple imputations used; relevant only if \code{method = "MI"}.}
   \item{call}{a copy of the matched call of \code{object}.}

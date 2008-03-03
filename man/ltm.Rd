@@ -79,10 +79,7 @@ ltm(formula, constraint = NULL, IRT.param, start.val,
     variates under the logit link. The required integrals are approximated using the Gauss-Hermite rule. The 
     optimization procedure used is a hybrid algorithm. The procedure initially uses a moderate number of EM 
     iterations (see \code{control} argument \code{iter.em}) and then switches to quasi-Newton (see \code{control} 
-    arguments \code{method} and \code{iter.qN}) iterations until convergence. In case of large number of items, 
-    the `Conjugate Gradient' optimization method might be preferable. Due to the use of Gauss-Hermite integration, 
-    when relatively large data sets are encountered in multivariate analysis the use of optimized BLAS 
-    (e.g., ATLAS) is recommended.
+    arguments \code{method} and \code{iter.qN}) iterations until convergence.
 }
 
 \note{

@@ -9,8 +9,12 @@ function (object, resp.patterns = NULL, method = c("EB", "EAP", "MI"), B = 5, ..
     p <- ncol(X)
     method <- match.arg(method)
     vals <- lapply(1:ncol(X), function (i) c(0, 1))
-    Obs <- observedFreqs(object, X, vals)
-    res <- data.frame(X, Obs = Obs, Exp = fits[, ncol(fits)])
+    res <- if (any(is.na(object$X))) {
+        data.frame(X)
+    } else {
+        Obs <- observedFreqs(object, X, vals)
+        data.frame(X, Obs = Obs, Exp = fits[, ncol(fits)])
+    }
     names(res)[1:p] <- rownames(thetas)
     environment(fscores.t) <- environment()
     res <- fscores.t(thetas, X, method)

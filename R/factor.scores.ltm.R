@@ -19,8 +19,12 @@ function (object, resp.patterns = NULL, method = c("EB", "EAP", "MI", "Component
         method <- "MI"
     }
     vals <- lapply(1:ncol(X), function (i) c(0,1))
-    Obs <- observedFreqs(object, X, vals)
-    res <- data.frame(X, Obs = Obs, Exp = fits[, ncol(fits)])
+    res <- if (any(is.na(object$X))) {
+        data.frame(X)
+    } else {
+        Obs <- observedFreqs(object, X, vals)
+        data.frame(X, Obs = Obs, Exp = fits[, ncol(fits)])
+    }
     names(res)[1:p] <- rownames(betas)
     if (method == "Component") {
         res$z1 <- colSums(t(X) * betas[, 2])
