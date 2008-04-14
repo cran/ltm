@@ -1,3 +1,10 @@
+Changes in version: ltm_0.8-4
+
+  o a bug was fixed in the print.tpm() when argument IRT.param was FALSE.
+
+
+==============================
+
 Changes in version: ltm_0.8-3
 
   o a bug was fixed in the application of the Delta method for computing the standard errors for 'grm' objects.

@@ -5,7 +5,7 @@ function (object, ...) {
     inv.hes <- solve(object$hessian)
     p <- nrow(object$coef)
     thetas <- object$coef 
-    nams <- as.vector(t(outer(c("c.", "beta.1", "beta.2"), as.character(1:p), paste, sep = "")))
+    onams <- nams <- as.vector(t(outer(c("c.", "beta.1", "beta.2"), as.character(1:p), paste, sep = "")))
     if (!is.null(constraint <- object$constraint)) {
         nams <- nams[-((constraint[, 2] - 1) * p + constraint[, 1])]
         thetas <- thetas[-((constraint[, 2] - 1) * p + constraint[, 1])]
@@ -23,7 +23,7 @@ function (object, ...) {
     thetas <- unique(c(thetas))
     if (type == "rasch" && any(constraint[, 2] == 3))
         thetas <- thetas[-length(thetas)]
-    formlLis.c <- lapply(paste("x", 1:cp, sep = ""), function (strg) {
+    formlLis.c <- if (cp == 0) NULL else lapply(paste("x", 1:cp, sep = ""), function (strg) {
         as.formula(paste("~ 1 / (1 + exp(-", strg, "))", sep = ""))
     })
     formlLis.b <- lapply(paste("x", seq(cp + 1, length(thetas)), sep = ""), function (strg) {
@@ -31,10 +31,12 @@ function (object, ...) {
     })    
     formlLis <- c(formlLis.c, formlLis.b)
     inv.hes[] <- deltamethod(formlLis, thetas, inv.hes, FALSE)
-    inv.hes[1:cp, 1:cp] <- inv.hes[1:cp, 1:cp] * object$max.guessing^2
+    if (cp > 0)
+        inv.hes[1:cp, 1:cp] <- inv.hes[1:cp, 1:cp] * object$max.guessing^2
     inv.hes[seq(cp + 1, nrow(inv.hes)), 1:cp] <- inv.hes[seq(cp + 1, nrow(inv.hes)), 1:cp] * object$max.guessing
     inv.hes[1:cp, seq(cp + 1, nrow(inv.hes))] <- inv.hes[1:cp, seq(cp + 1, nrow(inv.hes))] * object$max.guessing
     dimnames(inv.hes) <- list(nams, nams)
+    attr(inv.hes, "drop.ind") <- onams %in% nams
     inv.hes
 }
 

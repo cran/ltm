@@ -23,7 +23,7 @@ function (object, standard.errors = FALSE, digits.abbrv = 6, ...) {
         }
         ses <- numeric(nrow(Var))
         ses[ind1] <- sqrt(diag(as.matrix(Var[ind1, ind1])))
-        ind1 <- if (object$constrained) rep(ind1, length(ind2)) else rep(ind1, ncatg - 1)
+        ind1 <- if (object$constrained) rep(ind1, length(ind2)) else rep(ind1, ncatg - 1)        
         for (i in seq(along = ind2)) {
             ses[ind2[i]] <- deltamethod(~ x1 / x2,
                 c(thets[ind2[i]], thets[ind1[i]]), Var[c(ind2[i], ind1[i]), c(ind2[i], ind1[i])])

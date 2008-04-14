@@ -7,9 +7,13 @@ function (object, ...) {
     coefs <- if (object$IRT.param) irt$parms else object$coef
     coefs[, 1] <- plogis(coefs[, 1]) * object$max.guessing
     Var.betas <- vcov(object)
-    coefs <- if (object$type == "rasch") c(coefs[, 1:2], coefs[1, 3]) else c(coefs)
-    z.vals <- coefs / irt$se
-    coef.tab <- cbind(value = coefs, std.err = irt$se, z.vals = z.vals)
+    coefs <- if (object$type == "rasch") c(coefs[, 1:2], coefs[1, 3]) else c(coefs) 
+    se <- if (object$IRT.param) irt$se else {
+        ses <- rep(NA, length(coefs))
+        ses[attr(Var.betas, "drop.ind")] <- sqrt(diag(Var.betas))
+        ses
+    }
+    coef.tab <- cbind(value = coefs, std.err = se, z.vals = coefs / se)
     p <- ncol(object$X)
     nams <- if (object$IRT) {
          c(t(outer(colnames(irt$parms), abbreviate(rownames(object$coef), 4), paste, sep = ".")))
