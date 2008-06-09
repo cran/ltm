@@ -28,9 +28,10 @@ function (thetas, X, method) {
         cs <- plogis(thetas[, 1]) * object$max.guessing
         cs.mat <- matrix(cs, nrow(Z), nrow(betas), TRUE)
         pr <- cs + (1 - cs) * probs(Z %*% t(betas))
+        mX <- 1 - X
         if (any(na.ind <- is.na(X)))
-            X[na.ind] <- 0
-        p.xz <- exp(X %*% t(log(pr)) + (1 - X) %*% t(log(1 - pr)))
+            X[na.ind] <- mX[na.ind] <- 0
+        p.xz <- exp(X %*% t(log(pr)) + mX %*% t(log(1 - pr)))
         p.x <- c(p.xz %*% GHw)
         p.zx <- p.xz / p.x
         res$z1 <- c(p.zx %*% (Z[, 2] * GHw))

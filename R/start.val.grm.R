@@ -43,7 +43,11 @@ function (start.val, data, weight, constrained, ncatg) {
         if (constrained)
             res[seq(1, p - 1)] <- lapply(res[seq(1, p - 1)], function (x) x[-length(x)])
         res
-    } else 
-        start.val
+    } else {
+        lapply(start.val, function (x) {
+            nx <- length(x)
+            c(x[1], log(diff(x[-nx])), x[nx])
+        })
+    }
 }
 
