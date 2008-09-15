@@ -58,7 +58,7 @@ a numeric matrix with \code{n} rows and columns the number of items, containing 
 
 \author{
 
-    Dimitris Rizopoulos \email{dimitris.rizopoulos@med.kuleuven.be}
+    Dimitris Rizopoulos \email{d.rizopoulos@erasmusmc.nl}
 
 }
 

@@ -72,7 +72,7 @@ Yen, W. (1981) Using simulation results to choose a latent trait model. \emph{Ap
 }
 
 \author{
-    Dimitris Rizopoulos \email{dimitris.rizopoulos@med.kuleuven.be}
+    Dimitris Rizopoulos \email{d.rizopoulos@erasmusmc.nl}
 }
 
 \seealso{

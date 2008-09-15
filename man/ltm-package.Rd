@@ -18,8 +18,8 @@ Random missing data mechanisms.
 \tabular{ll}{
 Package: \tab ltm\cr
 Type: \tab Package\cr
-Version: \tab 0.8-5\cr
-Date: \tab 2008-06-09\cr
+Version: \tab 0.8-6\cr
+Date: \tab 2008-09-15\cr
 License: \tab \acronym{GPL} \cr
 }
 The following features are available:
@@ -49,7 +49,7 @@ More information as well as .R files containing sample analyses can be found in 
 \author{
 Dimitris Rizopoulos
 
-Maintainer: Dimitris Rizopoulos <dimitris.rizopoulos@med.kuleuven.be>
+Maintainer: Dimitris Rizopoulos <d.rizopoulos@erasmusmc.nl>
 }
 
 \references{

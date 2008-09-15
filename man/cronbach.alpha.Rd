@@ -65,7 +65,7 @@ Cronbach, L. J. (1951) Coefficient alpha and the internal structure of tests.
 }
 
 \author{
-Dimitris Rizopoulos \email{dimitris.rizopoulos@med.kuleuven.be}
+Dimitris Rizopoulos \email{d.rizopoulos@erasmusmc.nl}
 }
 
 

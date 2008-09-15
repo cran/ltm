@@ -68,7 +68,7 @@ descript(data, n.print = 10, chi.squared = TRUE, B = 1000)
 }
 
 \author{
-    Dimitris Rizopoulos \email{dimitris.rizopoulos@med.kuleuven.be}
+    Dimitris Rizopoulos \email{d.rizopoulos@erasmusmc.nl}
 }
 
 \seealso{

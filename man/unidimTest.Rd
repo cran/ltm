@@ -76,7 +76,7 @@ of dichotomously scored item responses. \emph{Journal of Applied Psychology}, \b
 }
 
 \author{
-    Dimitris Rizopoulos \email{dimitris.rizopoulos@med.kuleuven.be}
+    Dimitris Rizopoulos \email{d.rizopoulos@erasmusmc.nl}
 }
 
 \seealso{

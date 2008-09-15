@@ -49,7 +49,7 @@ An object of class \code{GoF.rasch} with components,
 }
 
 \author{
-    Dimitris Rizopoulos \email{dimitris.rizopoulos@med.kuleuven.be}
+    Dimitris Rizopoulos \email{d.rizopoulos@erasmusmc.nl}
 }
 
 \seealso{

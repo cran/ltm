@@ -23,7 +23,7 @@ a matrix of 0/1 values indicating wrong/correct answers.
 }
 
 \author{
-    Dimitris Rizopoulos \email{dimitris.rizopoulos@med.kuleuven.be}
+    Dimitris Rizopoulos \email{d.rizopoulos@erasmusmc.nl}
 }
 \examples{
 

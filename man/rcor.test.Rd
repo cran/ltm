@@ -34,7 +34,7 @@ the estimates of the correlation coefficients, and the lower diagonal part conta
 }
 
 \author{
-    Dimitris Rizopoulos \email{dimitris.rizopoulos@med.kuleuven.be}
+    Dimitris Rizopoulos \email{d.rizopoulos@erasmusmc.nl}
 }
 
 \examples{

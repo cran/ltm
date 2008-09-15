@@ -107,7 +107,7 @@ with nonlinear effects. \emph{British Journal of Mathematical and Statistical Ps
 }
 
 \author{
-    Dimitris Rizopoulos \email{dimitris.rizopoulos@med.kuleuven.be}
+    Dimitris Rizopoulos \email{d.rizopoulos@erasmusmc.nl}
 }
 
 \seealso{

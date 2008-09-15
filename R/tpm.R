@@ -32,18 +32,12 @@ function (data, type = c("latent.trait", "rasch"), constraint = NULL, max.guessi
                 eps.hessian = 1e-03, parscale = c(rep(0.5, p - sum(constraint[, 2] == 1)), 
                 rep(1, length(thetas) - p + sum(constraint[, 2] == 1))))
     con[names(control)] <- control
-    pats <- apply(X, 1, paste, collapse = "")
+    pats <- apply(X, 1, paste, collapse = "/")
     freqs <- table(pats)
+    nfreqs <- length(freqs)
     obs <- as.vector(freqs)
-    X <- apply(cbind(names(freqs)), 1, function (x) {
-        nx <- nchar(x)
-        out <- substring(x, 1:nx, 1:nx)
-        out <- out[out != "A"]
-        out[out == "N"] <- NA
-        out
-    })
-    X <- as.numeric(t(X))
-    dim(X) <- c(length(freqs), p)
+    X <- unlist(strsplit(cbind(names(freqs)), "/"))
+    X <- matrix(as.numeric(X), nfreqs, p, TRUE)
     mX <- 1 - X
     if (any(na.ind <- is.na(X)))
         X[na.ind] <- mX[na.ind] <- 0

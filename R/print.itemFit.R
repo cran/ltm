@@ -5,7 +5,7 @@ function (x, digits = 3, ...) {
     cat("\nItem-Fit Statistics and P-values\n")
     cat("\nCall:\n", paste(deparse(x$call), sep = "\n", collapse = "\n"), "\n", sep = "")
     cat("\nAlternative: Items do not fit the model")
-    cat("\nAbility Gategories:", x$G)
+    cat("\nAbility Categories:", x$G)
     if (x$simulate.p.value)
         cat("\nMonte Carlo samples:", x$B, "\n\n")
     else

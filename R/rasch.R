@@ -25,18 +25,12 @@ function (data, constraint = NULL, IRT.param = TRUE, start.val = NULL, na.action
         constraint[, 1] <- round(constraint[, 1])
         betas[constraint[, 1]] <- NA
     }
-    pats <- apply(X, 1, paste, collapse = "")
+    pats <- apply(X, 1, paste, collapse = "/")
     freqs <- table(pats)
+    nfreqs <- length(freqs)
     obs <- as.vector(freqs)
-    X <- apply(cbind(names(freqs)), 1, function (x) {
-                nx <- nchar(x)
-                out <- substring(x, 1:nx, 1:nx)
-                out <- out[out != "A"]
-                out[out == "N"] <- NA
-                out
-        })
-    X <- as.numeric(t(X))
-    dim(X) <- c(length(freqs), p)
+    X <- unlist(strsplit(cbind(names(freqs)), "/"))
+    X <- matrix(as.numeric(X), nfreqs, p, TRUE)
     mX <- 1 - X
     if (any(na.ind <- is.na(X)))
         X[na.ind] <- mX[na.ind] <- 0
@@ -68,7 +62,6 @@ function (data, constraint = NULL, IRT.param = TRUE, start.val = NULL, na.action
         else
             c(scores[, 1], sum(scores[, 2]))
     }
-    environment(logLik.rasch) <- environment(score.rasch) <- environment()
     res.qN <- optim(betas[!is.na(betas)], fn = logLik.rasch, gr = score.rasch, method = con$method, hessian = TRUE, 
                 control = list(maxit = con$iter.qN, trace = as.numeric(con$verbose)), constraint = constraint)                
     if (all(!is.na(res.qN$hessian) & is.finite(res.qN$hessian))) {

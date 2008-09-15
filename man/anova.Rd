@@ -52,7 +52,7 @@ An object of either class \code{aov.grm}, class \code{aov.ltm} or class \code{ao
 }
 
 \author{
-    Dimitris Rizopoulos \email{dimitris.rizopoulos@med.kuleuven.be}
+    Dimitris Rizopoulos \email{d.rizopoulos@erasmusmc.nl}
 }
 
 \seealso{

@@ -87,7 +87,7 @@ Rizopoulos, D. (2006) \bold{ltm}: An R package for latent variable modelling and
 }
 
 \author{
-    Dimitris Rizopoulos \email{dimitris.rizopoulos@med.kuleuven.be}
+    Dimitris Rizopoulos \email{d.rizopoulos@erasmusmc.nl}
 }
 
 \seealso{
