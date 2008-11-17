@@ -6,7 +6,7 @@ function (x, items = NULL, includeFirstLast = FALSE, xlab, ylab, ...) {
     if (any(levs > 2))
         stop("the plot method for 'descript' objects currently works for dichotomous responses.\n")
     tot <- as.vector(rowSums(x$data, na.rm = TRUE))
-    lis <- split(x$data, tot)
+    lis <- split(as.data.frame(x$data), tot)
     if (!includeFirstLast)
         lis <- lis[-c(1, length(lis))]
     out <- sapply(lis, colMeans, na.rm = TRUE)
@@ -21,6 +21,7 @@ function (x, items = NULL, includeFirstLast = FALSE, xlab, ylab, ...) {
     if (missing(ylab))
         ylab <- "Proportion Correct"
     p <- if (!includeFirstLast) 1:ncol(out) else 0:(ncol(out) - 1)
+    print(out)
     matplot(cbind(p), t(out), xlab = xlab, ylab = ylab, ...)
     invisible(out)
 }
