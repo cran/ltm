@@ -21,6 +21,7 @@ function (data, constrained = FALSE, IRT.param = TRUE, Hessian = FALSE, start.va
     nfreqs <- length(freqs)
     obs <- as.vector(freqs)
     X <- unlist(strsplit(cbind(names(freqs)), "/"))
+    X[X == "NA"] <- as.character(NA)
     X <- matrix(as.numeric(X), nfreqs, p, TRUE)
     con <- list(iter.qN = 150, GHk = 21, method = "BFGS", verbose = getOption("verbose"), digits.abbrv = 6)
     con[names(control)] <- control

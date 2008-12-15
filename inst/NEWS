@@ -1,3 +1,12 @@
+Changes in version: ltm_0.8-8
+
+  o a wrong warning message tha appeared after calling grm() in a data set with missing responses has be rectified.
+
+  o a bug was fixed in plot.descript() that did not work when the first argument of descript() was a matrix (a not a data.frame).
+
+
+==============================
+
 Changes in version: ltm_0.8-6
 
   o changes in e-mail addresses.
