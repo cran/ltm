@@ -6,8 +6,7 @@ function (object, B = 49, ...) {
     pearson.chi <- function (object) {
         fits <- fitted(object)
         X <- fits[, -ncol(fits), drop = FALSE]
-        vals <- lapply(1:p, function (i) c(0,1))
-        Obs <- observedFreqs(object, X, vals)
+        Obs <- observedFreqs(object, X)
         Exp <- fits[, ncol(fits)]
         if (any(ind <- Exp == 0))
             Exp[ind] <- 0.001

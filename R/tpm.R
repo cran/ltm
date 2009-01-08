@@ -37,6 +37,7 @@ function (data, type = c("latent.trait", "rasch"), constraint = NULL, max.guessi
     nfreqs <- length(freqs)
     obs <- as.vector(freqs)
     X <- unlist(strsplit(cbind(names(freqs)), "/"))
+    X[X == "NA"] <- as.character(NA)
     X <- matrix(as.numeric(X), nfreqs, p, TRUE)
     mX <- 1 - X
     if (any(na.ind <- is.na(X)))

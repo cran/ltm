@@ -1,3 +1,13 @@
+Changes in version: ltm_0.8-9
+
+  o the calculation of the observed frequencies has changed in the presence of NA; side-effect: residuals() does not produce valid results for
+    patterns with NAs. This will be rectified in a future release.
+
+  o plot.fscores() now alos works for patterns with missing data.
+
+
+==============================
+
 Changes in version: ltm_0.8-8
 
   o a wrong warning message tha appeared after calling grm() in a data set with missing responses has be rectified.

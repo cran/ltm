@@ -12,13 +12,8 @@ function (object, resp.patterns = NULL, method = c("EB", "EAP", "MI"), B = 5, ..
         warning("object does not have an estimate of the Hessian; the 'EB' method is used instead.\n")
         method <- "EB"
     }
-    vals <- lapply(betas, function(x) seq(1, length(x) - 1))
-    res <- if (any(is.na(object$X))) {
-        data.frame(X)
-    } else {
-        Obs <- observedFreqs(object, X, vals)
-        data.frame(X, Obs = Obs, Exp = fits[, ncol(fits)])
-    }
+    Obs <- observedFreqs(object, X)
+    res <- data.frame(X, Obs = Obs, Exp = fits[, ncol(fits)])
     names(res)[1:p] <- names(betas)
     environment(fscores.g) <- environment()
     res <- fscores.g(betas, X, method)
