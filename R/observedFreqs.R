@@ -1,7 +1,7 @@
 `observedFreqs` <-
 function (object, Y) {
-    if (!class(object) %in% c("grm", "ltm", "rasch", "tpm"))
-        stop("'object' must inherit from either class 'grm', class 'ltm', class 'rasch' or class 'tpm'.\n")
+    if (!class(object) %in% c("grm", "gpcm", "ltm", "rasch", "tpm"))
+        stop("'object' must inherit from either class 'grm', class 'gpcm', class 'ltm', class 'rasch' or class 'tpm'.\n")
     X <- object$patterns$X
     Obs <- object$patterns$obs
     patsX <- apply(X, 1, paste, collapse = "/")

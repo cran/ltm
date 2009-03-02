@@ -80,7 +80,7 @@ grm(data, constrained = FALSE, IRT.param = TRUE, Hessian = FALSE,
     \item{GH}{a list with two components used in the Gauss-Hermite rule: (i) \code{Z}: a numeric matrix that contains 
         the abscissas, and (ii) \code{GHw}: a numeric vector that contains the corresponding  weights.} 
     \item{max.sc}{the maximum absolute value of the score vector at convergence.}
-    \item{constraint}{the value of the \code{constraint} argument.}
+    \item{constrained}{the value of the \code{constrained} argument.}
     \item{IRT.param}{the value of the \code{IRT.param} argument.}
     \item{X}{a copy of the response data matrix.}
     \item{control}{the values used in the \code{control} argument.}

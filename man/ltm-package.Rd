@@ -18,19 +18,19 @@ Random missing data mechanisms.
 \tabular{ll}{
 Package: \tab ltm\cr
 Type: \tab Package\cr
-Version: \tab 0.8-9\cr
-Date: \tab 2009-01-08\cr
+Version: \tab 0.9-0\cr
+Date: \tab 2009-03-02\cr
 License: \tab \acronym{GPL} \cr
 }
-The following features are available:
+The following options are available:
 \describe{
   \item{Descriptives:}{samples proportions, missing values information, biserial correlation of items with total score, 
         pairwise associations between items, Cronbach's \eqn{\alpha}{alpha}, unidimensionality check using modified 
         parallel analysis, nonparametric correlation coefficient, plotting of sample proportions versus total score.}
   \item{Dichotomous data:}{Rasch Model, Two Parameter Logistic Model, Birnbaum's Three Parameter Model, and 
         Latent Trait Model up to two latent variables (allowing also for nonlinear terms between the latent traits).}
-  \item{Polytomous data:}{Samejima's Graded Response Model.}
-  \item{Goodness-of-Fit:}{Bootstrapped Pearson \eqn{\chi^2} for Rasch models, fit on the two- and three-way margins 
+  \item{Polytomous data:}{Samejima's Graded Response Model and the Generalized Partial Credit Model.}
+  \item{Goodness-of-Fit:}{Bootstrapped Pearson \eqn{\chi^2} for Rasch and Generalized Partial Credit models, fit on the two- and three-way margins 
         for all models, likelihood ratio tests between nested models (including AIC and BIC criteria values),
         and item- and person-fit statistics.}
   \item{Factor Scoring - Ability Estimates:}{Empirical Bayes (i.e., posterior modes), Expected a posteriori (i.e., 
@@ -58,7 +58,6 @@ New York: Marcel Dekker.
 
 Rizopoulos, D. (2006) \bold{ltm}: An R package for latent variable modelling and item response theory analyses. 
 \emph{Journal of Statistical Software}, \bold{17(5)}, 1--25. URL \url{http://www.jstatsoft.org/v17/i05/}
-
 }
 
 \keyword{ package }

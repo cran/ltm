@@ -1,4 +1,5 @@
 \name{residuals}
+\alias{residuals.gpcm}
 \alias{residuals.grm}
 \alias{residuals.ltm}
 \alias{residuals.rasch}
@@ -11,6 +12,8 @@
 }
 
 \usage{
+\method{residuals}{gpcm}(object, resp.patterns = NULL, order = TRUE, \dots)
+
 \method{residuals}{grm}(object, resp.patterns = NULL, order = TRUE, \dots)
 
 \method{residuals}{ltm}(object, resp.patterns = NULL, order = TRUE, \dots)
@@ -21,7 +24,7 @@
 }
 
 \arguments{
-  \item{object}{an object inheriting from either class \code{grm}, class \code{ltm}, class \code{rasch} or class 
+  \item{object}{an object inheriting either from class \code{gpcm}, class \code{grm}, class \code{ltm}, class \code{rasch} or class 
         \code{tpm}.}
   \item{resp.patterns}{a \code{matrix} or a \code{data.frame} of response patterns with columns denoting the 
         items; if \code{NULL} the expected frequencies are computed for the observed response patterns.}
@@ -43,6 +46,7 @@ each response pattern.
 }
 
 \seealso{
+    \code{\link{fitted.gpcm}},
     \code{\link{fitted.grm}},
     \code{\link{fitted.ltm}},
     \code{\link{fitted.rasch}},

@@ -1,4 +1,5 @@
 \name{summary}
+\alias{summary.gpcm}
 \alias{summary.grm}
 \alias{summary.ltm}
 \alias{summary.rasch}
@@ -11,6 +12,8 @@
 }
 
 \usage{
+\method{summary}{gpcm}(object, robust.se = FALSE, \dots)
+
 \method{summary}{grm}(object, \dots)
 
 \method{summary}{ltm}(object, robust.se = FALSE, \dots)
@@ -21,7 +24,8 @@
 }
 
 \arguments{
-  \item{object}{ an object inheriting from either class \code{grm}, class \code{ltm}, class \code{rasch} or class \code{tpm}. }
+  \item{object}{ an object inheriting from either class \code{gpcm}, either class \code{grm}, class \code{ltm}, 
+        class \code{rasch} or class \code{tpm}.}
   \item{robust.se}{logical; if \code{TRUE} robust estimation of standard errors is used, based on the sandwich estimator.}
   \item{\dots}{ additional argument; currently none is used. }
 }
@@ -35,7 +39,7 @@
 }
 
 \value{
-  An object of either class \code{summ.grm}, class \code{summ.ltm} or class \code{summ.rasch} with components,
+  An object of either class \code{summ.gpcm}, class \code{summ.grm}, class \code{summ.ltm} or class \code{summ.rasch} with components,
   \item{coefficients}{the estimated coefficients' table.}
   \item{Var.betas}{the approximate covariance matrix for the estimated parameters; returned only in \code{summ.ltm} 
             and \code{summ.rasch}.}
@@ -57,6 +61,7 @@
 }
 
 \seealso{
+    \code{\link{gpcm}},
     \code{\link{grm}},
     \code{\link{ltm}},
     \code{\link{rasch}},

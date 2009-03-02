@@ -1,3 +1,21 @@
+Changes in version: ltm_0.9-0
+
+  o there is a new function gpcm() (along with methods for the supporting generic functions) for fitting the generalized partial credit model.
+
+  o the new function GoF.gpcm() computes the Pearson chi-squared goodness-of-fit measure and also produces a p-value either using the 
+    asymptotice chi-squared distribution or a paremetric Bootstrap approach.
+
+  o the anova method for class 'gpcm' includes a simulate.p.value argument, which if is TRUE it computes an estimate to the p-value of the 
+    likelihood ratio test using paremetric Bootstrap.
+
+  o a bug was fixed in the fitted method for classes "grm", "ltm", "rasch" and "tpm" that did not work when the resp.patterns argument was a
+    data.frame with factor columns.
+
+  o a method has been written for the simulate generic for objects of class "gpcm" and "grm".
+
+
+==============================
+
 Changes in version: ltm_0.8-9
 
   o the calculation of the observed frequencies has changed in the presence of NA; side-effect: residuals() does not produce valid results for

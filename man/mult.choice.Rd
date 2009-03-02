@@ -25,14 +25,15 @@ a matrix of 0/1 values indicating wrong/correct answers.
 \author{
     Dimitris Rizopoulos \email{d.rizopoulos@erasmusmc.nl}
 }
+
 \examples{
 
-dat <- data.frame(cbind(It1 = sample(4, 100, TRUE),
-                        It2 = sample(4, 100, TRUE),
-                        It3 = sample(5, 100, TRUE),
-                        It4 = sample(5, 100, TRUE),
-                        It5 = sample(4, 100, TRUE),
-                        It6 = sample(5, 100, TRUE)))
+dat <- data.frame(It1 = sample(4, 100, TRUE),
+                  It2 = sample(4, 100, TRUE),
+                  It3 = sample(5, 100, TRUE),
+                  It4 = sample(5, 100, TRUE),
+                  It5 = sample(4, 100, TRUE),
+                  It6 = sample(5, 100, TRUE))
 dat[] <- lapply(dat, function (x) { x[sample(100, 4)] <- NA; x })
 crct <- c(3, 2, 5, 3, 4, 5)
 ####################

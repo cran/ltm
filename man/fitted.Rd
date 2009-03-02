@@ -1,4 +1,5 @@
 \name{fitted}
+\alias{fitted.gpcm}
 \alias{fitted.grm}
 \alias{fitted.ltm}
 \alias{fitted.rasch}
@@ -11,6 +12,9 @@
 }
 
 \usage{
+\method{fitted}{gpcm}(object, resp.patterns = NULL, 
+    type = c("expected", "marginal-probabilities",
+    "conditional-probabilities"), \dots)
 
 \method{fitted}{grm}(object, resp.patterns = NULL, 
     type = c("expected", "marginal-probabilities",
@@ -30,7 +34,7 @@
 }
 
 \arguments{
-  \item{object}{ an object inheriting from either class \code{grm}, class \code{ltm}, class \code{rasch}, or 
+  \item{object}{ an object inheriting either from class \code{gpcm}, class \code{grm}, class \code{ltm}, class \code{rasch}, or 
         class \code{tpm}. }
   \item{resp.patterns}{a \code{matrix} or a \code{data.frame} of response patterns with columns denoting the 
         items; if \code{NULL} the expected frequencies are computed for the observed response patterns.}
@@ -55,6 +59,7 @@ probabilities for each response pattern and item, if \code{type == "conditional-
 }
 
 \seealso{
+    \code{\link{residuals.gpcm}},
     \code{\link{residuals.grm}},
     \code{\link{residuals.ltm}},
     \code{\link{residuals.rasch}},

@@ -1,4 +1,5 @@
-\name{plot}
+\name{plot IRT}
+\alias{plot.gpcm}
 \alias{plot.grm}
 \alias{plot.ltm}
 \alias{plot.rasch}
@@ -11,6 +12,15 @@
 }
 
 \usage{
+\method{plot}{gpcm}(x, type = c("ICC", "IIC", "OCCu", "OCCl"), items = NULL, 
+     category = NULL, zrange = c(-3.8, 3.8), 
+     z = seq(zrange[1], zrange[2], length = 100), annot, 
+     labels = NULL, legend = FALSE, cx = "top", cy = NULL, ncol = 1, 
+     bty = "n", col = palette(), lty = 1, pch, xlab, ylab, main, 
+     sub = NULL, cex = par("cex"), cex.lab = par("cex.lab"), 
+     cex.main = par("cex.main"), cex.sub = par("cex.sub"), 
+     cex.axis = par("cex.axis"), plot = TRUE, \dots)
+
 \method{plot}{grm}(x, type = c("ICC", "IIC", "OCCu", "OCCl"), items = NULL, 
      category = NULL, zrange = c(-3.8, 3.8), 
      z = seq(zrange[1], zrange[2], length = 100), annot, 
@@ -45,7 +55,7 @@
      cex.axis = par("cex.axis"), plot = TRUE, \dots)
 }
 \arguments{
-  \item{x}{ an object inheriting from either class \code{grm}, class \code{ltm}, class \code{rasch} or class \code{tpm}. }
+  \item{x}{ an object inheriting either from class \code{gpcm}, class \code{grm}, class \code{ltm}, class \code{rasch} or class \code{tpm}. }
   \item{type}{ the type of plot; "ICC" refers to Item Response Category Characteristic Curves whereas "IIC" to 
                 Item Information Curves. For \code{ltm} objects the option "loadings" is also available that produces
                 the scatter plot of the standardized loadings. For \code{grm} objects the options "OCCu" and "OCCl" are 
@@ -98,6 +108,7 @@ editors, \emph{Measuring and Analyzing Behavior in Organizations}. San Francisco
 
 \seealso{
     \code{\link{information}},
+    \code{\link{gpcm}},
     \code{\link{grm}},
     \code{\link{ltm}},
     \code{\link{rasch}},
@@ -201,7 +212,7 @@ plot(vals[, "z"], 1 / sqrt(vals[, "info"]), type = "l", lwd = 2,
 
 # Examples for plot.tpm()
 
-## Compare the Item Characteristic Curves for the Lsat data,
+## Compare the Item Characteristic Curves for the LSAT data,
 ## under the constraint Rasch model, the unconstraint Rasch model,
 ## and the three parameter model assuming equal discrimination
 ## across items

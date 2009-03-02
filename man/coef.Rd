@@ -1,4 +1,5 @@
 \name{coef}
+\alias{coef.gpcm}
 \alias{coef.grm}
 \alias{coef.ltm}
 \alias{coef.rasch}
@@ -8,6 +9,7 @@
   Extracts the estimated parameters from either \code{grm}, \code{ltm}, \code{rasch} or \code{tpm} objects.
 }
 \usage{
+\method{coef}{gpcm}(object, \dots)
 
 \method{coef}{grm}(object, \dots)
 
@@ -19,7 +21,7 @@
 }
 
 \arguments{
-  \item{object}{ an object inheriting from either class \code{grm}, class \code{ltm}, class \code{rasch} or class \code{tpm}. }
+  \item{object}{ an object inheriting from either class \code{gpcm}, class \code{grm}, class \code{ltm}, class \code{rasch} or class \code{tpm}. }
   \item{standardized}{ logical; if \code{TRUE} the standardized loadings are also returned. See  \bold{Details} 
         for more info.}
   \item{prob}{ logical; if \code{TRUE} the probability of a positive response for the median individual
@@ -55,6 +57,7 @@ Social Scientists}. London: Chapman and Hall.
 }
 
 \seealso{
+    \code{\link{gpcm}},
     \code{\link{grm}},
     \code{\link{ltm}},
     \code{\link{rasch}},

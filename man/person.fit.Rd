@@ -104,7 +104,8 @@ Psychological Measurement}, \bold{14}, 127--137.
 \seealso{
     \code{\link{item.fit}},
     \code{\link{margins}},
-    \code{\link{GoF.rasch}},
+    \code{\link{GoF.gpcm}},
+    \code{\link{GoF.rasch}}
 }
 
 \examples{

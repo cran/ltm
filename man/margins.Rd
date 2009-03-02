@@ -1,5 +1,6 @@
 \name{margins}
 \alias{margins}
+\alias{margins.gpcm}
 \alias{margins.grm}
 \alias{margins.ltm}
 \alias{margins.rasch}
@@ -17,6 +18,8 @@
 
 margins(object, \dots)
 
+\method{margins}{gpcm}(object, type = c("two-way", "three-way"), rule = 3.5, \dots)
+
 \method{margins}{grm}(object, type = c("two-way", "three-way"), rule = 3.5, \dots)
 
 \method{margins}{ltm}(object, type = c("two-way", "three-way"), rule = 3.5, 
@@ -30,7 +33,7 @@ margins(object, \dots)
 }
 
 \arguments{
-  \item{object}{ an object inheriting either from class \code{grm}, class \code{ltm} or class \code{rasch}.}
+  \item{object}{ an object inheriting either from class \code{gpcm}, class \code{grm}, class \code{ltm} or class \code{rasch}.}
   \item{type}{ the type of margins to be used. See \bold{Details} for more info. }
   \item{rule}{ the rule of thumb used in determining the indicative goodness-of-fit.}
   \item{nprint}{ a numeric value determining the number of margins with the largest Chi-squared residuals 
@@ -48,15 +51,11 @@ margins(object, \dots)
     The analogous procedure is followed for the three-way margins.
 }
 
-\note{
-    \code{margins.rasch()} and \code{margins.tpm()} are in fact a copy of \code{margins.ltm()}.
-}
-
 \value{
 An object of either class \code{margins.ltm} if \code{object} inherits from class \code{ltm}, class \code{rasch} or class \code{tpm}, 
             or an object of class \code{margins.grm} if \code{object} inherits from class \code{grm}, with components,
     \item{margins}{for \code{margins.ltm} is an array containing the values of chi-squared residuals; 
-                    for \code{margins.grm} is a list of length either the number of all possible pairs or all possible 
+                    for \code{margins.gpcm} and \code{margins.grm} is a list of length either the number of all possible pairs or all possible 
                     triplets of items, containing the observed and expected frequencies, the values of chi-squared 
                     residuals, the value of the total residual and the value of the rule of thumb times the product of
                     the number of categories of the items under consideration.}
@@ -117,4 +116,4 @@ margins(fit, "three")
 
 }
 
-\keyword{ multivariate }
+\keyword{methods}

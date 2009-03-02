@@ -1,4 +1,4 @@
-\name{plot.fscores}
+\name{plot fscores}
 \alias{plot.fscores}
 
 \title{Factor Scores - Ability Estimates Plot method}

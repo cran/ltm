@@ -148,7 +148,7 @@ tpm(LSAT, control = list(optimizer = "nlminb"))
 # the three parameter model with equal 
 # discrimination parameter across items
 # fix the guessing parameter for the third item to zero
-tpm(LSAT, type = "rasch", constraint = cbind(3, 1, 0), max.guessing = 1)
+tpm(LSAT, type = "rasch", constraint = cbind(3, 1, 0))
 
 
 # the three parameter model for the Abortion data

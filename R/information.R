@@ -1,7 +1,7 @@
 `information` <-
 function (object, range, items = NULL, ...) {
-    if (!class(object) %in% c("grm", "ltm", "rasch", "tpm"))
-        stop("'object' must inherit from either class 'grm', class 'ltm', class 'rasch' or class 'tpm'.\n")
+    if (!class(object) %in% c("grm", "gpcm", "ltm", "rasch", "tpm"))
+        stop("'object' must inherit from either class 'grm', class 'gpcm', class 'ltm', class 'rasch' or class 'tpm'.\n")
     p <- ncol(object$X)
     itms <- if (!is.null(items)) {
         if (!is.numeric(items) && length(items) > p)
@@ -16,6 +16,7 @@ function (object, range, items = NULL, ...) {
     f <- function (z) {
         switch(class(object),
             "grm" = rowSums(infoprobs(object$coefficients, z)[, itms, drop = FALSE]),
+            "gpcm" = rowSums(infoGPCM(object$coefficients, z, object$IRT.param)[, itms, drop = FALSE]),
             "ltm" = { betas <- object$coefficients; Z <- cbind(1, z)
                 mat <- t(t(plogis(Z %*% t(betas)) * (1 - plogis(Z %*% t(betas)))) * betas[, 2]^2)
                 rowSums(mat[, itms, drop = FALSE])

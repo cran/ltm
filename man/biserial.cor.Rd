@@ -47,7 +47,7 @@ as a reference level
 
 \value{
 
-the point-biserial correlation.
+the (numeric) value of the point-biserial correlation.
 
 }
 

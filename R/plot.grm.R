@@ -67,8 +67,10 @@ function (x, type = c("ICC", "IIC", "OCCu", "OCCl"), items = NULL, category = NU
     if (type == "ICC" || (type == "OCCl" | type == "OCCu")) {
         if (ctg == "all") {
             if (plot) {
-                old.par <- par(ask = TRUE)
-                on.exit(par(old.par))
+                if (length(itms) > 1) {
+                    old.par <- par(ask = TRUE)
+                    on.exit(par(old.par))
+                }
                 one.fig <- prod(par("mfcol")) == 1
                 for (i in seq(along = itms)) {
                     ii <- itms[i]
@@ -96,14 +98,14 @@ function (x, type = c("ICC", "IIC", "OCCu", "OCCl"), items = NULL, category = NU
                     }
                     if (legend) {
                         ncol. <- if (is.null(ncol)) {
-                            if (is.factor(x$X[[i]]) && any(nchar(levels(x$X[[i]])) > 11)) 1 else ncatg[i] %/% 2
+                            if (is.factor(x$X[[ii]]) && any(nchar(levels(x$X[[ii]])) > 11)) 1 else ncatg[ii] %/% 2
                         } else
                             ncol
                         lab <- if (missing(labels)) {
                             switch(type,
-                                "ICC" = if (is.factor(x$X[[i]])) levels(x$X[[i]]) else 1:ncatg[i],
-                                "OCCu" = paste(if (is.factor(x$X[[i]])) levels(x$X[[i]])[-1] else 2:ncatg[i], "or higher"),
-                                "OCCl" = paste(if (is.factor(x$X[[i]])) levels(x$X[[i]])[-1] else 2:ncatg[i], "or lower"))
+                                "ICC" = if (is.factor(x$X[[ii]])) levels(x$X[[ii]]) else 1:ncatg[ii],
+                                "OCCu" = paste(if (is.factor(x$X[[ii]])) levels(x$X[[ii]])[-1] else 2:ncatg[ii], "or higher"),
+                                "OCCl" = paste(if (is.factor(x$X[[ii]])) levels(x$X[[ii]])[-1] else 2:ncatg[ii], "or lower"))
                         } else
                             labels
                         legend(cx, cy, legend = lab, lty = lty, pch = pch, col = col, bty = bty, ncol = ncol., cex = cex, ...)

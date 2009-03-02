@@ -1,4 +1,5 @@
 \name{vcov}
+\alias{vcov.gpcm}
 \alias{vcov.grm}
 \alias{vcov.ltm}
 \alias{vcov.rasch}
@@ -7,11 +8,13 @@
 \title{ vcov method for fitted IRT models }
 
 \description{
- Extracts the asymptotic variance-covariance matrix of the MLEs from either \code{grm},
+ Extracts the asymptotic variance-covariance matrix of the MLEs from either \code{gpcm}, \code{grm},
  \code{ltm}, \code{rasch} or \code{tpm} objects.
 }
 
 \usage{
+
+\method{vcov}{gpcm}(object, robust = FALSE, \dots)
 
 \method{vcov}{grm}(object, \dots)
 
@@ -23,10 +26,10 @@
 }
 
 \arguments{
-  \item{object}{ an object inheriting from either class \code{grm}, class \code{ltm}, class \code{rasch} or class 
-    \code{tpm}. }
-  \item{robust}{ logical; if \code{TRUE} the sandwich estimator is used. }
-  \item{\dots}{ additional arguments; currently none is used. }
+  \item{object}{an object inheriting from either class \code{gpcm}, class \code{grm}, class \code{ltm}, class \code{rasch} or class 
+    \code{tpm}.}
+  \item{robust}{logical; if \code{TRUE} the sandwich estimator is used. }
+  \item{\dots}{additional arguments; currently none is used. }
 }
 
 \value{
@@ -41,6 +44,7 @@
 }
 
 \seealso{
+    \code{\link{gpcm}},
     \code{\link{grm}},
     \code{\link{ltm}},
     \code{\link{rasch}},

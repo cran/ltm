@@ -1,7 +1,7 @@
 `factor.scores.grm` <-
 function (object, resp.patterns = NULL, method = c("EB", "EAP", "MI"), B = 5, ...) {
     if (!inherits(object, "grm"))
-        stop("Use only with 'rasch' objects.\n")
+        stop("Use only with 'grm' objects.\n")
     betas <- object$coefficients
     fits <- fitted(object, resp.patterns = resp.patterns)
     X <- fits[, -ncol(fits), drop = FALSE]

@@ -78,7 +78,8 @@ Yen, W. (1981) Using simulation results to choose a latent trait model. \emph{Ap
 \seealso{
     \code{\link{person.fit}},
     \code{\link{margins}},
-    \code{\link{GoF.rasch}},
+    \code{\link{GoF.gpcm}},
+    \code{\link{GoF.rasch}}
 }
 
 \examples{

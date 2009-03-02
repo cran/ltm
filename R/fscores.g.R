@@ -42,7 +42,7 @@ function (betas, X, method) {
             log.pr <- log.diff.cprs[[j]]
             xj <- X[, j]
             na.ind <- is.na(xj)
-            log.pr <- log.pr[xj, ]
+            log.pr <- log.pr[xj, , drop = FALSE]
             if (any(na.ind))
                 log.pr[na.ind, ] <- 0
             log.p.xz <- log.p.xz + log.pr

@@ -14,7 +14,7 @@ information(object, range, items = NULL, ...)
 }
 
 \arguments{
-  \item{object}{an object inheriting from either class \code{grm}, class \code{ltm}, class \code{rasch} or class \code{tpm}.}
+  \item{object}{an object inheriting from either class \code{gpcm}, class \code{grm}, class \code{ltm}, class \code{rasch} or class \code{tpm}.}
   \item{range}{a numeric interval for which the test information should be computed.}
   \item{items}{the items for which the information should be computed; the default \code{NULL} corresponds
                 to all the items, which is equivalent to the test information.}
@@ -43,6 +43,7 @@ A list of class \code{information} with components,
 }
 
 \seealso{
+  \code{\link{plot.gpcm}},
   \code{\link{plot.grm}},
   \code{\link{plot.ltm}},
   \code{\link{plot.rasch}}

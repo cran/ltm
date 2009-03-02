@@ -1,5 +1,6 @@
 \name{factor.scores}
 \alias{factor.scores}
+\alias{factor.scores.gpcm}
 \alias{factor.scores.grm}
 \alias{factor.scores.ltm}
 \alias{factor.scores.rasch}
@@ -13,6 +14,9 @@
 
 \usage{
 factor.scores(object, \dots)
+
+\method{factor.scores}{gpcm}(object, resp.patterns = NULL, 
+        method = c("EB", "EAP", "MI"), B = 5, robust.se = FALSE, \dots)
 
 \method{factor.scores}{grm}(object, resp.patterns = NULL, 
         method = c("EB", "EAP", "MI"), B = 5, \dots)
@@ -29,7 +33,7 @@ factor.scores(object, \dots)
 }
 
 \arguments{
-  \item{object}{an object inheriting either from class \code{grm}, class \code{ltm}, class \code{rasch} or class 
+  \item{object}{an object inheriting from either class \code{gpcm}, class \code{grm}, class \code{ltm}, class \code{rasch} or class 
         \code{tpm}.}
   \item{resp.patterns}{a matrix or a data.frame of response patterns with columns denoting the items; if \code{NULL} 
         the factor scores are computed for the observed response patterns.}
@@ -102,8 +106,8 @@ Social Scientists}. London: Chapman and Hall.
 Rizopoulos, D. (2006) \bold{ltm}: An R package for latent variable modelling and item response theory analyses. 
 \emph{Journal of Statistical Software}, \bold{17(5)}, 1--25. URL \url{http://www.jstatsoft.org/v17/i05/}
 
-Rizopoulos, D. and Moustaki, I. (2007) Generalized latent variable models
-with nonlinear effects. \emph{British Journal of Mathematical and Statistical Psychology}, to appear.
+Rizopoulos, D. and Moustaki, I. (2008) Generalized latent variable models
+with nonlinear effects. \emph{British Journal of Mathematical and Statistical Psychology}, \bold{61}, 415--438.
 }
 
 \author{
@@ -112,6 +116,7 @@ with nonlinear effects. \emph{British Journal of Mathematical and Statistical Ps
 
 \seealso{
     \code{\link{plot.fscores}},
+    \code{\link{gpcm}},
     \code{\link{grm}},
     \code{\link{ltm}},
     \code{\link{rasch}},
@@ -140,4 +145,4 @@ factor.scores(fit, resp.patterns = rbind(1:4, c(NA,1,2,3)))
 
 }
 
-\keyword{ multivariate }
+\keyword{methods}
