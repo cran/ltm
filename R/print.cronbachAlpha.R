@@ -1,4 +1,4 @@
-`print.cronbachAlpha` <-
+print.cronbachAlpha <-
 function (x, digits = 3, ...) {
     if (!inherits(x, "cronbachAlpha"))
         stop("Use only with 'cronbachAlpha' objects.\n")

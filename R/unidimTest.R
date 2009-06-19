@@ -1,4 +1,4 @@
-`unidimTest` <-
+unidimTest <-
 function (object, data, thetas, IRT = TRUE, z.vals = NULL, B = 100, ...) {
     if (missing(object) && (missing(data) & missing(thetas)))
         stop("either 'object' or both 'data' and 'thetas' must be supplied.\n")

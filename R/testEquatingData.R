@@ -1,4 +1,4 @@
-`testEquatingData` <-
+testEquatingData <-
 function (DataList, AnchoringItems = NULL) {
     if (!is.list(DataList) || any(sapply(DataList, function (x) !inherits(x, "matrix") && !inherits(x, "data.frame"))))
         stop("\n'DataList' must be a list containing either data.frames or matrices.")

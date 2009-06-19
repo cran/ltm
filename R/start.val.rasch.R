@@ -1,4 +1,4 @@
-`start.val.rasch` <-
+start.val.rasch <-
 function (start.val, data) {
     n <- nrow(data)
     p <- ncol(data)

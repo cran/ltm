@@ -1,4 +1,4 @@
-`fitted.ltm` <-
+fitted.ltm <-
 function (object, resp.patterns = NULL, 
     type = c("expected", "marginal-probabilities", "conditional-probabilities"), ...) {
     if (!inherits(object, "ltm"))

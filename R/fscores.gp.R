@@ -1,4 +1,4 @@
-`fscores.gp` <-
+fscores.gp <-
 function (betas, X, method) {
     logf.z <- function (z, y, betas) {
         log.prs <- crf.GPCM(betas, z, IRT.param = object$IRT.param, log = TRUE)

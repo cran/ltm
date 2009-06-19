@@ -1,4 +1,4 @@
-`residuals.rasch` <-
+residuals.rasch <-
 function (object, resp.patterns = NULL, order = TRUE, ...) {
     if (!inherits(object, "rasch"))
         stop("Use only with 'rasch' objects.\n")

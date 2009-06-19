@@ -1,4 +1,4 @@
-`information` <-
+information <-
 function (object, range, items = NULL, ...) {
     if (!class(object) %in% c("grm", "gpcm", "ltm", "rasch", "tpm"))
         stop("'object' must inherit from either class 'grm', class 'gpcm', class 'ltm', class 'rasch' or class 'tpm'.\n")

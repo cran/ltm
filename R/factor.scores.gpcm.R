@@ -1,4 +1,4 @@
-`factor.scores.gpcm` <-
+factor.scores.gpcm <-
 function (object, resp.patterns = NULL, method = c("EB", "EAP", "MI"), B = 5, robust.se = FALSE, ...) {
     if (!inherits(object, "gpcm"))
         stop("Use only with 'gpcm' objects.\n")

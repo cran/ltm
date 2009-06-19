@@ -1,4 +1,4 @@
-`thetas.tpm` <-
+thetas.tpm <-
 function (thetas, type, constraint, p) {
     if (is.null(constraint)) {
         if (type == "rasch")

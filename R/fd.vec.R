@@ -1,4 +1,4 @@
-`fd.vec` <-
+fd.vec <-
 function (x, f, ..., eps = 1e-06) {
     n <- length(x)
     f0 <- f(x, ...)

@@ -1,3 +1,14 @@
+Changes in version: ltm_0.9-1
+
+  o the coef method for objects of class "grm" and "gpcm" now returns the estimated coefficients without rounding.
+
+  o a bug in the print method for objects of class "itemFit" and "persFit" that was no printing correctly in Linux and Mac systems, has been corrected.
+
+  o a bug in the print method for objects of class "rcor.test", has been corrected.
+
+
+==============================
+
 Changes in version: ltm_0.9-0
 
   o there is a new function gpcm() (along with methods for the supporting generic functions) for fitting the generalized partial credit model.

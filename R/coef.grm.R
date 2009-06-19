@@ -1,4 +1,4 @@
-`coef.grm` <-
+coef.grm <-
 function (object, ...) {
     if (!inherits(object, "grm"))
         stop("Use only with 'grm' objects.\n")
@@ -6,6 +6,6 @@ function (object, ...) {
     coefs <- lapply(coefs, round, digits = 3)
     if (all(sapply(coefs, length) == length(coefs[[1]])))
         coefs <- do.call(rbind, coefs)
-    print(coefs, print.gap = 2, quote = FALSE)
+    coefs
 }
 

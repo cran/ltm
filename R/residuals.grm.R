@@ -1,4 +1,4 @@
-`residuals.grm` <-
+residuals.grm <-
 function (object, resp.patterns = NULL, order = TRUE, ...) {
     if (!inherits(object, "grm"))
         stop("Use only with 'grm' objects.\n")

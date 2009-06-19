@@ -1,4 +1,4 @@
-`descript` <-
+descript <-
 function (data, n.print = 10, chi.squared = TRUE, B = 1000) {
     if (!inherits(data, "matrix") && !inherits(data, "data.frame"))
         stop("'data' must be either a data.frame or a matrix")

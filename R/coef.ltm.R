@@ -1,4 +1,4 @@
-`coef.ltm` <-
+coef.ltm <-
 function (object, standardized = FALSE, prob = FALSE, order = FALSE, ...) {
     if (!inherits(object, "ltm"))
         stop("Use only with 'ltm' objects.\n")
@@ -32,6 +32,6 @@ function (object, standardized = FALSE, prob = FALSE, order = FALSE, ...) {
         cof <- cbind(cof, "P(x=1|z=0)" = plogis(object$coef[, 1]))
     if (order)
         cof <- cof[order(cof[, 1]), ]
-    round(cof, 3)
+    cof
 }
 

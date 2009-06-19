@@ -1,4 +1,4 @@
-`margins.gpcm` <-
+margins.gpcm <-
 function (object, type = c("two-way", "three-way"), rule = 3.5, ...) {
     if (!inherits(object, "gpcm"))
         stop("Use only with 'gpcm' objects.\n")

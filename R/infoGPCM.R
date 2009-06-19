@@ -1,4 +1,4 @@
-`infoGPCM` <-
+infoGPCM <-
 function (betas, z, IRT.param) {
     n <- length(z)
     p <- length(betas)

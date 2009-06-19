@@ -1,4 +1,4 @@
-`print.rasch` <-
+print.rasch <-
 function (x, digits = max(3, getOption("digits") - 3), ...) {
     if (!inherits(x, "rasch"))
         stop("Use only with 'rasch' objects.\n")

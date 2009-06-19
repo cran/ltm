@@ -1,4 +1,4 @@
-`print.fscores` <-
+print.fscores <-
 function (x, ...) {
     if (!inherits(x, "fscores"))
         stop("Use only with 'fscores' objects.\n")

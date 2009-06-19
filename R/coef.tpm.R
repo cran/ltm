@@ -1,4 +1,4 @@
-`coef.tpm` <-
+coef.tpm <-
 function (object, prob = FALSE, order = FALSE, ...) {
     if (!inherits(object, "tpm"))
         stop("Use only with 'tpm' objects.\n")
@@ -8,6 +8,6 @@ function (object, prob = FALSE, order = FALSE, ...) {
         cof <- cbind(cof, "P(x=1|z=0)" = cof[, 1] + (1 - cof[, 1]) * plogis(object$coef[, 2]))
     if (order)
         cof <- cof[order(cof[, 2]), ]
-    round(cof, 3)
+    cof
 }
 

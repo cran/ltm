@@ -1,4 +1,4 @@
-`print.aov.grm` <-
+print.aov.grm <-
 function (x, digits = 3, ...) {
     if (!inherits(x, "aov.grm"))
         stop("Use only with 'aov.grm' objects.\n")

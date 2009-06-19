@@ -1,4 +1,4 @@
-`plot.descript` <-
+plot.descript <-
 function (x, items = NULL, includeFirstLast = FALSE, xlab, ylab, ...) {
     if (!inherits(x, "descript"))
         stop("Use only with 'descript' objects.\n")
@@ -21,7 +21,6 @@ function (x, items = NULL, includeFirstLast = FALSE, xlab, ylab, ...) {
     if (missing(ylab))
         ylab <- "Proportion Correct"
     p <- if (!includeFirstLast) 1:ncol(out) else 0:(ncol(out) - 1)
-    print(out)
     matplot(cbind(p), t(out), xlab = xlab, ylab = ylab, ...)
     invisible(out)
 }

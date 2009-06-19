@@ -1,4 +1,4 @@
-`factor.scores.tpm` <-
+factor.scores.tpm <-
 function (object, resp.patterns = NULL, method = c("EB", "EAP", "MI"), B = 5, ...) {
     if (!inherits(object, "tpm"))
         stop("Use only with 'tpm' objects.\n")

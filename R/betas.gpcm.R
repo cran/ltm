@@ -1,4 +1,4 @@
-`betas.gpcm` <-
+betas.gpcm <-
 function (thetas, nitems, ncatg, constraint, keep.names = FALSE) {
     betas <- if (constraint == "gpcm") {
         ii <- rep(1:nitems, ncatg)

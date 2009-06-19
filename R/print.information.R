@@ -1,4 +1,4 @@
-`print.information` <-
+print.information <-
 function (x, ...) {
     cat("\nCall:\n", paste(deparse(x$call), sep = "\n", collapse = "\n"), "\n\n", sep = "")
     cat("Total Information =", round(x$InfoTotal, 2))

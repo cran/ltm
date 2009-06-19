@@ -1,4 +1,4 @@
-`print.GoF.gpcm` <-
+print.GoF.gpcm <-
 function (x, ...) {
     if (!inherits(x, "GoF.gpcm"))
         stop("Use only with 'GoF.gpcm' objects.\n")

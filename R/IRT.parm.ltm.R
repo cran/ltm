@@ -1,4 +1,4 @@
-`IRT.parm.ltm` <-
+IRT.parm.ltm <-
 function (object, standard.errors = FALSE, robust = FALSE, digits.abbrv = 6, ...) {
     if (!inherits(object, "ltm"))
         stop("Use only with 'ltm' objects.\n")

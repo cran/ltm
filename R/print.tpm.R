@@ -1,4 +1,4 @@
-`print.tpm` <-
+print.tpm <-
 function (x, digits = max(3, getOption("digits") - 3), ...) {
     if (!inherits(x, "tpm"))
         stop("Use only with 'tpm' objects.\n")

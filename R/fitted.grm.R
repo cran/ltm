@@ -1,4 +1,4 @@
-`fitted.grm` <-
+fitted.grm <-
 function (object, resp.patterns = NULL, 
         type = c("expected", "marginal-probabilities", "conditional-probabilities"), ...) {
     if (!inherits(object, "grm"))

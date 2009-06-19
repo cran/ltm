@@ -1,4 +1,4 @@
-`scoretpm` <-
+scoretpm <-
 function (thetas, type, constraint, max.guessing) {
     thetas. <- thetas
     thetas <- thetas.tpm(thetas, type, constraint, p)

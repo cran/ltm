@@ -1,4 +1,4 @@
-`plot.grm` <-
+plot.grm <-
 function (x, type = c("ICC", "IIC", "OCCu", "OCCl"), items = NULL, category = NULL, 
                       zrange = c(-3.8, 3.8), z = seq(zrange[1], zrange[2], length = 100), annot, 
                       labels = NULL, legend = FALSE, 

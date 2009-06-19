@@ -1,4 +1,4 @@
-`rmvlogis` <-
+rmvlogis <-
 function (n, thetas, IRT = TRUE, link = c("logit", "probit"), 
         distr = c("normal", "logistic", "log-normal", "uniform"), z.vals = NULL) {
     if (!is.matrix(thetas) || !is.numeric(thetas))

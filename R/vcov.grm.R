@@ -1,4 +1,4 @@
-`vcov.grm` <-
+vcov.grm <-
 function (object, ...) {
     if (!inherits(object, "grm"))
         stop("Use only with 'grm' objects.\n")

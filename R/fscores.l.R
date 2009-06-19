@@ -1,4 +1,4 @@
-`fscores.l` <-
+fscores.l <-
 function (betas, X, method) {
     logf.z <- function (z, y, betas) {
         Z <- c(1, z)

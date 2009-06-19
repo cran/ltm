@@ -1,4 +1,4 @@
-`IRT.parm.rasch` <-
+IRT.parm.rasch <-
 function (object, standard.errors = FALSE, robust = FALSE, digits.abbrv = 6, ...) {
     if (!inherits(object, "rasch"))
         stop("Use only with 'rasch' objects.\n")

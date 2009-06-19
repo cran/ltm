@@ -1,4 +1,4 @@
-`cprobs` <-
+cprobs <-
 function (betas, z, eps = .Machine$double.eps^(1/3)) {
     lapply(betas, function (x, z) {
         nx <- length(x)

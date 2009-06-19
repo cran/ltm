@@ -1,4 +1,4 @@
-`residuals.gpcm` <-
+residuals.gpcm <-
 function (object, resp.patterns = NULL, order = TRUE, ...) {
     if (!inherits(object, "gpcm"))
         stop("Use only with 'gpcm' objects.\n")

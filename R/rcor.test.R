@@ -1,4 +1,4 @@
-`rcor.test` <-
+rcor.test <-
 function (mat, p.adjust = FALSE, p.adjust.method = "holm", ...) {
     mat <- data.matrix(mat)
     cor.mat <- cor(mat, ...)

@@ -1,4 +1,4 @@
-`print.grm` <-
+print.grm <-
 function (x, digits = max(3, getOption("digits") - 4), ...) {
     if (!inherits(x, "grm"))
         stop("Use only with 'grm' objects.\n")

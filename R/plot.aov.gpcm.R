@@ -1,4 +1,4 @@
-`plot.aov.gpcm` <-
+plot.aov.gpcm <-
 function (x, line = TRUE, xlab, ylab, col, ...) {
     if (!inherits(x, "aov.gpcm") || !x$simulate.p.value)
         stop("Use only with 'aov.gpcm' objects with simulate.p.value = TRUE.\n")

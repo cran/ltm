@@ -1,4 +1,4 @@
-`margins.tpm` <-
+margins.tpm <-
 function (object, type = c("two-way", "three-way"), rule = 3.5, nprint = 3, ...) {
     if (!class(object) %in% c("ltm", "rasch", "tpm"))
         stop("Use only with 'ltm', 'rasch' or 'tpm' objects.\n")

@@ -1,4 +1,4 @@
-`chisq.irt` <-
+chisq.irt <-
 function (object) {
     if (!class(object) %in% c("ltm", "rasch", "tpm"))
         stop("Use only with 'ltm', 'rasch' or 'tpm' objects.\n")

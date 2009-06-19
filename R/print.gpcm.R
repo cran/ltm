@@ -1,4 +1,4 @@
-`print.gpcm` <-
+print.gpcm <-
 function (x, digits = max(3, getOption("digits") - 4), ...) {
     if (!inherits(x, "gpcm"))
         stop("Use only with 'gpcm' objects.\n")

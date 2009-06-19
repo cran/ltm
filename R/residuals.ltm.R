@@ -1,4 +1,4 @@
-`residuals.ltm` <-
+residuals.ltm <-
 function (object, resp.patterns = NULL, order = TRUE, ...) {
     if (!inherits(object, "ltm"))
         stop("Use only with 'ltm' objects.\n")

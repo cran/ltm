@@ -1,4 +1,4 @@
-`vcov.gpcm` <-
+vcov.gpcm <-
 function (object, robust = FALSE, ...) {
     if (!inherits(object, "gpcm"))
         stop("Use only with 'gpcm' objects.\n")

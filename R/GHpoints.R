@@ -1,4 +1,4 @@
-`GHpoints` <-
+GHpoints <-
 function (form, k) {
     av <- all.vars(form)
     factors <- sum(av %in% c("z1", "z2"))

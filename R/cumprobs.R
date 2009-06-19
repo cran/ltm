@@ -1,4 +1,4 @@
-`cumprobs` <-
+cumprobs <-
 function (betas, z,  lower = TRUE) {
     lapply(betas, function (x, z) {
         nx <- length(x)

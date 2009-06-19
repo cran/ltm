@@ -1,4 +1,4 @@
-`cronbach.alpha` <-
+cronbach.alpha <-
 function (data, standardized = FALSE, CI = FALSE, probs = c(0.025, 0.975), B = 1000, na.rm = FALSE) {
     if (!inherits(data, "matrix") && !inherits(data, "data.frame"))
         stop("'data' must be either a data.frame or a matrix.\n")

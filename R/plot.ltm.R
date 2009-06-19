@@ -1,4 +1,4 @@
-`plot.ltm` <-
+plot.ltm <-
 function (x, type = c("ICC", "IIC", "loadings"), items = NULL, zrange = c(-3.8, 3.8),
                       z = seq(zrange[1], zrange[2], length = 100), annot, 
                       labels = NULL, legend = FALSE, cx = "topleft", cy = NULL, ncol = 1, bty = "n", 

@@ -1,4 +1,4 @@
-`GoF.gpcm` <-
+GoF.gpcm <-
 function (object, simulate.p.value = TRUE, B = 99, seed = NULL, ...) {
     if (!inherits(object, "gpcm"))
         stop("Use only with 'gpcm' objects.\n")

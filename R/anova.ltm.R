@@ -1,4 +1,4 @@
-`anova.ltm` <-
+anova.ltm <-
 function (object, object2, ...) {
     if (!inherits(object, "ltm"))
         stop("Use only with 'ltm' objects.\n")

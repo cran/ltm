@@ -1,4 +1,4 @@
-`print.aov.tpm` <-
+print.aov.tpm <-
 function (x, digits = 3, ...) {
     if (!inherits(x, "aov.tpm"))
         stop("Use only with 'aov.tpm' objects.\n")

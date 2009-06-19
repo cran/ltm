@@ -1,4 +1,4 @@
-`summary.gpcm` <-
+summary.gpcm <-
 function (object, robust.se = FALSE, ...) {
     if (!inherits(object, "gpcm"))
         stop("Use only with 'gpcm' objects.\n")

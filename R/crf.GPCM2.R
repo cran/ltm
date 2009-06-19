@@ -1,4 +1,4 @@
-`crf.GPCM2` <-
+crf.GPCM2 <-
 function (betas, z, IRT.param = TRUE, index, log = FALSE, eps = .Machine$double.eps^(1/2)) {
     eta <- linpred.GPCM(betas, z, IRT.param)
     p <- length(eta)

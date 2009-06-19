@@ -1,4 +1,4 @@
-`GoF.rasch` <-
+GoF.rasch <-
 function (object, B = 49, ...) {
     if (!inherits(object, "rasch"))
         stop("Use only with 'rasch' objects.\n")

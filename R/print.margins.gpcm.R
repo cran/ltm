@@ -1,4 +1,4 @@
-`print.margins.gpcm` <-
+print.margins.gpcm <-
 function (x, digits = 2, ...) {
     if (!inherits(x, "margins.gpcm"))
         stop("Use only with 'margins.gpcm' objects.\n")    

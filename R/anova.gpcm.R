@@ -1,4 +1,4 @@
-`anova.gpcm` <-
+anova.gpcm <-
 function (object, object2, simulate.p.value = FALSE, B = 200, verbose = getOption("verbose"), seed = NULL, ...) {
     if (!inherits(object, "gpcm"))
         stop("Use only with 'gpcm' objects.\n")

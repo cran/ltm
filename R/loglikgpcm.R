@@ -1,4 +1,4 @@
-`loglikgpcm` <-
+loglikgpcm <-
 function (thetas, constraint) {
     betas <- betas.gpcm(thetas, p, ncatg, constraint)
     log.crf <- crf.GPCM(betas, Z, IRT.param, log = TRUE)

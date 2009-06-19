@@ -1,4 +1,4 @@
-`cd.tpm` <-
+cd.tpm <-
 function (x, f, ..., k, eps = 1e-04) {
     res <- numeric(k)
     ex <- pmax(abs(x), 1)

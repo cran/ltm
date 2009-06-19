@@ -1,4 +1,4 @@
-`biserial.cor` <-
+biserial.cor <-
 function (x, y, use = c("all.obs", "complete.obs"), level = 1) {
     if (!is.numeric(x))
         stop("'x' must be a numeric variable.\n")

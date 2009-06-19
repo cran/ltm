@@ -1,4 +1,4 @@
-`logLiktpm` <-
+logLiktpm <-
 function (thetas, type, constraint, max.guessing) {
     thetas <- thetas.tpm(thetas, type, constraint, p)
     betas <- thetas[, 2:3]

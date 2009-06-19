@@ -1,4 +1,4 @@
-`print.aov.gpcm` <-
+print.aov.gpcm <-
 function (x, digits = 3, ...) {
     if (!inherits(x, "aov.gpcm"))
         stop("Use only with 'aov.gpcm' objects.\n")

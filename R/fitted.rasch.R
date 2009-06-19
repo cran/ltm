@@ -1,4 +1,4 @@
-`fitted.rasch` <-
+fitted.rasch <-
 function (object, resp.patterns = NULL, 
     type = c("expected", "marginal-probabilities", "conditional-probabilities"), ...) {
     if (!inherits(object, "rasch"))

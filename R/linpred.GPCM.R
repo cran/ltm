@@ -1,4 +1,4 @@
-`linpred.GPCM` <-
+linpred.GPCM <-
 function (betas, z, IRT.param = TRUE) {
     lapply(betas, function (x) {
         nx <- length(x)

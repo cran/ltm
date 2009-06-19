@@ -1,4 +1,4 @@
-`vcov.rasch` <-
+vcov.rasch <-
 function (object, robust = FALSE, ...) {
     if (!inherits(object, "rasch"))
         stop("Use only with 'rasch' objects.\n")

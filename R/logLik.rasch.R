@@ -1,4 +1,4 @@
-`logLik.rasch` <-
+logLik.rasch <-
 function (object, ...) {
     if (!inherits(object, "rasch"))
         stop("Use only with 'rasch' objects.\n")

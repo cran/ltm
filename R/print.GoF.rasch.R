@@ -1,4 +1,4 @@
-`print.GoF.rasch` <-
+print.GoF.rasch <-
 function (x, ...) {
     if (!inherits(x, "GoF.rasch"))
         stop("Use only with 'GoF.rasch' objects.\n")

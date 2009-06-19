@@ -1,4 +1,4 @@
-`residuals.tpm` <-
+residuals.tpm <-
 function (object, resp.patterns = NULL, order = TRUE, ...) {
     if (!inherits(object, "tpm"))
         stop("Use only with 'tpm' objects.\n")

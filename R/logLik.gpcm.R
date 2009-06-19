@@ -1,4 +1,4 @@
-`logLik.gpcm` <-
+logLik.gpcm <-
 function (object, ...) {
     if (!inherits(object, "gpcm"))
         stop("Use only with 'gpcm' objects.\n")

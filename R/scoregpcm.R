@@ -1,4 +1,4 @@
-`scoregpcm` <-
+scoregpcm <-
 function (thetas, constraint) {
     betas <- betas.gpcm(thetas, p, ncatg, constraint)
     eta <- eta1 <- log.crf <- num <- den <- vector("list", p)

@@ -1,4 +1,4 @@
-`logLik.grm` <-
+logLik.grm <-
 function (object, ...) {
     if (!inherits(object, "grm"))
         stop("Use only with 'grm' objects.\n")

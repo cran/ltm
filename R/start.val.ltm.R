@@ -1,4 +1,4 @@
-`start.val.ltm` <-
+start.val.ltm <-
 function (start.val, data, factors, formula) {
     n <- nrow(data)
     p <- ncol(data)

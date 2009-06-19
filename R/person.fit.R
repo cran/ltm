@@ -1,4 +1,4 @@
-`person.fit` <-
+person.fit <-
 function (object, alternative = c("less", "greater", "two.sided"), 
     resp.patterns = NULL, FUN = NULL, simulate.p.value = FALSE, B = 1000) {
     if (!class(object) %in% c("ltm", "rasch", "tpm"))

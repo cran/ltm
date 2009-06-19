@@ -1,4 +1,4 @@
-`print.descript` <-
+print.descript <-
 function (x, digits = max(4, getOption("digits") - 4), ...) {
     if (!inherits(x, "descript"))
         stop("Use only with 'descript' objects.\n")

@@ -1,4 +1,4 @@
-`print.ltm` <-
+print.ltm <-
 function (x, digits = max(3, getOption("digits") - 4), ...) {
     if (!inherits(x, "ltm"))
         stop("Use only with 'ltm' objects.\n")

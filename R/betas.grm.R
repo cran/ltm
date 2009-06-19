@@ -1,4 +1,4 @@
-`betas.grm` <-
+betas.grm <-
 function (thetas, constrained, ind1, ind2, p, trasform = TRUE) {
     betas <- vector("list", p)
     for (i in 1:p) {

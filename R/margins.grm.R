@@ -1,4 +1,4 @@
-`margins.grm` <-
+margins.grm <-
 function (object, type = c("two-way", "three-way"), rule = 3.5, ...) {
     if (!inherits(object, "grm"))
         stop("Use only with 'grm' objects.\n")

@@ -1,4 +1,4 @@
-`IRT.parm.grm` <-
+IRT.parm.grm <-
 function (object, standard.errors = FALSE, digits.abbrv = 6, ...) {
     if(!inherits(object, "grm"))
         stop("Use only with 'grm' objects.\n")

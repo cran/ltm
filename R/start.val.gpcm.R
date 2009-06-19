@@ -1,4 +1,4 @@
-`start.val.gpcm` <-
+start.val.gpcm <-
 function (start.val, data, weight, constraint, ncatg, IRT.param) {
     n <- nrow(data)
     p <- ncol(data)

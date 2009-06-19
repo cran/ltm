@@ -1,4 +1,4 @@
-`crf.GPCM` <-
+crf.GPCM <-
 function (betas, z, IRT.param = TRUE, log = FALSE, eps = .Machine$double.eps^(1/2)) {
     lapply(linpred.GPCM(betas, z, IRT.param), function (x) {
         num <- exp(apply(x, 2, cumsum))

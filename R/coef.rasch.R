@@ -1,4 +1,4 @@
-`coef.rasch` <-
+coef.rasch <-
 function (object, prob = FALSE, order = FALSE, ...) {
     if (!inherits(object, "rasch"))
         stop("Use only with 'rasch' objects.\n")
@@ -14,6 +14,6 @@ function (object, prob = FALSE, order = FALSE, ...) {
         cof <- cbind(cof, "P(x=1|z=0)" = plogis(object$coef[, 1]))
     if (order)
         cof <- cof[order(cof[, 1]), ]
-    round(cof, 3)
+    cof
 }
 

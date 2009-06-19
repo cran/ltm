@@ -1,4 +1,4 @@
-`logLik.ltm` <-
+logLik.ltm <-
 function (object, ...) {
     if (!inherits(object, "ltm"))
         stop("Use only with 'ltm' objects.\n")

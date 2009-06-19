@@ -1,4 +1,4 @@
-`gpcm` <-
+gpcm <-
 function (data, constraint = c("gpcm", "1PL", "rasch"), IRT.param = TRUE, start.val = NULL, na.action = NULL, control = list()) {
     cl <- match.call()
     if ((!is.data.frame(data) & !is.matrix(data)) || ncol(data) == 1)

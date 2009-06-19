@@ -1,4 +1,4 @@
-`start.val.tpm` <-
+start.val.tpm <-
 function (start.val, data, type, constraint) {
     n <- nrow(data)
     p <- ncol(data)

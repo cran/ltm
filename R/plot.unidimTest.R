@@ -1,4 +1,4 @@
-`plot.unidimTest` <-
+plot.unidimTest <-
 function (x, xlab = "Eigenvalue number", ylab = "Eigenvalue", ...) {
     y1 <- x$Tobs
     y2 <- colMeans(x$T.boot, na.rm = TRUE)

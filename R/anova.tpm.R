@@ -1,4 +1,4 @@
-`anova.tpm` <-
+anova.tpm <-
 function (object, object2, ...) {
     if (!inherits(object, "tpm"))
         stop("Use only with 'tpm' objects.\n")

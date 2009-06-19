@@ -1,4 +1,4 @@
-`scoreltm` <-
+scoreltm <-
 function (betas, constraint) {
     betas <- betas.ltm(betas, constraint, p, q.)
     pr <- probs(Z %*% t(betas))

@@ -1,4 +1,4 @@
-`simulate.gpcm` <-
+simulate.gpcm <-
 function (object, nsim = 1, seed = NULL, ...) {
     if (!exists(".Random.seed", envir = .GlobalEnv, inherits = FALSE)) 
         runif(1)

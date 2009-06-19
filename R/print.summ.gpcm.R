@@ -1,4 +1,4 @@
-`print.summ.gpcm` <-
+print.summ.gpcm <-
 function (x, digits = max(3, getOption("digits") - 4), ...) {
     if (!inherits(x, "summ.gpcm"))
         stop("Use only with 'summ.gpcm' objects.\n")

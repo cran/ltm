@@ -1,4 +1,4 @@
-`rasch` <-
+rasch <-
 function (data, constraint = NULL, IRT.param = TRUE, start.val = NULL, na.action = NULL, control = list()) {
     cl <- match.call()
     if ((!is.data.frame(data) & !is.matrix(data)) || ncol(data) == 1)

@@ -1,5 +1,5 @@
-`print.persFit` <-
-function (x, digits = 3, ...) {
+print.persFit <-
+function (x, digits = 4, ...) {
     if (!inherits(x, "persFit"))
         stop("Use only with 'persFit' objects.\n")
     cat("\nPerson-Fit Statistics and P-values\n")
@@ -16,7 +16,7 @@ function (x, digits = 3, ...) {
     out.dat1 <- as.data.frame(round(x$Tobs, digits))
     out <- apply(x$p.value, 2, function (x) {
         val <- round(x, digits)
-        res <- sprintf(paste("%.", digits, "f", collapse = ""), val)
+        res <- formatC(val, digits = digits)
         res[val == 0] <- paste("<0.", paste(rep(0, digits - 1), collapse = ""), "1", collapse = "", sep = "")
         res
     })

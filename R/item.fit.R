@@ -1,4 +1,4 @@
-`item.fit` <-
+item.fit <-
 function (object, G = 10, FUN = median, simulate.p.value = FALSE, B = 100) {
     if (!class(object) %in% c("ltm", "rasch", "tpm"))
         stop("Use only with 'ltm', 'rasch' or 'tpm' objects.\n")

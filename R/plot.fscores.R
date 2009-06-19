@@ -1,4 +1,4 @@
-`plot.fscores` <-
+plot.fscores <-
 function (x, bw = "nrd0", adjust = 2, kernel = "gaussian", 
             include.items = FALSE, tol = 0.2, xlab = "Ability", ylab = "Density", 
             main = "Kernel Density Estimation for Ability Estimates", pch = 16, cex = 1.5, ...) {

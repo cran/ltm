@@ -1,4 +1,4 @@
-`print.unidimTest` <-
+print.unidimTest <-
 function (x, digits = max(3, getOption("digits") - 3), ...) {
     cat("\nUnidimensionality Check using Modified Parallel Analysis\n")
     if (!is.null(x$call))

@@ -1,4 +1,4 @@
-`summary.rasch` <-
+summary.rasch <-
 function (object, robust.se = FALSE, ...) {
     if (!inherits(object, "rasch"))
         stop("Use only with 'rasch' objects.\n")

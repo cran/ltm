@@ -1,4 +1,4 @@
-`scoregpcmSNW` <-
+scoregpcmSNW <-
 function (object) {
     X <- if (!is.data.frame(object$X)) as.data.frame(object$X) else object$X
     X[] <- lapply(X, factor)

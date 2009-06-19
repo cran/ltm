@@ -1,4 +1,4 @@
-`fitted.gpcm` <-
+fitted.gpcm <-
 function (object, resp.patterns = NULL, 
         type = c("expected", "marginal-probabilities", "conditional-probabilities"), ...) {
     if (!inherits(object, "gpcm"))
@@ -22,7 +22,7 @@ function (object, resp.patterns = NULL,
                 stop("the levels in the ", i, "th column of 'resp.patterns' does not much with the levels of the ", 
                     i, " item in the original data set.\n")
             } else {
-                rp[[i]] <- factor(rp[[i]], levels = unique(object$patterns$X[, i]))
+                rp[[i]] <- factor(rp[[i]], levels = sort(unique(object$patterns$X[, i])))
             }
         }
         rp <- sapply(rp, unclass)

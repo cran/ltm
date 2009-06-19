@@ -1,4 +1,4 @@
-`rmvordlogis` <-
+rmvordlogis <-
 function (n, thetas, IRT = TRUE, model = c("gpcm", "grm"), link = c("logit", "probit"),
     distr = c("normal", "logistic", "log-normal", "uniform"), z.vals = NULL) {
     if (n < 0 || !is.list(thetas))
