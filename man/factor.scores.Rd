@@ -16,20 +16,25 @@
 factor.scores(object, \dots)
 
 \method{factor.scores}{gpcm}(object, resp.patterns = NULL, 
-        method = c("EB", "EAP", "MI"), B = 5, robust.se = FALSE, \dots)
+        method = c("EB", "EAP", "MI"), B = 5, robust.se = FALSE, 
+        prior = TRUE, return.MIvalues = FALSE, \dots)
 
 \method{factor.scores}{grm}(object, resp.patterns = NULL, 
-        method = c("EB", "EAP", "MI"), B = 5, \dots)
+        method = c("EB", "EAP", "MI"), B = 5, prior = TRUE, 
+        return.MIvalues = FALSE, \dots)
 
 \method{factor.scores}{ltm}(object, resp.patterns = NULL, 
         method = c("EB", "EAP", "MI", "Component"), B = 5, 
-        robust.se = FALSE, \dots)
+        robust.se = FALSE, prior = TRUE, return.MIvalues = FALSE, 
+        \dots)
 
 \method{factor.scores}{rasch}(object, resp.patterns = NULL, 
-        method = c("EB", "EAP", "MI"), B = 5, robust.se = FALSE, \dots)
+        method = c("EB", "EAP", "MI"), B = 5, robust.se = FALSE,
+	    prior = TRUE, return.MIvalues = FALSE, \dots)
 
 \method{factor.scores}{tpm}(object, resp.patterns = NULL, 
-        method = c("EB", "EAP", "MI"), B = 5, \dots)
+        method = c("EB", "EAP", "MI"), B = 5, prior = TRUE, 
+        return.MIvalues = FALSE, \dots)
 }
 
 \arguments{
@@ -43,6 +48,11 @@ factor.scores(object, \dots)
   \item{B}{the number of multiple imputations to be used if \code{method = "MI"}.}
   \item{robust.se}{logical; if \code{TRUE} the sandwich estimator is used for the estimation of the covariance
   matrix of the MLEs. See \bold{Details} section for more info.}
+  \item{prior}{logical. If \code{TRUE}, then the prior normal distribution for the latent abilities is taken into
+	account in the calculation of the posterior modes, when \code{method = "EB"}.}
+  \item{return.MIvalues}{logical. If \code{TRUE}, then the estimated z-values and their covariance matrix are contained
+    as extra attributes \code{"zvalues.MI"} and \code{"var.zvalues.MI"}, respectively, in the returned 
+    \code{score.dat} data frame.}
   \item{\dots}{ additional argument; currently none is used. }
 }
 

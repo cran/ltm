@@ -1,3 +1,14 @@
+Changes in version: ltm_0.9-2
+
+  o "ltm()" has been upgraded such that it can fit the Quotient model.
+
+  o a bug in "item.fit()" has been corrected.
+
+  o "factor.scores()" has two extra logical arguments: 'prior' which if TRUE (the default) the prior normal distribution is taken into account in the calculation of the ability estimates; 'return.MIvalues' which if TRUE it return the estimates abilities and their variance-covariance matrix for each one of the multiple imputations.
+
+
+==============================
+
 Changes in version: ltm_0.9-1
 
   o the coef method for objects of class "grm" and "gpcm" now returns the estimated coefficients without rounding.
@@ -13,10 +24,10 @@ Changes in version: ltm_0.9-0
 
   o there is a new function gpcm() (along with methods for the supporting generic functions) for fitting the generalized partial credit model.
 
-  o the new function GoF.gpcm() computes the Pearson chi-squared goodness-of-fit measure and also produces a p-value either using the 
+  o the new function GoF.gpcm() computes the Pearson chi-squared goodness-of-fit measure and also produces a p-value either using the
     asymptotice chi-squared distribution or a paremetric Bootstrap approach.
 
-  o the anova method for class 'gpcm' includes a simulate.p.value argument, which if is TRUE it computes an estimate to the p-value of the 
+  o the anova method for class 'gpcm' includes a simulate.p.value argument, which if is TRUE it computes an estimate to the p-value of the
     likelihood ratio test using paremetric Bootstrap.
 
   o a bug was fixed in the fitted method for classes "grm", "ltm", "rasch" and "tpm" that did not work when the resp.patterns argument was a
@@ -71,7 +82,7 @@ Changes in version: ltm_0.8-3
 
   o a bug was fixed in the application of the Delta method for computing the standard errors for 'grm' objects.
 
-  o factor.scores() no longer returns the observed and expected frequencies of the response patterns when missing 
+  o factor.scores() no longer returns the observed and expected frequencies of the response patterns when missing
     data are present in the response data.
 
   o some additions in .Rd files.
@@ -96,14 +107,14 @@ Changes in version: ltm_0.8-1
   o the new function "cronbach.alpha()" computes Cronbach's alpha for given data-sets. The function can also compute
     a Bootstrap confidence interval for alpha.
 
-  o a "plot()" method has been added for 'fscores' objects. It plots a Kernel Density Estimation of the distribution 
-    of the factor scores (i.e., person parameters). Provides also the option to include in the plot the item difficulty 
+  o a "plot()" method has been added for 'fscores' objects. It plots a Kernel Density Estimation of the distribution
+    of the factor scores (i.e., person parameters). Provides also the option to include in the plot the item difficulty
     parameters (similar to the Item Person Maps).
 
-  o "factor.scores()" have now the extra option (specified via the 'method' argument) to compute expected a posteriori 
+  o "factor.scores()" have now the extra option (specified via the 'method' argument) to compute expected a posteriori
     scores.
 
-  o the "descript()" function also returns Cronbach's alpha estimates, and biserial correlation with the total score by 
+  o the "descript()" function also returns Cronbach's alpha estimates, and biserial correlation with the total score by
     excluding each time the item under consideration.
 
 
@@ -111,17 +122,17 @@ Changes in version: ltm_0.8-1
 
 Changes in version: ltm_0.8-0
 
-  o "person.fit()" and "item.fit()" functions have been included that compute p-values for person- and item-fit 
+  o "person.fit()" and "item.fit()" functions have been included that compute p-values for person- and item-fit
     statistics for IRT models for dichotomous data. The 'simulate.p.value' argument enables the computation of p-values
     based on a parametric Bootstrap procedure.
 
-  o "unidimTest()" function has been included that can be used to check the unidimensionality assumption for IRT models 
+  o "unidimTest()" function has been included that can be used to check the unidimensionality assumption for IRT models
     for dichotomous data using Modified Parallel Analysis.
 
-  o "testEquatingData()" function has been included for preparing data-sets for test equating by common items and 
+  o "testEquatingData()" function has been included for preparing data-sets for test equating by common items and
     common subjects.
 
-  o "grm()" works now with the available cases when incomplete response patterns (i.e., in the presence of NAs) are 
+  o "grm()" works now with the available cases when incomplete response patterns (i.e., in the presence of NAs) are
     considered.
 
   o better algorithms, for Missing At Random missing values, have been writen for "grm()", "ltm()", "rasch()" and "tpm()".
@@ -129,7 +140,7 @@ Changes in version: ltm_0.8-0
   o "factor.scores()" and "fitted()" methods for classes 'grm', 'ltm', 'rasch', and 'tpm' allow for NAs in the
     'resp.patterns' argument.
 
-  o a "residuals()" method has been added for 'grm', 'ltm', 'rasch', and 'tpm' objects that computed Pearson-type 
+  o a "residuals()" method has been added for 'grm', 'ltm', 'rasch', and 'tpm' objects that computed Pearson-type
     residuals.
 
   o the "fitted()" method now allows also for the computation of marginal and conditional probabilities; this feature
@@ -176,7 +187,7 @@ Changes in version: ltm_0.7-1
 
 Changes in version: ltm_0.7-0
 
-  o function "biserial.cor()" has been included that computes the point biserial correlation between a dichotomous and 
+  o function "biserial.cor()" has been included that computes the point biserial correlation between a dichotomous and
     a continuous variable.
 
   o in the "plot()" method for 'grm' objects, the option for Operation Characteristic Curves has been added.
@@ -185,7 +196,7 @@ Changes in version: ltm_0.7-0
 
   o "rmvlogis()" has extra available distributions for the latent variable.
 
-  o a "plot()" method has been added for 'descript' objects, producing the plot of Total Score versus Proportion of 
+  o a "plot()" method has been added for 'descript' objects, producing the plot of Total Score versus Proportion of
     Correct for each item.
 
 
@@ -193,10 +204,10 @@ Changes in version: ltm_0.7-0
 
 Changes in version: ltm_0.6-1
 
-  o starting values for "ltm()" are now by default deterministic; for random starting values you may use 
+  o starting values for "ltm()" are now by default deterministic; for random starting values you may use
     'start.val = "random"'.
 
-  o "anova.rasch()" now only computes likelihood ratio test between nested models. The parametric Bootstrap 
+  o "anova.rasch()" now only computes likelihood ratio test between nested models. The parametric Bootstrap
     goodness-of-fit test in now implemented in function "GoF.rasch()".
 
   o "information()" returns now a list of class 'information' for which a "print()" method has been added.
@@ -232,7 +243,7 @@ Changes in version: ltm_0.6-0
 
 Changes in version: ltm_0.5-1
 
-  o the Gauss-Hermite rule has been upgraded; functions "grm()", "ltm()" and "rasch()" may produce slightly different 
+  o the Gauss-Hermite rule has been upgraded; functions "grm()", "ltm()" and "rasch()" may produce slightly different
     parameter estimates from the previous versions.
 
   o some issues regarding missing values and singular designs have been resolved in "start.val.rasch()".
@@ -246,7 +257,7 @@ Changes in version: ltm_0.5-0
 
   o the "plot()" method for 'grm', 'ltm' and 'rasch' objects is now more flexible containing a number of extra arguments.
 
-  o starting values for "rasch()" are now by default deterministic; for random starting values you may use 
+  o starting values for "rasch()" are now by default deterministic; for random starting values you may use
     'start.val = "random"'.
 
   o the "coef()" method for 'ltm' and 'rasch' objects has an extra argument 'order' that sorts the coefficients according
@@ -274,7 +285,7 @@ Changes in version: ltm_0.4-0
   o "grm()" function is introduced for fitting Graded Response models under IRT.
 
   o "plot()" function has a new argument, 'type', that indicates whether Item Characteristic Curves or
-    Item Information Curves should be plotted. If 'items = 0', the Test Information Curve is plotted. 
+    Item Information Curves should be plotted. If 'items = 0', the Test Information Curve is plotted.
     Some extra arguments have been also introduced, like 'lty' and 'col'.
 
   o Both "grm()" and "rasch()" report parameter estimates under the IRT parameterization, by default. "ltm()" does the
@@ -284,7 +295,7 @@ Changes in version: ltm_0.4-0
 
   o "factor.scores()" has a new argument 'resp.patterns' that provides specific response patterns for which
     factor scores should be computed. "factor.scores.ltm()" has now as default method 'EB' instead of 'Component'.
-    
+
   o "descript()" can now also handle data sets with polytomous responses.
 
   o the function "mult.choice()" has been introduced that can convert multiple choice responses to 0-1 data; this
@@ -318,12 +329,12 @@ Changes in version: ltm_0.3-0
   o a new logical argument -- 'IRT.param' (default to FALSE) -- has been introduced in both "ltm()" and "rasch()"
     which if TRUE reports the coefficients under the usual IRT parameterization.
 
-  o "plot.ltm()" and "plot.rasch()" improved: (i) if the column names of the input data are not NULL then they are 
+  o "plot.ltm()" and "plot.rasch()" improved: (i) if the column names of the input data are not NULL then they are
     used to denote the items, (ii) printing of legend is now optional -- see argument 'legend', (iii) if 'legend = FALSE',
     'text()' is used to add as labels to the existing plot either the column names of the input data or numbers denoting
     the items, (iv) there is an argument 'items' controlling which items are plotted.
 
-  o 'constraint' argument in "ltm()" accepts now more general fixed value constraints. For more info check 
+  o 'constraint' argument in "ltm()" accepts now more general fixed value constraints. For more info check
     help("ltm", package = "ltm").
 
   o a "fitted()" method has been introduced for both classes 'ltm' and 'rasch'.
@@ -344,11 +355,11 @@ Changes in version: ltm_0.3-0
 
 Changes in version: ltm_0.2-1
 
-  o "rasch()" now contains an extra argument 'constraint' that permits incorporation of fixed-value constraints. 
+  o "rasch()" now contains an extra argument 'constraint' that permits incorporation of fixed-value constraints.
     For more info check help("rasch", package = "ltm").
 
   o "anova.rasch()" now also performs LRTs between constrained and unconstrained Rasch models.
-  
+
   o a "vcov()" method has been introduced for "rasch()" objects.
 
   o Edited *.Rd files to use \method{} for generics.

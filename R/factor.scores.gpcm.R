@@ -1,5 +1,6 @@
 factor.scores.gpcm <-
-function (object, resp.patterns = NULL, method = c("EB", "EAP", "MI"), B = 5, robust.se = FALSE, ...) {
+function (object, resp.patterns = NULL, method = c("EB", "EAP", "MI"), B = 5, 
+        robust.se = FALSE, prior = TRUE, return.MIvalues = FALSE, ...) {
     if (!inherits(object, "gpcm"))
         stop("Use only with 'gpcm' objects.\n")
     betas <- object$coefficients

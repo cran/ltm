@@ -1,5 +1,6 @@
 factor.scores.tpm <-
-function (object, resp.patterns = NULL, method = c("EB", "EAP", "MI"), B = 5, ...) {
+function (object, resp.patterns = NULL, method = c("EB", "EAP", "MI"), B = 5, 
+        prior = TRUE, return.MIvalues = FALSE, ...) {
     if (!inherits(object, "tpm"))
         stop("Use only with 'tpm' objects.\n")
     thetas <- object$coef

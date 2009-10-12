@@ -14,7 +14,10 @@ function (betas, X, method) {
         for (i in 1:p) {
             log.pxz[i] <- if (!is.na(y[i])) log.prs[[i]][y[i]] else 0
         }
-        - (sum(log.pxz, na.rm = TRUE) + dnorm(z, log = TRUE))
+        if (prior)
+            - (sum(log.pxz, na.rm = TRUE) + dnorm(z, log = TRUE)) 
+        else
+            - sum(log.pxz, na.rm = TRUE)
     }
     fscore <- function (logf.z, y, betas) {
         opt <- optim(0.0, fn = logf.z, method = "BFGS", hessian = TRUE, y = y, betas = betas)
@@ -86,6 +89,8 @@ function (betas, X, method) {
         hes.av <- hes.av + (1 + 1/B) * SV
         res$z1 <- scores.av
         res$se.z1 <- sqrt(hes.av)
+        attr(res, "zvalues.MI") <- scores.B
+        attr(res, "var.zvalues.MI") <- hes.B
     }
     res
 }

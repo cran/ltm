@@ -35,7 +35,7 @@ function (object, alternative = c("less", "greater", "two.sided"),
         out <- fitted(object, resp.patterns = resp.patterns)[, 1:p, drop = FALSE]
         if (!is.null(rownames(resp.patterns)))
             rownames(out) <- rownames(resp.patterns)
-        out    
+        out
     }
     npats <- nrow(X)
     fsc <- factor.scores(object, resp.patterns = X)$score.dat

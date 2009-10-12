@@ -3,7 +3,8 @@ function (start.val, data, factors, formula) {
     n <- nrow(data)
     p <- ncol(data)
     cf <- paste(formula[3])
-    form <- paste("y ~ ", paste("z", 1:factors, collapse = " + ", sep = ""), " + ", cf)
+    #form <- paste("y ~ ", paste("z", 1:factors, collapse = " + ", sep = ""), " + ", cf)
+    form <- paste("y ~ ", cf)
     form <- as.formula(form)
     q. <- length(attr(terms(form), "term.labels")) + 1
     cmptStrVal <- is.null(start.val) || (start.val == "random" || (all(is.numeric(start.val)) && length(start.val) != p*q.))

@@ -1,6 +1,6 @@
 factor.scores.ltm <-
 function (object, resp.patterns = NULL, method = c("EB", "EAP", "MI", "Component"), B = 5, 
-                                robust.se = FALSE, ...) {
+        robust.se = FALSE, prior = TRUE, return.MIvalues = FALSE, ...) {
     if (!inherits(object, "ltm"))
         stop("Use only with 'ltm' objects.\n")
     betas <- object$coef
@@ -13,6 +13,8 @@ function (object, resp.patterns = NULL, method = c("EB", "EAP", "MI", "Component
     quad.z2 <- object$ltst$quad.z2
     p <- nrow(betas)
     q. <- 1 + factors + sum(inter, quad.z1, quad.z2)
+    form <- as.character(object$formula)
+    form <- as.formula(paste("~", form[3]))
     method <- match.arg(method)
     if (any(inter, quad.z1, quad.z2) && method == "Component") {
         warning("In presence of nonlinear terms, Component Scores give biased factor-scores estimates. The MI method is used instead.\n")

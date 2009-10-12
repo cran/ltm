@@ -1,5 +1,6 @@
 factor.scores.grm <-
-function (object, resp.patterns = NULL, method = c("EB", "EAP", "MI"), B = 5, ...) {
+function (object, resp.patterns = NULL, method = c("EB", "EAP", "MI"), B = 5, 
+        prior = TRUE, return.MIvalues = FALSE, ...) {
     if (!inherits(object, "grm"))
         stop("Use only with 'grm' objects.\n")
     betas <- object$coefficients

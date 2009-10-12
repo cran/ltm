@@ -1,17 +1,15 @@
 fscores.l <-
 function (betas, X, method) {
     logf.z <- function (z, y, betas) {
-        Z <- c(1, z)
-        names(Z) <- if (length(z) == 1) c("(Intercept)", "z1") else c("(Intercept)", "z1", "z2")
-        if (inter)
-            Z <- c(Z, "z1:z2" = z[1] * z[2])
-        if (quad.z1)
-            Z <- c(Z, "I(z1^2)" = z[1] * z[1])
-        if (quad.z2)
-            Z <- c(Z, "I(z2^2)" = z[2] * z[2])            
-        Z <- Z[match(colnames(betas), names(Z))]
-        pr <- probs(c(betas %*% Z))
-        -sum(dbinom(y, 1, pr, log = TRUE), na.rm = TRUE) - sum(dnorm(z, log = TRUE))
+        DF <- data.frame(rbind(z))
+        names(DF) <- if (length(z) == 1) c("z1") else c("z1", "z2")
+        Z <- model.matrix(form, DF)
+        Z <- Z[, match(colnames(betas), colnames(Z)) , drop = FALSE]        
+        pr <- probs(c(Z %*% t(betas)))
+        if (prior)
+            -sum(dbinom(y, 1, pr, log = TRUE), na.rm = TRUE) - sum(dnorm(z, log = TRUE))
+        else
+            -sum(dbinom(y, 1, pr, log = TRUE), na.rm = TRUE)
     }
     fscore <- function (logf.z, y, betas) {
         opt <- optim(rep(0, factors), fn = logf.z, method = "BFGS", hessian = TRUE, y = y, betas = betas)
@@ -53,6 +51,7 @@ function (betas, X, method) {
     }
     if (method == "MI") {
         constraint <- object$constraint
+        cnams.betas <- colnames(betas)
         if (!is.null(constraint))
             betas <- betas[-((constraint[, 2] - 1) * p + constraint[, 1])]
         var.b <- vcov(object, robust.se)
@@ -61,7 +60,7 @@ function (betas, X, method) {
         for (b in 1:B) {
             betas. <- mvrnorm(1, c(betas), var.b)
             betas. <- betas.ltm(betas., constraint, p, q.)
-            colnames(betas.) <- colnames(betas)
+            colnames(betas.) <- cnams.betas
             for (i in 1:nx) {
                 out <- fscore(logf.z = logf.z, y = X[i, ], betas = betas.)
                 scores.B[[b]][i, ] <- out$mu
@@ -90,6 +89,8 @@ function (betas, X, method) {
             res$z2 <- scores.av[, 2]
             res$se.z2 <- se.av[, 2]
         }
+        attr(res, "zvalues.MI") <- scores.B
+        attr(res, "var.zvalues.MI") <- hes.B
     }
     res
 }

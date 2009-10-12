@@ -14,7 +14,7 @@ item.fit(object, G = 10, FUN = median,
 
 \arguments{
   \item{object}{a model object inheriting either from class \code{ltm}, class \code{rasch} or class \code{tpm}.}
-  \item{G}{either a number or a numeric vector. If a number, the it denotes the number of categories sample units
+  \item{G}{either a number or a numeric vector. If a number, then it denotes the number of categories sample units
         are grouped according to their ability estimates.}
   \item{FUN}{a function to summarize the ability estimate with each group (e.g., median, mean, etc.).}
   \item{simulate.p.value}{logical; if \code{TRUE}, then the Monte Carlo procedure described in the \bold{Details} 
@@ -25,9 +25,9 @@ item.fit(object, G = 10, FUN = median,
 \details{
   The item-fit statistic computed by \code{item.fit()} has the form: \deqn{\sum \limits_{j = 1}^G \frac{N_j 
   (O_{ij} - E_{ij})^2}{E_{ij} (1 - E_{ij})},}{\sum_{j = 1}^g N_j (O_{ij} - E_{ij})^2 / [E_{ij} (1 - E_{ij})],}
-  where \eqn{i} is the item, \eqn{j} is the interval created by grouping sample units on the basis of the ability
+  where \eqn{i} is the item, \eqn{j} is the interval created by grouping sample units on the basis of their ability
   estimates, \eqn{G} is the number of sample units groupings (i.e., \code{G} argument), \eqn{N_j} is the number of
-  sample units with ability estimates falling in a give interval \eqn{j}, \eqn{O_{ij}} is the observed proportion of 
+  sample units with ability estimates falling in a given interval \eqn{j}, \eqn{O_{ij}} is the observed proportion of 
   keyed responses on item \eqn{i} for interval \eqn{j}, and \eqn{E_{ij}} is the expected proportion of keyed responses 
   on item \eqn{i} for interval \eqn{j} based on the IRT model (i.e., \code{object}) evaluated at the ability estimate 
   \eqn{z^*} within the interval, with \eqn{z^*} denoting the result of \code{FUN} applied to the ability estimates in 

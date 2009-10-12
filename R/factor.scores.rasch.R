@@ -1,5 +1,6 @@
 factor.scores.rasch <-
-function (object, resp.patterns = NULL, method = c("EB", "EAP", "MI"), B = 5, robust.se = FALSE, ...) {
+function (object, resp.patterns = NULL, method = c("EB", "EAP", "MI"), B = 5, 
+        robust.se = FALSE, prior = TRUE, return.MIvalues = FALSE, ...) {
     if (!inherits(object, "rasch"))
         stop("Use only with 'rasch' objects.\n")
     betas <- object$coef

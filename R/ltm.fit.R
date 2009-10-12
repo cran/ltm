@@ -27,8 +27,11 @@ function (X, betas, constraint, formula, control) {
     res.EM <- EM(betas, constraint, control$iter.em, control$verbose)
     if (!is.null(constraint))
         res.EM[constraint[, 1:2, drop = FALSE]] <- NA
+    psc <- control$parscale 
+    nb <- length(c(res.EM[!is.na(res.EM)]))
+    psc <- if (!is.null(psc) && length(psc) == nb) psc else rep(1, nb)
     res.qN <- optim(c(res.EM[!is.na(res.EM)]), fn = loglikltm, gr = scoreltm, method = control$method, hessian = TRUE, 
-                control = list(maxit = control$iter.qN, trace = as.numeric(control$verbose)), constraint = constraint)
+                control = list(maxit = control$iter.qN, trace = as.numeric(control$verbose), parscale = psc), constraint = constraint)
     if (all(!is.na(res.qN$hessian) & is.finite(res.qN$hessian))) {
         ev <- eigen(res.qN$hessian, TRUE, TRUE)$values
         if (!all(ev >= -1e-06 * abs(ev[1]))) 

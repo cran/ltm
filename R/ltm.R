@@ -47,7 +47,7 @@ function (formula, constraint = NULL, IRT.param, start.val = NULL, na.action = N
         constraint[, 1:2] <- round(constraint[, 1:2])
         betas[constraint[, 1:2]] <- constraint[, 3]
     }
-    con <- list(iter.em = 40, iter.qN = 150, GHk = if (factors == 1) 21 else 15, method = "BFGS", 
+    con <- list(iter.em = 40, iter.qN = 150, GHk = if (factors == 1) 21 else 15, method = "BFGS", parscale = NULL,
                 verbose = getOption("verbose"))
     con[names(control)] <- control
     fit <- ltm.fit(X, betas, constraint, formula, con)
