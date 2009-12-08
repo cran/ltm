@@ -16,7 +16,7 @@ function (object, ...) {
     coef.tab <- cbind(value = coefs, std.err = se, z.vals = coefs / se)
     p <- ncol(object$X)
     nams <- if (object$IRT) {
-         c(t(outer(colnames(irt$parms), abbreviate(rownames(object$coef), 4), paste, sep = ".")))
+         c(t(outer(colnames(irt$parms), rownames(object$coef), paste, sep = ".")))
     } else {
         as.vector(t(outer(c("c.", "beta.1", "beta.2"), as.character(1:p), paste, sep = ""))) 
     }

@@ -5,7 +5,7 @@ function (object, standard.errors = FALSE, robust = FALSE, digits.abbrv = 6, ...
     thetas <- object$coef
     parms <- c(-thetas[, 1] / thetas[1, 2], thetas[1, 2])
     difc <- abbreviate(c("Difficulty", "Discrimination"), digits.abbrv)
-    names(parms) <- c(paste(difc[1], abbreviate(rownames(thetas), 5), sep = "."), difc[2])
+    names(parms) <- c(paste(difc[1], rownames(thetas), sep = "."), difc[2])
     out <- list(parms = parms)
     out$se <- if (standard.errors) {
         p <- nrow(thetas)

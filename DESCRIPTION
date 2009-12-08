@@ -1,7 +1,7 @@
 Package: ltm
 Title: Latent Trait Models under IRT
-Version: 0.9-2
-Date: 2009-10-12
+Version: 0.9-3
+Date: 2009-12-08
 Author: Dimitris Rizopoulos <d.rizopoulos@erasmusmc.nl>
 Maintainer: Dimitris Rizopoulos <d.rizopoulos@erasmusmc.nl>
 Description: Analysis of multivariate dichotomous and polytomous data
@@ -14,6 +14,6 @@ LazyLoad: yes
 LazyData: yes
 License: GPL (>= 2)
 URL: http://wiki.r-project.org/rwiki/doku.php?id=packages:cran:ltm
-Packaged: 2009-10-12 06:58:28 UTC; Dimitris
+Packaged: 2009-12-08 07:19:24 UTC; Dimitris
 Repository: CRAN
-Date/Publication: 2009-10-12 10:23:12
+Date/Publication: 2009-12-09 08:53:47

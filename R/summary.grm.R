@@ -10,6 +10,12 @@ function (object, ...) {
         if (object$constrained)
             coefs.[-p] <- lapply(coefs[-p], function (x) x[-length(x)])
         coefs. <- unlist(coefs., use.names = FALSE)
+        if (all(!is.na(object$hessian) & is.finite(object$hessian))) {
+            ev <- eigen(object$hessian, TRUE, TRUE)$values
+            if (!all(ev >= -1e-06 * abs(ev[1]))) 
+                warning("Hessian matrix at convergence is not positive definite; unstable solution.\n")
+        } else 
+            stop("Hessian matrix at convergence contains infinite or missing values; unstable solution.\n")
         se <- if (object$IRT.param) IRT.parm(object, TRUE, digits.abbrv = object$control$digits)$se else sqrt(diag(vcov(object)))
         z.vals <- coefs.
         for (i in seq(along = z.vals))

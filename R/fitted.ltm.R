@@ -11,6 +11,8 @@ function (object, resp.patterns = NULL,
             stop("'resp.patterns' should be a matrix or a data.frame.\n")
         resp.patterns <- data.matrix(resp.patterns)
         resp.patterns <- apply(resp.patterns, 2, function (x) if (all(unique(x) %in% c(1, 0, NA))) x else x - 1)
+        if (!is.matrix(resp.patterns))
+            resp.patterns <- t(resp.patterns)
         p <- ncol(object$X)
         if (ncol(resp.patterns) != p)
             stop("the number of items in ", deparse(substitute(object)), 
