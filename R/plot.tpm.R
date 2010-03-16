@@ -28,7 +28,7 @@ function (x, type = c("ICC", "IIC"), items = NULL, zrange = c(-3.8, 3.8),
         cs + (1 - cs) * probs(Z %*% t(betas))
     } else {
         pi. <- plogis(Z %*% t(betas))
-        cs <- matrix(cs, 100, p, TRUE)
+        cs <- matrix(cs, length(z), p, TRUE)
         pi <- cs + (1 - cs) * pi.
         pqr <- pi * (1 - pi) * (pi. / pi)^2
         t(t(pqr) * betas[, 2]^2)

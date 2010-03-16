@@ -18,8 +18,8 @@ Random missing data mechanisms.
 \tabular{ll}{
 Package: \tab ltm\cr
 Type: \tab Package\cr
-Version: \tab 0.9-3\cr
-Date: \tab 2009-12-08\cr
+Version: \tab 0.9-4\cr
+Date: \tab 2010-03-16\cr
 License: \tab \acronym{GPL} \cr
 }
 The following options are available:
@@ -42,8 +42,8 @@ The following options are available:
         of Measurement, Standardized Loadings Scatterplot (for the two-factor latent trait model), Item Operation 
         Characteristic Curves (for ordinal polytomous data), Item Person Maps.}  
 }
-More information as well as .R files containing sample analyses can be found in the Rwiki page of package 
-\bold{ltm} available at: \cr \url{http://wiki.r-project.org/rwiki/doku.php?id=packages:cran:ltm}.
+More information as well as R script files containing sample analyses can be found in the Rwiki page of 
+\bold{ltm} available at: \cr \url{http://rwiki.sciviews.org/doku.php?id=packages:cran:ltm}.
 }
 
 \author{

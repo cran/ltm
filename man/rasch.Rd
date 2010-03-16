@@ -8,7 +8,7 @@
 
 \usage{
 rasch(data, constraint = NULL, IRT.param = TRUE, start.val = NULL, 
-    na.action = NULL, control = list())
+    na.action = NULL, control = list(), Hessian = TRUE)
 }
 
 \arguments{
@@ -36,6 +36,9 @@ rasch(data, constraint = NULL, IRT.param = TRUE, start.val = NULL,
         \item{verbose}{ logical; if \code{TRUE} info about the optimization procedure are printed.}
     }
   }
+  \item{Hessian}{logical; if \code{TRUE}, then the Hessian matrix is computed. Warning: setting this argument to \code{FALSE}
+	will cause many methods (e.g., \code{summary()}) to fail; setting to \code{FALSE} is intended for simulation 
+	purposes in order \code{rasch()} to run faster.}
 }
 
 \details{ 

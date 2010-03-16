@@ -53,7 +53,7 @@ factor.scores(object, \dots)
   \item{return.MIvalues}{logical. If \code{TRUE}, then the estimated z-values and their covariance matrix are contained
     as extra attributes \code{"zvalues.MI"} and \code{"var.zvalues.MI"}, respectively, in the returned 
     \code{score.dat} data frame.}
-  \item{\dots}{ additional argument; currently none is used. }
+  \item{\dots}{ additional arguments; currently none is used. }
 }
 
 \details{

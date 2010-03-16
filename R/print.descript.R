@@ -17,7 +17,7 @@ function (x, digits = max(4, getOption("digits") - 4), ...) {
     cat("\n\nFrequencies of total scores:\n")
     print(x$items)
     if (!is.null(x$bisCorr)) {
-        cat("\n\nBiserial correlation with Total Score:\n")
+        cat("\n\nPoint Biserial correlation with Total Score:\n")
         mat <- round(cbind(x$bisCorr, x$ExBisCorr), digits) 
         colnames(mat) <- c("Included", "Excluded")
         print(mat)

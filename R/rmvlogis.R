@@ -12,7 +12,7 @@ function (n, thetas, IRT = TRUE, link = c("logit", "probit"),
             "log-normal" = (rlnorm(n) - exp(0.5)) / sqrt(exp(2) - exp(1)),
             "uniform" = runif(n, -3.5, 3.5) / sqrt(7^2/ 12))
     } else {
-        z.vals
+        c(z.vals)
     }
     p <- nrow(thetas)
     if (ncol(thetas) < 2 || ncol(thetas) > 3)

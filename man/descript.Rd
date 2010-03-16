@@ -34,7 +34,7 @@ descript(data, n.print = 10, chi.squared = TRUE, B = 1000)
                 "slightly concerned", and "not very concerned" in \code{\link{Environment}} are represented as 1, 2, 
                 and 3).}
         \item{(iii)}{Cronbach's alpha, for all items and excluding each time one of the items.}
-        \item{(iv)}{for dichotomous response matrices two versions of the biserial correlation of each item with the 
+        \item{(iv)}{for dichotomous response matrices two versions of the point biserial correlation of each item with the 
                 total score are returned. In the first one the item is included in the computation of the
                 total score, and in the second one is excluded.}
         \item{(v)}{pairwise associations between items. Before an analysis with latent variable models, it is useful to 

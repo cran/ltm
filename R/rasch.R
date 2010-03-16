@@ -1,5 +1,6 @@
 rasch <-
-function (data, constraint = NULL, IRT.param = TRUE, start.val = NULL, na.action = NULL, control = list()) {
+function (data, constraint = NULL, IRT.param = TRUE, start.val = NULL, na.action = NULL, 
+    control = list(), Hessian = TRUE) {
     cl <- match.call()
     if ((!is.data.frame(data) & !is.matrix(data)) || ncol(data) == 1)
         stop("'data' must be either a numeric matrix or a data.frame, with at least two columns.\n")
@@ -63,14 +64,16 @@ function (data, constraint = NULL, IRT.param = TRUE, start.val = NULL, na.action
         else
             c(scores[, 1], sum(scores[, 2]))
     }
-    res.qN <- optim(betas[!is.na(betas)], fn = logLik.rasch, gr = score.rasch, method = con$method, hessian = TRUE, 
+    res.qN <- optim(betas[!is.na(betas)], fn = logLik.rasch, gr = score.rasch, method = con$method, hessian = Hessian, 
                 control = list(maxit = con$iter.qN, trace = as.numeric(con$verbose)), constraint = constraint)                
-    if (all(!is.na(res.qN$hessian) & is.finite(res.qN$hessian))) {
+    if (Hessian && all(!is.na(res.qN$hessian) & is.finite(res.qN$hessian))) {
         ev <- eigen(res.qN$hessian, TRUE, TRUE)$values
         if (!all(ev >= -1e-06 * abs(ev[1]))) 
             warning("Hessian matrix at convergence is not positive definite; unstable solution.\n")
-    } else 
+    }
+    if (Hessian && any(!is.finite(res.qN$hessian))) {
         warning("Hessian matrix at convergence contains infinite or missing values; unstable solution.\n")
+    }
     betas <- betas.rasch(res.qN$par, constraint, p)
     rownames(betas) <- if (!is.null(colnamsX)) colnamsX else paste("Item", 1:p)
     colnames(betas) <- c("beta.i", "beta")

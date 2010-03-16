@@ -1,3 +1,10 @@
+Changes in version: ltm_0.9-4
+
+  o rasch() has a new logical argument 'Hessian' which if set to FALSE, the Hessian matrix is not calculated. This could be useful in simulations.
+
+
+==============================
+
 Changes in version: ltm_0.9-3
 
   o functions "ltm()", "rasch()" and "tpm()" nolonger abbreviate the names of the variables.
