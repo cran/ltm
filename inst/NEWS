@@ -1,3 +1,10 @@
+Changes in version: ltm_0.9-5
+
+  o a bug was corrected in fitted.gpcm(), fitted.grm(), fitted.ltm(), fitted.rasch(), and fitted.tpm(), i.e., fitted values are no longer rounded.
+
+
+==============================
+
 Changes in version: ltm_0.9-4
 
   o rasch() has a new logical argument 'Hessian' which if set to FALSE, the Hessian matrix is not calculated. This could be useful in simulations.
@@ -7,7 +14,7 @@ Changes in version: ltm_0.9-4
 
 Changes in version: ltm_0.9-3
 
-  o functions "ltm()", "rasch()" and "tpm()" nolonger abbreviate the names of the variables.
+  o functions "ltm()", "rasch()" and "tpm()" no longer abbreviate the names of the variables.
 
 
 ==============================

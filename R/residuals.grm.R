@@ -9,7 +9,7 @@ function (object, resp.patterns = NULL, order = TRUE, ...) {
     Exp <- fits[, "Exp"]
     betas <- object$coefficients 
     Obs <- observedFreqs(object, X)
-    out <- cbind(X, Obs = Obs, Exp = Exp, Resid = round((Obs - Exp) / sqrt(Exp), 3))
+    out <- cbind(X, Obs = Obs, Exp = Exp, Resid = (Obs - Exp) / sqrt(Exp))
     if (order)
         out <- out[order(out[, "Resid"]), ]
     out

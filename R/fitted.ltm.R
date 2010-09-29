@@ -42,9 +42,9 @@ function (object, resp.patterns = NULL,
     p.xz <- exp(X %*% t(log(pr)) + mX %*% t(log(1 - pr)))
     X[na.ind] <- NA
     out <- switch(type,
-        "expected" = cbind(X, Exp = round(nrow(object$X) * colSums(object$GH$GHw * t(p.xz)), 3)),
-        "marginal-probabilities" = cbind(X, "Marg-Probs" = round(colSums(object$GH$GHw * t(p.xz)), 4)),
-        "conditional-probabilities" = round(pr, 4))
+        "expected" = cbind(X, Exp = nrow(object$X) * colSums(object$GH$GHw * t(p.xz))),
+        "marginal-probabilities" = cbind(X, "Marg-Probs" = colSums(object$GH$GHw * t(p.xz))),
+        "conditional-probabilities" = pr)
     rownames(out) <- if (!is.null(resp.patterns) && !is.null(nams <- rownames(resp.patterns))) nams else NULL
     out
 }
