@@ -1,3 +1,10 @@
+Changes in version: ltm_0.9-6
+
+  o minor bug fixes.
+
+
+==============================
+
 Changes in version: ltm_0.9-5
 
   o a bug was corrected in fitted.gpcm(), fitted.grm(), fitted.ltm(), fitted.rasch(), and fitted.tpm(), i.e., fitted values are no longer rounded.

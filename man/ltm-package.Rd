@@ -18,8 +18,8 @@ Random missing data mechanisms.
 \tabular{ll}{
 Package: \tab ltm\cr
 Type: \tab Package\cr
-Version: \tab 0.9-4\cr
-Date: \tab 2010-03-16\cr
+Version: \tab 0.9-6\cr
+Date: \tab 2011-09-19\cr
 License: \tab \acronym{GPL} \cr
 }
 The following options are available:

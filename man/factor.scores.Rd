@@ -139,10 +139,15 @@ with nonlinear effects. \emph{British Journal of Mathematical and Statistical Ps
 fit <- rasch(LSAT)
 factor.scores(fit) # Empirical Bayes
 
+
+## Factor scores for all subjects in the
+## original dataset LSAT
+factor.scores(fit, resp.patterns = LSAT)
+
+
 ## Factor scores for specific patterns,
 ## including NA's, can be obtained by 
 factor.scores(fit, resp.patterns = rbind(c(1,0,1,0,1), c(NA,1,0,NA,1)))
-
 
 
 ## Factor Scores for the two-parameter logistic model

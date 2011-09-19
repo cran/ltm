@@ -32,7 +32,7 @@ function (thetas, constraint) {
     check.alpha <- constraint == "gpcm" || constraint == "1PL"
     if (check.alpha)
         scores.alpha <- numeric(p)
-    scores.deltas <- lapply(ncatg - 1, numeric)
+    scores.deltas <- vector("list", p)    
     for (j in 1:p) {
         if (check.alpha) {
             xj <- X[, j]
