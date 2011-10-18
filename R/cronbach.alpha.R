@@ -10,7 +10,7 @@ function (data, standardized = FALSE, CI = FALSE, probs = c(0.025, 0.975), B = 1
     data <- data.matrix(data)
     alpha <- if (!standardized) {
         VarTot <- var(rowSums(data, na.rm = na.rm))
-        VarInd <- sum(sd(data, na.rm = na.rm)^2)
+        VarInd <- sum(apply(data, 2, sd, na.rm = TRUE)^2) #sum(sd(data, na.rm = na.rm)^2)
         (p / (p - 1)) * (1 - (VarInd / VarTot))
     } else {
         mat <- if (na.rm) cor(data, use = "complete.obs") else cor(data)
@@ -24,7 +24,7 @@ function (data, standardized = FALSE, CI = FALSE, probs = c(0.025, 0.975), B = 1
             data.boot <- data[sample(1:n, replace = TRUE), ]
             T.boot[i] <- if (!standardized) {
                 VarTot <- var(rowSums(data.boot, na.rm = na.rm))
-                VarInd <- sum(sd(data.boot, na.rm = na.rm)^2)
+                VarInd <- sum(apply(data.boot, 2, sd, na.rm = na.rm)^2)#sum(sd(data.boot, na.rm = na.rm)^2)
                 (p / (p - 1)) * (1 - (VarInd / VarTot))
             } else {
                 mat <- if (na.rm) cor(data.boot, use = "complete.obs") else cor(data.boot)

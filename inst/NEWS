@@ -1,3 +1,10 @@
+Changes in version: ltm_0.9-7
+
+  o changed deprecated sd() for matrices.
+
+
+==============================
+
 Changes in version: ltm_0.9-6
 
   o minor bug fixes.
