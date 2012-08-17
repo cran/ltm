@@ -39,4 +39,3 @@ function (object, robust.se = FALSE, ...) {
     class(out) <- "summ.gpcm"
     out
 }
-

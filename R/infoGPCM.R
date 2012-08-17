@@ -13,4 +13,3 @@ function (betas, z, IRT.param) {
     colnames(info) <- names(betas)
     info
 }
-

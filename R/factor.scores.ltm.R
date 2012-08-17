@@ -37,4 +37,3 @@ function (object, resp.patterns = NULL, method = c("EB", "EAP", "MI", "Component
     class(out) <- "fscores"
     out
 }
-

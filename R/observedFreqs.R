@@ -12,4 +12,3 @@ function (object, Y) {
     obs[na] <- Obs[ind[na]]
     obs
 }
-

@@ -89,4 +89,3 @@ function (data, type = c("latent.trait", "rasch"), constraint = NULL, max.guessi
     class(fit) <- "tpm"
     fit
 }
-

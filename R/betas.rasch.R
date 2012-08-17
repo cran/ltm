@@ -9,4 +9,3 @@ function (betas, constraint, p) {
         cbind(betas[1:p], abs(betas[p + 1]))
     }
 }
-

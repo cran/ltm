@@ -69,4 +69,3 @@ function (object, G = 10, FUN = median, simulate.p.value = FALSE, B = 100) {
     class(out) <- "itemFit"
     out
 }
-

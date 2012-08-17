@@ -48,4 +48,3 @@ function (object, ...) {
     class(out) <- "summ.grm"
     out
 }
-

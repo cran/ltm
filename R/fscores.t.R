@@ -74,4 +74,3 @@ function (thetas, X, method) {
     }
     res
 }
-

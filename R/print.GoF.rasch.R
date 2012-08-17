@@ -11,4 +11,3 @@ function (x, ...) {
     cat("p-value:", p.val, "\n\n")
     invisible(x)    
 }
-

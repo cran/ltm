@@ -32,4 +32,3 @@ function (x, digits = 4, ...) {
     cat("\n\n")
     invisible(x)    
 }
-

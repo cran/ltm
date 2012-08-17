@@ -19,4 +19,3 @@ function (x, line = TRUE, xlab, ylab, col, ...) {
     }
     invisible()
 }
-

@@ -6,4 +6,3 @@ function (betas, z,  lower = TRUE) {
         if (lower) t(rbind(out)) else 1 - t(rbind(out))
     }, z = z)
 }
-

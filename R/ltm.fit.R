@@ -48,4 +48,3 @@ function (X, betas, constraint, formula, control) {
     list(coefficients = betas, log.Lik = -res.qN$value, convergence = res.qN$conv, hessian = res.qN$hessian, 
             counts = res.qN$counts, patterns = list(X = X, obs = obs), GH = list(Z = Z, GHw = GHw), max.sc = max.sc)
 }
-

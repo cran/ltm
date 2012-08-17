@@ -25,4 +25,3 @@ function (x, bw = "nrd0", adjust = 2, kernel = "gaussian",
     }
     invisible()
 }
-

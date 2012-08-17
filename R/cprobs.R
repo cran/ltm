@@ -10,4 +10,3 @@ function (betas, z, eps = .Machine$double.eps^(1/3)) {
         rbind(out, 1)        
     }, z = z)
 }
-

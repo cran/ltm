@@ -65,4 +65,3 @@ function (object, data, thetas, IRT = TRUE, z.vals = NULL, B = 100, ...) {
     class(out) <- "unidimTest"
     out
 }
-

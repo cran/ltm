@@ -94,4 +94,3 @@ function (betas, X, method) {
     }
     res
 }
-

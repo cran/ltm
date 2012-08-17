@@ -61,4 +61,3 @@ function (object, resp.patterns = NULL,
         out
     }
 }
-

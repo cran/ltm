@@ -15,4 +15,3 @@ function (mat, p.adjust = FALSE, p.adjust.method = "holm", ...) {
     class(out) <- "rcor.test"
     out
 }
-

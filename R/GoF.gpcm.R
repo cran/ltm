@@ -60,4 +60,3 @@ function (object, simulate.p.value = TRUE, B = 99, seed = NULL, ...) {
     class(out) <- "GoF.gpcm"
     out
 }
-

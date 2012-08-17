@@ -39,4 +39,3 @@ function (object, ...) {
     attr(inv.hes, "drop.ind") <- onams %in% nams
     inv.hes
 }
-

@@ -37,4 +37,3 @@ function (n, thetas, IRT = TRUE, link = c("logit", "probit"),
         X[, i] <- rbinom(n, 1, pr[, i])
     X
 }
-

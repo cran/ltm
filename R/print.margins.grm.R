@@ -7,7 +7,9 @@ function (x, digits = 2, ...) {
     cat("\nCall:\n", paste(deparse(x$call), sep = "\n", collapse = "\n"), "\n", sep = "")
     if (x$type == "two-way") {
         cat("\nFit on the Two-Way Margins\n\n")
-        out <- diag(rep("-", x$nitems))
+        #out <- diag(rep("-", x$nitems))
+        out <- matrix("0", x$nitems, x$nitems)
+        out[cbind(seq_len(x$nitems), seq_len(x$nitems))] <- "-"
         out[lower.tri(out)] <- format(sapply(x$margins, "[[", "TotalResid"), digits = digits, nsmall = 2)
         out <- t(out)
         out[lower.tri(out)] <- sapply(x$margins, function (x) if (x$TotalResid > x$rule) "***" else "")
@@ -28,4 +30,3 @@ function (x, digits = 2, ...) {
     cat("\n")
     invisible(x)
 }
-

@@ -12,4 +12,3 @@ function (x, f, ..., k, eps = 1e-04) {
     }
     res
 }
-

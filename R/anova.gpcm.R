@@ -71,4 +71,3 @@ function (object, object2, simulate.p.value = FALSE, B = 200, verbose = getOptio
     class(out) <- "aov.gpcm"
     out
 }
-

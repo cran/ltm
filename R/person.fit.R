@@ -73,4 +73,3 @@ function (object, alternative = c("less", "greater", "two.sided"),
     class(out) <- "persFit"
     out
 }
-

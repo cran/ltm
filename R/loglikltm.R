@@ -6,4 +6,3 @@ function (betas, constraint) {
     p.x <- rep(c(p.xz %*% GHw), obs)
     -sum(log(p.x))
 }
-

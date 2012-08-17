@@ -85,4 +85,3 @@ function (data, constraint = NULL, IRT.param = TRUE, start.val = NULL, na.action
     class(fit) <- "rasch"
     fit
 }
-

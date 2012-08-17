@@ -31,4 +31,3 @@ function (object, object2, ...) {
     class(out) <- "aov.tpm"
     out
 }
-

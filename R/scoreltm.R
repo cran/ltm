@@ -17,4 +17,3 @@ function (betas, constraint) {
     else
         c(scores)
 }
-

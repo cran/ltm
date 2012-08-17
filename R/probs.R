@@ -7,4 +7,3 @@ function (x) {
         pr[ind] <- sqrt(.Machine$double.eps)
     pr
 }
-

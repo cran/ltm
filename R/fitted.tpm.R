@@ -49,4 +49,3 @@ function (object, resp.patterns = NULL,
     rownames(out) <- if (!is.null(resp.patterns) && !is.null(nams <- rownames(resp.patterns))) nams else NULL
     out
 }
-

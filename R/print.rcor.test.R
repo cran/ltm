@@ -15,4 +15,3 @@ function (x, digits = max(3, getOption("digits") - 4), ...) {
         "\nlower diagonal part contains corresponding p-values\n\n")
     invisible(x)
 }
-

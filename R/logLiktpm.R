@@ -9,4 +9,3 @@ function (thetas, type, constraint, max.guessing) {
     p.x <- rep(c(p.xz %*% GHw), obs)
     -sum(log(p.x))
 }
-

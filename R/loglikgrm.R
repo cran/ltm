@@ -17,4 +17,3 @@ function (thetas, constrained) {
     p.x <- rep(exp(log.p.xz) %*% GHw, obs)
     - sum(log(p.x))
 }
-

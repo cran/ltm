@@ -210,4 +210,3 @@ function (x, type = c("ICC", "IIC", "OCCu", "OCCl"), items = NULL, category = NU
     }
     invisible(return.value)
 }
-

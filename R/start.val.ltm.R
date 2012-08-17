@@ -40,4 +40,3 @@ function (start.val, data, factors, formula) {
     } else 
         start.val
 }
-

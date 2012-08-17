@@ -169,4 +169,3 @@ function (x, type = c("ICC", "IIC", "loadings"), items = NULL, zrange = c(-3.8, 
     }
     invisible(return.value)
 }
-

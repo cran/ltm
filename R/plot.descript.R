@@ -24,4 +24,3 @@ function (x, items = NULL, includeFirstLast = FALSE, xlab, ylab, ...) {
     matplot(cbind(p), t(out), xlab = xlab, ylab = ylab, ...)
     invisible(out)
 }
-

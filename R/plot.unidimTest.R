@@ -6,4 +6,3 @@ function (x, xlab = "Eigenvalue number", ylab = "Eigenvalue", ...) {
     matplot(x, cbind(y1, y2), xlab = xlab, ylab = ylab, ...)
     invisible()
 }
-

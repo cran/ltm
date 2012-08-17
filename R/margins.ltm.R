@@ -68,4 +68,3 @@ function (object, type = c("two-way", "three-way"), rule = 3.5, nprint = 3, ...)
     class(out) <- "margins.ltm"
     out
 }
-

@@ -14,4 +14,3 @@ function (object, resp.patterns = NULL, order = TRUE, ...) {
         out <- out[order(out[, "Resid"]), ]
     out
 }
-

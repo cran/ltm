@@ -16,4 +16,3 @@ function (object, prob = FALSE, order = FALSE, ...) {
         cof <- cof[order(cof[, 1]), ]
     cof
 }
-

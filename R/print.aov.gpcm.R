@@ -15,4 +15,3 @@ function (x, digits = 3, ...) {
     cat("\n\n")
     invisible(x)
 }
-

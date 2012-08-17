@@ -42,4 +42,3 @@ function (start.val, data, type, constraint) {
     } else
         coefs
 }
-

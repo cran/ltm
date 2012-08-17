@@ -11,4 +11,3 @@ function (data, correct) {
         stop("correct answer(s) for item(s) ", paste(which(!ind), collapse = ", "), " cannot be find in 'data'.")
     t(t(X) == correct) + 0.0
 }
-

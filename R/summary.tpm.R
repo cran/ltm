@@ -39,4 +39,3 @@ function (object, ...) {
     class(out) <- "summ.tpm"
     out
 }
-

@@ -65,4 +65,3 @@ function (start.val, data, weight, constraint, ncatg, IRT.param) {
         }
     }
 }
-

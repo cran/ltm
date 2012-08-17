@@ -16,4 +16,3 @@ function (betas, z, IRT.param = TRUE, index, log = FALSE, eps = .Machine$double.
     }
     out
 }
-

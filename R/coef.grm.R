@@ -8,4 +8,3 @@ function (object, ...) {
         coefs <- do.call(rbind, coefs)
     coefs
 }
-

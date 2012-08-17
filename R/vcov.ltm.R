@@ -45,4 +45,3 @@ function (object, robust = FALSE, ...) {
     dimnames(inv.hes) <- list(nams, nams)
     inv.hes
 }
-

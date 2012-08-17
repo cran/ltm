@@ -39,4 +39,3 @@ function (data, standardized = FALSE, CI = FALSE, probs = c(0.025, 0.975), B = 1
     class(out) <- "cronbachAlpha"
     out
 }
-

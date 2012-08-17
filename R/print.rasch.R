@@ -16,4 +16,3 @@ function (x, digits = max(3, getOption("digits") - 3), ...) {
     cat("\n\n")
     invisible(x)
 }
-

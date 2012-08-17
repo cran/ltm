@@ -11,4 +11,3 @@ function (betas, z) {
         sum.cprs[[i]] <- betas.[i]^2 * ipr[[i]] * sum.cprs[[i]]
     do.call(cbind, lapply(sum.cprs, rowSums))
 }
-

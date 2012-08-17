@@ -36,4 +36,3 @@ function (object, robust.se = FALSE, ...) {
     class(out) <- "summ.ltm"
     out
 }
-

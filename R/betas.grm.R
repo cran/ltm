@@ -18,4 +18,3 @@ function (thetas, constrained, ind1, ind2, p, trasform = TRUE) {
     }
     betas
 }
-

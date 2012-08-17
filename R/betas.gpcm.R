@@ -15,4 +15,3 @@ function (thetas, nitems, ncatg, constraint, keep.names = FALSE) {
         names(betas) <- NULL
     betas
 }
-

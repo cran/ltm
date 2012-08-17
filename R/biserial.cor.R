@@ -18,4 +18,3 @@ function (x, y, use = c("all.obs", "complete.obs"), level = 1) {
     prob <- mean(ind)
     diff.mu * sqrt(prob * (1 - prob)) / sd(x)
 }
-

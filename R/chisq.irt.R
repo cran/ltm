@@ -18,4 +18,3 @@ function (object) {
     class(rval) <- "htest"
     rval
 }
-

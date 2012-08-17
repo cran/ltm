@@ -15,4 +15,3 @@ function (betas, z, IRT.param = TRUE, log = FALSE, eps = .Machine$double.eps^(1/
         out
     })
 }
-

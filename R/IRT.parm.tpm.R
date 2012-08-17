@@ -40,4 +40,3 @@ function (object, standard.errors = FALSE, digits.abbrv = 6, ...) {
         NULL
     out
 }
-

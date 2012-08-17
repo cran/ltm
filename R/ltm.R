@@ -62,4 +62,3 @@ function (formula, constraint = NULL, IRT.param, start.val = NULL, na.action = N
     class(fit) <- "ltm"
     fit
 }
-

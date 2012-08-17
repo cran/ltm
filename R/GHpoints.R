@@ -18,4 +18,3 @@ function (form, k) {
     names(grid.w) <- NULL
     list(x = out, w = grid.w, colnams = colnams)
 }
-

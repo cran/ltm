@@ -9,4 +9,3 @@ function (betas, constraint, p, q.) {
         matrix(betas, p)
     }
 }
-

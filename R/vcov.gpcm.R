@@ -20,4 +20,3 @@ function (object, robust = FALSE, ...) {
     dimnames(inv.Hessian) <- list(nams, nams)
     inv.Hessian
 }
-

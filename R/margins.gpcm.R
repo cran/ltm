@@ -51,4 +51,3 @@ function (object, type = c("two-way", "three-way"), rule = 3.5, ...) {
     class(out) <- "margins.gpcm"
     out
 }
-

@@ -72,4 +72,3 @@ function (data, constraint = c("gpcm", "1PL", "rasch"), IRT.param = TRUE, start.
     class(fit) <- "gpcm"
     fit
 }
-

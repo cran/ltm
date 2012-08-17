@@ -5,4 +5,3 @@ function (lis) {
         out <- out + lis[[i]]
     out
 }
-

@@ -15,4 +15,3 @@ function (thetas, type, constraint, p) {
         thetas.
     }
 }
-

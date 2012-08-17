@@ -19,4 +19,3 @@ function (object, resp.patterns = NULL, method = c("EB", "EAP", "MI"), B = 5,
     class(out) <- "fscores"
     out
 }
-

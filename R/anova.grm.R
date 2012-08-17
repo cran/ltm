@@ -30,4 +30,3 @@ function (object, object2, ...) {
     class(out) <- "aov.grm"
     out
 }
-

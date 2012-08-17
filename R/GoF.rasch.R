@@ -47,4 +47,3 @@ function (object, B = 49, ...) {
     class(out) <- "GoF.rasch"
     out
 }
-

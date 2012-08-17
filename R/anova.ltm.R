@@ -27,4 +27,3 @@ function (object, object2, ...) {
     class(out) <- "aov.ltm"
     out
 }
-

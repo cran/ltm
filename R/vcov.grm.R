@@ -24,4 +24,3 @@ function (object, ...) {
     dimnames(inv.hes) <- list(nams, nams)
     inv.hes
 }
-

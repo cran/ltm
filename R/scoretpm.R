@@ -36,4 +36,3 @@ function (thetas, type, constraint, max.guessing) {
     } else
         -as.vector(out)
 }
-

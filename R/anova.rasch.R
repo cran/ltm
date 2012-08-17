@@ -28,4 +28,3 @@ function (object, object2, ...) {
     class(out) <- "aov.rasch"
     out
 }
-

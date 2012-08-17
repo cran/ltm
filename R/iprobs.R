@@ -10,4 +10,3 @@ function (betas, z) {
         cbind(x[, 1], x[, 2:nc] - x[, 1:(nc - 1)])
     })
 }
-

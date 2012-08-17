@@ -38,4 +38,3 @@ function (DataList, AnchoringItems = NULL) {
     attr(out, "anchoring") <- !is.null(AnchoringItems)
     out
 }
-

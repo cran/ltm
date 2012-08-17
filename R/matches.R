@@ -7,4 +7,3 @@ function (subs, mat) {
     m2 <- apply(m2, 1, paste, collapse = "")
     mat[match(m1, m2), ]
 }
-

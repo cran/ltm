@@ -43,4 +43,3 @@ function (object, range, items = NULL, ...) {
     class(out) <- "information"
     out
 }
-

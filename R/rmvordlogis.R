@@ -39,4 +39,3 @@ function (n, thetas, IRT = TRUE, model = c("gpcm", "grm"), link = c("logit", "pr
     }
     X
 }
-

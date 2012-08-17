@@ -53,4 +53,3 @@ function (thetas, constrained) {
     else
         unlist(scores)
 }
-

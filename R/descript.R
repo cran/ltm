@@ -72,4 +72,3 @@ function (data, n.print = 10, chi.squared = TRUE, B = 1000) {
     class(out) <- "descript"
     out
 }
-

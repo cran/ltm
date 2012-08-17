@@ -28,4 +28,3 @@ function (x, digits = 2, ...) {
     cat("\n")
     invisible(x)
 }
-

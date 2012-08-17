@@ -77,4 +77,3 @@ function (object) {
     dim(out.score) <- c(ncol(score), ncol(score))
     0.5 * (out.score + t(out.score))
 }
-

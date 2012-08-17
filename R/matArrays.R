@@ -6,4 +6,3 @@ function (lis, na.rm = FALSE) {
     dim(mat) <- c(length(mat)/M, M)
     array(rowMeans(mat), dims)
 }
-

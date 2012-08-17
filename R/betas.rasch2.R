@@ -20,4 +20,3 @@ function (betas, constraint, p, IRT) {
         }
     }
 }
-

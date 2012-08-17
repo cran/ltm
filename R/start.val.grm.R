@@ -50,4 +50,3 @@ function (start.val, data, weight, constrained, ncatg) {
         })
     }
 }
-

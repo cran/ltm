@@ -17,4 +17,3 @@ function (object, nsim = 1, seed = NULL, ...) {
     attr(ans, "seed") <- RNGstate
     ans
 }
-

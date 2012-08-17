@@ -47,4 +47,3 @@ function (data, constrained = FALSE, IRT.param = TRUE, Hessian = FALSE, start.va
     class(fit) <- "grm"
     fit
 }
-

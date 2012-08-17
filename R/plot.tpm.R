@@ -96,4 +96,3 @@ function (x, type = c("ICC", "IIC"), items = NULL, zrange = c(-3.8, 3.8),
         if (plot.items) cbind(z = z, pr[, itms]) else cbind(z = z, info = rowSums(pr))
     }
 }
-

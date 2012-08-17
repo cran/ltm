@@ -64,4 +64,3 @@ function (thetas, constraint) {
         }
     }
 }
-

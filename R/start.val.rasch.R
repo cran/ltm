@@ -31,4 +31,3 @@ function (start.val, data) {
     } else 
         start.val
 }
-

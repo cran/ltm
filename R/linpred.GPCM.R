@@ -8,4 +8,3 @@ function (betas, z, IRT.param = TRUE) {
             outer(x[-nx], x[nx] * z , "+")
     })
 }
-
