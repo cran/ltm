@@ -1,4 +1,4 @@
-a73a2b75d2252a974ed4bd6ef7ba5697 *DESCRIPTION
+e36ce9ef7eb2640f14bbaeb755c6069d *DESCRIPTION
 963c10e078774a2a120ce86c6b334f5c *NAMESPACE
 262528c5d1e680a7c2bc74a4b1a01ccd *R/EM.R
 8079953144b10825de0ed27423160996 *R/GHpoints.R
@@ -52,6 +52,7 @@ c91eaf0b63fbe149190fdc2de8d6bcbc *R/fscores.g.R
 798dcda78499aa2ed4ef4b67ed277b6e *R/fscores.r.R
 958d451a518d0642ee04bfc622b26aec *R/fscores.t.R
 c7c07ef729b4feb3bafa4d710395e279 *R/gauher.R
+ee2914184ca9665b4aad104cee478670 *R/globals.R
 4338a28e6a7b0117bddbe2a170eaab80 *R/gpcm.R
 c2b7cf03a1bf059b087aa37ed551a727 *R/grm.R
 f2df726b97320cbc086aa01b8411fbf9 *R/infoGPCM.R
@@ -169,7 +170,7 @@ b9e0c5494ad76ad7f6b288d376aef746 *data/gh.rda
 963afe368570c242e8cdc7c8c50c5410 *demo/ltm.R
 f0fad437ae15b4f973732dd43daa7dca *demo/rasch.R
 762a8e519b6158e6de7c3020277ce470 *inst/CITATION
-77e5997b3fd2445a866b7cf7b5b460d1 *inst/NEWS
+40dc9476c46b7d03145c8c253815e5d7 *inst/NEWS
 de52110d5434e3eee886ce0fd7806fd0 *man/Abortion.Rd
 6774adbc67029c238b6e16aa437282cb *man/Environment.Rd
 fc64557e32c8c28473bce16e1311dd9d *man/GoF.Rd
@@ -189,7 +190,7 @@ cc7f5a6c43c50287b2704487a26bbdfa *man/gh.Rd
 36dc55d800d243574c8ba833d25d4e00 *man/grm.Rd
 f06d1a3f1a9d374a0018ea58b46a4b5b *man/information.Rd
 ad6bd97b7870374574ee082354639c96 *man/item.fit.Rd
-926b61cfba99c5ab5dc260352825056c *man/ltm-package.Rd
+9e42a59b0edf0c162415f25abcd32347 *man/ltm-package.Rd
 c685cd988f8ccb58fb22699916a6f0b0 *man/ltm.Rd
 968c91b4ea3af6cee80f2de44128f461 *man/margins.Rd
 4de456c7145e55959d6069fbd1e457b7 *man/mult.choice.Rd

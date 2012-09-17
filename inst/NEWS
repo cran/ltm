@@ -1,3 +1,12 @@
+Changes in version: ltm_0.9-9
+
+  o use of globalVariables() in source code.
+
+  o small bug fixes.
+
+
+==============================
+
 Changes in version: ltm_0.9-7
 
   o changed deprecated sd() for matrices.
