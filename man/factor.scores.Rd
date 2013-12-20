@@ -150,6 +150,7 @@ factor.scores(fit, resp.patterns = LSAT)
 factor.scores(fit, resp.patterns = rbind(c(1,0,1,0,1), c(NA,1,0,NA,1)))
 
 
+\dontrun{
 ## Factor Scores for the two-parameter logistic model
 fit <- ltm(Abortion ~ z1)
 factor.scores(fit, method = "MI", B = 20) # Multiple Imputation
@@ -157,7 +158,7 @@ factor.scores(fit, method = "MI", B = 20) # Multiple Imputation
 ## Factor Scores for the graded response model
 fit <- grm(Science[c(1,3,4,7)])
 factor.scores(fit, resp.patterns = rbind(1:4, c(NA,1,2,3)))
-
+}
 }
 
 \keyword{methods}

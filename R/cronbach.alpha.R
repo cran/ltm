@@ -8,14 +8,18 @@ function (data, standardized = FALSE, CI = FALSE, probs = c(0.025, 0.975), B = 1
     if (p < 2)
         stop("'data' should have more than two columns.\n")
     data <- data.matrix(data)
-    alpha <- if (!standardized) {
-        VarTot <- var(rowSums(data, na.rm = na.rm))
-        VarInd <- sum(apply(data, 2, sd, na.rm = TRUE)^2) #sum(sd(data, na.rm = na.rm)^2)
-        (p / (p - 1)) * (1 - (VarInd / VarTot))
+    if (!na.rm && any(is.na(data))) {
+        stop("missing values in 'data'.\n")
     } else {
-        mat <- if (na.rm) cor(data, use = "complete.obs") else cor(data)
-        ave.rho <- mean(mat[upper.tri(mat)])
-        (p * ave.rho) / (1 + (p - 1) * ave.rho)
+        alpha <- if (!standardized) {
+            VarTot <- var(rowSums(data[complete.cases(data), ]))
+            VarInd <- sum(apply(data, 2, sd, na.rm = TRUE)^2)
+            (p / (p - 1)) * (1 - (VarInd / VarTot))
+        } else {
+            mat <- cor(data, use = "complete.obs")
+            ave.rho <- mean(mat[upper.tri(mat)])
+            (p * ave.rho) / (1 + (p - 1) * ave.rho)
+        }        
     }
     out <- list(alpha = alpha, n = n, p = p, standardized = standardized, name = nam)
     if (CI) {
@@ -23,8 +27,8 @@ function (data, standardized = FALSE, CI = FALSE, probs = c(0.025, 0.975), B = 1
         for (i in 1:B) {
             data.boot <- data[sample(1:n, replace = TRUE), ]
             T.boot[i] <- if (!standardized) {
-                VarTot <- var(rowSums(data.boot, na.rm = na.rm))
-                VarInd <- sum(apply(data.boot, 2, sd, na.rm = na.rm)^2)#sum(sd(data.boot, na.rm = na.rm)^2)
+                VarTot <- var(rowSums(data.boot[complete.cases(data.boot), ]))
+                VarInd <- sum(apply(data.boot, 2, sd, na.rm = na.rm)^2)
                 (p / (p - 1)) * (1 - (VarInd / VarTot))
             } else {
                 mat <- if (na.rm) cor(data.boot, use = "complete.obs") else cor(data.boot)
