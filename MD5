@@ -1,4 +1,4 @@
-2c1ff7b42f051a14f088953eec1fe306 *DESCRIPTION
+8d870cee5a610899813d131834248635 *DESCRIPTION
 b6f7bc38eea78bb593406511a9478aa3 *NAMESPACE
 262528c5d1e680a7c2bc74a4b1a01ccd *R/EM.R
 8079953144b10825de0ed27423160996 *R/GHpoints.R
@@ -19,7 +19,7 @@ c487f38ca03f6230e8ac1daa108829b2 *R/betas.gpcm.R
 1dc1ccba33d051b66b14cfb50604cd5e *R/betas.ltm.R
 5b57342cdf1739b9a7739375eae8a5b2 *R/betas.rasch.R
 5a959ce1cb5cf1ea49052514032bfa79 *R/betas.rasch2.R
-54a50c6090c41ae42cbc4d5a63cc53e3 *R/biserial.cor.R
+37b16388544d1dfc8cd83fa11998719e *R/biserial.cor.R
 6688daba96639e89b01cd8140b78b06b *R/cd.tpm.R
 e933b210aff09e1577492143411b9233 *R/cd.vec.R
 25373ffb0c4256b68196bdb3d6c70fdd *R/chisq.irt.R
@@ -33,7 +33,7 @@ a028d6c52c359294dc659215a9ad5d62 *R/crf.GPCM.R
 565316ed8e478f573433c79c5b950106 *R/crf.GPCM2.R
 f8cfdf007afb9f16421a892fa20b3fd2 *R/cronbach.alpha.R
 818e42e121b3d316b9f80a4163fec3db *R/cumprobs.R
-e0beca462b45788fce9d5b6732b00125 *R/descript.R
+f3631aa1aac35143f4bdc779f69e1fff *R/descript.R
 dc1960a102e2408e83d6819378039524 *R/factor.scores.R
 d909087ad9e1f9e5d5c4584055ab84a2 *R/factor.scores.gpcm.R
 bdf51093bbded9f2125acbb57e0ffd7b *R/factor.scores.grm.R
@@ -170,7 +170,7 @@ e47e7365f5081e822f37c5904efe8fa3 *data/gh.rda
 963afe368570c242e8cdc7c8c50c5410 *demo/ltm.R
 f0fad437ae15b4f973732dd43daa7dca *demo/rasch.R
 762a8e519b6158e6de7c3020277ce470 *inst/CITATION
-021be0a828ae27bab6391bfce8a9c505 *inst/NEWS
+d083aa739f6cdcb7246148f42bb16c2f *inst/NEWS
 de52110d5434e3eee886ce0fd7806fd0 *man/Abortion.Rd
 6774adbc67029c238b6e16aa437282cb *man/Environment.Rd
 fc64557e32c8c28473bce16e1311dd9d *man/GoF.Rd
@@ -190,7 +190,7 @@ cc7f5a6c43c50287b2704487a26bbdfa *man/gh.Rd
 36dc55d800d243574c8ba833d25d4e00 *man/grm.Rd
 f06d1a3f1a9d374a0018ea58b46a4b5b *man/information.Rd
 ad6bd97b7870374574ee082354639c96 *man/item.fit.Rd
-dc0ac6b5c124fd8d8cbd70ff5f0afb5d *man/ltm-package.Rd
+7ba42491b266e881ac196c11aa8376aa *man/ltm-package.Rd
 c685cd988f8ccb58fb22699916a6f0b0 *man/ltm.Rd
 968c91b4ea3af6cee80f2de44128f461 *man/margins.Rd
 4de456c7145e55959d6069fbd1e457b7 *man/mult.choice.Rd
